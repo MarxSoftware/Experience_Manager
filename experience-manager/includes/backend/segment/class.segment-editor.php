@@ -146,15 +146,14 @@ class SegmentEditor {
 		if (isset(get_option('tma_webtools_option')['webtools_siteid'])) {
 			$siteid = get_option('tma_webtools_option')['webtools_siteid'];
 		}
-		$json_dsl = get_post_meta($post->ID, 'tma_segment_editor', true);
+		$dsl = get_post_meta($post->ID, 'tma_segment_editor', true);
 
-		$translator = new Translator($siteid);
-
+		
 		$post_data = array(
 			'name' => $post->post_title,
 			'externalId' => $ID,
 			'active' => $post->post_status === "publish",
-			'dsl' => $translator->translate($json_dsl)
+			'dsl' => $dsl
 		);
 
 		tma_exm_log($post_data);

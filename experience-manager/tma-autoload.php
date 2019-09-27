@@ -36,15 +36,6 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	// Audience Editor
 	"TMA\ExperienceManager\Segment\SegmentType" => "includes/backend/segment/class.segment-type.php",
 	"TMA\ExperienceManager\Segment\SegmentEditor" => "includes/backend/segment/class.segment-editor.php",
-	"TMA\ExperienceManager\Segment\Translator" => "includes/backend/segment/class.translator.php",
-	// UniRest
-	/*
-	"Unirest\Request" => "modules/unirest/Unirest/Request.php",
-	"Unirest\Response" => "modules/unirest/Unirest/Response.php",
-	"Unirest\Method" => "modules/unirest/Unirest/Method.php",
-	"Unirest\Exception" => "modules/unirest/Unirest/Exception.php",
-	"Unirest\Request\Body" => "modules/unirest/Unirest/Request/Body.php",
-	*/
 	// Event Tracking
 	"TMA\ExperienceManager\WC_TRACKER" => "includes/modules/events/class.woocommerce_tracker.php",
 ));
