@@ -1,5 +1,6 @@
 <?php ?>
 <div id="exm_segment_editor_categores">
+	<a name="exm_categories"></a>
 	<p>
 		Generate category pathes to use in the category rule <b>&quot;rule(CATEGORY).field("c_categories").path(...)&quot;</b>.
 		Copy the value with leading und ending slash.

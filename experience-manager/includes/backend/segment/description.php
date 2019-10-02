@@ -7,6 +7,10 @@
 ?>
 <style>
 	.tma_webtools span.headline {
+		font-weight: bolder;
+		text-decoration: underline;
+	}
+	.tma_webtools span.subheadline {
 		font-weight: bold;
 	}
 </style>
@@ -57,13 +61,65 @@
 			<b>not(&lt;list of rules&gt;)</b>
 		</p>
 		<p>
-			<span class="headline">event</span>
+			<span class="headline">PAGEVIEW</span>
+			<br />
+			Test if a user has viewed a specific page or posttype. By confention use &lt;posttype&gt;#&lt;slug&gt;
+			<br />
+			<b>rule(PAGEVIEW)</b>
+			<br />
+			<span class="subheadline">Examples</span><br/>
+			<span>User has visited the homepage: </span><b>.rule(PAGEVIEW).page('page#home').count(1)</b>
+			<br />
+			<span>User has visited a product page: </span><b>.rule(PAGEVIEW).page('product#home').count(1)</b>
+		</p>
+		<p>
+			<span class="headline">EVENT</span>
 			<br />
 			A specific event. See <a href="#events">Events Section</a> for all tracked events.
 			<br />
 			<b>rule(EVENT)</b>
-			<br>
-			<span>example, user has visited at least one page: </span>rule(EVENT).event("pageview").count(1)
+			<br />
+			<span class="subheadline">Examples</span><br/>
+			<span>User has visited at least two page: </span><b>rule(EVENT).event("pageview").count(2)</b>
+		</p>
+		<p>
+			<span class="headline">FIRSTVISIT</span>
+			<br />
+			Check if it is the first visit of a customer.
+			<br />
+			<b>rule(FIRSTVISIT)</b>
+		</p>
+		<p>
+			<span class="headline">CATEGORY</span>
+			<br />
+			Check if a user has visited posts or products of a specific category.
+			User the category path generator to get the correct path: <a href="#exm_categories">Category path generator</a>
+			<br />
+			<b>rule(CATEGORY).field('c_categories')</b>
+			<br />
+			<span class="subheadline">Examples</span><br/>
+			<span>User has visited at least two post of a category: </span><b>rule(CATEGORY).path('/news/local').field('c_categories').count(2)</b>
+			<br/>
+			<span>User has visited at least two products of the category T-Shirts: </span><b>rule(CATEGORY).path('/tshirts/').field('c_categories').count(2)</b>
+		</p>
+		<p>
+			<span class="headline">KEYVALUE</span>
+			<br />
+			Check if a user has visited posts or products of a specific category.
+			User the category path generator to get the correct path: <a href="#exm_categories">Category path generator</a>
+			<br />
+			<b>rule(CATEGORY).field('c_categories')</b>
+			<br />
+			"browser.name", ua.getBrowser().name());
+			"browser.group", ua.getBrowser().getGroup().name());
+			"browser.version", ua.getBrowserVersion().getVersion());
+			"os.name", ua.getOperatingSystem().name());
+			"os.group", ua.getOperatingSystem().getGroup().name());
+			"os.type", ua.getOperatingSystem().getDeviceType().name());
+			<span class="subheadline">Examples</span><br/>
+			<span>User has visited at least two post of a category: </span><b>rule(CATEGORY).path('/news/local').field('c_categories').count(2)</b>
+			<br/>
+			<span>User has visited at least two products of the category T-Shirts: </span><b>rule(CATEGORY).path('/tshirts/').field('c_categories').count(2)</b>
 		</p>
 	</div>
 
