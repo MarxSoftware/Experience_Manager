@@ -115,8 +115,8 @@ class ShortCode_TMA_CONTENT {
 		$segments = array();
 		$segments[] = "default";
 		if ($response !== NULL) {
-			if (sizeof($response->user->segments) > 0) {
-				$segments = $response->user->segments;
+			if (sizeof($response->user->actionsSystem->segments) > 0) {
+				$segments = $response->user->actionsSystem->segments;
 			}
 		}
 

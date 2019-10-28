@@ -119,8 +119,8 @@ abstract class Integration {
 		
 		$segments = ["default"];
 		if ($response !== NULL) {
-			if (sizeof($response->user->segments) > 0) {
-				$segments = $response->user->segments;
+			if (sizeof($response->user->actionSystem->segments) > 0) {
+				$segments = $response->user->actionSystem->segments;
 			}
 		}
 

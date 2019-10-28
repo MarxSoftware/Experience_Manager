@@ -51,8 +51,8 @@ final class TMA_PopupMakerIntegration {
 
 		$user_segments = [];
 		if ($response !== NULL) {
-			if (sizeof($response->user->segments) > 0) {
-				$user_segments = $response->user->segments;
+			if (sizeof($response->user->actionSystem->segments) > 0) {
+				$user_segments = $response->user->actionSystem->segments;
 			}
 		}
 
