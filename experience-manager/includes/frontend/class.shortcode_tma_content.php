@@ -115,9 +115,7 @@ class ShortCode_TMA_CONTENT {
 		$segments = array();
 		$segments[] = "default";
 		if ($response !== NULL) {
-			if (sizeof($response->user->actionSystem->segments) > 0) {
-				$segments = $response->user->actionSystem->segments;
-			}
+			$segments = tma_exp_get_user_segments(["default"]);
 		}
 
 		// content for group allready added

@@ -1,5 +1,16 @@
 <?php
 
+function tma_exm_get_user_segments ($defaultValue = []) {
+	$request = new TMA\ExperienceManager\TMA_Request();
+	$response = $request->getSegments(\TMA\ExperienceManager\TMA_Request::getUserID());
+	tma_exm_log(json_encode($response));
+	if ($response !== NULL && $response !== FALSE && $response->status === "ok" && property_exists($response->user, "actionSystem")) {
+		$tma_config['user_segments'] = $response->user->actionSystem->segments;
+	}
+	return $defaultValue;
+	
+}
+
 function tma_exm_get_segments() {
 	$request = new \TMA\ExperienceManager\TMA_Request();
 	$response = $request->getAllSegments();

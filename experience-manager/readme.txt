@@ -67,7 +67,7 @@ none
 2.1.0
  * Update to new the new tracking url provided by the Experience Platform
 
-IMPORTANT: If you upgrade to version 2.1.0 you need at least Experience Platform version 3.3.0
+IMPORTANT: If you upgrade to version 2.1.0 you need at least Experience Platform version 3.3.1
 
 2.0.0
  * The plugin is renamed into Experience Manager

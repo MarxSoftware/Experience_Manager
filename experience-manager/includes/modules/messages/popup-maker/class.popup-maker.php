@@ -51,9 +51,7 @@ final class TMA_PopupMakerIntegration {
 
 		$user_segments = [];
 		if ($response !== NULL) {
-			if (sizeof($response->user->actionSystem->segments) > 0) {
-				$user_segments = $response->user->actionSystem->segments;
-			}
+			$user_segments = tma_exm_get_user_segments();
 		}
 
 		$user_segments = array_map('trim', $user_segments);

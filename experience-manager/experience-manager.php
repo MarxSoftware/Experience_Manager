@@ -145,12 +145,7 @@ function tma_js_variables() {
 
 	$tma_config['segments'] = tma_exm_get_segments_as_array();
 
-	$request = new TMA\ExperienceManager\TMA_Request();
-	$response = $request->getSegments(\TMA\ExperienceManager\TMA_Request::getUserID());
-	tma_exm_log(json_encode($response));
-	if ($response !== NULL && $response !== FALSE && $response->status === "ok" && $response->user->actionSystem) {
-		$tma_config['user_segments'] = $response->user->actionSystem->segments;
-	}
+	$tma_config['user_segments'] = tma_exm_get_user_segments();
 
 	$tma_config = apply_filters("tma_config", $tma_config);
 	

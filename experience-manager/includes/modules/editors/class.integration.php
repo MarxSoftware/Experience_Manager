@@ -119,9 +119,7 @@ abstract class Integration {
 		
 		$segments = ["default"];
 		if ($response !== NULL) {
-			if (sizeof($response->user->actionSystem->segments) > 0) {
-				$segments = $response->user->actionSystem->segments;
-			}
+			$segments = tma_exm_get_user_segments(["default"]);
 		}
 
 		$matching = false;

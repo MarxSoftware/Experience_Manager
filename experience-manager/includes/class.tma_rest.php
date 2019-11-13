@@ -74,12 +74,7 @@ class TMA_Rest {
 		$segments = [];
 
 		$segments['segments'] = tma_exm_get_segments_as_array();
-		
-		$request = new \TMA\ExperienceManager\TMA_Request();
-		$response = $request->getSegments(\TMA\ExperienceManager\TMA_Request::getUserID());
-		if ($response !== NULL && $response->status === "ok" && $response->user->actionSystem) {
-			$segments['user_segments'] = $response->user->actionSystem->segments;
-		}
+		$segments['user_segments'] = tma_exp_get_user_segments();
 
 		return apply_filters("experience-manager/rest/segments", $segments);
 	}
