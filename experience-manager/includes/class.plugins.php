@@ -36,10 +36,6 @@ class Plugins {
 		return in_array('elementor/elementor.php', $this->plugins);
 	}
 
-	public function beaverBuilder() {
-		return class_exists('FLBuilder');
-	}
-
 	public function popup_maker() {
 		return in_array('popup-maker/popup-maker.php', $this->plugins);
 	}

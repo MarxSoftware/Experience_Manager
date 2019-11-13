@@ -54,11 +54,6 @@ function tma_webtools_plugins_loaded() {
 	if (\TMA\ExperienceManager\Plugins::getInstance()->gutenberg()) {
 		new \TMA\ExperienceManager\Gutenberg_Integration();
 	}
-
-	if (\TMA\ExperienceManager\Plugins::getInstance()->beaverBuilder()) {
-		new \TMA\ExperienceManager\BeaverBuilder_Integration();
-		//\TMA\TMA_BeaverBuilderPreview::getInstance()->init();
-	}
 }
 
 function tma_webtools_rest_init() {

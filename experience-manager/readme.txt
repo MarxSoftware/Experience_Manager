@@ -20,7 +20,6 @@ Features:
 * Content targeting via shortcodes fro classic editor
 * Segment simulator in the preview
 * Support for [Elementor Page Builder](https://elementor.com/)
-* Support for [Beaver Page Builder](https://www.wpbeaverbuilder.com/)
 * Support For [Gutenberg](https://wordpress.org/gutenberg/)
 * Template-Tag to check if a user match a specific segment ( e.q. tma_exm_is_in_segment("a_segment_id"))
 * Support for Cache Plugins
@@ -66,6 +65,7 @@ none
 
 2.1.0
  * Update to new the new tracking url provided by the Experience Platform
+ * Beaver Builder support removed
 
 IMPORTANT: If you upgrade to version 2.1.0 you need at least Experience Platform version 3.3.1
 

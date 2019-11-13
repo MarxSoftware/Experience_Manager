@@ -29,9 +29,6 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	"TMA\ExperienceManager\TMA_AdvancedAdsIntegration" => "includes/modules/ads/advanced/class.advanced_ads.php",
 	// Gutenberg
 	"TMA\ExperienceManager\Gutenberg_Integration" => "includes/modules/editors/gutenberg/class.gutenberg_integration.php",
-	// Beaver Builder
-	"TMA\ExperienceManager\BeaverBuilder_Integration" => "includes/modules/editors/beaver/class.beaverbuilder_integration.php",
-	"TMA\ExperienceManager\TMA_BeaverBuilderPreview" => "includes/modules/editors/beaver/class.beaverbuilder.preview.php",
 	
 	// Audience Editor
 	"TMA\ExperienceManager\Segment\SegmentType" => "includes/backend/segment/class.segment-type.php",
