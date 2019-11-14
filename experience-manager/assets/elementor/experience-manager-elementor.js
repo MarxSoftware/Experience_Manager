@@ -12,20 +12,19 @@ var onElementorReady = function() {
 };
 
 onElementorReady().then(function () {
-	console.log("Hallo Leute");
-	console.log("exm", window.elementor);
-
-	window.elementor.channels.editor.on("exm:editor:preview", function () {
-		console.log("event");
+	window.elementor.channels.editor.on("exm:editor:highlight", function () {
+		tma_toggle_highlight();
 	});
 
 });
-//webtools.domReady(function (event) {
-//	console.log("Hallo Leute");
-//	console.log("exm", window.elementor);
-//
-//	window.elementor.channels.editor.on("exm:editor:preview", function () {
-//		console.log("event");
-//	});
-//
-//});
+var tma_exm_elementor_highlight = false;
+function tma_toggle_highlight() {
+	if (tma_exm_elementor_highlight) {
+		tma_exm_elementor_highlight = false;
+		webtools.Highlight.deactivate();
+	} else {
+		tma_exm_elementor_highlight = true;
+		webtools.Highlight.activate(Array.apply([], document.querySelectorAll('[data-tma-group]')));
+	}
+}
+

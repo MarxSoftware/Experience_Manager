@@ -20,18 +20,28 @@
 namespace TMA\ExperienceManager;
 
 class Elementor_Preview {
+	
+	protected static $_instance = null;
+
+	public static function getInstance() {
+		if (null === self::$_instance) {
+			self::$_instance = new self;
+		}
+		return self::$_instance;
+	}
 
 	/**
 	 * Start up
 	 */
-	public function __construct() {
+	private function __construct() {
 		add_action('elementor/element/post/document_settings/after_section_end', array($this, 'add_elementor_page_settings_controls'));
 
 		add_action('elementor/frontend/after_register_scripts', [$this, 'widget_scripts']);
 
 		add_action("elementor/widget/render_content", function ($content, $element) {
 			if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
-				$attrs = Elementor_Integration::getAttributes($element, true);
+				// TODO: static call not working anymore
+				$attrs = Elementor_Integration::getInstance()->getAttributes($element, true);
 				$element->add_render_attribute('exm_wrapper', $attrs);
 				return '<div id="exm_wrapper" ' . $element->get_render_attribute_string('exm_wrapper') . ' >' . $content . "</div>";
 			}
@@ -40,7 +50,7 @@ class Elementor_Preview {
 	}
 
 	function widget_scripts() {
-		wp_register_script('exm-elementor', plugins_url('experience-manager/assets/elementor/experience-manager-elementor.js'), [], "2.1.0", true);
+		wp_register_script('exm-elementor', plugins_url('experience-manager/assets/elementor/experience-manager-elementor.js'), [], "2.2.0", true);
 		wp_enqueue_script('exm-elementor');
 	}
 
@@ -56,12 +66,13 @@ class Elementor_Preview {
 		$page->add_control(
 				'exm_toggle_preview',
 				[
-					'label' => __('Toggle preview', 'tma-webtools'),
+					'label' => __('Toggle highlight', 'tma-webtools'),
+					'description' => __("Highlight the elements with configured targeting!", "tma-webtools"),
 					'type' => \Elementor\Controls_Manager::BUTTON,
 					'separator' => 'before',
 					'button_type' => 'success',
-					'text' => __('Preview', 'tma-webtools'),
-					'event' => 'exm:editor:preview',
+					'text' => __('Highlight', 'tma-webtools'),
+					'event' => 'exm:editor:highlight',
 				]
 		);
 
@@ -69,14 +80,3 @@ class Elementor_Preview {
 	}
 
 }
-
-/**
- function handleMenuItemColor ( newValue ) {
-	console.log( newValue );
-	elementor.reloadPreview();
-}
- elementor.settings.page.addChangeCallback( 'menu_item_color', handleMenuItemColor );
-  
- */
-
-//$tma_elementor_integration = new Elementor_Integration();

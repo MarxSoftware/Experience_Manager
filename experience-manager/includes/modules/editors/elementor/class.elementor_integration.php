@@ -21,10 +21,19 @@ namespace TMA\ExperienceManager;
 
 class Elementor_Integration extends Integration {
 
+	protected static $_instance = null;
+
+	public static function getInstance() {
+		if (null === self::$_instance) {
+			self::$_instance = new self;
+		}
+		return self::$_instance;
+	}
+
 	/**
 	 * Start up
 	 */
-	public function __construct() {
+	private function __construct() {
 
 		parent::__construct();
 
@@ -32,7 +41,7 @@ class Elementor_Integration extends Integration {
 		add_action('elementor/frontend/widget/before_render', array($this, 'widget_before_render'), 10, 2);
 	}
 
-	static function getAttributes($element, $in_edit = false) {
+	function getAttributes($element, $in_edit = false) {
 		$settings = $element->get_settings();
 
 		$attrs = [];
@@ -64,7 +73,7 @@ class Elementor_Integration extends Integration {
 	function widget_before_render(\Elementor\Element_Base $element) {
 		tma_exm_log("widget_before_render");
 
-		$attrs = Elementor_Integration::getAttributes($element);
+		$attrs = $this->getAttributes($element);
 
 		$element->add_render_attribute('_wrapper', $attrs);
 	}
@@ -91,7 +100,7 @@ class Elementor_Integration extends Integration {
 	function isActivated($args) {
 		return Elementor_Integration::_isActivated($args);
 	}
-	
+
 	protected function isGroupDefault($args) {
 		return (is_array($args) && !empty($args['tma_default']) && $args['tma_default'] === "yes");
 	}

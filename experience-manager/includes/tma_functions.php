@@ -43,7 +43,11 @@ function tma_exm_get_segments_as_array() {
 	if (false === $segments) {
 		$segments = [];
 
-		$args = array('post_type' => \TMA\ExperienceManager\Segment\SegmentType::$TYPE, 'orderby' => 'title');
+		$args = array(
+				'post_type' => \TMA\ExperienceManager\Segment\SegmentType::$TYPE, 
+				'orderby' => 'title',
+				'post_status' => array('publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit')
+		);
 		$loop = new WP_Query($args);
 
 		foreach ($loop->posts as $post) {

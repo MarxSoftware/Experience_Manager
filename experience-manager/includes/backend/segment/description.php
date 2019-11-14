@@ -102,25 +102,7 @@
 			<br/>
 			<span>User has visited at least two products of the category T-Shirts: </span><b>rule(CATEGORY).path('/tshirts/').field('c_categories').count(2)</b>
 		</p>
-		<p>
-			<span class="headline">KEYVALUE</span>
-			<br />
-			Check if a user has visited posts or products of a specific category.
-			User the category path generator to get the correct path: <a href="#exm_categories">Category path generator</a>
-			<br />
-			<b>rule(CATEGORY).field('c_categories')</b>
-			<br />
-			"browser.name", ua.getBrowser().name());
-			"browser.group", ua.getBrowser().getGroup().name());
-			"browser.version", ua.getBrowserVersion().getVersion());
-			"os.name", ua.getOperatingSystem().name());
-			"os.group", ua.getOperatingSystem().getGroup().name());
-			"os.type", ua.getOperatingSystem().getDeviceType().name());
-			<span class="subheadline">Examples</span><br/>
-			<span>User has visited at least two post of a category: </span><b>rule(CATEGORY).path('/news/local').field('c_categories').count(2)</b>
-			<br/>
-			<span>User has visited at least two products of the category T-Shirts: </span><b>rule(CATEGORY).path('/tshirts/').field('c_categories').count(2)</b>
-		</p>
+		
 	</div>
 
 

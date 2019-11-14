@@ -99,7 +99,7 @@ class SegmentEditor {
 				  wp_enqueue_style('experience-manager-query-editor-styles_main', TMA_EXPERIENCE_MANAGER_URL . 'assets/query-editor/css/main.8881f70e.chunk.css', array('experience-manager-query-editor-styles_1'), "1.2");
 				 */
 
-				wp_enqueue_script ( 'tma-webtools-backend' );
+				wp_enqueue_script('tma-webtools-backend');
 				wp_enqueue_style('experience-manager-codemirror-styles', TMA_EXPERIENCE_MANAGER_URL . 'assets/codemirror/codemirror.css', array(), "5.48.4", false);
 				wp_enqueue_script('experience-manager-codemirror', TMA_EXPERIENCE_MANAGER_URL . 'assets/codemirror/codemirror.js', array(), "5.48.4", false);
 				wp_enqueue_script('experience-manager-codemirror-javascript', TMA_EXPERIENCE_MANAGER_URL . 'assets/codemirror/mode/javascript/javascript.js', array("experience-manager-codemirror"), "5.48.4", false);
@@ -146,17 +146,16 @@ class SegmentEditor {
 		if (isset(get_option('tma_webtools_option')['webtools_siteid'])) {
 			$siteid = get_option('tma_webtools_option')['webtools_siteid'];
 		}
-		$dsl = get_post_meta($post->ID, 'tma_segment_editor', true);
-
-		
 		$post_data = array(
 			'name' => $post->post_title,
 			'externalId' => $ID,
 			'active' => $post->post_status === "publish",
-			'dsl' => $dsl
+			'dsl' => $this->get_segment_dsl($post->ID),
+			'period' => $this->get_segment_period($post->ID)
 		);
-
-		tma_exm_log($post_data);
+		
+		tma_exm_log("post data");
+		tma_exm_log(json_encode($post_data));
 
 		$request = new \TMA\ExperienceManager\TMA_Request();
 		$error = FALSE;
@@ -236,16 +235,60 @@ class SegmentEditor {
 		);
 	}
 
-	public function save($post_id) {
+	public function get_segment_dsl($post_id) {
 		if (array_key_exists('exm_audience_editor', $_POST)) {
 			$editor_value = filter_input(INPUT_POST, 'exm_audience_editor');
-			//$editor_value = sanitize_textarea_field($_POST['exm_audience_editor']);
+
+			return $editor_value;
+		} else {
+			return get_post_meta($post_id, 'tma_segment_editor', true);
+		}
+	}
+	public function get_segment_period($post_id) {
+		$period = [
+			'unit' => "YEAR", // MINUTE, HOUR, DAY, WEEK, MONTH, YEAR
+			'count' => 1
+		];
+		if (array_key_exists('exm_audience_editor_tw_unit', $_POST)) {
+			$period['unit'] = $_POST['exm_audience_editor_tw_unit'];
+		} else {
+			$period['unit'] = get_post_meta($post_id, 'tma_segment_editor_unit', true);
+		}
+		
+		if (array_key_exists('exm_audience_editor_tw_count', $_POST)) {
+			$period['count'] = intval($_POST['exm_audience_editor_tw_count']);
+		} else {
+			$period['count'] = intval(get_post_meta($post_id, 'tma_segment_editor_count', true));
+		}
+		
+		return $period;
+	}
+
+	public function save($post_id) {
+		tma_exm_log("save");
+		if (array_key_exists('exm_audience_editor', $_POST)) {
+			$editor_value = filter_input(INPUT_POST, 'exm_audience_editor');
 			update_post_meta(
 					$post_id,
 					'tma_segment_editor',
 					$editor_value
 			);
 		}
+		if (array_key_exists('exm_audience_editor_tw_unit', $_POST)) {
+			update_post_meta(
+					$post_id,
+					'tma_segment_editor_unit',
+					$_POST['exm_audience_editor_tw_unit']
+			);
+		}
+		if (array_key_exists('exm_audience_editor_tw_count', $_POST)) {
+			update_post_meta(
+					$post_id,
+					'tma_segment_editor_count',
+					$_POST['exm_audience_editor_tw_count']
+			);
+		}
+		
 	}
 
 	public function add_meta_box() {
@@ -268,6 +311,12 @@ class SegmentEditor {
 				[$this, 'categories'], // Content callback, must be of type callable
 				SegmentType::$TYPE   // Post type
 		);
+		add_meta_box(
+				'tma_segment_editor_timewindow', // Unique ID
+				'Time window', // Box title
+				[$this, 'time_meta_box'], // Content callback, must be of type callable
+				SegmentType::$TYPE   // Post type
+		);
 	}
 
 	public function description($post) {
@@ -278,12 +327,36 @@ class SegmentEditor {
 		include 'categories.php';
 	}
 
+	function time_meta_box($post) {
+		$unit = get_post_meta($post->ID, 'tma_segment_editor_unit', true);
+		$count = get_post_meta($post->ID, 'tma_segment_editor_count', true);
+		?>
+		<div>
+		<label for="exm_audience_editor_tw_unit">Unit</label>
+		<select name="exm_audience_editor_tw_unit" id="tma_segment_editor_tw_unit" class="postbox">
+			<option value="YEAR" <?php selected($unit, 'YEAR'); ?> >YEAR</option>
+			<option value="MONTH" <?php selected($unit, 'MONTH'); ?> >MONTH</option>
+			<option value="WEEK" <?php selected($unit, 'WEEK'); ?> >WEEK</option>
+			<option value="DAY" <?php selected($unit, 'DAY'); ?> >DAY</option>
+			<option value="HOUR" <?php selected($unit, 'HOUR'); ?> >HOUR</option>
+			<option value="MINUTE" <?php selected($unit, 'MINUTE'); ?> >MINUTE</option>
+		</select>
+		</div>
+		<div>
+			<label for="exm_audience_editor_tw_unit">Count</label>
+			<input type="number" name="exm_audience_editor_tw_count" class="postbox" value="<?php echo $count?>" />
+		</div>
+		<?php
+	}
+
 	public function html($post) {
 		$value = get_post_meta($post->ID, 'tma_segment_editor', true);
 		?>
-		<textarea name="exm_audience_editor" id="exm_audience_editor" cols="50" rows="10"><?php if ($value && $value !== "") {
+		<textarea name="exm_audience_editor" id="exm_audience_editor" cols="50" rows="10"><?php
+		if ($value && $value !== "") {
 			echo $value;
-		} ?></textarea>
+		}
+		?></textarea>
 		<script type="text/javascript">
 			CodeMirror.fromTextArea(document.getElementById("exm_audience_editor"), {
 				lineNumbers: true,

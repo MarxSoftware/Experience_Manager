@@ -4,7 +4,7 @@
   Plugin URI: https://wp-digitalexperience.com/experience-manager/
   Description: The integration for the experience platform.
   Author: Thorsten Marx
-  Version: 2.1.0
+  Version: 2.2.0
   Author URI: https://wp-digitalexperience.com/
   Text Domain: tma-webtools
   Domain Path: /languages
@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-define("TMA_EXPERIENCE_MANAGER_VERSION", "2.1.0");
+define("TMA_EXPERIENCE_MANAGER_VERSION", "2.2.0");
 define("TMA_EXPERIENCE_MANAGER_SEGMENT_MATCHING_ALL", "all");
 define("TMA_EXPERIENCE_MANAGER_SEGMENT_MATCHING_ANY", "any");
 define("TMA_EXPERIENCE_MANAGER_SEGMENT_MATCHING_NONE", "none");
@@ -42,8 +42,8 @@ function tma_webtools_plugins_loaded() {
 	tma_exm_log("load editor plugins");
 
 	if (\TMA\ExperienceManager\Plugins::getInstance()->elementor()) {
-		new \TMA\ExperienceManager\Elementor_Integration();
-		//new \TMA\ExperienceManager\Elementor_Preview();
+		\TMA\ExperienceManager\Elementor_Integration::getInstance();
+		\TMA\ExperienceManager\Elementor_Preview::getInstance();
 	}
 	if (\TMA\ExperienceManager\Plugins::getInstance()->popup_maker()) {
 		\TMA\ExperienceManager\TMA_PopupMakerIntegration::getInstance()->init();

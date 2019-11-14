@@ -87,6 +87,8 @@ class TMA_WPAdminBar {
 		$args = array();
 
 		$segments = tma_exm_get_segments_as_array();
+		tma_exm_log("hier sind die segmente");
+		tma_exm_log(json_encode($segments));
 		if (sizeof($segments) > 0) {
 			foreach ($segments as $segment) {
 				array_push($args, array(
