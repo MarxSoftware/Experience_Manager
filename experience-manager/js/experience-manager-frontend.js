@@ -18,7 +18,8 @@
 
 
 	function tma_webtools_update(segments) {
-		webtools.Frontend.update(segments.user_segments);
+		let flat_segments = segments.user_segments.map(segment => "" + segment.wpid);
+		webtools.Frontend.update(flat_segments);
 	}
 
 	webtools.domReady(function (event) {

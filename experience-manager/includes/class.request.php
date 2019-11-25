@@ -30,6 +30,7 @@ class TMA_Request {
 
 	public function __construct() {
 		$this->options = get_option('tma_webtools_option');
+		
 	}
 
 	public static function getUserID() {
@@ -214,19 +215,6 @@ class TMA_Request {
 	 * @return type
 	 */
 	public function getSegments($userid) {
-		/*
-		  if (tma_is_preview()) {
-		  if (isset($_GET['segment'])) {
-		  $segments = filter_input(INPUT_GET, 'segment', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
-		  $result = '{"user" :{"segments" : ["' . implode("\",\"", $segments) . '"]}, "status" : "ok"}';
-		  return json_decode($result);
-		  } else {
-		  $result = '{"user" : {"segments" : []}, "status" : "ok"}';
-		  return json_decode($result);
-		  }
-		  } */
-
-
 		if (!isset($this->options["webtools_apikey"]) || !isset($this->options['webtools_url'])) {
 			$result = '{"user" : {"segments" : []}}';
 			return json_decode($result);
@@ -235,7 +223,7 @@ class TMA_Request {
 		$apikey = $this->options["webtools_apikey"];
 		if (false === $result) {
 			$url = $this->options['webtools_url'] . 'rest/userinformation/user?apikey=' . $apikey . '&user=' . $userid;
-			$result = $this->loadContent($url, '{"user" : {"segments" : []}, "status" : "ok"}');
+			$result = $this->loadContent($url, '{"user" : {"segments" : []}, "status" : "ok", "default": true}');
 
 			wp_cache_set($userid, $result, "", 60);
 		}
@@ -374,7 +362,7 @@ class TMA_Request {
 		$parameters['headers']['Content-Type'] = "text/plain";
 
 		$response = wp_remote_get($url, $parameters);
-
+		tma_exm_log(json_encode($response));
 		if ((is_object($response) || is_array($response)) && !is_wp_error($response)) {
 			$result = $response['body']; // use the content
 		}

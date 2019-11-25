@@ -31,12 +31,12 @@ class ShortCode_TMA_CONTENT {
 	 * user must be in all of the segments
 	 */
 	public static $match_mode_all = TMA_EXPERIENCE_MANAGER_SEGMENT_MATCHING_ALL; //'all';
+
 	/**
 	 *
 	 * user should match none of the segments
 	 */
 	public static $match_mode_none = TMA_EXPERIENCE_MANAGER_SEGMENT_MATCHING_NONE; //'none';
-	
 	public static $delimiter = ',';
 	private static $contentGroups = array();
 	private $options;
@@ -163,6 +163,16 @@ class ShortCode_TMA_CONTENT {
 	 */
 	public static function matching_mode_all($usersSegments, $tagSegments) {
 		return array_diff($usersSegments, $tagSegments) === array_diff($tagSegments, $usersSegments);
+	}
+
+	public static function array_flat($usersSegments) {
+		$segments = [];
+
+		foreach ($usersSegments as $segment) {
+			$segments[] = $segment->wpid;
+		}
+
+		return $segments;
 	}
 
 	/**

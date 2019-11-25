@@ -65,7 +65,9 @@ none
 
 2.2.0
  * Add highlighting of widgets with configured targeting to elementor
- * Segmente editor publish-save-order issue fixed
+ * Segment editor publish-save-order issue fixed
+ * Javascript for updating segments fixed
+ * Widget Targeting removed due to bug 
 
 2.1.0
  * Update to new the new tracking url provided by the Experience Platform

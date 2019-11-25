@@ -74,7 +74,7 @@ class TMA_Rest {
 		$segments = [];
 
 		$segments['segments'] = tma_exm_get_segments_as_array();
-		$segments['user_segments'] = tma_exp_get_user_segments();
+		$segments['user_segments'] = tma_exm_get_user_segments();
 
 		return apply_filters("experience-manager/rest/segments", $segments);
 	}

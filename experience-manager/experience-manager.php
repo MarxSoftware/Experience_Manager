@@ -76,10 +76,11 @@ function tma_webtools_init() {
 	// has to be global
 	// Settings
 //	require_once 'includes/frontend/class.tma_script_helper.php';
-	require_once 'includes/frontend/class.shortcode_tma_content.php';
+	//require_once 'includes/frontend/class.shortcode_tma_content.php';
 	require_once 'includes/frontend/template_tags.php';
 
-	new TMA\ExperienceManager\TMA_Widget_Targeting();
+	// IS not stored
+	//new TMA\ExperienceManager\TMA_Widget_Targeting();
 
 	require_once 'includes/modules/events/class.ecommerce_events.php';
 

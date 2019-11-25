@@ -123,14 +123,17 @@ abstract class Integration {
 		}
 
 		$matching = false;
-		$segments = array_map('trim', $segments);
+//		$segments = array_map('trim', $segments);
 		$attr_segments = array_map('trim', $attr_segments);
 		if ($matching_mode === ShortCode_TMA_CONTENT::$match_mode_all) {
-			$matching = ShortCode_TMA_CONTENT::matching_mode_all($segments, $attr_segments);
+//			$matching = ShortCode_TMA_CONTENT::matching_mode_all(ShortCode_TMA_CONTENT::array_flat($segments), $attr_segments);
+			$matching = tma_exm_array_match_all($attr_segments, $segments);
 		} else if ($matching_mode === ShortCode_TMA_CONTENT::$match_mode_any) {
-			$matching = ShortCode_TMA_CONTENT::matching_mode_any($segments, $attr_segments);
+//			$matching = ShortCode_TMA_CONTENT::matching_mode_any(ShortCode_TMA_CONTENT::array_flat($segments), $attr_segments);
+			$matching = tma_exm_array_match_any($attr_segments, $segments);
 		} else if ($matching_mode === ShortCode_TMA_CONTENT::$match_mode_none) {
-			$matching = !ShortCode_TMA_CONTENT::matching_mode_any($segments, $attr_segments);
+//			$matching = !ShortCode_TMA_CONTENT::matching_mode_any(ShortCode_TMA_CONTENT::array_flat($segments), $attr_segments);
+			$matching = !tma_exm_array_match_all($attr_segments, $segments);
 		}
 
 		return $matching;

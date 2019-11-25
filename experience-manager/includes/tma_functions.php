@@ -1,14 +1,32 @@
 <?php
 
-function tma_exm_get_user_segments ($defaultValue = []) {
+function tma_exm_array_match_all($settings_segments, $user_segments) {
+	tma_exm_log("tma_exm_array_match_all");
+	tma_exm_log(json_encode($settings_segments));
+	$user_segments = TMA\ExperienceManager\ShortCode_TMA_CONTENT::array_flat($user_segments);
+	tma_exm_log(json_encode($user_segments));
+	
+	return TMA\ExperienceManager\ShortCode_TMA_CONTENT::matching_mode_all($user_segments, $settings_segments);
+}
+
+function tma_exm_array_match_any($settings_segments, $user_segments) {
+	tma_exm_log("tma_exm_array_match_all");
+	tma_exm_log(json_encode($settings_segments));
+	$user_segments = TMA\ExperienceManager\ShortCode_TMA_CONTENT::array_flat($user_segments);
+	tma_exm_log(json_encode($user_segments));
+	
+	return TMA\ExperienceManager\ShortCode_TMA_CONTENT::matching_mode_any($user_segments, $settings_segments);
+}
+
+function tma_exm_get_user_segments($defaultValue = []) {
 	$request = new TMA\ExperienceManager\TMA_Request();
 	$response = $request->getSegments(\TMA\ExperienceManager\TMA_Request::getUserID());
 	tma_exm_log(json_encode($response));
 	if ($response !== NULL && $response !== FALSE && $response->status === "ok" && property_exists($response->user, "actionSystem")) {
-		$tma_config['user_segments'] = $response->user->actionSystem->segments;
+//		$tma_config['user_segments'] = $response->user->actionSystem->segments;
+		return $response->user->actionSystem->segments;
 	}
 	return $defaultValue;
-	
 }
 
 function tma_exm_get_segments() {
@@ -44,9 +62,9 @@ function tma_exm_get_segments_as_array() {
 		$segments = [];
 
 		$args = array(
-				'post_type' => \TMA\ExperienceManager\Segment\SegmentType::$TYPE, 
-				'orderby' => 'title',
-				'post_status' => array('publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit')
+			'post_type' => \TMA\ExperienceManager\Segment\SegmentType::$TYPE,
+			'orderby' => 'title',
+			'post_status' => array('publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit')
 		);
 		$loop = new WP_Query($args);
 
@@ -114,20 +132,19 @@ function tma_exm_is_elementor_preview() {
 	return false;
 }
 
-function tma_exm_is_elementor_active () {
-	return \TMA\ExperienceManager\Plugins::getInstance()->elementor() 
-			&& (\Elementor\Plugin::$instance->editor->is_edit_mode() || \Elementor\Plugin::$instance->preview->is_preview_mode());
+function tma_exm_is_elementor_active() {
+	return \TMA\ExperienceManager\Plugins::getInstance()->elementor() && (\Elementor\Plugin::$instance->editor->is_edit_mode() || \Elementor\Plugin::$instance->preview->is_preview_mode());
 }
 
 function tma_exm_is_editor_active() {
-	if (isset($_GET['action'])  && ($_GET['action'] === 'edit')) { // || $_GET['action'] === 'elementor')
+	if (isset($_GET['action']) && ($_GET['action'] === 'edit')) { // || $_GET['action'] === 'elementor')
 		tma_exm_log("editor is active gutenberg");
 		return true;
 	} else if (tma_exm_is_elementor_active()) {
 		tma_exm_log("editor is active elementor");
 		return true;
 	}
-	
+
 	return false;
 }
 

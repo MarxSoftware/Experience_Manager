@@ -54,9 +54,10 @@ final class TMA_PopupMakerIntegration {
 			$user_segments = tma_exm_get_user_segments();
 		}
 
-		$user_segments = array_map('trim', $user_segments);
+		//$user_segments = array_map('trim', $user_segments);
 		$settings_segments = array_map('trim', $settings_segments);
-		return ShortCode_TMA_CONTENT::matching_mode_all($user_segments, $settings_segments);
+//		return ShortCode_TMA_CONTENT::matching_mode_all(ShortCode_TMA_CONTENT::array_flat($user_segments), $settings_segments);
+		return tma_exm_array_match_all($settings_segments, $user_segments);
 	}
 
 	function conditions($conditions) {

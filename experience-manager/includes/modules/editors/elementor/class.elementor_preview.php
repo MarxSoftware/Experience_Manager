@@ -54,7 +54,7 @@ class Elementor_Preview {
 		wp_enqueue_script('exm-elementor');
 	}
 
-	function add_elementor_page_settings_controls(\Elementor\Core\DocumentTypes\Post $page) {
+	function add_elementor_page_settings_controls( $page) { // \Elementor\Core\DocumentTypes\Post
 
 		$page->start_controls_section(
 				'tma_exm_preview', [

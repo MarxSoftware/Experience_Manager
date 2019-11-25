@@ -52,6 +52,8 @@ if (!class_exists('TMA_Widget_Targeting')) {
 		}
 
 		function add_widget_form($widget, $return, $instance) {
+			tma_exm_log(json_encode($widget));
+			tma_exm_log(json_encode($instance));
 			// Display the description option.
 			$enable = isset($instance['tma_personalization']) ? $instance['tma_personalization'] : '';
 			$matching = isset($instance['tma_matching']) ? $instance['tma_matching'] : '';
