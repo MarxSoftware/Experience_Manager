@@ -3,7 +3,7 @@ Contributors: thmarx
 Tags: digital experience platform, experience manager, targeting, analytics, tracking, product targeting, behaviour targets
 Requires at least: 4.4.1
 Tested up to: 5.3
-Stable tag: 2.2.0
+Stable tag: 2.3.0
 License: GPLv2 or later
 
 Experience Manager is a integration for https://wp-digitalexperience.com/experience-platform/
@@ -62,6 +62,9 @@ Yes, since version 2 the Experience Manager supports frontend and backend target
 none
 
 == Changelog ==
+
+2.3.0
+ * cookie handling fixed
 
 2.2.0
  * Add highlighting of widgets with configured targeting to elementor
