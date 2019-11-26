@@ -45,7 +45,7 @@ final class TMA_PopupMakerIntegration {
 
 		$settings_segments = $settings['segments'];
 
-		$uid = TMA_COOKIE_HELPER::getCookie(TMA_COOKIE_HELPER::$COOKIE_USER, UUID::v4(), TMA_COOKIE_HELPER::$COOKIE_USER_EXPIRE);
+		$uid = \TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(TMA_COOKIE_HELPER::$COOKIE_USER, UUID::v4(), TMA_COOKIE_HELPER::$COOKIE_USER_EXPIRE);
 		$request = new TMA_Request();
 		$response = $request->getSegments($uid);
 

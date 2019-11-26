@@ -34,7 +34,7 @@ class TMA_Request {
 	}
 
 	public static function getUserID() {
-		return TMA_COOKIE_HELPER::getCookie(TMA_COOKIE_HELPER::$COOKIE_USER, UUID::v4(), TMA_COOKIE_HELPER::$COOKIE_USER_EXPIRE);
+		return \TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(TMA_COOKIE_HELPER::$COOKIE_USER, UUID::v4(), TMA_COOKIE_HELPER::$COOKIE_USER_EXPIRE);
 	}
 
 	private function garded($function_to_gard) {
@@ -171,9 +171,9 @@ class TMA_Request {
 			return;
 		}
 
-		$uid = TMA_COOKIE_HELPER::getCookie(TMA_COOKIE_HELPER::$COOKIE_USER, UUID::v4(), TMA_COOKIE_HELPER::$COOKIE_USER_EXPIRE);
-		$rid = TMA_COOKIE_HELPER::getCookie(TMA_COOKIE_HELPER::$COOKIE_REQUEST, UUID::v4(), TMA_COOKIE_HELPER::$COOKIE_REQUEST_EXPIRE);
-		$vid = TMA_COOKIE_HELPER::getCookie(TMA_COOKIE_HELPER::$COOKIE_VISIT, UUID::v4(), TMA_COOKIE_HELPER::$COOKIE_VISIT_EXPIRE);
+		$uid = \TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(TMA_COOKIE_HELPER::$COOKIE_USER, UUID::v4(), TMA_COOKIE_HELPER::$COOKIE_USER_EXPIRE);
+		$rid = \TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(TMA_COOKIE_HELPER::$COOKIE_REQUEST, UUID::v4(), TMA_COOKIE_HELPER::$COOKIE_REQUEST_EXPIRE);
+		$vid = \TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(TMA_COOKIE_HELPER::$COOKIE_VISIT, UUID::v4(), TMA_COOKIE_HELPER::$COOKIE_VISIT_EXPIRE);
 		$fp = $_COOKIE['_tma_fp'];
 		$apikey = $this->options["webtools_apikey"];
 		$url = $this->options['webtools_url'];

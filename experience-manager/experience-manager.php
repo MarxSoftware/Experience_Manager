@@ -162,7 +162,7 @@ function tma_webtools_hook_js() {
 }
 
 function tma_init_cookie() {
-	\TMA\ExperienceManager\TMA_COOKIE_HELPER::getCookie(\TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_USER, \TMA\ExperienceManager\UUID::v4(), \TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_USER_EXPIRE, true);
-	\TMA\ExperienceManager\TMA_COOKIE_HELPER::getCookie(\TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_REQUEST, \TMA\ExperienceManager\UUID::v4(), \TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_REQUEST_EXPIRE, true);
-	\TMA\ExperienceManager\TMA_COOKIE_HELPER::getCookie(\TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_VISIT, \TMA\ExperienceManager\UUID::v4(), \TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_VISIT_EXPIRE, true);
+	\TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(\TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_USER, \TMA\ExperienceManager\UUID::v4(), \TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_USER_EXPIRE, true);
+	\TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(\TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_REQUEST, \TMA\ExperienceManager\UUID::v4(), \TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_REQUEST_EXPIRE, true);
+	\TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(\TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_VISIT, \TMA\ExperienceManager\UUID::v4(), \TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_VISIT_EXPIRE, true);
 }

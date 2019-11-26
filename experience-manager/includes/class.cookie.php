@@ -15,43 +15,59 @@ namespace TMA\ExperienceManager;
  */
 class TMA_COOKIE_HELPER {
 
-	public static $DAY = null;
-	public static $HOUR = null;
-	public static $MINUTE = null;
-	
-	public static $COOKIE_REQUEST = "_tma_rid";
-	public static $COOKIE_REQUEST_EXPIRE = null;
-	public static $COOKIE_VISIT = "_tma_vid";
-	public static $COOKIE_VISIT_EXPIRE = null;
-	public static $COOKIE_USER = "_tma_uid";
-	public static $COOKIE_USER_EXPIRE = null;
-	public static $COOKIE_FINGERPRINT = "_tma_fp";
-	public static $COOKIE_FINGERPRINT_EXPIRE = null;
-	
-	public function __construct() {
-		if (self::$COOKIE_REQUEST_ESPIRE == null) {
-			self::$DAY = 24 * 60 * 60 * 1000;
-			self::$HOUR = 60 * 60 * 1000;
-			self::$MINUTE = 60 * 1000;
-			self::$COOKIE_REQUEST_EXPIRE = 3 * self::$MINUTE;
-			self::$COOKIE_VISIT_EXPIRE = 1 * TMA_COOKIE_HELPER::$HOUR;
-			self::$COOKIE_USER_EXPIRE = 1 * TMA_COOKIE_HELPER::$YEAR;
-			self::$COOKIE_FINGERPRINT= 1 * TMA_COOKIE_HELPER::$YEAR;
+	protected static $_instance = null;
+
+	public static function getInstance() {
+		if (null === self::$_instance) {
+			self::$_instance = new self;
 		}
+		return self::$_instance;
 	}
 
-	public static function getCookie($name, $value, $expire, $setNew=false) {
+	public static $MINUTE = 60;
+	public static $HOUR;
+	public static $DAY;
+	public static $YEAR;
+	public static $COOKIE_REQUEST = "_tma_rid";
+	public static $COOKIE_REQUEST_EXPIRE;
+	public static $COOKIE_VISIT = "_tma_vid";
+	public static $COOKIE_VISIT_EXPIRE;
+	public static $COOKIE_USER = "_tma_uid";
+	public static $COOKIE_USER_EXPIRE;
+
+	protected function __construct() {
+		
+	}
+
+	public function getCookie($name, $value, $expire, $setNew = false) {
 		if (isset($_COOKIE[$name])) {
 			$value = $_COOKIE[$name];
 		}
 		if ($setNew) {
-			setcookie($name, $value, $expire, '/');
+
+			$cookieDomain = null;
+			if (isset(get_option('tma_webtools_option')['webtools_cookiedomain'])) {
+				$cookieDomain = get_option('tma_webtools_option')['webtools_cookiedomain'];
+
+				$query = ".";
+				if (substr($cookieDomain, 0, strlen($query)) !== $query) {
+					$cookieDomain = "." . $cookieDomain;
+				}
+			}
+			setcookie($name, $value, time() + $expire, '/', $cookieDomain, true);
 		}
-		
+
 		return $value;
 	}
 
 }
+
+TMA_COOKIE_HELPER::$HOUR = 60 * TMA_COOKIE_HELPER::$MINUTE;
+TMA_COOKIE_HELPER::$DAY = 24 * TMA_COOKIE_HELPER::$HOUR;
+TMA_COOKIE_HELPER::$YEAR = 365 * TMA_COOKIE_HELPER::$DAY;
+TMA_COOKIE_HELPER::$COOKIE_REQUEST_EXPIRE = 3 * TMA_COOKIE_HELPER::$MINUTE;
+TMA_COOKIE_HELPER::$COOKIE_VISIT_EXPIRE = 1 * TMA_COOKIE_HELPER::$HOUR;
+TMA_COOKIE_HELPER::$COOKIE_USER_EXPIRE = 1 + TMA_COOKIE_HELPER::$YEAR;
 
 class UUID {
 
@@ -66,7 +82,7 @@ class UUID {
 		$nstr = '';
 
 		// Convert Namespace UUID to bits
-		for ($i = 0; $i < strlen($nhex); $i+=2) {
+		for ($i = 0; $i < strlen($nhex); $i += 2) {
 			$nstr .= chr(hexdec($nhex[$i] . $nhex[$i + 1]));
 		}
 
@@ -119,7 +135,7 @@ class UUID {
 		$nstr = '';
 
 		// Convert Namespace UUID to bits
-		for ($i = 0; $i < strlen($nhex); $i+=2) {
+		for ($i = 0; $i < strlen($nhex); $i += 2) {
 			$nstr .= chr(hexdec($nhex[$i] . $nhex[$i + 1]));
 		}
 
