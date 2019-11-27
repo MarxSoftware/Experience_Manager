@@ -102,7 +102,20 @@
 			<br/>
 			<span>User has visited at least two products of the category T-Shirts: </span><b>rule(CATEGORY).path('/tshirts/').field('c_categories').count(2)</b>
 		</p>
-		
+		<p>
+			<span class="headline">KEYVALUE</span>
+			<br />
+			The KeyValue-Rule is a generic rule that is used for many purposes.			
+			<br />
+			<b>rule(KEYVALUE).name('browser.name').values(['Chrome', 'Firefox'])</b>
+			<br />
+			"browser.name" (e.g. Chrome, Firefox, Edge, Safari) <br/>
+			"device.type" (e.g. Mobile Phone, Desktop, Tablet, Console, TV Device) <br/>
+			<span class="subheadline">Examples</span><br/>
+			<span>User uses firefox or chrome browser: </span><b>rule(KEYVALUE).name('browser.name').values(['Chrome', 'Firefox'])</b>
+			<br/>
+			<span>User uses a desktop pc: </span><b>rule(KEYVALUE).name('device.type').values(['Desktop'])</b>
+		</p>
 	</div>
 
 
