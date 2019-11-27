@@ -22,7 +22,7 @@ namespace TMA\ExperienceManager;
 /**
  * Tracking of WooCommerce events.
  */
-class WC_TRACKER {
+class EDD_TRACKER {
 
 	/**
 	 * Holds the values to be used in the fields callbacks
@@ -37,11 +37,11 @@ class WC_TRACKER {
 	}
 
 	public function shouldInit() {
-		return isset($this->options['wc_tracking']) && $this->options['wc_tracking'] === "on";
+		return isset($this->options['edd_tracking']) && $this->options['edd_tracking'] === "on";
 	}
 
 	public function init() {
-		add_action('woocommerce_order_status_changed', array($this, 'woocommerce_order_status_changed'), 10, 3);
+		add_action('edd_update_payment_status', array($this, 'order_status_changed'), 10, 3);
 
 		add_action('woocommerce_add_to_cart', array($this, 'woocommerce_add_to_cart'));
 		add_action('woocommerce_remove_cart_item', array($this, 'woocommerce_remove_cart_item'));
@@ -84,12 +84,12 @@ class WC_TRACKER {
 		$request->track("ecommerce_cart_item_remove", "#cart", $customAttributes);
 	}
 
-	public function woocommerce_order_status_changed($order_id, $status_from, $status_to) {
-		$order = new \WC_Order($order_id);
-		$items = $order->get_items();
+	public function order_status_changed($order_id, $status_from, $status_to) {
+		$order = new EDD_Payment( $order_id );
+		$items = $order->get_downloads();
 		$product_ids = array();
 		foreach ($items as $item => $product) {
-			$product_ids[] = $product['product_id'];
+			$product_ids[] = $product->get_ID();
 		}
 		$request = new \TMA\TMA_Request();
 		$customAttributes = array();
@@ -98,17 +98,17 @@ class WC_TRACKER {
 		$customAttributes['order_status'] = $order->get_status();
 		$customAttributes['order_total'] = $order->get_total();
 
-		if ($order->get_used_coupons()) {
-			$coupons_count = count($order->get_used_coupons());
-			
-			$coupons_used = array();
-			foreach ($order->get_used_coupons() as $coupon) {
-				$coupons_used[] = $coupon;
-			}
-			
-			$customAttributes['order_coupons_count'] = $coupons_count;
-			$customAttributes['order_coupons_used'] = $coupons_used;
-		}
+//		if ($order->get_used_coupons()) {
+//			$coupons_count = count($order->get_used_coupons());
+//			
+//			$coupons_used = array();
+//			foreach ($order->get_used_coupons() as $coupon) {
+//				$coupons_used[] = $coupon;
+//			}
+//			
+//			$customAttributes['order_coupons_count'] = $coupons_count;
+//			$customAttributes['order_coupons_used'] = $coupons_used;
+//		}
 
 		$request->track("ecommerce_order", "#order", $customAttributes);
 	}
