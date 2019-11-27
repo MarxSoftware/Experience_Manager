@@ -34,7 +34,8 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	"TMA\ExperienceManager\Segment\SegmentType" => "includes/backend/segment/class.segment-type.php",
 	"TMA\ExperienceManager\Segment\SegmentEditor" => "includes/backend/segment/class.segment-editor.php",
 	// Event Tracking
-	"TMA\ExperienceManager\WC_TRACKER" => "includes/modules/events/class.woocommerce_tracker.php",
+	"TMA\ExperienceManager\Events\WC_TRACKER" => "includes/modules/events/class.woocommerce_tracker.php",
+	"TMA\ExperienceManager\Events\Base" => "includes/modules/events/class.ecommerce_base.php",	
 ));
 
 function tma_webtools_autoload($class_name) {

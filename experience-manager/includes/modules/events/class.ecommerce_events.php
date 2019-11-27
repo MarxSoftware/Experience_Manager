@@ -46,7 +46,7 @@ function tma_webtools_modules_woocommerce_sections($sections) {
 
 if (\TMA\ExperienceManager\Plugins::getInstance()->woocommerce()) {
 	require_once 'class.woocommerce_tracker.php';
-	$tracker = new \TMA\ExperienceManager\WC_TRACKER();
+	$tracker = new \TMA\ExperienceManager\Events\WC_TRACKER();
 	if ($tracker->shouldInit()) {
 		tma_exm_log("tracking woocommerce events");
 		$tracker->init();

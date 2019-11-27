@@ -116,10 +116,10 @@ class SegmentEditor {
 	}
 
 	public function transition_status($new_status, $old_status, $post) {
-		tma_exm_log("transition_status: " . $new_status);
 		if ($post->post_type !== SegmentType::$TYPE) {
 			return;
 		}
+		tma_exm_log("transition_status: " . $new_status);
 
 		if ($new_status === "publish") {
 			$this->publish($post->ID, $post);

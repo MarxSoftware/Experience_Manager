@@ -17,12 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace TMA\ExperienceManager;
+namespace TMA\ExperienceManager\Events;
 
 /**
  * Tracking of WooCommerce events.
  */
-class WC_TRACKER {
+class WC_TRACKER extends Base {
 
 	/**
 	 * Holds the values to be used in the fields callbacks
@@ -48,6 +48,7 @@ class WC_TRACKER {
 	}
 
 	public function woocommerce_add_to_cart($cart_item_key) {
+		
 		$cart = WC()->cart;
 		$item = $cart->get_cart_item($cart_item_key);
 
@@ -60,7 +61,8 @@ class WC_TRACKER {
 		$customAttributes = array();
 		$customAttributes['item_id'] = $item['product_id'];
 		$customAttributes['cart_items'] = $product_ids; //implode(":", $product_ids);
-		$request = new \TMA\TMA_Request();
+
+		$request = new \TMA\ExperienceManager\TMA_Request();
 		$request->track("ecommerce_cart_item_add", "#cart", $customAttributes);
 	}
 
@@ -80,22 +82,27 @@ class WC_TRACKER {
 		$customAttributes = array();
 		$customAttributes['item_id'] = $item['product_id'];
 		$customAttributes['cart_items'] = $product_ids; //implode(":", $product_ids);
-		$request = new \TMA\TMA_Request();
+		$request = new \TMA\ExperienceManager\TMA_Request();
 		$request->track("ecommerce_cart_item_remove", "#cart", $customAttributes);
 	}
 
 	public function woocommerce_order_status_changed($order_id, $status_from, $status_to) {
+		if ( $this->has_order_been_tracked_already( $order_id ) ) {
+			tma_exm_log( sprintf( 'Ignoring already tracked order %d', $order_id ) );
+			return;
+		}
+		tma_exm_log("track woocommerce order " . $order_id);
+		
 		$order = new \WC_Order($order_id);
 		$items = $order->get_items();
 		$product_ids = array();
 		foreach ($items as $item => $product) {
 			$product_ids[] = $product['product_id'];
 		}
-		$request = new \TMA\TMA_Request();
+		$request = new \TMA\ExperienceManager\TMA_Request();
 		$customAttributes = array();
 		$customAttributes['order_id'] = $order_id;
 		$customAttributes['order_items'] = $product_ids;
-		$customAttributes['order_status'] = $order->get_status();
 		$customAttributes['order_total'] = $order->get_total();
 
 		if ($order->get_used_coupons()) {
@@ -111,6 +118,7 @@ class WC_TRACKER {
 		}
 
 		$request->track("ecommerce_order", "#order", $customAttributes);
+		$this->set_order_been_tracked( $order_id );
 	}
 
 }

@@ -186,7 +186,7 @@ class TMA_Request {
 		//	event=pageview&site=demosite&page=testpage&fp=6e289159b1106008e0379c9565a44f03&uid=3694ff4e-668b-4484-8ddf-52662bbcc44c&
 		//	reqid=a42be86b-2930-4f72-b499-f3dcab983633&vid=8251e717-afea-43bc-b270-1033f482359f&_t=1454323264835&apikey=apikey
 
-		$url .= 'tracking/image?event=' . $event;
+		$url .= 'tracking/pixel?event=' . $event;
 		$url .= '&site=' . $siteid . '&page=' . urlencode($page);
 		$url .= "&fp=" . $fp . "&uid=" . $uid . '&reqid=' . $rid . '&vid=' . $vid;
 		$url .= "&apikey=" . $apikey;
@@ -204,7 +204,9 @@ class TMA_Request {
 				}
 			}
 		}
-
+		
+		tma_exm_log($url);
+		
 		$this->loadContent($url, "{}");
 	}
 
