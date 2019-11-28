@@ -160,23 +160,35 @@ class TMAScriptHelper {
 
 	private function add_categories(& $meta) {
 		$cats = [];
+		$term = get_term_by( 'slug', get_query_var('term'), get_query_var('taxonomy') );
 		if (is_category()) {
 			$term_list = get_categories();
 			foreach ($term_list as $cat) {
 				//$cats[] = $cat->slug;
 				$cats[] = "/" . get_term_parents_list($cat->term_id, "category", ["format" => "slug", "link" => false]);
 			}
-		} else if (function_exists("is_product_category") && is_product_category()) {
+		} else if (function_exists("is_product_category") && is_product_category()) { // woocommerce category
 			$term = get_queried_object();
 			//$cats[] = $term->slug;
 			$cats[] = "/" . get_term_parents_list($term->term_id, "product_cat", ["format" => "slug", "link" => false]);
-		} else if (function_exists("is_product") && is_product()) {
+		} else if (function_exists("is_product") && is_product()) { // woocommerce product
 			$product = wc_get_product();
 			$term_list = get_the_terms($product->get_id(), 'product_cat');
 			foreach ($term_list as $cat) {
 				//$cats[] = $cat->slug;
 				$cats[] = "/" . get_term_parents_list($cat->term_id, "product_cat", ["format" => "slug", "link" => false]);
 			}
+		} else if (get_post() && get_post()->post_type === "download") { // easy digital download
+			$download = edd_get_download(get_post()->ID);
+
+			$term_list = get_the_terms($download->ID, 'download_category');
+			foreach ($term_list as $cat) {
+				$cats[] = "/" . get_term_parents_list($cat->term_id, "download_category", ["format" => "slug", "link" => false]);
+			}
+		} else if ($term && $term->taxonomy === "download_category") {
+			$term = get_queried_object();
+			//$cats[] = $term->slug;
+			$cats[] = "/" . get_term_parents_list($term->term_id, $term->taxonomy, ["format" => "slug", "link" => false]);
 		} else if (!is_404()) {
 			$post_categories = wp_get_post_categories(get_post()->ID, ['fields' => "ids"]);
 			foreach ($post_categories as $cat) {
@@ -184,9 +196,6 @@ class TMAScriptHelper {
 				//$cats[] = $category->slug;
 				$cats[] = "/" . get_term_parents_list($category->term_id, "category", ["format" => "slug", "link" => false]);
 			}
-		} else {
-//			$taxomony = get_query_var( 'taxonomy' );
-//			$term = get_term_by( 'slug', get_query_var( 'term' ), $taxomony ); 
 		}
 
 		if (sizeof($cats) > 0) {
