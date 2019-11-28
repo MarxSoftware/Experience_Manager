@@ -31,6 +31,9 @@ class Plugins {
 	public function woocommerce() {
 		return in_array('woocommerce/woocommerce.php', $this->plugins);
 	}
+	public function easydigitaldownloads() {
+		return in_array('easy-digital-downloads/easy-digital-downloads.php', $this->plugins);
+	}
 
 	public function elementor() {
 		return in_array('elementor/elementor.php', $this->plugins);

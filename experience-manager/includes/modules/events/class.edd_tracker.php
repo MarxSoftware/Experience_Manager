@@ -43,44 +43,47 @@ class EDD_TRACKER {
 	public function init() {
 		add_action('edd_update_payment_status', array($this, 'order_status_changed'), 10, 3);
 
-		add_action('woocommerce_add_to_cart', array($this, 'woocommerce_add_to_cart'));
-		add_action('woocommerce_remove_cart_item', array($this, 'woocommerce_remove_cart_item'));
+		add_action('edd_post_add_to_cart', array($this, 'add_to_cart'), 10, 3);
+
+		add_action('edd_post_remove_from_cart', array($this, 'remove_cart_item'), 10, 2);
 	}
 
-	public function woocommerce_add_to_cart($cart_item_key) {
-		$cart = WC()->cart;
-		$item = $cart->get_cart_item($cart_item_key);
+	
+	
+	public function add_to_cart($download_id,  $options,  $items) {
+		$cart = EDD()->cart;
+//		$item = $cart->get_contents();
 
 		// loop through the cart looking 
 		$product_ids = array();
-		foreach ($cart->get_cart() as $item_key => $values) {
-			$product_ids[] = $values['product_id'];
+		foreach ($items as $key => $item) {
+			$product_ids[] = $item['id'];
 		}
 
 		$customAttributes = array();
-		$customAttributes['item_id'] = $item['product_id'];
+		$customAttributes['item_id'] = $download_id;
 		$customAttributes['cart_items'] = $product_ids; //implode(":", $product_ids);
-		$request = new \TMA\TMA_Request();
+		$request = new \TMA\ExperienceManager\TMA_Request();
 		$request->track("ecommerce_cart_item_add", "#cart", $customAttributes);
 	}
 
-	public function woocommerce_remove_cart_item($cart_item_key) {
-		$cart = WC()->cart;
-		$item = $cart->get_cart_item($cart_item_key);
+	public function remove_cart_item($cart_item_key,  $item_id) {
+		$cart = EDD()->cart;
+		$item = $cart->get_contents();
 
 		// loop through the cart looking 
 		$product_ids = array();
-		foreach ($cart->get_cart() as $item_key => $values) {
-			if ($cart_item_key === $item_key) {
+		foreach ($items as $key => $item) {
+			if ($cart_item_key === $key) {
 				continue;
 			}
-			$product_ids[] = $values['product_id'];
+			$product_ids[] = $item['id'];
 		}
 
 		$customAttributes = array();
-		$customAttributes['item_id'] = $item['product_id'];
+		$customAttributes['item_id'] = $item_id;
 		$customAttributes['cart_items'] = $product_ids; //implode(":", $product_ids);
-		$request = new \TMA\TMA_Request();
+		$request = new \TMA\ExperienceManager\TMA_Request();
 		$request->track("ecommerce_cart_item_remove", "#cart", $customAttributes);
 	}
 

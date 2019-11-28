@@ -184,6 +184,9 @@ class TMAScriptHelper {
 				//$cats[] = $category->slug;
 				$cats[] = "/" . get_term_parents_list($category->term_id, "category", ["format" => "slug", "link" => false]);
 			}
+		} else {
+//			$taxomony = get_query_var( 'taxonomy' );
+//			$term = get_term_by( 'slug', get_query_var( 'term' ), $taxomony ); 
 		}
 
 		if (sizeof($cats) > 0) {

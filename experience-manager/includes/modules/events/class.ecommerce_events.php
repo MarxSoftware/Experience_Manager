@@ -20,6 +20,13 @@ function tma_webtools_modules_woocommerce_settings($fields) {
 				'type' => 'toggle',
 				'default' => ''
 			),
+			array(
+				'name' => 'edd_tracking',
+				'label' => __("Track EasyDigitalDownloads events?", "tma-webtools"),
+				'desc' => __("Tracked events are: order, add item to basket, remove item from basket.", "tma-webtools"),
+				'type' => 'toggle',
+				'default' => ''
+			),
 			
 			array(
 				'name' => 'newsletter',
@@ -45,13 +52,20 @@ function tma_webtools_modules_woocommerce_sections($sections) {
 }
 
 if (\TMA\ExperienceManager\Plugins::getInstance()->woocommerce()) {
-	require_once 'class.woocommerce_tracker.php';
 	$tracker = new \TMA\ExperienceManager\Events\WC_TRACKER();
 	if ($tracker->shouldInit()) {
 		tma_exm_log("tracking woocommerce events");
 		$tracker->init();
 	} else {
 		tma_exm_log("not tracking woocommerce events");
+	}
+	
+	$edd_tracker = new \TMA\ExperienceManager\Events\EDD_TRACKER();
+	if ($edd_tracker->shouldInit()) {
+		tma_exm_log("tracking easydigitaldownloads events");
+		$edd_tracker->init();
+	} else {
+		tma_exm_log("not tracking easydigitaldownloads events");
 	}
 }
 
