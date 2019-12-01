@@ -43,8 +43,8 @@ class SegmentEditor {
 		add_action('post_submitbox_start', [$this, "state"]);
 
 		add_action('admin_notices', [$this, 'message']);
-	}
 
+	}
 	function message() {
 		$user_id = get_current_user_id();
 		$post_id = get_the_ID();
@@ -57,16 +57,8 @@ class SegmentEditor {
 		}
 	}
 
-	function isAudience() {
-		$screen = get_current_screen();
-		if (is_object($screen) && SegmentType::$TYPE === $screen->post_type) {
-			return TRUE;
-		}
-		return FALSE;
-	}
-
 	function state($post) {
-		if (!$this->isAudience()) {
+		if (!SegmentType::isAudienceEditor()) {
 			return;
 		}
 
@@ -89,7 +81,7 @@ class SegmentEditor {
 
 	function query_editor_scripts($hook_suffix) {
 		if (in_array($hook_suffix, array('post.php', 'post-new.php'))) {
-			if ($this->isAudience()) {
+			if (SegmentType::isAudienceEditor()) {
 				/*
 				  wp_enqueue_script('experience-manager-query-editor_init', TMA_EXPERIENCE_MANAGER_URL . 'assets/query-editor/init.js', array(), "1.2", true);
 				  wp_enqueue_script('experience-manager-query-editor_1', TMA_EXPERIENCE_MANAGER_URL . 'assets/query-editor/js/1.5939a542.chunk.js', array('experience-manager-query-editor_init'), "1.2", true);
@@ -153,7 +145,7 @@ class SegmentEditor {
 			'dsl' => $this->get_segment_dsl($post->ID),
 			'period' => $this->get_segment_period($post->ID)
 		);
-		
+
 		tma_exm_log("post data");
 		tma_exm_log(json_encode($post_data));
 
@@ -244,6 +236,7 @@ class SegmentEditor {
 			return get_post_meta($post_id, 'tma_segment_editor', true);
 		}
 	}
+
 	public function get_segment_period($post_id) {
 		$period = [
 			'unit' => "YEAR", // MINUTE, HOUR, DAY, WEEK, MONTH, YEAR
@@ -254,13 +247,13 @@ class SegmentEditor {
 		} else {
 			$period['unit'] = get_post_meta($post_id, 'tma_segment_editor_unit', true);
 		}
-		
+
 		if (array_key_exists('exm_audience_editor_tw_count', $_POST)) {
 			$period['count'] = intval($_POST['exm_audience_editor_tw_count']);
 		} else {
 			$period['count'] = intval(get_post_meta($post_id, 'tma_segment_editor_count', true));
 		}
-		
+
 		return $period;
 	}
 
@@ -288,7 +281,6 @@ class SegmentEditor {
 					$_POST['exm_audience_editor_tw_count']
 			);
 		}
-		
 	}
 
 	public function add_meta_box() {
@@ -331,20 +323,22 @@ class SegmentEditor {
 		$unit = get_post_meta($post->ID, 'tma_segment_editor_unit', true);
 		$count = get_post_meta($post->ID, 'tma_segment_editor_count', true);
 		?>
-		<div>
-		<label for="exm_audience_editor_tw_unit">Unit</label>
-		<select name="exm_audience_editor_tw_unit" id="tma_segment_editor_tw_unit" class="postbox">
-			<option value="YEAR" <?php selected($unit, 'YEAR'); ?> >YEAR</option>
-			<option value="MONTH" <?php selected($unit, 'MONTH'); ?> >MONTH</option>
-			<option value="WEEK" <?php selected($unit, 'WEEK'); ?> >WEEK</option>
-			<option value="DAY" <?php selected($unit, 'DAY'); ?> >DAY</option>
-			<option value="HOUR" <?php selected($unit, 'HOUR'); ?> >HOUR</option>
-			<option value="MINUTE" <?php selected($unit, 'MINUTE'); ?> >MINUTE</option>
-		</select>
-		</div>
-		<div>
-			<label for="exm_audience_editor_tw_unit">Count</label>
-			<input type="number" name="exm_audience_editor_tw_count" class="postbox" value="<?php echo $count?>" />
+		<div id="exm_timewindow">
+			<div>
+				<label for="exm_audience_editor_tw_unit">Unit</label>
+				<select name="exm_audience_editor_tw_unit" id="tma_segment_editor_tw_unit" class="postbox">
+					<option value="YEAR" <?php selected($unit, 'YEAR'); ?> >YEAR</option>
+					<option value="MONTH" <?php selected($unit, 'MONTH'); ?> >MONTH</option>
+					<option value="WEEK" <?php selected($unit, 'WEEK'); ?> >WEEK</option>
+					<option value="DAY" <?php selected($unit, 'DAY'); ?> >DAY</option>
+					<option value="HOUR" <?php selected($unit, 'HOUR'); ?> >HOUR</option>
+					<option value="MINUTE" <?php selected($unit, 'MINUTE'); ?> >MINUTE</option>
+				</select>
+			</div>
+			<div>
+				<label for="exm_audience_editor_tw_unit">Count</label>
+				<input type="number" name="exm_audience_editor_tw_count" class="postbox" value="<?php echo $count ?>" />
+			</div>
 		</div>
 		<?php
 	}
@@ -353,10 +347,10 @@ class SegmentEditor {
 		$value = get_post_meta($post->ID, 'tma_segment_editor', true);
 		?>
 		<textarea name="exm_audience_editor" id="exm_audience_editor" cols="50" rows="10"><?php
-		if ($value && $value !== "") {
-			echo $value;
-		}
-		?></textarea>
+			if ($value && $value !== "") {
+				echo $value;
+			}
+			?></textarea>
 		<script type="text/javascript">
 			CodeMirror.fromTextArea(document.getElementById("exm_audience_editor"), {
 				lineNumbers: true,

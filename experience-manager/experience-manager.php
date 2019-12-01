@@ -37,6 +37,7 @@ add_action("plugins_loaded", "tma_webtools_plugins_loaded");
 
 \TMA\ExperienceManager\Segment\SegmentType::getInstance()->register();
 \TMA\ExperienceManager\Segment\SegmentEditor::getInstance()->register();
+\TMA\ExperienceManager\Segment\SegmentEditorHelp::getInstance()->register();
 
 function tma_webtools_plugins_loaded() {
 	tma_exm_log("load editor plugins");

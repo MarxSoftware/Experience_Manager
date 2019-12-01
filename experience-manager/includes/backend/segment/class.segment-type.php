@@ -56,6 +56,19 @@ class SegmentType {
     * externe Instanzierung verbieten
     */
    protected function __construct() {}
+
+   /**
+    * check if the current page is the segment editor
+    * 
+    * @return boolean
+    */
+   static function isAudienceEditor() {
+		$screen = get_current_screen();
+		if (is_object($screen) && SegmentType::$TYPE === $screen->post_type) {
+			return TRUE;
+		}
+		return FALSE;
+	}
    
    public function register () {
 	   add_action('init', array($this, "register_post_type"));
