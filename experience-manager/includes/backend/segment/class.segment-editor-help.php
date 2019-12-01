@@ -26,7 +26,7 @@ class SegmentEditorHelp {
 	public function register() {
 		add_action('admin_enqueue_scripts', [$this, "query_editor_scripts"]);
 
-		add_action('edit_form_after_title', [$this, 'intro_button']);
+		add_action('edit_form_top', [$this, 'intro_button']);
 
 		add_action("admin_footer", [$this, 'intro_js']);
 	}
@@ -35,7 +35,7 @@ class SegmentEditorHelp {
 		if ($post->post_type !== SegmentType::$TYPE) {
 			return;
 		}
-		echo "<a class='button button-primary' href='javascript::void(0);' onclick='start_exm_intro()'>" . __("Getting started", "tma-webtools") . "</a>";
+		echo "<a class='button button-primary button-hero' href='javascript::void(0);' onclick='start_exm_intro()'>" . __("Getting started", "tma-webtools") . "</a>";
 	}
 
 	function intro_js() {
@@ -43,19 +43,21 @@ class SegmentEditorHelp {
 		$introConfig['steps'] = [];
 		$introConfig['steps'][] = [
 			'element' => "#tma_segment_editor",
-			'intro' => "Enter your segment dsl here"
+			'intro' => "This is the mein area for your segment definition."
 		];
 		$introConfig['steps'][] = [
 			'element' => "#tma_segment_editor_timewindow",
-			'intro' => "The TimeWindow lets define the time rang the dsl definition must match. For Example, number of orders in the last month"
+			'intro' => "Here you can define the time window in which a user must meet the requirements to be assigned to a segment."
+			. "For example, you can specify that a visitor must have bought something in the last 6 months."
+			
 		];
 		$introConfig['steps'][] = [
 			'element' => "#tma_segment_editor_categories",
-			'intro' => "This tiny helper helps you geht the category path for the category rule!"
+			'intro' => "This little helper will help you determine the category path for the category rule."
 		];
 		$introConfig['steps'][] = [
 			'element' => "#tma_segment_editor_help",
-			'intro' => "Here you find help for all available events who can be used for segmentation.!"
+			'intro' => "Here you can find all events that can be used for segmentation."
 		];
 		?>
 		<script>
