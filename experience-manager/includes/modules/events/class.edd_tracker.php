@@ -22,7 +22,7 @@ namespace TMA\ExperienceManager\Events;
 /**
  * Tracking of WooCommerce events.
  */
-class EDD_TRACKER {
+class EDD_TRACKER extends Base {
 
 	/**
 	 * Holds the values to be used in the fields callbacks
@@ -88,6 +88,13 @@ class EDD_TRACKER {
 	}
 
 	public function order_status_changed($order_id, $status_from, $status_to) {
+		
+		if ( $this->has_order_been_tracked_already( $order_id ) ) {
+			tma_exm_log( sprintf( 'Ignoring already tracked order %d', $order_id ) );
+			return;
+		}
+		tma_exm_log("track edd order " . $order_id);
+		
 		$order = new EDD_Payment( $order_id );
 		$items = $order->get_downloads();
 		$product_ids = array();
