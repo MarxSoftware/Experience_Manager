@@ -75,12 +75,10 @@ class TMAScriptHelper {
 			if (isset(get_option('tma_webtools_option')['webtools_siteid'])) {
 				$siteid = get_option('tma_webtools_option')['webtools_siteid'];
 			}
-			$cookieDomain = null;
+			$cookieDomain = FALSE;
 			if (isset(get_option('tma_webtools_option')['webtools_cookiedomain'])) {
 				$cookieDomain = get_option('tma_webtools_option')['webtools_cookiedomain'];
-
-				$query = ".";
-				if (substr($cookieDomain, 0, strlen($query)) !== $query) {
+				if ($cookieDomain !== '')
 					$cookieDomain = "." . $cookieDomain;
 				}
 			}
@@ -115,7 +113,7 @@ class TMAScriptHelper {
 			} else {
 				$output .= 'webtools.Tracking.init("' . $this->getWebTools_Url() . '", "' . $siteid . '", "404");';
 			}
-			if ($cookieDomain !== null) {
+			if ($cookieDomain !== FALSE) {
 				$output .= 'webtools.Tracking.setCookieDomain("' . $cookieDomain . '");';
 			}
 			$output .= 'webtools.Tracking.customParameters(';
