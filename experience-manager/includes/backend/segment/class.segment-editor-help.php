@@ -43,7 +43,7 @@ class SegmentEditorHelp {
 		$introConfig['steps'] = [];
 		$introConfig['steps'][] = [
 			'element' => "#tma_segment_editor",
-			'intro' => "This is the mein area for your segment definition."
+			'intro' => "This is the main area for your segment definition."
 		];
 		$introConfig['steps'][] = [
 			'element' => "#tma_segment_editor_timewindow",
