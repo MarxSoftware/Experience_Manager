@@ -78,7 +78,7 @@ class TMAScriptHelper {
 			$cookieDomain = FALSE;
 			if (isset(get_option('tma_webtools_option')['webtools_cookiedomain'])) {
 				$cookieDomain = get_option('tma_webtools_option')['webtools_cookiedomain'];
-				if ($cookieDomain !== '')
+				if ($cookieDomain !== '') {
 					$cookieDomain = "." . $cookieDomain;
 				}
 			}
