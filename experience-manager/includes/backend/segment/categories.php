@@ -57,4 +57,32 @@
 		});
 	</script>
 	<?php } ?>
+	
+	<?php if (\TMA\ExperienceManager\Plugins::getInstance()->easydigitaldownloads()) { ?>
+	<h2><?php echo __('Easy Digital Downloads Categories:', "tma-webtools"); ?></h2>
+	
+	<div id="exm-edd-category-select-categories">
+		<?php wp_dropdown_categories('show_count=1&hierarchical=1&taxonomy=download_category'); ?>
+		<button id="exm-edd-category-select"><?php echo __("Category path", "tma-webtools") ?></button>
+		<b id="exm_edd_cat_path"></b>
+	</div>
+	
+	<script>
+		webtools.domReady(function () {
+			webtools.Tools.on(document.getElementById("exm-edd-category-select"), "click", e => {
+				e.preventDefault();
+				var $element = document.querySelector("#exm-edd-category-select-categories select");
+
+				var value = $element.options[$element.selectedIndex].value;
+				window.fetch(TMA_CONFIG.rest_url + "experience-manager/v1/category-path?taxonomy=download_category&category=" + value).then(function (response) {
+					response.json().then(data => {
+						document.getElementById("exm_edd_cat_path").innerHTML = data.path;
+					});
+				});
+
+				return false;
+			});
+		});
+	</script>
+	<?php } ?>
 </div>

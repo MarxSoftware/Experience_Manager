@@ -86,8 +86,8 @@ function tma_webtools_init() {
 
 	require_once 'includes/modules/events/class.ecommerce_events.php';
 
-	tma_exm_log(is_preview() ? "preview" : "no preview");
-	tma_exm_log(tma_exm_is_preview() ? "tma_preview" : "no tma_preview");
+	//tma_exm_log(is_preview() ? "preview" : "no preview");
+	//tma_exm_log(tma_exm_is_preview() ? "tma_preview" : "no tma_preview");
 
 	require_once 'includes/backend/class.tma_wpadminbar.php';
 	if (is_user_logged_in() && (is_admin() || tma_exm_is_preview() )) {
