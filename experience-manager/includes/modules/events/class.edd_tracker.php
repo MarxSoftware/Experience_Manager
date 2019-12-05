@@ -48,10 +48,18 @@ class EDD_TRACKER extends Base {
 
 		add_action('edd_post_add_to_cart', array($this, 'add_to_cart'), 10, 3);
 
-		add_action('edd_post_remove_from_cart', array($this, 'remove_cart_item'), 10, 2);
+		add_action( 'edd_post_remove_from_cart', function () {
+			tma_exm_log("remove the item");
+			
+		});
+		
+		
+		/*
+		add_action('edd_post_remove_from_cart', array($this, 'remove_cart_item'));
 
 		add_action('wp_ajax_edd_remove_from_cart', [$this, 'edd_ajax_remove_from_cart']);
 		add_action('wp_ajax_nopriv_edd_remove_from_cart', [$this, 'edd_ajax_remove_from_cart']);
+		 */
 	}
 
 	public function edd_ajax_remove_from_cart() {
@@ -112,7 +120,7 @@ class EDD_TRACKER extends Base {
 		$request->track("ecommerce_cart_item_add", "#cart", $customAttributes);
 	}
 
-	public function remove_cart_item($download_id, $options) {
+	public function remove_cart_item($key, $item_id ) {
 		tma_exm_log("edd remove_cart_item");
 		$cart = EDD()->cart;
 		$item = $cart->get_contents();
@@ -120,14 +128,14 @@ class EDD_TRACKER extends Base {
 		// loop through the cart looking 
 		$product_ids = array();
 		foreach ($items as $key => $item) {
-			if ($download_id === $item["id"]) {
+			if ($item_id === $item["id"]) {
 				continue;
 			}
 			$product_ids[] = $item['id'];
 		}
 
 		$customAttributes = array();
-		$customAttributes['item_id'] = $download_id;
+		$customAttributes['item_id'] = $item_id;
 		$customAttributes['cart_items'] = $product_ids; //implode(":", $product_ids);
 		$request = new \TMA\ExperienceManager\TMA_Request();
 		$request->track("ecommerce_cart_item_remove", "#cart", $customAttributes);
