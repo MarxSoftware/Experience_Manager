@@ -103,17 +103,23 @@ class EDD_TRACKER extends Base {
 		tma_exm_log("track edd order " . $order_id);
 
 		$order = new \EDD_Payment($order_id);
-		$items = $order->get_downloads();
 		$product_ids = array();
-		foreach ($items as $item => $product) {
-			$product_ids[] = $product->get_ID();
+		
+		$cart = edd_get_payment_meta_cart_details($order_id, true);
+		if ($cart) {
+			foreach ($cart as $key => $item) {
+				if (empty($item['in_bundle'])) {
+					$download = new \EDD_Download($item['id']);
+					$product_ids[] = $download->get_ID();
+				}
+			}
 		}
+		
 		$request = new \TMA\ExperienceManager\TMA_Request();
 		$customAttributes = array();
 		$customAttributes['order_id'] = $order_id;
 		$customAttributes['order_items'] = $product_ids;
-		$customAttributes['order_status'] = $order->get_status();
-		$customAttributes['order_total'] = $order->get_total();
+		$customAttributes['order_total'] = $order->total;
 
 		$request->track("ecommerce_order", "#order", $customAttributes);
 	}
