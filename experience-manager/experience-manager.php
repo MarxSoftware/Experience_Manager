@@ -56,9 +56,12 @@ function tma_webtools_plugins_loaded() {
 	if (\TMA\ExperienceManager\Plugins::getInstance()->gutenberg()) {
 		new \TMA\ExperienceManager\Gutenberg_Integration();
 	}
+	
+	require_once 'includes/modules/events/class.ecommerce_events.php';
 }
 
 function tma_webtools_rest_init() {
+	tma_exm_log("tma_webtools_rest_init");
 	$tma_rest = new \TMA\ExperienceManager\TMA_Rest();
 
 //	register_rest_route('experience-manager/v1', '/test', array(
@@ -72,7 +75,7 @@ function tma_webtools_rest_init() {
 
 function tma_webtools_init() {
 
-	tma_exm_log("init");
+	tma_exm_log("tma_webtools_init");
 	wp_register_style('experience-manager', plugins_url('css/experience-manager.css', __FILE__));
 	wp_enqueue_style('experience-manager');
 	// has to be global
@@ -84,7 +87,7 @@ function tma_webtools_init() {
 	// IS not stored
 	//new TMA\ExperienceManager\TMA_Widget_Targeting();
 
-	require_once 'includes/modules/events/class.ecommerce_events.php';
+	
 
 	//tma_exm_log(is_preview() ? "preview" : "no preview");
 	//tma_exm_log(tma_exm_is_preview() ? "tma_preview" : "no tma_preview");

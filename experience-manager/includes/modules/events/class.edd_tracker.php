@@ -24,6 +24,15 @@ namespace TMA\ExperienceManager\Events;
  */
 class EDD_TRACKER extends Base {
 
+	protected static $_instance = null;
+
+	public static function getInstance() {
+		if (null === self::$_instance) {
+			self::$_instance = new self;
+		}
+		return self::$_instance;
+	}
+	
 	/**
 	 * Holds the values to be used in the fields callbacks
 	 */
@@ -32,75 +41,19 @@ class EDD_TRACKER extends Base {
 	/**
 	 * Start up
 	 */
-	public function __construct() {
+	protected function __construct() {
 		$this->options = get_option('tma-webtools-events');
 	}
 
 	public function shouldInit() {
 		return isset($this->options['edd_tracking']) && $this->options['edd_tracking'] === "on";
 	}
-
+	
 	public function init() {
 		tma_exm_log("init edd tracking");
 		add_action('edd_update_payment_status', array($this, 'order_status_changed'), 10, 3);
-		add_action('edd_payment_receipt_after_table', array($this, 'on_order'), 10, 3);
-
-
 		add_action('edd_post_add_to_cart', array($this, 'add_to_cart'), 10, 3);
-
-		add_action( 'edd_post_remove_from_cart', function () {
-			tma_exm_log("remove the item");
-			
-		});
-		
-		
-		/*
-		add_action('edd_post_remove_from_cart', array($this, 'remove_cart_item'));
-
-		add_action('wp_ajax_edd_remove_from_cart', [$this, 'edd_ajax_remove_from_cart']);
-		add_action('wp_ajax_nopriv_edd_remove_from_cart', [$this, 'edd_ajax_remove_from_cart']);
-		 */
-	}
-
-	public function edd_ajax_remove_from_cart() {
-		tma_exm_log("edd_ajax_remove_from_cart");
-	}
-
-	public function on_order($payment, $edd_receipt_args) {
-		if ($this->has_order_been_tracked_already($payment->ID)) {
-			tma_exm_log(sprintf('Ignoring already tracked order %d', $payment->ID));
-			return;
-		}
-		tma_exm_log("track edd order (on_order)" . $payment->ID);
-
-		$product_ids = array();
-		
-		$order = new \EDD_Payment($payment->ID);
-//		$items = $order->get_downloads();
-//		$product_ids = array();
-//		foreach ($items as $item => $product) {
-//			$product_ids[] = $product->get_ID();
-//		}
-
-		
-		$cart = edd_get_payment_meta_cart_details($payment->ID, true);
-		if ($cart) {
-			foreach ($cart as $key => $item) {
-				if (empty($item['in_bundle'])) {
-					$download = new \EDD_Download($item['id']);
-					$product_ids[] = $download->get_ID();
-				}
-			}
-		}
-
-		$request = new \TMA\ExperienceManager\TMA_Request();
-		$customAttributes = array();
-		$customAttributes['order_id'] = $order->ID;
-		$customAttributes['order_items'] = $product_ids;
-		//$customAttributes['order_status'] = $order->get_status();
-		$customAttributes['order_total'] = sizeof($product_ids);
-
-		$request->track("ecommerce_order", "#order", $customAttributes);
+		add_action('edd_post_remove_from_cart', array($this, 'remove_cart_item'), 10, 2);
 	}
 
 	public function add_to_cart($download_id, $options, $items) {

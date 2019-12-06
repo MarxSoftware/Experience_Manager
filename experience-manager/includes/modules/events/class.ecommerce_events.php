@@ -61,7 +61,7 @@ if (\TMA\ExperienceManager\Plugins::getInstance()->woocommerce()) {
 	}
 }
 if (\TMA\ExperienceManager\Plugins::getInstance()->easydigitaldownloads()) {
-	$edd_tracker = new \TMA\ExperienceManager\Events\EDD_TRACKER();
+	$edd_tracker = \TMA\ExperienceManager\Events\EDD_TRACKER::getInstance();
 	if ($edd_tracker->shouldInit()) {
 		tma_exm_log("tracking easydigitaldownloads events");
 		$edd_tracker->init();

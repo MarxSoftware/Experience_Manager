@@ -189,7 +189,7 @@ class TMA_Request {
 		$url .= 'tracking/pixel?event=' . $event;
 		$url .= '&site=' . $siteid . '&page=' . urlencode($page);
 		$url .= "&fp=" . $fp . "&uid=" . $uid . '&reqid=' . $rid . '&vid=' . $vid;
-		$url .= "&apikey=" . $apikey;
+		//$url .= "&apikey=" . $apikey;
 
 		// add the custom parameters
 		if (isset($customAttributes)) {
