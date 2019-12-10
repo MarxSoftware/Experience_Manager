@@ -96,7 +96,7 @@ class SegmentEditorMetaBoxes {
 			}
 			?></textarea>
 		<script type="text/javascript">
-			CodeMirror.fromTextArea(document.getElementById("exm_audience_editor"), {
+			window.exmSegmentEditor = CodeMirror.fromTextArea(document.getElementById("exm_audience_editor"), {
 				lineNumbers: true,
 				matchBrackets: true,
 				mode: "javascript"
