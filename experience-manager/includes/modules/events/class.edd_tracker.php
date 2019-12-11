@@ -101,6 +101,7 @@ class EDD_TRACKER extends Base {
 			return;
 		}
 		tma_exm_log("track edd order " . $order_id);
+		
 
 		$order = new \EDD_Payment($order_id);
 		$product_ids = array();
@@ -120,8 +121,25 @@ class EDD_TRACKER extends Base {
 		$customAttributes['order_id'] = $order_id;
 		$customAttributes['order_items'] = $product_ids;
 		$customAttributes['order_total'] = $order->total;
+		
+		$discounts = $this->getDiscounts($order);
+		$customAttributes['order_coupons_count'] = count($discounts);
+		$customAttributes['order_coupons_used'] = $discounts;
 
 		$request->track("ecommerce_order", "#order", $customAttributes);
+	}
+	
+	private function getDiscounts ($order) {
+		$discounts = $order->discounts;
+		if ( 'none' === $discounts || empty( $discounts ) ) {
+			return [];
+		}
+
+		if ( ! is_array( $discounts ) ) {
+			$discounts = array_map( 'trim', explode( ',', $discounts ) );
+		}
+		
+		return $discounts;
 	}
 
 }
