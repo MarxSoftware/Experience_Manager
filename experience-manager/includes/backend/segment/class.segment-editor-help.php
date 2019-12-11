@@ -37,12 +37,16 @@ class SegmentEditorHelp {
 		}
 		//echo "<a class='button button-primary button-hero' href='javascript::void(0);' onclick='start_exm_intro()'>" . __("Getting started", "tma-webtools") . "</a>";
 		echo "<a class='ui button primary' href='#' onclick='start_exm_intro()'>" . __("Intro", "tma-webtools") . "</a>";
-		echo "<a class='ui button primary' href='#' onclick='start_exm_wizard()'>" . __("Getting started", "tma-webtools") . "</a>";
+		echo "<a class='ui button primary' id='tma_segment_editor_getting_start' href='#' onclick='start_exm_wizard()'>" . __("Getting started", "tma-webtools") . "</a>";
 	}
 
 	function intro_js() {
 		$introConfig = [];
 		$introConfig['steps'] = [];
+		$introConfig['steps'][] = [
+			'element' => "#tma_segment_editor_getting_start",
+			'intro' => "Here you find a simple wizard to create a basic segment definition."
+		];
 		$introConfig['steps'][] = [
 			'element' => "#tma_segment_editor",
 			'intro' => "This is the main area for your segment definition."
@@ -98,6 +102,15 @@ class SegmentEditorHelp {
 					}
 					if (devices.length > 0) {
 						rules.push("rule(KEYVALUE).name('device.type').values([" + devices.join(",") + "])");
+					}
+					
+					let selectedOrder = document.querySelector("input[name='exm_order']:checked").value;
+					if (selectedOrder === "none") {
+						rules.push("rule(ECOMMERCE_ORDER).exact().count(0)")
+					} else if (selectedOrder === "first") {
+						rules.push("rule(ECOMMERCE_ORDER).exact().count(1)")
+					} else if (selectedOrder === "active") {
+						rules.push("rule(ECOMMERCE_ORDER).count(3)")
 					}
 
 					segmentData += ".and(" + rules.join(",") + ")";

@@ -3,7 +3,7 @@
 	<div class="header">Create basic segment</div>
 	<div class="scrolling content">
 		<div class="ui form">
-			<h4 class="ui dividing header">User visit</h4>
+			<h4 class="ui dividing header">Visit</h4>
 			<div class="inline fields">
 				<div class="field">
 					<div class="ui radio checkbox">
@@ -42,6 +42,33 @@
 					<div class="ui toggle checkbox">
 						<input type="checkbox" tabindex="0" class="hidden" name="exm_device_desktop" >
 						<label>Desktop</label>
+					</div>
+				</div>
+			</div>
+			<h4 class="ui dividing header">e-Commerce</h4>
+			<div class="inline fields">
+				<div class="field">
+					<div class="ui radio checkbox">
+						<input type="radio" name="exm_order" value="any" tabindex="0" class="hidden" checked="">
+						<label>Any</label>
+					</div>
+				</div>
+				<div class="field">
+					<div class="ui radio checkbox">
+						<input type="radio" name="exm_order" value="none" tabindex="0" class="hidden">
+						<label>None purchase yet</label>
+					</div>
+				</div>
+				<div class="field">
+					<div class="ui radio checkbox">
+						<input type="radio" name="exm_order" value="first" tabindex="0" class="hidden">
+						<label>First Purchaser</label>
+					</div>
+				</div>
+				<div class="field">
+					<div class="ui radio checkbox">
+						<input type="radio" name="exm_order" value="active" tabindex="0" class="hidden">
+						<label>Active customer</label>
 					</div>
 				</div>
 			</div>

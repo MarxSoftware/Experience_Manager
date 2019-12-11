@@ -64,9 +64,9 @@ none
 == Changelog ==
 
 2.4.0
- * initial tracking of the visit for better targeting
  * Intro to the segment editor added
  * Simple wizard to getting started with the segment editor
+ * tracking of easy digital downloads ecommerce events: add_to_cart, remove_from_cart and order
 
 2.3.0
  * cookie handling fixed
