@@ -46,6 +46,12 @@
 				</div>
 			</div>
 			<h4 class="ui dividing header">e-Commerce</h4>
+			<h6 class="ui horizontal divider header">
+				Purchases
+			</h6>
+			<div class="ui info message">
+				Select to amount of <b>purchases</b> for segmentation. <b>Active customer</b> means 3 or more purchases.
+			</div>
 			<div class="inline fields">
 				<div class="field">
 					<div class="ui radio checkbox">
@@ -72,14 +78,41 @@
 					</div>
 				</div>
 			</div>
+			<h6 class="ui horizontal divider header">
+				Discount / Coupons
+			</h6>
+			<div class="ui info message">
+				Select to amount of <b>coupons</b> for segmentation. <b>Coupon lovers</b> means 1 or more coupons used in the past.
+			</div>
+			<div class="inline fields">
+				<div class="field">
+					<div class="ui radio checkbox">
+						<input type="radio" name="exm_coupon" value="any" tabindex="0" class="hidden" checked="">
+						<label>Any</label>
+					</div>
+				</div>
+				<div class="field">
+					<div class="ui radio checkbox">
+						<input type="radio" name="exm_coupon" value="none" tabindex="0" class="hidden">
+						<label>No coupon used</label>
+					</div>
+				</div>
+				<div class="field">
+					<div class="ui radio checkbox">
+						<input type="radio" name="exm_coupon" value="lover" tabindex="0" class="hidden">
+						<label>Coupon lovers</label>
+					</div>
+				</div>
+			</div>
+			
 		</div>
 	</div>
 	<div class="actions">
 		<div class="ui black deny button">
-			Nope
+			Cancle
 		</div>
 		<div class="ui positive right labeled icon button">
-			Yep, that's me
+			Create segment
 			<i class="checkmark icon"></i>
 		</div>
 	</div>

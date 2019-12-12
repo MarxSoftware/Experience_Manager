@@ -174,7 +174,6 @@ class TMA_Request {
 		$uid = \TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(TMA_COOKIE_HELPER::$COOKIE_USER, UUID::v4(), TMA_COOKIE_HELPER::$COOKIE_USER_EXPIRE);
 		$rid = \TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(TMA_COOKIE_HELPER::$COOKIE_REQUEST, UUID::v4(), TMA_COOKIE_HELPER::$COOKIE_REQUEST_EXPIRE);
 		$vid = \TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(TMA_COOKIE_HELPER::$COOKIE_VISIT, UUID::v4(), TMA_COOKIE_HELPER::$COOKIE_VISIT_EXPIRE);
-		$fp = $_COOKIE['_tma_fp'];
 		$apikey = $this->options["webtools_apikey"];
 		$url = $this->options['webtools_url'];
 		$siteid = get_option('blogname');
@@ -188,7 +187,7 @@ class TMA_Request {
 
 		$url .= 'tracking/pixel?event=' . $event;
 		$url .= '&site=' . $siteid . '&page=' . urlencode($page);
-		$url .= "&fp=" . $fp . "&uid=" . $uid . '&reqid=' . $rid . '&vid=' . $vid;
+		$url .= "&uid=" . $uid . '&reqid=' . $rid . '&vid=' . $vid;
 		//$url .= "&apikey=" . $apikey;
 
 		// add the custom parameters

@@ -30,7 +30,9 @@ add_action('plugins_loaded', 'tma_load_textdomain');
 function tma_load_textdomain() {
 	load_plugin_textdomain('tma-webtools', false, dirname(plugin_basename(__FILE__)) . '/languages/');
 }
-
+add_action("wp_loaded", function () {
+	tma_exm_log("wordpress is loaded ready to start");
+});
 add_action("init", "tma_webtools_init");
 add_action("rest_api_init", "tma_webtools_rest_init");
 add_action("plugins_loaded", "tma_webtools_plugins_loaded");
@@ -123,6 +125,7 @@ function tma_webtools_init() {
 
 	tma_init_cookie();
 	
+	// track an initial visit to have user data preset for segmentation
 	$request = new \TMA\ExperienceManager\TMA_Request();
 	$request->track("visit", "#visit");
 }

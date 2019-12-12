@@ -68,6 +68,8 @@ none
  * Simple wizard to getting started with the segment editor
  * tracking of easy digital downloads ecommerce events: add_to_cart, remove_from_cart and order
 
+IMPORTANT: If you upgrade to version 2.4.0 you need at least Experience Platform version 3.6.0
+
 2.3.0
  * cookie handling fixed
 

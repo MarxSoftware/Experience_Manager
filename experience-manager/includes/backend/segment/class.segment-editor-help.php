@@ -112,6 +112,12 @@ class SegmentEditorHelp {
 					} else if (selectedOrder === "active") {
 						rules.push("rule(ECOMMERCE_ORDER).count(3)")
 					}
+					let selectedCoupon = document.querySelector("input[name='exm_coupon']:checked").value;
+					if (selectedCoupon === "none") {
+						rules.push("rule(ECOMMERCE_COUPON).exact().count(0)")
+					} else if (selectedCoupon === "lover") {
+						rules.push("rule(ECOMMERCE_COUPON).count(1)")
+					}
 
 					segmentData += ".and(" + rules.join(",") + ")";
 					window.exmSegmentEditor.setValue(segmentData);
