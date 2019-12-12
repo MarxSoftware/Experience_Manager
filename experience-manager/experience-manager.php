@@ -30,9 +30,8 @@ add_action('plugins_loaded', 'tma_load_textdomain');
 function tma_load_textdomain() {
 	load_plugin_textdomain('tma-webtools', false, dirname(plugin_basename(__FILE__)) . '/languages/');
 }
-add_action("wp_loaded", function () {
-	tma_exm_log("wordpress is loaded ready to start");
-});
+
+
 add_action("init", "tma_webtools_init");
 add_action("rest_api_init", "tma_webtools_rest_init");
 add_action("plugins_loaded", "tma_webtools_plugins_loaded");
