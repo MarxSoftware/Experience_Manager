@@ -69,6 +69,7 @@ class SegmentEditorMetaBoxes {
 	function time_meta_box($post) {
 		$unit = get_post_meta($post->ID, 'tma_segment_editor_unit', true);
 		$count = get_post_meta($post->ID, 'tma_segment_editor_count', true);
+		
 		?>
 		<div id="exm_timewindow">
 			<div>
@@ -84,7 +85,7 @@ class SegmentEditorMetaBoxes {
 			</div>
 			<div>
 				<label for="exm_audience_editor_tw_unit">Count</label>
-				<input type="number" name="exm_audience_editor_tw_count" class="postbox" value="<?php echo $count ?>" />
+				<input type="number" name="exm_audience_editor_tw_count" class="postbox" value="<?php echo empty($count) ? 1 : $count ?>" />
 			</div>
 		</div>
 		<?php
