@@ -85,7 +85,7 @@ class SegmentEditorMetaBoxes {
 			</div>
 			<div>
 				<label for="exm_audience_editor_tw_unit">Count</label>
-				<input type="number" name="exm_audience_editor_tw_count" class="postbox" value="<?php echo empty($count) ? 1 : $count ?>" />
+				<input type="number" min="1" name="exm_audience_editor_tw_count" class="postbox" value="<?php echo empty($count) ? 1 : $count ?>" />
 			</div>
 		</div>
 		<?php
