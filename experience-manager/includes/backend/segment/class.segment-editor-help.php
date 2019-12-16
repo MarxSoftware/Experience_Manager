@@ -41,6 +41,9 @@ class SegmentEditorHelp {
 	}
 
 	function intro_js() {
+		if (!SegmentType::isAudienceEditor()) {
+			return;
+		}
 		$introConfig = [];
 		$introConfig['steps'] = [];
 		$introConfig['steps'][] = [

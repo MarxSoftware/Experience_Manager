@@ -31,15 +31,16 @@ function tma_load_textdomain() {
 	load_plugin_textdomain('tma-webtools', false, dirname(plugin_basename(__FILE__)) . '/languages/');
 }
 
-
-add_action("init", "tma_webtools_init");
-add_action("rest_api_init", "tma_webtools_rest_init");
-add_action("plugins_loaded", "tma_webtools_plugins_loaded");
+tma_exm_log("register segment postype");
 
 \TMA\ExperienceManager\Segment\SegmentType::getInstance()->register();
 \TMA\ExperienceManager\Segment\SegmentEditor::getInstance()->register();
 \TMA\ExperienceManager\Segment\SegmentEditorHelp::getInstance()->register();
 \TMA\ExperienceManager\Segment\SegmentEditorMetaBoxes::getInstance()->register();
+
+add_action("init", "tma_webtools_init");
+add_action("rest_api_init", "tma_webtools_rest_init");
+add_action("plugins_loaded", "tma_webtools_plugins_loaded");
 
 function tma_webtools_plugins_loaded() {
 	tma_exm_log("load editor plugins");
@@ -57,7 +58,7 @@ function tma_webtools_plugins_loaded() {
 	if (\TMA\ExperienceManager\Plugins::getInstance()->gutenberg()) {
 		new \TMA\ExperienceManager\Gutenberg_Integration();
 	}
-	
+
 	require_once 'includes/modules/events/class.ecommerce_events.php';
 }
 
@@ -87,9 +88,6 @@ function tma_webtools_init() {
 
 	// IS not stored
 	//new TMA\ExperienceManager\TMA_Widget_Targeting();
-
-	
-
 	//tma_exm_log(is_preview() ? "preview" : "no preview");
 	//tma_exm_log(tma_exm_is_preview() ? "tma_preview" : "no tma_preview");
 
@@ -123,7 +121,7 @@ function tma_webtools_init() {
 	add_action('admin_head', 'tma_js_variables', -100);
 
 	tma_init_cookie();
-	
+
 	// track an initial visit to have user data preset for segmentation
 	$request = new \TMA\ExperienceManager\TMA_Request();
 	$request->track("visit", "#visit");
@@ -154,7 +152,7 @@ function tma_js_variables() {
 	$tma_config['user_segments'] = tma_exm_get_user_segments();
 
 	$tma_config = apply_filters("tma_config", $tma_config);
-	
+
 //	$data = "var TMA_CONFIG = ". json_encode($tma_config);
 //	wp_register_script( 'webtools-dummy-handle', '' );
 //	wp_enqueue_script( 'webtools-dummy-handle' );
@@ -167,8 +165,8 @@ function tma_js_variables() {
 
 function tma_webtools_hook_js() {
 	$scriptHelper = new \TMA\ExperienceManager\TMAScriptHelper();
-	wp_enqueue_script( "webtools-library", $scriptHelper->getLibrary(), [], "2.0.0", false );
-	wp_add_inline_script( "webtools-library", $scriptHelper->getCode());
+	wp_enqueue_script("webtools-library", $scriptHelper->getLibrary(), [], "2.0.0", false);
+	wp_add_inline_script("webtools-library", $scriptHelper->getCode());
 }
 
 function tma_init_cookie() {

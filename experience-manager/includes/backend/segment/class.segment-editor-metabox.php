@@ -28,6 +28,9 @@ class SegmentEditorMetaBoxes {
 	}
 
 	public function add_meta_box() {
+		if (!SegmentType::isAudienceEditor()) {
+			return;
+		}
 		add_meta_box(
 				'tma_segment_editor', // Unique ID
 				'Target segment editor', // Box title
