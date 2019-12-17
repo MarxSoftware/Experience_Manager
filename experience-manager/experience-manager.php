@@ -32,7 +32,6 @@ function tma_load_textdomain() {
 }
 
 tma_exm_log("register segment postype");
-
 \TMA\ExperienceManager\Segment\SegmentType::getInstance()->register();
 \TMA\ExperienceManager\Segment\SegmentEditor::getInstance()->register();
 \TMA\ExperienceManager\Segment\SegmentEditorHelp::getInstance()->register();
@@ -43,11 +42,6 @@ add_action("rest_api_init", "tma_webtools_rest_init");
 add_action("plugins_loaded", "tma_webtools_plugins_loaded");
 
 function tma_webtools_plugins_loaded() {
-	tma_exm_log("log initial visit");
-	// track an initial visit to have user data preset for segmentation
-	$request = new \TMA\ExperienceManager\TMA_Request();
-	$request->track("visit", "#visit");
-	
 	tma_exm_log("load editor plugins");
 
 	if (\TMA\ExperienceManager\Plugins::getInstance()->elementor()) {
