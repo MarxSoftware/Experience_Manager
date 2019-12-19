@@ -2,11 +2,11 @@
 Contributors: thmarx
 Tags: digital experience platform, experience manager, targeting, analytics, tracking, product targeting, behaviour targets
 Requires at least: 4.4.1
-Tested up to: 5.3
+Tested up to: 5.3.2
 Stable tag: 2.4.0
 License: GPLv2 or later
 
-Experience Manager is a integration for https://wp-digitalexperience.com/experience-platform/
+Do not treat all your customers the same, create a digital experience!
 
 == Description ==
 
