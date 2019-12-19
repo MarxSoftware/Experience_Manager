@@ -28,7 +28,7 @@ final class TMA_PopupMakerIntegration {
 		add_action('wp_enqueue_scripts', function () {
 			wp_enqueue_script('jquery');
 		});
-		add_filter('pum_get_conditions', array($this, "conditions"));
+		add_filter('pum_registered_conditions', array($this, "conditions"));
 	}
 
 	function visible($settings) {

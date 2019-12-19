@@ -47,6 +47,8 @@ function tma_webtools_plugins_loaded() {
 	if (\TMA\ExperienceManager\Plugins::getInstance()->elementor()) {
 		\TMA\ExperienceManager\Elementor_Integration::getInstance();
 		\TMA\ExperienceManager\Elementor_Preview::getInstance();
+		
+//		\TMA\ExperienceManager\ElementorPopupIntegration::getInstance()->init();
 	}
 	if (\TMA\ExperienceManager\Plugins::getInstance()->popup_maker()) {
 		\TMA\ExperienceManager\TMA_PopupMakerIntegration::getInstance()->init();

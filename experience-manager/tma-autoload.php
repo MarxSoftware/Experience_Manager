@@ -25,6 +25,8 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	// Elementor
 	"TMA\ExperienceManager\Elementor_Integration" => "includes/modules/editors/elementor/class.elementor_integration.php",
 	"TMA\ExperienceManager\Elementor_Preview" => "includes/modules/editors/elementor/class.elementor_preview.php",
+	"TMA\ExperienceManager\ElementorPopupIntegration" => "includes/modules/messages/elementor/class.elementor-popup.php",
+	"TMA\ExperienceManager\Base" => "includes/modules/messages/elementor/class.base.php",
 	// Advanced Ads
 	"TMA\ExperienceManager\TMA_AdvancedAdsIntegration" => "includes/modules/ads/advanced/class.advanced_ads.php",
 	// Gutenberg
