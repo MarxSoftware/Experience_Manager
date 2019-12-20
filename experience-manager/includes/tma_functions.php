@@ -64,7 +64,7 @@ function tma_exm_get_segments_as_array() {
 		$args = array(
 			'post_type' => \TMA\ExperienceManager\Segment\SegmentType::$TYPE,
 			'orderby' => 'title',
-			'post_status' => array('publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit')
+			'post_status' => array('publish', 'pending', 'future') // , 'draft', 'auto-draft', 'future', 'private', 'inherit'
 		);
 		$loop = new WP_Query($args);
 
