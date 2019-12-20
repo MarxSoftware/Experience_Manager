@@ -62,13 +62,13 @@
 				<div class="field">
 					<div class="ui radio checkbox">
 						<input type="radio" name="exm_order" value="none" tabindex="0" class="hidden">
-						<label>None purchase yet</label>
+						<label>No purchase yet</label>
 					</div>
 				</div>
 				<div class="field">
 					<div class="ui radio checkbox">
 						<input type="radio" name="exm_order" value="first" tabindex="0" class="hidden">
-						<label>First Purchaser</label>
+						<label>First purchaser</label>
 					</div>
 				</div>
 				<div class="field">
