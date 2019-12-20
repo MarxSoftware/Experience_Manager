@@ -50,7 +50,7 @@
 				Purchases
 			</h6>
 			<div class="ui info message">
-				Select to amount of <b>purchases</b> for segmentation. <b>Active customer</b> means 3 or more purchases.
+				Select the amount of <b>purchases</b> for segmentation. <b>Active customer</b> means 3 or more purchases.
 			</div>
 			<div class="inline fields">
 				<div class="field">
@@ -82,7 +82,7 @@
 				Discount / Coupons
 			</h6>
 			<div class="ui info message">
-				Select to amount of <b>coupons</b> for segmentation. <b>Coupon lovers</b> means 1 or more coupons used in the past.
+				Select the amount of <b>coupons</b> for segmentation. <b>Coupon lovers</b> means 1 or more coupons used in the past.
 			</div>
 			<div class="inline fields">
 				<div class="field">
