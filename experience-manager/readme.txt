@@ -63,6 +63,9 @@ none
 
 == Changelog ==
 
+2.5.0
+ * Generate unique id for cart tracking
+
 2.4.2
  * Typo fixed
 
