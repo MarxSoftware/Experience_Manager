@@ -48,7 +48,7 @@ to create targeted content for these segments.
 == Frequently Asked Questions ==
 
 = Can I use the plugin without Experience Platform? =
-No, the plugin integrates Experience Platform into WordPress. It is not possible to use it without WebTools.
+No, the plugin integrates Experience Platform into WordPress. It is not possible to use it without the Experience Platform.
 
 = Is Experience Platform free? =
 Yes, it is. As this plugin, Experience Platform is licensed under the GPLv3 or later

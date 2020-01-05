@@ -32,7 +32,7 @@ class EDD_TRACKER extends Base {
 		}
 		return self::$_instance;
 	}
-	
+
 	/**
 	 * Holds the values to be used in the fields callbacks
 	 */
@@ -48,12 +48,24 @@ class EDD_TRACKER extends Base {
 	public function shouldInit() {
 		return isset($this->options['edd_tracking']) && $this->options['edd_tracking'] === "on";
 	}
-	
+
 	public function init() {
 		tma_exm_log("init edd tracking");
 		add_action('edd_update_payment_status', array($this, 'order_status_changed'), 10, 3);
 		add_action('edd_post_add_to_cart', array($this, 'add_to_cart'), 10, 3);
 		add_action('edd_post_remove_from_cart', array($this, 'remove_cart_item'), 10, 2);
+	}
+	
+	private function get_cart_id() {
+		$exm_cart_id = EDD()->session->get('exm_cart_id');
+		if ( ! $exm_cart_id ) {
+			EDD()->session->set("exm_cart_id", uniqid());
+		}
+		return EDD()->session->get("exm_cart_id");
+	}
+	
+	private function remove_cart_id () {
+		EDD()->session->set("exm_cart_id", false);
 	}
 
 	public function add_to_cart($download_id, $options, $items) {
@@ -69,11 +81,12 @@ class EDD_TRACKER extends Base {
 		$customAttributes = array();
 		$customAttributes['item_id'] = $download_id;
 		$customAttributes['cart_items'] = $product_ids; //implode(":", $product_ids);
+		$customAttributes['cart_id'] = $this->get_cart_id();
 		$request = new \TMA\ExperienceManager\TMA_Request();
 		$request->track("ecommerce_cart_item_add", "#cart", $customAttributes);
 	}
 
-	public function remove_cart_item($key, $item_id ) {
+	public function remove_cart_item($key, $item_id) {
 		tma_exm_log("edd remove_cart_item");
 		$cart = EDD()->cart;
 		$item = $cart->get_contents();
@@ -90,6 +103,7 @@ class EDD_TRACKER extends Base {
 		$customAttributes = array();
 		$customAttributes['item_id'] = $item_id;
 		$customAttributes['cart_items'] = $product_ids; //implode(":", $product_ids);
+		$customAttributes['cart_id'] = $this->get_cart_id();
 		$request = new \TMA\ExperienceManager\TMA_Request();
 		$request->track("ecommerce_cart_item_remove", "#cart", $customAttributes);
 	}
@@ -101,11 +115,11 @@ class EDD_TRACKER extends Base {
 			return;
 		}
 		tma_exm_log("track edd order " . $order_id);
-		
+
 
 		$order = new \EDD_Payment($order_id);
 		$product_ids = array();
-		
+
 		$cart = edd_get_payment_meta_cart_details($order_id, true);
 		if ($cart) {
 			foreach ($cart as $key => $item) {
@@ -115,30 +129,33 @@ class EDD_TRACKER extends Base {
 				}
 			}
 		}
-		
+
 		$request = new \TMA\ExperienceManager\TMA_Request();
 		$customAttributes = array();
 		$customAttributes['order_id'] = $order_id;
+		$customAttributes['cart_id'] = $this->get_cart_id();
 		$customAttributes['order_items'] = $product_ids;
 		$customAttributes['order_total'] = $order->total;
-		
+
 		$discounts = $this->getDiscounts($order);
 		$customAttributes['order_coupons_count'] = count($discounts);
 		$customAttributes['order_coupons_used'] = $discounts;
 
 		$request->track("ecommerce_order", "#order", $customAttributes);
+		
+		$this->remove_cart_id();
 	}
-	
-	private function getDiscounts ($order) {
+
+	private function getDiscounts($order) {
 		$discounts = $order->discounts;
-		if ( 'none' === $discounts || empty( $discounts ) ) {
+		if ('none' === $discounts || empty($discounts)) {
 			return [];
 		}
 
-		if ( ! is_array( $discounts ) ) {
-			$discounts = array_map( 'trim', explode( ',', $discounts ) );
+		if (!is_array($discounts)) {
+			$discounts = array_map('trim', explode(',', $discounts));
 		}
-		
+
 		return $discounts;
 	}
 

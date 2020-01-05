@@ -47,6 +47,17 @@ class WC_TRACKER extends Base {
 		add_action('woocommerce_remove_cart_item', array($this, 'woocommerce_remove_cart_item'));
 	}
 
+	private function get_cart_id() {
+		$exm_cart_id = WC()->session->get('exm_cart_id');
+		if (is_null($exm_cart_id)) {
+			WC()->session->set("exm_cart_id", uniqid());
+		}
+		return WC()->session->get("exm_cart_id");
+	}
+	private function remove_cart_id () {
+		WC()->session->set("exm_cart_id", null);
+	}
+	
 	public function woocommerce_add_to_cart($cart_item_key) {
 		
 		$cart = WC()->cart;
@@ -61,7 +72,7 @@ class WC_TRACKER extends Base {
 		$customAttributes = array();
 		$customAttributes['item_id'] = $item['product_id'];
 		$customAttributes['cart_items'] = $product_ids; //implode(":", $product_ids);
-
+		$customAttributes['cart_id'] = $this->get_cart_id();
 		$request = new \TMA\ExperienceManager\TMA_Request();
 		$request->track("ecommerce_cart_item_add", "#cart", $customAttributes);
 	}
@@ -82,6 +93,7 @@ class WC_TRACKER extends Base {
 		$customAttributes = array();
 		$customAttributes['item_id'] = $item['product_id'];
 		$customAttributes['cart_items'] = $product_ids; //implode(":", $product_ids);
+		$customAttributes['cart_id'] = $this->get_cart_id();
 		$request = new \TMA\ExperienceManager\TMA_Request();
 		$request->track("ecommerce_cart_item_remove", "#cart", $customAttributes);
 	}
@@ -102,6 +114,7 @@ class WC_TRACKER extends Base {
 		$request = new \TMA\ExperienceManager\TMA_Request();
 		$customAttributes = array();
 		$customAttributes['order_id'] = $order_id;
+		$customAttributes['cart_id'] = $this->get_cart_id();
 		$customAttributes['order_items'] = $product_ids;
 		$customAttributes['order_total'] = $order->get_total();
 
@@ -119,6 +132,8 @@ class WC_TRACKER extends Base {
 
 		$request->track("ecommerce_order", "#order", $customAttributes);
 		$this->set_order_been_tracked( $order_id );
+		
+		$this->remove_cart_id();
 	}
 
 }
