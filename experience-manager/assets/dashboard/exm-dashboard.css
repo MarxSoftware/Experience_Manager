@@ -1,0 +1,117 @@
+/* 
+	Dashboard based on https://codepen.io/trooperandz/pen/YRpKjo
+*/
+/* START DASHBOARD */
+#webtools .grid-container {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 50px 1fr 50px;
+	grid-template-areas:
+		'main';
+	height: 100vh;
+}
+
+#webtools .main {
+	grid-area: main;
+}
+
+.main-header {
+	display: flex;
+	justify-content: space-between;
+	margin: 20px;
+	/*padding: 20px;*/
+	height: 150px;
+	background-color: #e3e4e6;
+	color: slategray;
+}
+
+#webtools .main-overview {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+	/*grid-auto-rows: 94px;*/
+	grid-gap: 20px;
+	margin: 20px;
+}
+
+#webtools .overviewcard {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	/*padding: 20px;*/
+	background-color: #fff;
+	border-radius: 0;
+	border: 1px solid #ccd0d4;
+	box-shadow: none;
+}
+#webtools .overviewcard:hover {
+	background-color: #f8f9f9;
+}
+#webtools .overviewcard_title {
+	width: 100%;
+	border-radius: 0;
+	border-bottom: 1px solid #ccd0d4;
+}
+#webtools .overviewcard_title h2 {
+	padding: 5px;
+}
+#webtools .overviewcard_content {
+	padding: 10px;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+
+#webtools .main-cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+	column-count: 1;
+	column-gap: 20px;
+	margin: 20px;
+}
+
+#webtools .card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	background-color: #82bef6;
+	margin-bottom: 20px;
+	-webkit-column-break-inside: avoid;
+	padding: 24px;
+	box-sizing: border-box;
+}
+
+
+
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #82bef6;
+  border-color: #82bef6 transparent #82bef6 transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* END DASHBOARD */
+
+/* CHARTS */
+#webtools #chart {
+	width: 100%;
+}

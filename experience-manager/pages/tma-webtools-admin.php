@@ -16,23 +16,47 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 ?>
-<style>
-	#webtools table {
-		border-collapse: collapse;
-	}
-	#webtools td.bold {
-		font-weight: bold;
-	}
-
-	#webtools table, #webtools th, #webtools td {
-		border: 1px solid black;
-	}
-</style>
-<h2>Digital Experience Manager</h2>
+<h1>Dashboard</h1>
 <div id="webtools">
-	<h2>Help</h2>
-	<div>
-		The plugin integrates the Experience Platform into WordPress. Experience Platform must be hosted by yourself. The current
-		version can be downloaded here: <a src="https://wp-digitalexperience.com/experience-platform/">Download the Experience Platform</a>
+	<div class="grid-container">
+		<main class="main">
+
+			<div class="main-header">
+				<div id="chart"></div>
+			</div>
+
+			<div class="main-overview">
+				<div class="overviewcard">
+					<div class="overviewcard_title">
+						<h2>Order conversion</h2>
+					</div>
+					<div class="overviewcard_content">
+						<div id="order_conversion_chart"></div>
+					</div>
+				</div>
+				<div class="overviewcard">
+					<div class="overviewcard_title">
+						<h2>Another awesome metric</h2>
+					</div>
+					<div class="overviewcard_content">
+						<div class="lds-dual-ring"></div>
+					</div>
+				</div>
+				<div class="overviewcard">
+					<div class="overviewcard__icon">Overview</div>
+					<div class="overviewcard__info">Card</div>
+				</div>
+				<div class="overviewcard">
+					<div class="overviewcard__icon">Overview</div>
+					<div class="overviewcard__info">Card</div>
+				</div>
+			</div>
+
+			<div class="main-cards">
+				<div class="card">Card 1</div>
+				<div class="card">Card 2</div>
+				<div class="card">Card 3</div>
+			</div>
+		</main>
 	</div>
 </div>
