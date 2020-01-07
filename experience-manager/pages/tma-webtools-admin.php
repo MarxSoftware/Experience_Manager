@@ -31,6 +31,7 @@
 						<h2>Order conversion</h2>
 					</div>
 					<div class="overviewcard_content">
+						<div class="lds-dual-ring" id="exm_order_conversion_chart_loader"></div>
 						<div id="order_conversion_chart"></div>
 					</div>
 				</div>

@@ -166,6 +166,10 @@ class TMA_Request {
 		return $url;
 	}
 
+	public function module () {
+		// /rest/module/module-metrics/kpi
+	}
+	
 	public function track($event, $page, $customAttributes = null) {
 		if (!isset($this->options["webtools_apikey"]) || !isset($this->options['webtools_url'])) {
 			return;

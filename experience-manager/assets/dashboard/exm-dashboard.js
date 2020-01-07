@@ -1,46 +1,66 @@
+/**
+ * moment js for timestamps:
+ * 
+ * moment().valueOf() -> epoch millis
+ * moment().subtract('months', 12) => before 12 month
+ * 
+ * @type type
+ */
 webtools.domReady(function () {
 
-	var main_chart = c3.generate({
-		bindto: '#webtools #chart',
-		data: {
-			columns: [
-				['data1', 30, 200, 100, 400, 150, 250],
-				['data2', 50, 20, 10, 40, 15, 25]
-			]
-		}
+	fetch(ajaxurl, {
+		method: "POST",
+		mode: "cors",
+		cache: "no-cache",
+		credentials: "same-origin",
+		body: "action=exm_dashboard_main",
+		headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}),
+	}).then((response) => response.json()
+	).then((response) => {
+		console.log('Success:', response);
+
+		var main_chart = c3.generate({
+			bindto: '#webtools #chart',
+			data: {
+				x: 'x',
+				xFormat: '%m-%Y',
+				columns: response.data,
+				names: response.names
+			},
+			axis: {
+				x: {
+					type: 'timeseries',
+					tick: {
+						format: '%m-%Y'
+					}
+				}
+			}
+		});
+
 	});
 
-	var order_conversions_chart = c3.generate({
-		bindto: '#webtools #order_conversion_chart',
-		data: {
-			columns: [
-				['data', 91.4]
-			],
-			type: 'gauge',
-			onclick: function (d, i) {
-				console.log("onclick", d, i);
+	setTimeout(() => {
+		document.querySelector("#webtools #exm_order_conversion_chart_loader").style.display = 'none';
+		var order_conversions_chart = c3.generate({
+			bindto: '#webtools #order_conversion_chart',
+			data: {
+				columns: [
+					['data', 91.4]
+				],
+				type: 'gauge'
 			},
-			onmouseover: function (d, i) {
-				console.log("onmouseover", d, i);
+			color: {
+				pattern: ['#FF0000', '#F97600', '#F6C600', '#60B044'], // the three color levels for the percentage values.
+				threshold: {
+					values: [30, 60, 90, 100]
+				}
 			},
-			onmouseout: function (d, i) {
-				console.log("onmouseout", d, i);
+			size: {
+				height: 180
 			}
-		},
-		gauge: {
+		});
+	}, 3000);
 
-		},
-		color: {
-			pattern: ['#FF0000', '#F97600', '#F6C600', '#60B044'], // the three color levels for the percentage values.
-			threshold: {
-//            unit: 'value', // percentage is default
-//            max: 200, // 100 is default
-				values: [30, 60, 90, 100]
-			}
-		},
-		size: {
-			height: 180
-		}
-	});
+
 
 });
