@@ -37,10 +37,11 @@
 				</div>
 				<div class="overviewcard">
 					<div class="overviewcard_title">
-						<h2>Another awesome metric</h2>
+						<h2>Orders per user</h2>
 					</div>
 					<div class="overviewcard_content">
-						<div class="lds-dual-ring"></div>
+						<div class="lds-dual-ring" id="exm_orders_per_user_loader"></div>
+						<div id="orders_per_user" class="number hit-the-floor"></div>
 					</div>
 				</div>
 				<div class="overviewcard">
@@ -52,12 +53,13 @@
 					<div class="overviewcard__info">Card</div>
 				</div>
 			</div>
-
+			<!--
 			<div class="main-cards">
 				<div class="card">Card 1</div>
 				<div class="card">Card 2</div>
 				<div class="card">Card 3</div>
 			</div>
+			-->
 		</main>
 	</div>
 </div>

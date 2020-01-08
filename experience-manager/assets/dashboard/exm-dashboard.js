@@ -6,6 +6,19 @@
  * 
  * @type type
  */
+
+function exm_fetch_kpi(body_string, ok_function) {
+	fetch(ajaxurl, {
+		method: "POST",
+		mode: "cors",
+		cache: "no-cache",
+		credentials: "same-origin",
+		body: body_string,
+		headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}),
+	}).then((response) => response.json()
+	).then(ok_function);
+}
+
 webtools.domReady(function () {
 
 	fetch(ajaxurl, {
@@ -39,18 +52,7 @@ webtools.domReady(function () {
 
 	});
 
-
-	fetch(ajaxurl, {
-		method: "POST",
-		mode: "cors",
-		cache: "no-cache",
-		credentials: "same-origin",
-		body: "action=exm_dashboard_kpi&kpi=order_conversion_rate",
-		headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}),
-	}).then((response) => response.json()
-	).then((response) => {
-		console.log('Success:', response);
-
+	exm_fetch_kpi("action=exm_dashboard_kpi&kpi=order_conversion_rate", (response) => {
 		document.querySelector("#webtools #exm_order_conversion_chart_loader").style.display = 'none';
 		var order_conversions_chart = c3.generate({
 			bindto: '#webtools #order_conversion_chart',
@@ -73,6 +75,10 @@ webtools.domReady(function () {
 				height: 180
 			}
 		});
-
 	});
+	exm_fetch_kpi("action=exm_dashboard_kpi&kpi=orders_per_user", (response) => {
+		document.querySelector("#webtools #exm_orders_per_user_loader").style.display = 'none';
+		document.querySelector("#webtools #orders_per_user").innerHTML = response.value.value;
+	});
+
 });
