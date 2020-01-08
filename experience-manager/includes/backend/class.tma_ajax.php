@@ -61,6 +61,78 @@ class TMA_Backend_Ajax {
 		$response = [];
 		$response["error"] = false;
 
+		
+		$response["names"] = (object) [
+					'data1' => 'Order Conversions',
+					'data2' => 'Orders per user',
+					'data3' => 'Orders',
+		];
+
+		
+		
+		$start_date = date_create();
+		$end_date = date_create();
+		
+		$labels = ["x"];
+		for ($i = 1; $i <= 12; $i++) {
+			date_sub($start_date, date_interval_create_from_date_string('1 months'));
+			$labels[] = date_format($start_date, 'm-Y');
+		}
+		
+		
+		$parameters = [
+			"start" => $start_date->getTimestamp() * 1000,
+			"end" => $end_date->getTimestamp() * 1000,
+			"site" => tma_exm_get_site(),
+			"name" => "order_conversion_rate"
+		];
+		
+		$request = new TMA_Request();
+		$result_array = $request->module("module-metrics", "/range", $parameters);
+		$data1 = ["data1"];
+		foreach ($result_array->value as $key => $value) {
+			$data1[] = $value;
+		}
+		
+		$parameters = [
+			"start" => $start_date->getTimestamp() * 1000,
+			"end" => $end_date->getTimestamp() * 1000,
+			"site" => tma_exm_get_site(),
+			"name" => "orders_per_user"
+		];
+		
+		$result_array = $request->module("module-metrics", "/range", $parameters);
+		$data2 = ["data2"];
+		foreach ($result_array->value as $key => $value) {
+			$data2[] = $value;
+		}
+		$parameters = [
+			"start" => $start_date->getTimestamp() * 1000,
+			"end" => $end_date->getTimestamp() * 1000,
+			"site" => tma_exm_get_site(),
+			"name" => "unique_orders"
+		];
+		
+		$result_array = $request->module("module-metrics", "/range", $parameters);
+		$data3 = ["data3"];
+		foreach ($result_array->value as $key => $value) {
+			$data3[] = $value;
+		}
+		
+		$response["data"] = [];
+		$response["data"][] = $labels;
+		$response["data"][] = $data1;
+		$response["data"][] = $data2;
+		$response["data"][] = $data3;
+		$response["error"] = false;
+		
+		wp_send_json($response);
+	}
+	
+	function dashboard_main_test() {
+		$response = [];
+		$response["error"] = false;
+
 		$start_date = date_create();
 		$end_date = date_create();
 		$x_var = [];
@@ -80,8 +152,31 @@ class TMA_Backend_Ajax {
 		$response["data"][] = $x_var;
 		$response["data"][] = ['data1', 30, 200, 100, 400, 150, 250, 130, 340, 200, 500, 250, 350];
 		$response["data"][] = ['data2', 130, 340, 200, 500, 250, 350, 30, 200, 100, 400, 150, 250];
-		//date_timestamp_get($date);
-
+		date_timestamp_get($date);
+		
+//		$start_date = date_create();
+//		$end_date = date_create();
+//		date_sub($start_date, date_interval_create_from_date_string('12 months'));
+//		$parameters = [
+//			"start" => $start_date->getTimestamp() * 1000,
+//			"end" => $end_date->getTimestamp() * 1000,
+//			"site" => tma_exm_get_site(),
+//			"name" => "order_conversion_rate"
+//		];
+//		
+//		$request = new TMA_Request();
+//		$result_array = $request->module("module-metrics", "/range", $parameters).value;
+//		ksort($result_array);
+//		$data1 = ["data1"];
+//		$labels = ["x"];
+//		foreach ($result_array as $key => $value) {
+//			$data1[] = $value;
+//			$labels[] = $key;
+//		}
+//		$response["data"][] = $labels;
+//		$response["data"][] = $data1;
+//		$response["error"] = false;
+		
 		wp_send_json($response);
 	}
 

@@ -176,9 +176,10 @@ class TMA_Request {
 		tma_exm_log(json_encode($response));
 		if ((is_object($response) || is_array($response)) && !is_wp_error($response)) {
 			$result = $response['body']; // use the content
+			return json_decode($result);
 		}
 
-		return json_decode($result);
+		return FALSE;
 	}
 	
 	public function track($event, $page, $customAttributes = null) {

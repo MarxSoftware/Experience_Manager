@@ -35,23 +35,32 @@
 						<div id="order_conversion_chart"></div>
 					</div>
 				</div>
+				
 				<div class="overviewcard">
 					<div class="overviewcard_title">
 						<h2>Orders per user</h2>
 					</div>
 					<div class="overviewcard_content">
 						<div class="lds-dual-ring" id="exm_orders_per_user_loader"></div>
-						<div id="orders_per_user" class="number hit-the-floor"></div>
+						<div id="orders_per_user" class="number"></div>
 					</div>
 				</div>
+				
+				<div class="overviewcard">
+					<div class="overviewcard_title">
+						<h2>Cart abandoned rate</h2>
+					</div>
+					<div class="overviewcard_content">
+						<div class="lds-dual-ring" id="exm_cart_abandoned_rate_loader"></div>
+						<div id="cart_abandoned_rate" ></div>
+					</div>
+				</div>
+				<!--
 				<div class="overviewcard">
 					<div class="overviewcard__icon">Overview</div>
 					<div class="overviewcard__info">Card</div>
 				</div>
-				<div class="overviewcard">
-					<div class="overviewcard__icon">Overview</div>
-					<div class="overviewcard__info">Card</div>
-				</div>
+				-->
 			</div>
 			<!--
 			<div class="main-cards">

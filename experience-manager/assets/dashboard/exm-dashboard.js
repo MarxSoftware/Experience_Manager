@@ -80,5 +80,32 @@ webtools.domReady(function () {
 		document.querySelector("#webtools #exm_orders_per_user_loader").style.display = 'none';
 		document.querySelector("#webtools #orders_per_user").innerHTML = response.value.value;
 	});
+	exm_fetch_kpi("action=exm_dashboard_kpi&kpi=cart_abandoned_rate", (response) => {
+		document.querySelector("#webtools #exm_cart_abandoned_rate_loader").style.display = 'none';
+		
+		c3.generate({
+			bindto: '#webtools #cart_abandoned_rate',
+			data: {
+				columns: [
+					['data', response.value.value]
+				],
+				names: {
+					data: 'Cart abandoned rate'
+				},
+				type: 'gauge'
+			},
+			color: {
+				pattern: ['#FF0000', '#F97600', '#F6C600', '#60B044'], // the three color levels for the percentage values.
+				threshold: {
+					values: [30, 60, 90, 100]
+				}
+			},
+			size: {
+				height: 180
+			}
+		});
+	});
+	
+	
 
 });
