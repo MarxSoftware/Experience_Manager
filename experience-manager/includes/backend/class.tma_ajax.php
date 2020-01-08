@@ -74,9 +74,9 @@ class TMA_Backend_Ajax {
 		$end_date = date_create();
 		
 		$labels = ["x"];
-		for ($i = 1; $i <= 12; $i++) {
-			date_sub($start_date, date_interval_create_from_date_string('1 months'));
+		for ($i = 0; $i <= 12; $i++) {
 			$labels[] = date_format($start_date, 'm-Y');
+			date_sub($start_date, date_interval_create_from_date_string('1 months'));
 		}
 		$response["data"] = [];
 		$response["data"][] = $labels;
