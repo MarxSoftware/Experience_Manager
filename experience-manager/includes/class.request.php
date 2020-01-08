@@ -54,6 +54,8 @@ class TMA_Request {
 		if (!isset($this->options["webtools_apikey"]) || !isset($this->options['webtools_url'])) {
 			return FALSE;
 		}
+		
+		tma_exm_log("get request: " . $url);
 
 		$webtools_url = $this->clean_webtools_url($this->options['webtools_url']) . $this->clean_url($url);
 		$headers["apikey"] = $this->options["webtools_apikey"];
@@ -166,8 +168,17 @@ class TMA_Request {
 		return $url;
 	}
 
-	public function module () {
-		// /rest/module/module-metrics/kpi
+	public function module ($module, $path, $parameters) {
+		$module_url = "/rest/module/$module$path";
+		$module_url .= "?" . http_build_query($parameters);
+		
+		$response = $this->get($module_url);
+		tma_exm_log(json_encode($response));
+		if ((is_object($response) || is_array($response)) && !is_wp_error($response)) {
+			$result = $response['body']; // use the content
+		}
+
+		return json_decode($result);
 	}
 	
 	public function track($event, $page, $customAttributes = null) {

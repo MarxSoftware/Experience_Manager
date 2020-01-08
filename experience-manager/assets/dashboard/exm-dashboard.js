@@ -39,14 +39,28 @@ webtools.domReady(function () {
 
 	});
 
-	setTimeout(() => {
+
+	fetch(ajaxurl, {
+		method: "POST",
+		mode: "cors",
+		cache: "no-cache",
+		credentials: "same-origin",
+		body: "action=exm_dashboard_kpi&kpi=order_conversion_rate",
+		headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}),
+	}).then((response) => response.json()
+	).then((response) => {
+		console.log('Success:', response);
+
 		document.querySelector("#webtools #exm_order_conversion_chart_loader").style.display = 'none';
 		var order_conversions_chart = c3.generate({
 			bindto: '#webtools #order_conversion_chart',
 			data: {
 				columns: [
-					['data', 91.4]
+					['data', response.value.value]
 				],
+				names: {
+					data: 'Order conversion rate'
+				},
 				type: 'gauge'
 			},
 			color: {
@@ -59,8 +73,6 @@ webtools.domReady(function () {
 				height: 180
 			}
 		});
-	}, 3000);
 
-
-
+	});
 });

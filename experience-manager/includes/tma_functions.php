@@ -1,5 +1,12 @@
 <?php
 
+function tma_exm_get_site () {
+	if (isset(get_option('tma_webtools_option')['webtools_siteid'])) {
+		return get_option('tma_webtools_option')['webtools_siteid'];
+	}
+	return FALSE;
+}
+
 function tma_exm_array_match_all($settings_segments, $user_segments) {
 	tma_exm_log("tma_exm_array_match_all");
 	tma_exm_log(json_encode($settings_segments));

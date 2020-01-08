@@ -22,16 +22,16 @@ class TMA_Backend_Ajax {
 		add_action('wp_ajax_tma_categories', array($this, 'tma_categories'));
 
 		add_action('wp_ajax_exm_dashboard_main', array($this, 'dashboard_main'));
+		add_action('wp_ajax_exm_dashboard_kpi', array($this, 'dashboard_kpi'));
 	}
 
-	function single_kpi () {
+	function dashboard_kpi () {
 		
 		$response = [];
 		
-		
 		$kpi = FALSE;
-		if ($_REQUEST['kpi']) {
-			$kpi = filter_input(INPUT_REQUEST, 'KPI', FILTER_DEFAULT);
+		if ($_POST['kpi']) {
+			$kpi = filter_input(INPUT_POST, 'kpi', FILTER_DEFAULT);
 		}
 		if ( !$kpi) {
 			$response["error"] = true;
@@ -42,6 +42,19 @@ class TMA_Backend_Ajax {
 		
 		$firstDay = new \DateTime('first day of this month 00:00:01');
 		$lastDay = new \DateTime('first day of next month 23:59:59');
+		
+		$parameters = [
+			"start" => $firstDay->getTimestamp() * 1000,
+			"end" => $lastDay->getTimestamp() * 1000,
+			"site" => tma_exm_get_site(),
+			"name" => $kpi
+		];
+		//https://exp.wp-digitalexperience.com/rest/module/module-metrics/range?name=order_conversion_rate&site=b8ff2cf4-aee7-49eb-9a08-085d9ba20788&end=1577836800000&start=1546732800000
+		
+		$request = new TMA_Request();
+		$response["value"] = $request->module("module-metrics", "/kpi", $parameters);
+		$response["error"] = false;
+		wp_send_json($response);
 	}
 	
 	function dashboard_main() {
