@@ -78,55 +78,34 @@ class TMA_Backend_Ajax {
 			date_sub($start_date, date_interval_create_from_date_string('1 months'));
 			$labels[] = date_format($start_date, 'm-Y');
 		}
+		$response["data"] = [];
+		$response["data"][] = $labels;
 		
+		$this->add_metric($response, "order_conversion_rate", "data1", $start_date, $end_date);
+		$this->add_metric($response, "orders_per_user", "data2", $start_date, $end_date);
+		$this->add_metric($response, "unique_orders", "data3", $start_date, $end_date);
 		
+
+		$response["error"] = false;
+		
+		wp_send_json($response);
+	}
+	
+	function add_metric (&$response, $kpi_name, $data_name, $start_date, $end_date) {
 		$parameters = [
 			"start" => $start_date->getTimestamp() * 1000,
 			"end" => $end_date->getTimestamp() * 1000,
 			"site" => tma_exm_get_site(),
-			"name" => "order_conversion_rate"
+			"name" => $kpi_name
 		];
 		
 		$request = new TMA_Request();
 		$result_array = $request->module("module-metrics", "/range", $parameters);
-		$data1 = ["data1"];
+		$data = [$data_name];
 		foreach ($result_array->value as $key => $value) {
-			$data1[] = $value;
+			$data[] = $value;
 		}
-		
-		$parameters = [
-			"start" => $start_date->getTimestamp() * 1000,
-			"end" => $end_date->getTimestamp() * 1000,
-			"site" => tma_exm_get_site(),
-			"name" => "orders_per_user"
-		];
-		
-		$result_array = $request->module("module-metrics", "/range", $parameters);
-		$data2 = ["data2"];
-		foreach ($result_array->value as $key => $value) {
-			$data2[] = $value;
-		}
-		$parameters = [
-			"start" => $start_date->getTimestamp() * 1000,
-			"end" => $end_date->getTimestamp() * 1000,
-			"site" => tma_exm_get_site(),
-			"name" => "unique_orders"
-		];
-		
-		$result_array = $request->module("module-metrics", "/range", $parameters);
-		$data3 = ["data3"];
-		foreach ($result_array->value as $key => $value) {
-			$data3[] = $value;
-		}
-		
-		$response["data"] = [];
-		$response["data"][] = $labels;
-		$response["data"][] = $data1;
-		$response["data"][] = $data2;
-		$response["data"][] = $data3;
-		$response["error"] = false;
-		
-		wp_send_json($response);
+		$response["data"][] = $data;
 	}
 	
 	function dashboard_main_test() {
