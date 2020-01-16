@@ -20,7 +20,11 @@ function exm_fetch_kpi(body_string, ok_function) {
 }
 
 webtools.domReady(function () {
-
+	
+	if (document.querySelector(".webtools-dashboard") === null) {
+		return;
+	}
+	
 	fetch(ajaxurl, {
 		method: "POST",
 		mode: "cors",
@@ -78,7 +82,7 @@ webtools.domReady(function () {
 	});
 	exm_fetch_kpi("action=exm_dashboard_kpi&kpi=orders_per_user", (response) => {
 		document.querySelector("#webtools #exm_orders_per_user_loader").style.display = 'none';
-		document.querySelector("#webtools #orders_per_user").innerHTML = response.value.value;
+		document.querySelector("#webtools #orders_per_user").innerHTML = response.value.value.toPrecision(2);
 	});
 	exm_fetch_kpi("action=exm_dashboard_kpi&kpi=cart_abandoned_rate", (response) => {
 		document.querySelector("#webtools #exm_cart_abandoned_rate_loader").style.display = 'none';

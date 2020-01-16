@@ -4,7 +4,7 @@
   Plugin URI: https://wp-digitalexperience.com/experience-manager/
   Description: The integration for the experience platform.
   Author: Thorsten Marx
-  Version: 2.4.2
+  Version: 2.5.0
   Author URI: https://wp-digitalexperience.com/
   Text Domain: tma-webtools
   Domain Path: /languages
@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-define("TMA_EXPERIENCE_MANAGER_VERSION", "2.4.2");
+define("TMA_EXPERIENCE_MANAGER_VERSION", "2.5.0");
 define("TMA_EXPERIENCE_MANAGER_SEGMENT_MATCHING_ALL", "all");
 define("TMA_EXPERIENCE_MANAGER_SEGMENT_MATCHING_ANY", "any");
 define("TMA_EXPERIENCE_MANAGER_SEGMENT_MATCHING_NONE", "none");
@@ -70,6 +70,8 @@ function tma_webtools_rest_init() {
 new \TMA\ExperienceManager\TMA_Backend_Ajax();
 function tma_webtools_init() {
 
+	do_action("experience-manager/init/before");
+	
 	tma_exm_log("tma_webtools_init");
 	wp_register_style('experience-manager', plugins_url('css/experience-manager.css', __FILE__));
 	wp_enqueue_style('experience-manager');
@@ -114,6 +116,8 @@ function tma_webtools_init() {
 	add_action('admin_head', 'tma_js_variables', -100);
 
 	tma_init_cookie();
+	
+	do_action("experience-manager/init/after");
 }
 
 /*

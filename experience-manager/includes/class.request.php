@@ -30,7 +30,6 @@ class TMA_Request {
 
 	public function __construct() {
 		$this->options = get_option('tma_webtools_option');
-		
 	}
 
 	public static function getUserID() {
@@ -49,31 +48,34 @@ class TMA_Request {
 	/**
 	 * setup the request object and return
 	 */
-	public function get($url, $parameters = NULL) {
+	public function get($url, $parameters = NULL, $headers = ['Content-Type' => "application/json"]) {
 
 		if (!isset($this->options["webtools_apikey"]) || !isset($this->options['webtools_url'])) {
 			return FALSE;
 		}
-		
+
 		tma_exm_log("get request: " . $url);
 
 		$webtools_url = $this->clean_webtools_url($this->options['webtools_url']) . $this->clean_url($url);
-		$headers["apikey"] = $this->options["webtools_apikey"];
+//		$headers["apikey"] = $this->options["webtools_apikey"];
 
 		$parameters = array();
 		$parameters['method'] = "GET";
 		$parameters['timeout'] = "45";
-		$parameters['headers'] = array();
-		$parameters['headers']['Content-Type'] = "application/json";
+		$parameters['headers'] = $headers;
+//		$parameters['headers']['Content-Type'] = "application/json";
+//		$parameters['headers']['Content-Type'] = "text/plain";
 		$parameters['headers']['apikey'] = $this->options["webtools_apikey"];
 
+		tma_exm_log(json_encode($parameters));
+		
 		return $this->garded(function () use ($webtools_url, $parameters) {
-			$response = wp_remote_get($webtools_url, $parameters);
-			if (is_array($response) && !is_wp_error($response)) {
-				return $response; // use the content
-			}
-			return FALSE;
-		});
+					$response = wp_remote_get($webtools_url, $parameters);
+					if (is_array($response) && !is_wp_error($response)) {
+						return $response; // use the content
+					}
+					return FALSE;
+				});
 	}
 
 	public function delete($url) {
@@ -83,7 +85,7 @@ class TMA_Request {
 		}
 
 		$webtools_url = $this->clean_webtools_url($this->options['webtools_url']) . $this->clean_url($url);
-		
+
 		$parameters = array();
 		$parameters['method'] = "DELETE";
 		//$parameters['body'] = json_encode($data);
@@ -93,12 +95,12 @@ class TMA_Request {
 		$parameters['headers']['apikey'] = $this->options["webtools_apikey"];
 
 		return $this->garded(function () use ($webtools_url, $parameters) {
-			$response = wp_remote_request($webtools_url, $parameters);
-			if (is_array($response) && !is_wp_error($response)) {
-				return $response; // use the content
-			}
-			return FALSE;
-		});
+					$response = wp_remote_request($webtools_url, $parameters);
+					if (is_array($response) && !is_wp_error($response)) {
+						return $response; // use the content
+					}
+					return FALSE;
+				});
 	}
 
 	public function post($url, $data = NULL) {
@@ -107,7 +109,7 @@ class TMA_Request {
 			return FALSE;
 		}
 		$webtools_url = $this->clean_webtools_url($this->options['webtools_url']) . $this->clean_url($url);
-		
+
 		$parameters = array();
 		$parameters['method'] = "POST";
 		$parameters['body'] = json_encode($data);
@@ -118,12 +120,12 @@ class TMA_Request {
 		$parameters['headers']['apikey'] = $this->options["webtools_apikey"];
 
 		return $this->garded(function () use ($webtools_url, $parameters) {
-			$response = wp_remote_post($webtools_url, $parameters);
-			if (is_array($response) && !is_wp_error($response)) {
-				return $response; // use the content
-			}
-			return FALSE;
-		});
+					$response = wp_remote_post($webtools_url, $parameters);
+					if (is_array($response) && !is_wp_error($response)) {
+						return $response; // use the content
+					}
+					return FALSE;
+				});
 	}
 
 	public function put($url, $data = NULL) {
@@ -132,7 +134,7 @@ class TMA_Request {
 			return FALSE;
 		}
 		$webtools_url = $this->clean_webtools_url($this->options['webtools_url']) . $this->clean_url($url);
-		
+
 		$parameters = array();
 		$parameters['method'] = "PUT";
 		$parameters['body'] = json_encode($data);
@@ -143,15 +145,15 @@ class TMA_Request {
 		$parameters['headers']['apikey'] = $this->options["webtools_apikey"];
 
 		return $this->garded(function () use ($webtools_url, $parameters) {
-			tma_exm_log("url " . $webtools_url);
-			tma_exm_log("parameters " . json_encode($parameters));
-			$response = wp_remote_request($webtools_url, $parameters);
-			tma_exm_log("response " . json_encode($response));
-			if (is_array($response) && !is_wp_error($response)) {
-				return $response; // use the content
-			}
-			return FALSE;
-		});
+					tma_exm_log("url " . $webtools_url);
+					tma_exm_log("parameters " . json_encode($parameters));
+					$response = wp_remote_request($webtools_url, $parameters);
+					tma_exm_log("response " . json_encode($response));
+					if (is_array($response) && !is_wp_error($response)) {
+						return $response; // use the content
+					}
+					return FALSE;
+				});
 	}
 
 	private function clean_webtools_url($url) {
@@ -168,10 +170,10 @@ class TMA_Request {
 		return $url;
 	}
 
-	public function module ($module, $path, $parameters) {
+	public function module($module, $path, $parameters) {
 		$module_url = "/rest/module/$module$path";
 		$module_url .= "?" . http_build_query($parameters);
-		
+
 		$response = $this->get($module_url);
 		tma_exm_log(json_encode($response));
 		if ((is_object($response) || is_array($response)) && !is_wp_error($response)) {
@@ -181,7 +183,50 @@ class TMA_Request {
 
 		return FALSE;
 	}
-	
+
+	/**
+	 * checks if the platform modules are installed
+	 * 
+	 * <platform_url>/rest/module/installed
+	 * 
+	 * {
+	  "error": false,
+	  "modules": [
+	  {
+	  "name": "Core Module Entities",
+	  "active": true,
+	  "id": "core-module-entities",
+	  "version": "1.3.0"
+	  },...
+	  ]}
+	 */
+	public function check_installed_modules($dependencies = []) {
+		if (!is_array($dependencies) || sizeof($dependencies) === 0) {
+			return TRUE;
+		}
+		$module_url = "/rest/module/installed";
+
+		$response = $this->get($module_url, NULL, ['Content-Type' => 'text/plain', 'Accept' => 'application/json']);
+		tma_exm_log(json_encode($response));
+		if ((is_object($response) || is_array($response)) && !is_wp_error($response)) {
+			$result = $response['body']; // use the content
+			$installed_modules = json_decode($result);
+			if (property_exists($installed_modules, "modules") && is_array($installed_modules->modules)) {
+				foreach ($dependencies AS $module) {
+					$found = array_filter($installed_modules->modules, function($installedModule) use ($module) {
+						return $installedModule->id == $module;
+					});
+					if (!$found) {
+						return FALSE;
+					}
+				}
+				return TRUE;
+			}
+		}
+
+		return FALSE;
+	}
+
 	public function track($event, $page, $customAttributes = null) {
 		if (!isset($this->options["webtools_apikey"]) || !isset($this->options['webtools_url'])) {
 			return;
@@ -205,7 +250,6 @@ class TMA_Request {
 		$url .= '&site=' . $siteid . '&page=' . urlencode($page);
 		$url .= "&uid=" . $uid . '&reqid=' . $rid . '&vid=' . $vid;
 		//$url .= "&apikey=" . $apikey;
-
 		// add the custom parameters
 		if (isset($customAttributes)) {
 			tma_exm_log(json_encode($customAttributes));
@@ -219,9 +263,9 @@ class TMA_Request {
 				}
 			}
 		}
-		
+
 		tma_exm_log($url);
-		
+
 		$this->loadContent($url, "{}");
 	}
 
