@@ -282,8 +282,10 @@ class TMA_Request {
 		}
 		$result = wp_cache_get($userid);
 		$apikey = $this->options["webtools_apikey"];
+		$site = tma_exm_get_site();
 		if (false === $result) {
-			$url = $this->options['webtools_url'] . 'rest/userinformation/user?apikey=' . $apikey . '&user=' . $userid;
+			$url = $this->options['webtools_url'] . 'rest/userinformation/user?apikey=' . $apikey . '&user=' . $userid
+					 . '&site=' . $site;
 			$result = $this->loadContent($url, '{"user" : {"segments" : []}, "status" : "ok", "default": true}');
 
 			wp_cache_set($userid, $result, "", 60);

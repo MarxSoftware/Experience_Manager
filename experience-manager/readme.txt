@@ -65,6 +65,8 @@ none
 
 2.5.0
  * Generate unique id for cart tracking
+ * Conversion Dashboard added if metrics module is installed
+ * 
 
 2.4.2
  * Typo fixed
