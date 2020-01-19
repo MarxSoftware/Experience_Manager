@@ -71,10 +71,7 @@ class TMAScriptHelper {
 		$output = '';
 		if ($this->isTrackingEnabled()) {
 
-			$siteid = get_option('blogname');
-			if (isset(get_option('tma_webtools_option')['webtools_siteid'])) {
-				$siteid = get_option('tma_webtools_option')['webtools_siteid'];
-			}
+			$siteid = tma_exm_get_site();
 			$cookieDomain = FALSE;
 			if (isset(get_option('tma_webtools_option')['webtools_cookiedomain'])) {
 				$cookieDomain = get_option('tma_webtools_option')['webtools_cookiedomain'];

@@ -133,13 +133,11 @@ class SegmentEditor {
 	public function publish($ID, $post) {
 		tma_exm_log("publish");
 
-		$siteid = get_option('blogname');
-		if (isset(get_option('tma_webtools_option')['webtools_siteid'])) {
-			$siteid = get_option('tma_webtools_option')['webtools_siteid'];
-		}
+		$siteid = tma_exm_get_site();
 		$post_data = array(
 			'name' => $post->post_title,
 			'externalId' => $ID,
+			'site' => $siteid,
 			'active' => $post->post_status === "publish",
 			'dsl' => $this->get_segment_dsl($post->ID),
 			'period' => $this->get_segment_period($post->ID)
@@ -205,8 +203,9 @@ class SegmentEditor {
 				'tma_segment_synced'
 		);
 
+		$site = tma_exm_get_site();
 		$request = new \TMA\ExperienceManager\TMA_Request();
-		$request->delete("/rest/audience?wpid=" . $ID);
+		$request->delete("/rest/audience?wpid=" . $ID . "&site=" . $site);
 	}
 
 	/**
@@ -217,8 +216,9 @@ class SegmentEditor {
 	 */
 	public function trash($ID) {
 		tma_exm_log("trash");
+		$site = tma_exm_get_site();
 		$request = new \TMA\ExperienceManager\TMA_Request();
-		$request->delete("/rest/audience?wpid=" . $ID);
+		$request->delete("/rest/audience?wpid=" . $ID . "&site=" . $site);
 		update_post_meta(
 				$ID,
 				'tma_segment_synced',
