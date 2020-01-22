@@ -1,5 +1,10 @@
 <?php
 
+function tma_exm_dependencies_fulfilled ($dependencies = []) {
+	$request = new \TMA\ExperienceManager\TMA_Request();
+	return $request->check_installed_modules($dependencies);
+}
+
 function tma_exm_get_site () {
 	if (isset(get_option('tma_webtools_option')['webtools_siteid'])) {
 		return get_option('tma_webtools_option')['webtools_siteid'];

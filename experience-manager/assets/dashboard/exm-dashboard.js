@@ -84,6 +84,15 @@ webtools.domReady(function () {
 		document.querySelector("#webtools #exm_orders_per_user_loader").style.display = 'none';
 		document.querySelector("#webtools #orders_per_user").innerHTML = response.value.value.toPrecision(2);
 	});
+	exm_fetch_kpi("action=exm_dashboard_kpi&kpi=unique_users", (response) => {
+		document.querySelector("#webtools #exm_unique_users_loader").style.display = 'none';
+		document.querySelector("#webtools #unique_users").innerHTML = response.value.value.toPrecision(2);
+	});
+	exm_fetch_kpi("action=exm_dashboard_kpi&kpi=pageviews_per_visit", (response) => {
+		document.querySelector("#webtools #exm_pageviews_per_visit_loader").style.display = 'none';
+		document.querySelector("#webtools #pageviews_per_visit").innerHTML = response.value.value.toPrecision(2);
+	});
+	
 	exm_fetch_kpi("action=exm_dashboard_kpi&kpi=cart_abandoned_rate", (response) => {
 		document.querySelector("#webtools #exm_cart_abandoned_rate_loader").style.display = 'none';
 		

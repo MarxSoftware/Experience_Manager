@@ -16,9 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$request = new \TMA\ExperienceManager\TMA_Request();
-$dependencies_fulfilled = $request->check_installed_modules(["module-metrics"]);
-if ($dependencies_fulfilled)  {
+if (tma_exm_dependencies_fulfilled(["module-metrics"]))  {
 	include "dashboard.php";
 } else {
 	echo "<h1>";

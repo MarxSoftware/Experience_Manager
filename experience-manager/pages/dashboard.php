@@ -8,6 +8,28 @@
 			</div>
 
 			<div class="main-overview">
+				
+				<div class="overviewcard">
+					<div class="overviewcard_title">
+						<h2>Unique user</h2>
+					</div>
+					<div class="overviewcard_content">
+						<div class="lds-dual-ring" id="exm_unique_users_loader"></div>
+						<div id="unique_users" class="number"></div>
+					</div>
+				</div>
+				<div class="overviewcard">
+					<div class="overviewcard_title">
+						<h2>Requests per visit</h2>
+					</div>
+					<div class="overviewcard_content">
+						<div class="lds-dual-ring" id="exm_pageviews_per_visit_loader"></div>
+						<div id="pageviews_per_visit" class="number"></div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="main-overview">
 				<div class="overviewcard">
 					<div class="overviewcard_title">
 						<h2>Order conversion</h2>
@@ -37,20 +59,16 @@
 						<div id="cart_abandoned_rate" ></div>
 					</div>
 				</div>
-				<!--
-				<div class="overviewcard">
-					<div class="overviewcard__icon">Overview</div>
-					<div class="overviewcard__info">Card</div>
-				</div>
-				-->
 			</div>
-			<!--
-			<div class="main-cards">
+			
+			<!--div class="main-cards">
 				<div class="card">Card 1</div>
 				<div class="card">Card 2</div>
+				<div class="card">Card 2</div>
+				<div class="card">Card 2</div>
 				<div class="card">Card 3</div>
-			</div>
-			-->
+			</div-->
+			
 		</main>
 	</div>
 </div>

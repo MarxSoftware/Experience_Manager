@@ -41,7 +41,7 @@ class TMA_Backend_Ajax {
 		}
 		
 		$firstDay = new \DateTime('first day of this month 00:00:01');
-		$lastDay = new \DateTime('first day of next month 23:59:59');
+		$lastDay = new \DateTime('last day of this month 23:59:59');
 		
 		$parameters = [
 			"start" => $firstDay->getTimestamp() * 1000,
@@ -62,16 +62,20 @@ class TMA_Backend_Ajax {
 		$response["error"] = false;
 
 		
-		$response["names"] = (object) [
-					'data1' => 'Order Conversions',
-					'data2' => 'Orders per user',
-					'data3' => 'Orders',
-		];
+		$data = [];
+		$data['data1'] = 'Unique users';
+		$data['data2'] = 'PageViews per user';
+		if (\TMA\ExperienceManager\Plugins::getInstance()->woocommerce()) {
+			$data['data3'] = 'Order Conversions';
+			$data['data4'] = 'Orders per user';
+			$data['data5'] = 'Orders';
+		}
+		$response["names"] = (object) $data;
 
 		
 		
-		$start_date = date_create();
-		$end_date = date_create();
+		$start_date = date_create('first day of this month 00:00:01');
+		$end_date = date_create('last day of this month 23:59:59');
 		
 		$labels = ["x"];
 		for ($i = 0; $i <= 12; $i++) {
@@ -81,17 +85,20 @@ class TMA_Backend_Ajax {
 		$response["data"] = [];
 		$response["data"][] = $labels;
 		
-		$this->add_metric($response, "order_conversion_rate", "data1", $start_date, $end_date);
-		$this->add_metric($response, "orders_per_user", "data2", $start_date, $end_date);
-		$this->add_metric($response, "unique_orders", "data3", $start_date, $end_date);
+		$this->add_metric($response, "unique_users", "data1", $start_date, $end_date, $labels);
+		$this->add_metric($response, "pageviews_per_visit", "data2", $start_date, $end_date, $labels);
+		if (\TMA\ExperienceManager\Plugins::getInstance()->woocommerce()) {
+			$this->add_metric($response, "order_conversion_rate", "data3", $start_date, $end_date, $labels);
+			$this->add_metric($response, "orders_per_user", "data4", $start_date, $end_date, $labels);
+			$this->add_metric($response, "unique_orders", "data5", $start_date, $end_date, $labels);
+		}
 		
-
 		$response["error"] = false;
 		
 		wp_send_json($response);
 	}
 	
-	function add_metric (&$response, $kpi_name, $data_name, $start_date, $end_date) {
+	function add_metric (&$response, $kpi_name, $data_name, $start_date, $end_date, $labels) {
 		$parameters = [
 			"start" => $start_date->getTimestamp() * 1000,
 			"end" => $end_date->getTimestamp() * 1000,
@@ -101,10 +108,14 @@ class TMA_Backend_Ajax {
 		
 		$request = new TMA_Request();
 		$result_array = $request->module("module-metrics", "/range", $parameters);
-		$data = [$data_name];
-		foreach ($result_array->value as $key => $value) {
-			$data[] = $value;
+		$data = [];
+		$values = get_object_vars($result_array->value);
+		foreach ($labels as $key => $value) {
+			if (array_key_exists($value, $values)) {
+				$data[$key] = $values[$value];
+			}
 		}
+		array_unshift($data, $data_name);
 		$response["data"][] = $data;
 	}
 	

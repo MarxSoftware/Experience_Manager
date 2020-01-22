@@ -21,21 +21,23 @@ class TMA_Settings {
 
 		wp_register_style('tma-settings', plugins_url('experience-manager/css/tma-settings.css'));
 		wp_enqueue_style('tma-settings');
-		
-		
-		wp_register_script('exm-d3-js', plugins_url('experience-manager/assets/dashboard/d3.min.js'));
-		wp_enqueue_script('exm-d3-js');
-		wp_register_script('exm-c3-js', plugins_url('experience-manager/assets/dashboard/c3.min.js'), ['exm-d3-js']);
-		wp_enqueue_script('exm-c3-js');
-		wp_register_style('ecm-c3-css', plugins_url('experience-manager/assets/dashboard/c3.min.css'));
-		wp_enqueue_style('ecm-c3-css');
-		
-		
-		
-		wp_register_script('exm-dashboard-js', plugins_url('experience-manager/assets/dashboard/exm-dashboard.js'), ['exm-c3-js', 'tma-webtools-backend']);
-		wp_enqueue_script('exm-dashboard-js');
-		wp_register_style('exm-dashboard-css', plugins_url('experience-manager/assets/dashboard/exm-dashboard.css'));
-		wp_enqueue_style('exm-dashboard-css');
+
+
+		if (tma_exm_dependencies_fulfilled(["module-metrics"])) {
+			wp_register_script('exm-d3-js', plugins_url('experience-manager/assets/dashboard/d3.min.js'));
+			wp_enqueue_script('exm-d3-js');
+			wp_register_script('exm-c3-js', plugins_url('experience-manager/assets/dashboard/c3.min.js'), ['exm-d3-js']);
+			wp_enqueue_script('exm-c3-js');
+			wp_register_style('ecm-c3-css', plugins_url('experience-manager/assets/dashboard/c3.min.css'));
+			wp_enqueue_style('ecm-c3-css');
+
+
+
+			wp_register_script('exm-dashboard-js', plugins_url('experience-manager/assets/dashboard/exm-dashboard.js'), ['exm-c3-js', 'tma-webtools-backend']);
+			wp_enqueue_script('exm-dashboard-js');
+			wp_register_style('exm-dashboard-css', plugins_url('experience-manager/assets/dashboard/exm-dashboard.css'));
+			wp_enqueue_style('exm-dashboard-css');
+		}
 
 		//set the settings
 		$this->settings_api->set_sections($this->get_settings_sections());
@@ -46,7 +48,7 @@ class TMA_Settings {
 
 	function admin_menu() {
 		add_menu_page(
-				__("Experience Manager", "tma-webtools"), __("Experience Manager", "tma-webtools"), 'manage_options', 'experience-manager/pages/tma-webtools-admin.php', null, plugins_url( 'experience-manager/images/settings.png' ), 50);
+				__("Experience Manager", "tma-webtools"), __("Experience Manager", "tma-webtools"), 'manage_options', 'experience-manager/pages/tma-webtools-admin.php', null, plugins_url('experience-manager/images/settings.png'), 50);
 		add_submenu_page('experience-manager/pages/tma-webtools-admin.php', __("Dashboard", "tma-webtools"), __("Dashboard", "tma-webtools"), 'manage_options', 'experience-manager/pages/tma-webtools-admin.php', null);
 		add_submenu_page('experience-manager/pages/tma-webtools-admin.php', __("Settings", "tma-webtools"), __("Settings", "tma-webtools"), 'manage_options', 'tma-webtools-setting-admin', array($this, 'plugin_page'));
 	}
