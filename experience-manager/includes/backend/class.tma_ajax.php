@@ -25,24 +25,24 @@ class TMA_Backend_Ajax {
 		add_action('wp_ajax_exm_dashboard_kpi', array($this, 'dashboard_kpi'));
 	}
 
-	function dashboard_kpi () {
-		
+	function dashboard_kpi() {
+
 		$response = [];
-		
+
 		$kpi = FALSE;
 		if ($_POST['kpi']) {
 			$kpi = filter_input(INPUT_POST, 'kpi', FILTER_DEFAULT);
 		}
-		if ( !$kpi) {
+		if (!$kpi) {
 			$response["error"] = true;
 			$response["message"] = __("No kpi requested", "tma-webtools");
-			
+
 			wp_send_json($response);
 		}
-		
+
 		$firstDay = new \DateTime('first day of this month 00:00:01');
 		$lastDay = new \DateTime('last day of this month 23:59:59');
-		
+
 		$parameters = [
 			"start" => $firstDay->getTimestamp() * 1000,
 			"end" => $lastDay->getTimestamp() * 1000,
@@ -50,33 +50,33 @@ class TMA_Backend_Ajax {
 			"name" => $kpi
 		];
 		//https://exp.wp-digitalexperience.com/rest/module/module-metrics/range?name=order_conversion_rate&site=b8ff2cf4-aee7-49eb-9a08-085d9ba20788&end=1577836800000&start=1546732800000
-		
+
 		$request = new TMA_Request();
 		$response["value"] = $request->module("module-metrics", "/kpi", $parameters);
 		$response["error"] = false;
 		wp_send_json($response);
 	}
-	
+
 	function dashboard_main() {
 		$response = [];
 		$response["error"] = false;
 
-		
+
 		$data = [];
 		$data['data1'] = 'Unique users';
 		$data['data2'] = 'PageViews per user';
-		if (\TMA\ExperienceManager\Plugins::getInstance()->woocommerce()) {
+		if (\TMA\ExperienceManager\Plugins::getInstance()->woocommerce() || \TMA\ExperienceManager\Plugins::getInstance()->easydigitaldownloads()) {
 			$data['data3'] = 'Order Conversions';
 			$data['data4'] = 'Orders per user';
 			$data['data5'] = 'Orders';
 		}
 		$response["names"] = (object) $data;
 
-		
-		
+
+
 		$start_date = date_create('first day of this month 00:00:01');
 		$end_date = date_create('last day of this month 23:59:59');
-		
+
 		$labels = ["x"];
 		for ($i = 0; $i <= 12; $i++) {
 			$labels[] = date_format($start_date, 'm-Y');
@@ -84,28 +84,28 @@ class TMA_Backend_Ajax {
 		}
 		$response["data"] = [];
 		$response["data"][] = $labels;
-		
+
 		$this->add_metric($response, "unique_users", "data1", $start_date, $end_date, $labels);
 		$this->add_metric($response, "pageviews_per_visit", "data2", $start_date, $end_date, $labels);
-		if (\TMA\ExperienceManager\Plugins::getInstance()->woocommerce()) {
+		if (\TMA\ExperienceManager\Plugins::getInstance()->woocommerce() || \TMA\ExperienceManager\Plugins::getInstance()->easydigitaldownloads()) {
 			$this->add_metric($response, "order_conversion_rate", "data3", $start_date, $end_date, $labels);
 			$this->add_metric($response, "orders_per_user", "data4", $start_date, $end_date, $labels);
 			$this->add_metric($response, "unique_orders", "data5", $start_date, $end_date, $labels);
 		}
-		
+
 		$response["error"] = false;
-		
+
 		wp_send_json($response);
 	}
-	
-	function add_metric (&$response, $kpi_name, $data_name, $start_date, $end_date, $labels) {
+
+	function add_metric(&$response, $kpi_name, $data_name, $start_date, $end_date, $labels) {
 		$parameters = [
 			"start" => $start_date->getTimestamp() * 1000,
 			"end" => $end_date->getTimestamp() * 1000,
 			"site" => tma_exm_get_site(),
 			"name" => $kpi_name
 		];
-		
+
 		$request = new TMA_Request();
 		$result_array = $request->module("module-metrics", "/range", $parameters);
 		$data = [];
@@ -118,7 +118,7 @@ class TMA_Backend_Ajax {
 		array_unshift($data, $data_name);
 		$response["data"][] = $data;
 	}
-	
+
 	function dashboard_main_test() {
 		$response = [];
 		$response["error"] = false;
@@ -131,19 +131,19 @@ class TMA_Backend_Ajax {
 			date_sub($end_date, date_interval_create_from_date_string('1 months'));
 			$x_var[] = date_format($end_date, 'm-Y');
 		}
-		
+
 		$obj = (object) [
 					'data1' => 'Order Conversions',
 					'data2' => 'Abondend Carts'
 		];
 		$response["names"] = $obj;
-		
+
 		$response["data"] = [];
 		$response["data"][] = $x_var;
 		$response["data"][] = ['data1', 30, 200, 100, 400, 150, 250, 130, 340, 200, 500, 250, 350];
 		$response["data"][] = ['data2', 130, 340, 200, 500, 250, 350, 30, 200, 100, 400, 150, 250];
 		date_timestamp_get($date);
-		
+
 //		$start_date = date_create();
 //		$end_date = date_create();
 //		date_sub($start_date, date_interval_create_from_date_string('12 months'));
@@ -166,7 +166,7 @@ class TMA_Backend_Ajax {
 //		$response["data"][] = $labels;
 //		$response["data"][] = $data1;
 //		$response["error"] = false;
-		
+
 		wp_send_json($response);
 	}
 

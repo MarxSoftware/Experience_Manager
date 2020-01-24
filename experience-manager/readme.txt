@@ -66,7 +66,7 @@ none
 3.0.0
  * Generate unique id for cart tracking
  * Conversion Dashboard added if metrics module is installed
- * 
+ * Experimental backend mode removed
 
 Important: Version 3.0.0 needs at least version 4.0.0 of the Experience Platform
 

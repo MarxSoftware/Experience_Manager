@@ -7,8 +7,8 @@
 				<div id="chart"></div>
 			</div>
 
+			<h2>Metrics</h2>
 			<div class="main-overview">
-				
 				<div class="overviewcard">
 					<div class="overviewcard_title">
 						<h2>Unique user</h2>
@@ -28,8 +28,12 @@
 					</div>
 				</div>
 			</div>
-			
+			<?php 
+				if (\TMA\ExperienceManager\Plugins::getInstance()->woocommerce() || \TMA\ExperienceManager\Plugins::getInstance()->easydigitaldownloads())  {
+			?>
+			<h2>eCommerce-Metrics</h2>
 			<div class="main-overview">
+				
 				<div class="overviewcard">
 					<div class="overviewcard_title">
 						<h2>Order conversion</h2>
@@ -60,7 +64,9 @@
 					</div>
 				</div>
 			</div>
-			
+			<?php 
+				}
+			?>
 			<!--div class="main-cards">
 				<div class="card">Card 1</div>
 				<div class="card">Card 2</div>
