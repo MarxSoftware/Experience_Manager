@@ -133,12 +133,14 @@ class TMA_Settings {
 				)
 			),
 			'tma_webtools_option_targeting' => array(
+				/*
 				array(
 					'name' => 'webtools_backend_mode',
 					'label' => __("Backend mode?", "tma-webtools"),
 					'desc' => __("Experimental: If enabled, the targeting is done in the backend.", "tma-webtools"),
 					'type' => 'toggle'
 				),
+				 */
 				array(
 					'name' => 'webtools_shortcode_single_item_per_group',
 					'label' => __("Single item per group?", "tma-webtools"),

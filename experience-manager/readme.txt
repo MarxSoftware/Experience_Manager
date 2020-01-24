@@ -3,7 +3,7 @@ Contributors: thmarx
 Tags: digital experience platform, experience manager, targeting, analytics, tracking, product targeting, behaviour targets
 Requires at least: 4.4.1
 Tested up to: 5.3.2
-Stable tag: 2.5.0
+Stable tag: 3.0.0
 License: GPLv2 or later
 
 Do not treat all your customers the same, create a digital experience!
@@ -63,10 +63,12 @@ none
 
 == Changelog ==
 
-2.5.0
+3.0.0
  * Generate unique id for cart tracking
  * Conversion Dashboard added if metrics module is installed
  * 
+
+Important: Version 3.0.0 needs at least version 4.0.0 of the Experience Platform
 
 2.4.2
  * Typo fixed

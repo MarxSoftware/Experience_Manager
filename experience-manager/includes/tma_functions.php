@@ -161,12 +161,15 @@ function tma_exm_is_editor_active() {
 }
 
 function tma_exm_is_frontend_mode_enabled() {
+	/*
 	$options = get_option('tma_webtools_option_targeting');
 	if ($options !== false && is_array($options) && array_key_exists("webtools_backend_mode", $options)) {
 		return !$options['webtools_backend_mode'] === "on";
 	} else {
 		return true;
 	}
+	 */
+	return true;
 }
 
 /**

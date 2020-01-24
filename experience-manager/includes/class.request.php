@@ -237,7 +237,7 @@ class TMA_Request {
 		$vid = \TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(TMA_COOKIE_HELPER::$COOKIE_VISIT, UUID::v4(), TMA_COOKIE_HELPER::$COOKIE_VISIT_EXPIRE);
 		$apikey = $this->options["webtools_apikey"];
 		$url = $this->options['webtools_url'];
-		$siteid = tma_exm_get_segments();
+		$siteid = tma_exm_get_site();
 
 		// http://localhost:8082/rest/track?
 		//	event=pageview&site=demosite&page=testpage&fp=6e289159b1106008e0379c9565a44f03&uid=3694ff4e-668b-4484-8ddf-52662bbcc44c&
