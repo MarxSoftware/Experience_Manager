@@ -142,6 +142,7 @@ class TMA_Settings_API {
                     'min'               => isset( $option['min'] ) ? $option['min'] : '',
                     'max'               => isset( $option['max'] ) ? $option['max'] : '',
                     'step'              => isset( $option['step'] ) ? $option['step'] : '',
+                    'disable'            => isset( $option['disable'] ) ? $option['disable'] : FALSE,
                 );
 
                 add_settings_field( "{$section}[{$name}]", $label, $callback, $section, $section, $args );
@@ -244,9 +245,14 @@ class TMA_Settings_API {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
 
-        $html  = '<fieldset>';
-        $html  .= sprintf( '<label for="wpuf-%1$s[%2$s]" class="switch">', $args['section'], $args['id'] );
-        $html  .= sprintf( '<input type="checkbox" class="slider" id="wpuf-%1$s[%2$s]" name="%1$s[%2$s]" value="on" %3$s />', $args['section'], $args['id'], checked( $value, 'on', false ) );
+		$disabled = "";
+		if (isset($args['disable']) && $args['disable']) {
+			$disabled = "disabled";
+		}
+		
+        $html  = '<fieldset ' . $disabled . ' class="overflow_hidden">';
+        $html  .= sprintf( '<label for="wpuf-%1$s[%2$s]" class="switch overflow_hidden">', $args['section'], $args['id'] );
+        $html  .= sprintf( '<input type="checkbox" class="slider overflow_hidden" id="wpuf-%1$s[%2$s]" name="%1$s[%2$s]" value="on" %3$s />', $args['section'], $args['id'], checked( $value, 'on', false ) );
 		$html  .= sprintf( '<span class="slider"></span>');
 		$html  .= sprintf( '</label>');
         $html  .= $this->get_field_description( $args );

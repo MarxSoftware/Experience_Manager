@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-define("TMA_EXPERIENCE_MANAGER_VERSION", "3.0.0");
+define("TMA_EXPERIENCE_MANAGER_VERSION", "3.1.0");
 define("TMA_EXPERIENCE_MANAGER_SEGMENT_MATCHING_ALL", "all");
 define("TMA_EXPERIENCE_MANAGER_SEGMENT_MATCHING_ANY", "any");
 define("TMA_EXPERIENCE_MANAGER_SEGMENT_MATCHING_NONE", "none");
@@ -39,28 +39,15 @@ tma_exm_log("register segment postype");
 
 add_action("init", "tma_webtools_init");
 add_action("rest_api_init", "tma_webtools_rest_init");
-add_action("plugins_loaded", "tma_webtools_plugins_loaded");
+//add_action("plugins_loaded", "tma_webtools_plugins_loaded");
+add_action("init", "tma_webtools_plugins_loaded");
 
 function tma_webtools_plugins_loaded() {
 	tma_exm_log("load editor plugins");
 
-	if (\TMA\ExperienceManager\Plugins::getInstance()->elementor()) {
-		\TMA\ExperienceManager\Elementor_Integration::getInstance();
-		\TMA\ExperienceManager\Elementor_Preview::getInstance();
-		
-//		\TMA\ExperienceManager\ElementorPopupIntegration::getInstance()->init();
-	}
-	if (\TMA\ExperienceManager\Plugins::getInstance()->popup_maker()) {
-		\TMA\ExperienceManager\TMA_PopupMakerIntegration::getInstance()->init();
-	}
-	if (\TMA\ExperienceManager\Plugins::getInstance()->advanced_ads()) {
-		\TMA\ExperienceManager\TMA_AdvancedAdsIntegration::getInstance()->init();
-	}
-	if (\TMA\ExperienceManager\Plugins::getInstance()->gutenberg()) {
-		new \TMA\ExperienceManager\Gutenberg_Integration();
-	}
+	\TMA\ExperienceManager\Modules\Integrations::getInstance()->init();
 
-	require_once 'includes/modules/events/class.ecommerce_events.php';
+//	require_once 'includes/modules/events/class.ecommerce_events.php';
 }
 
 function tma_webtools_rest_init() {

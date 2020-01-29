@@ -3,7 +3,8 @@ Contributors: thmarx
 Tags: digital experience platform, experience manager, targeting, analytics, tracking, product targeting, behaviour targets
 Requires at least: 4.4.1
 Tested up to: 5.3.2
-Stable tag: 3.0.0
+Stable tag: 3.1.0
+Version: 3.1.0
 License: GPLv2 or later
 
 Do not treat all your customers the same, create a digital experience!
@@ -62,6 +63,9 @@ Yes, since version 2 the Experience Manager supports frontend and backend target
 none
 
 == Changelog ==
+
+3.1.0
+ * Add possibility to disable integrations into other plugins
 
 3.0.0
  * Generate unique id for cart tracking
