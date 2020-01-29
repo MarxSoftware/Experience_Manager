@@ -38,6 +38,9 @@ class Plugins {
 	public function elementor() {
 		return in_array('elementor/elementor.php', $this->plugins);
 	}
+	public function divi() {
+		return function_exists("et_setup_theme");
+	}
 
 	public function popup_maker() {
 		return in_array('popup-maker/popup-maker.php', $this->plugins);

@@ -20,6 +20,8 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	// Widgets
 	"TMA\ExperienceManager\TMA_Widget_Targeting" => "includes/widgets/class.widget_targeting.php",
 	
+	// Integrations
+	"TMA\ExperienceManager\Modules\Integrations" => "includes/modules/class.integrations.php",
 	// Popup Maker
 	"TMA\ExperienceManager\TMA_PopupMakerIntegration" => "includes/modules/messages/popup-maker/class.popup-maker.php",
 	// Elementor
@@ -31,6 +33,8 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	"TMA\ExperienceManager\TMA_AdvancedAdsIntegration" => "includes/modules/ads/advanced/class.advanced_ads.php",
 	// Gutenberg
 	"TMA\ExperienceManager\Gutenberg_Integration" => "includes/modules/editors/gutenberg/class.gutenberg_integration.php",
+	// DIVI
+	"TMA\ExperienceManager\Modules\Editors\Divi\DiviBuilder_Integration" => "includes/modules/editors/divi/class.divibuilder_integration.php",
 	
 	// Audience Editor
 	"TMA\ExperienceManager\Segment\SegmentType" => "includes/backend/segment/class.segment-type.php",
