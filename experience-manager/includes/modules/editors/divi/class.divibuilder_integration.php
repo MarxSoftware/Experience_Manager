@@ -39,7 +39,7 @@ class DiviBuilder_Integration extends \TMA\ExperienceManager\Integration {
 
 	public function init() {
 		$this->register_taxonomy();
-		$divi_elements = ["et_pb_section", "et_pb_row"];
+		$divi_elements = ["et_pb_section"];
 
 		$divi_elements = apply_filters("experience-manager/editor/divi/elements", $divi_elements);
 
