@@ -38,6 +38,7 @@ class DiviBuilder_Integration extends \TMA\ExperienceManager\Integration {
 	}
 
 	public function init() {
+		$this->register_taxonomy();
 		$divi_elements = ["et_pb_section", "et_pb_row"];
 
 		$divi_elements = apply_filters("experience-manager/editor/divi/elements", $divi_elements);
@@ -50,6 +51,7 @@ class DiviBuilder_Integration extends \TMA\ExperienceManager\Integration {
 	function exm_divi_config_fields($tag) {
 
 		add_filter("et_pb_all_fields_unprocessed_${tag}", function ($fields_uncompressed) {
+			$segment_options = tma_exm_get_segments_as_array_flat();
 			$fields = [];
 			$fields['exm_targeting'] = [
 				'label' => 'Targeting',
@@ -93,17 +95,16 @@ class DiviBuilder_Integration extends \TMA\ExperienceManager\Integration {
 					"exm_targeting" => "on"
 				]
 			];
-
-			$fields['exm_targeting_audiences'] = [
-				'label' => 'Audiences',
-				'description' => 'Das ist meine Test einstellung',
-				'type' => 'multiple_checkboxes',
-				'option_category' => 'basic_option',
-				'options' => array(
-					'option_1' => 'First Visitor',
-					'option_2' => 'Returning Visitor',
-					'option_3' => 'Regular customer',
-				),
+			$fields['exm_targeting_group_default'] = [
+				'label' => 'Group default',
+				'description' => 'Is the group default!',
+				'type' => 'yes_no_button',
+				'option_category' => 'configuration',
+				'options' => [
+					'off' => "Off",
+					'on' => "On"
+				],
+				"default" => "off",
 				"tab_slug" => "custom_css",
 				"toggle_slug" => "visibility",
 				"show_if" => [
@@ -111,18 +112,99 @@ class DiviBuilder_Integration extends \TMA\ExperienceManager\Integration {
 				]
 			];
 
-
-
+			$fields['exm_targeting_audiences'] = [
+				'label' => 'Audiences',
+				'description' => 'Das ist meine Test einstellung',
+				'type' => 'categories',
+				'option_category' => 'basic_option',
+				'taxonomy_name' => 'exm_segments',
+				"tab_slug" => "custom_css",
+				"toggle_slug" => "visibility",
+				"show_if" => [
+					"exm_targeting" => "on"
+				]
+			];
+//			$fields['checkboxes_category'] = array(
+//				'label' => esc_html__('Checkboxes Audiences', 'tma-webtools'),
+//				'type' => 'categories',
+//				'option_category' => 'basic_option',
+//				'taxonomy_name' => 'exm_segments',
+////				'term_name' => 'exm_segments',
+////				'use_terms' => true,
+//				"tab_slug" => "custom_css",
+//				"toggle_slug" => "visibility",
+//			);
 			return array_merge($fields_uncompressed, $fields);
 		});
 
+		add_filter('get_terms', function($terms, $taxonomies, $args, $term_query) {
+			if (in_array("exm_segments", $taxonomies)) {
+				$segment_options = tma_exm_get_segments_as_array_flat();
+				$exm_terms = [];
+				foreach ($segment_options as $key => $value) {
+					$exm_terms[] = (object) ['term_id' => $key, "name" => $value];
+				}
+				return $exm_terms;
+			} else {
+				return $terms;
+			}
+		}, 10, 4);
+
+
 		add_filter("${tag}_data_attributes", function ($attributes, $properties, $count) {
 			if (array_key_exists('exm_targeting', $properties) && 'on' === $properties['exm_targeting']) {
-				$attributes["tma-personalication"] = "enabled";
-				$attributes["meinAttribute"] = "enabled";
+//				var_dump($properties);
+				$attributes["tma-personalization"] = "enabled";
+				$attributes["tma-matching"] = $properties['exm_targeting_matching'];
+				$attributes["tma-group"] = $properties['exm_targeting_group'];
+				$attributes["tma-default"] = $properties['exm_targeting_group_default'];
+				if (is_array($properties['exm_targeting_audiences'])) {
+					$attributes["tma-segments"] = implode(",", $properties['exm_targeting_audiences']);
+				} else {
+					$attributes["tma-segments"] = $properties['exm_targeting_audiences'];
+				}
 			}
 			return $attributes;
 		}, 10, 3);
+	}
+
+	// Register Custom Taxonomy
+	public function register_taxonomy() {
+
+		$labels = array(
+			'name' => _x('Audiences', 'Taxonomy General Name', 'tma-webtools'),
+			'singular_name' => _x('Audience', 'Taxonomy Singular Name', 'tma-webtools'),
+			'menu_name' => __('Audience', 'tma-webtools'),
+			'all_items' => __('All Items', 'tma-webtools'),
+			'parent_item' => __('Parent Item', 'tma-webtools'),
+			'parent_item_colon' => __('Parent Item:', 'tma-webtools'),
+			'new_item_name' => __('New Item Name', 'tma-webtools'),
+			'add_new_item' => __('Add New Item', 'tma-webtools'),
+			'edit_item' => __('Edit Item', 'tma-webtools'),
+			'update_item' => __('Update Item', 'tma-webtools'),
+			'view_item' => __('View Item', 'tma-webtools'),
+			'separate_items_with_commas' => __('Separate items with commas', 'tma-webtools'),
+			'add_or_remove_items' => __('Add or remove items', 'tma-webtools'),
+			'choose_from_most_used' => __('Choose from the most used', 'tma-webtools'),
+			'popular_items' => __('Popular Items', 'tma-webtools'),
+			'search_items' => __('Search Items', 'tma-webtools'),
+			'not_found' => __('Not Found', 'tma-webtools'),
+			'no_terms' => __('No items', 'tma-webtools'),
+			'items_list' => __('Items list', 'tma-webtools'),
+			'items_list_navigation' => __('Items list navigation', 'tma-webtools'),
+		);
+		$args = array(
+			'labels' => $labels,
+			'hierarchical' => false,
+			'public' => false,
+			'show_ui' => false,
+			'show_admin_column' => false,
+			'show_in_nav_menus' => false,
+			'show_tagcloud' => false,
+			'rewrite' => false,
+			'show_in_rest' => false,
+		);
+		register_taxonomy('exm_segments', array(''), $args);
 	}
 
 }
