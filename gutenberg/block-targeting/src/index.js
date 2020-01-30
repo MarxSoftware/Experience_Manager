@@ -25,12 +25,12 @@ import "./style.scss";
  * @return {Object} Filtered block settings.
  */
 function addAttributes(settings) {
-  //console.log("addAttributes");
-  // Use Lodash's assign to gracefully handle if attributes are undefined
-  settings.attributes = assign(settings.attributes, targetingSettings);
-  //settings.attributes = assign(settings.attributes, { "data-attribute": ['tma_personalization', 'tma_matching', 'tma_group', 'tma_default', 'tma_segments'] });
-  //console.log(settings);
-  return settings;
+	//console.log("addAttributes");
+	// Use Lodash's assign to gracefully handle if attributes are undefined
+	settings.attributes = assign(settings.attributes, targetingSettings);
+	//settings.attributes = assign(settings.attributes, { "data-attribute": ['tma_personalization', 'tma_matching', 'tma_group', 'tma_default', 'tma_segments'] });
+	//console.log(settings);
+	return settings;
 }
 
 /**
@@ -41,34 +41,16 @@ function addAttributes(settings) {
  * @return {string} Wrapped component.
  */
 const withInspectorControl = createHigherOrderComponent(BlockEdit => {
-  //console.log("withInspectorControl");
-  return props => {
-    return (
-      <Fragment>
-        {props.isSelected && <Inspector {...{ ...props }} />}
-        <BlockEdit {...props} />
-      </Fragment>
-    );
-  };
+	//console.log("withInspectorControl");
+	return props => {
+		return (
+			<Fragment>
+				{props.isSelected && <Inspector {...{ ...props }} />}
+				<BlockEdit {...props} />
+			</Fragment>
+		);
+	};
 }, "withInspectorControl");
-
-/**
- * Override the default block element to add background wrapper props.
- *
- * @param  {Function} BlockListBlock Original component
- * @return {Function}                Wrapped component
- */
-const withBackground = createHigherOrderComponent(BlockListBlock => {
-  //console.log('withBackground');
-  return props => {
-    let wrapperProps = props.wrapperProps;
-    wrapperProps = {
-      ...wrapperProps
-    };
-
-    return <BlockListBlock {...props} wrapperProps={wrapperProps} />;
-  };
-}, "withBackground");
 
 /**
  * Override props assigned to save component to inject background atttributes
@@ -80,85 +62,48 @@ const withBackground = createHigherOrderComponent(BlockListBlock => {
  * @return {Object} Filtered props applied to save element.
  */
 function addBackground(extraProps, blockType, attributes) {
-  //console.log("addBackground");
-  //extraProps.style = getStyle(attributes);
-  const { tma_personalization, tma_matching, tma_group, tma_default, tma_segments } = attributes;
-  var settings = {};
-  if (tma_personalization) {
-    settings['data-tma-personalization'] = tma_personalization ? "enabled" : "disabled";
-    settings['data-tma-matching'] = tma_matching;
-    settings['data-tma-group'] = tma_group;
-    settings['data-tma-default'] = tma_default ? "yes" : "no";
-    if (Array.isArray(tma_segments)) {
-      settings['data-tma-segments'] = tma_segments.join(",");
-    } else {
-      settings['data-tma-segments'] = [];
-    }
-    if (!tma_default) {
-      settings['class'] = "tma-hide";
-    }
+	//console.log("addBackground");
+	//extraProps.style = getStyle(attributes);
+	const {
+		tma_personalization,
+		tma_matching,
+		tma_group,
+		tma_default,
+		tma_segments
+	} = attributes;
+	var settings = {};
+	if (tma_personalization) {
+		settings["data-tma-personalization"] = tma_personalization
+			? "enabled"
+			: "disabled";
+		settings["data-tma-matching"] = tma_matching;
+		settings["data-tma-group"] = tma_group;
+		settings["data-tma-default"] = tma_default ? "yes" : "no";
+		if (Array.isArray(tma_segments)) {
+			settings["data-tma-segments"] = tma_segments.join(",");
+		} else {
+			settings["data-tma-segments"] = [];
+		}
+		if (!tma_default) {
+			settings["className"] =
+				"tma-hide " +
+				(extraProps["className"] !== undefined ? extraProps["className"] : "");
+		}
 
-    assign(extraProps, settings);
-  }
+		assign(extraProps, settings);
 
+		console.log(extraProps);
+	}
 
-  return extraProps;
+	return extraProps;
 }
 
-function addAssignedBackgroundSettings(elem, blockType, attr) {
-  //console.log("addAssignedBackgroundSettings");
-  //console.log(elem);
-  //console.log(attr);
-  //extraProps.style = getStyle(attributes);
-  /*
-  const { tma_personalization, tma_matching, tma_group, tma_default, tma_segments } = attributes;
-  var settings = {};
-  settings['data-tma-personalization'] = tma_personalization ? "enabled" : "disabled";
-  settings['data-tma-matching'] = tma_matching;
-  settings['data-tma-group'] = tma_group;
-  settings['data-tma-default'] = tma_default ? "yes" : "no";
-  if (Array.isArray(tma_segments)) {
-    settings['data-tma-segments'] = tma_segments.join(",");
-  } else {
-    settings['data-tma-segments'] = [];
-  }
-  if (!tma_default) {
-    settings['class'] = "tma-hide";
-  }
+addFilter("blocks.registerBlockType", "tma/targeting/attribute", addAttributes);
 
-  assign(extraProps, settings);
-*/
-  return elem;
-}
+addFilter("editor.BlockEdit", "tma/targeting/inspector", withInspectorControl);
 
 addFilter(
-  "blocks.registerBlockType",
-  "tma/targeting/attribute",
-  addAttributes
+	"blocks.getSaveContent.extraProps",
+	"lubus/background/addAssignedBackground",
+	addBackground
 );
-
-addFilter(
-  "editor.BlockEdit",
-  "tma/targeting/inspector",
-  withInspectorControl
-);
-/*
-addFilter(
-  "editor.BlockListBlock",
-  "tma/targeting/withBackground",
-  withBackground
-);
-*/
-addFilter(
-  "blocks.getSaveContent.extraProps",
-  "lubus/background/addAssignedBackground",
-  addBackground
-);
-
-/*
-addFilter(
-  "blocks.getSaveElement",
-  "tma/targeting/addAssignedBackgroundSettings",
-  addAssignedBackgroundSettings
-);
-*/

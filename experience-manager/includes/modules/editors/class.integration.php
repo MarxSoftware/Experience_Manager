@@ -18,51 +18,6 @@ abstract class Integration {
 		}
 	}
 
-	protected function is_visible($settings) {
-		$visible = TRUE;
-//		var_dump($settings);
-		// frontend
-		if (!$this->isActivated($settings)) {
-			return true;
-		}
-//		var_dump($settings);
-		$group = $this->getGroup($settings);
-		if (!$this->matching($settings)) {
-			// segmentation activated AND not matching AND not group default OR group content already added
-			if ($this->isGroupDefault($settings) && $this->contentAdded($group)) {
-				$visible = FALSE;
-			} else if (!$this->isGroupDefault($settings)) {
-				$visible = FALSE;
-			}
-		} else if ($this->singleItemPerGroup() && $this->contentAdded($group)) {
-			// segmentation activated & only single item per group & group content already added
-			$visible = FALSE;
-		}
-		if ($visible) {
-			$this->addGroupContent($group);
-		}
-		
-
-		$visible = apply_filters("experience-manager/modules/editors/visible", $visible, $settings);
-		
-		return $visible;
-	}
-
-	protected function singleItemPerGroup() {
-		return $this->onlySingleItemPerGroup === true;
-	}
-
-	protected function addGroupContent($group) {
-		$_REQUEST["tmagroup_" . $group] = true;
-	}
-
-	protected function contentAdded($group) {
-		if (array_key_exists("tmagroup_".$group, $_REQUEST)) {
-			return filter_var($_REQUEST["tmagroup_" . $group], FILTER_VALIDATE_BOOLEAN);
-		}
-		return false;
-	}
-	
 	protected function isActivated($args) {
 		return (is_array($args) 
 		&& !empty($args['tma_personalization']) 
@@ -126,13 +81,10 @@ abstract class Integration {
 //		$segments = array_map('trim', $segments);
 		$attr_segments = array_map('trim', $attr_segments);
 		if ($matching_mode === ShortCode_TMA_CONTENT::$match_mode_all) {
-//			$matching = ShortCode_TMA_CONTENT::matching_mode_all(ShortCode_TMA_CONTENT::array_flat($segments), $attr_segments);
 			$matching = tma_exm_array_match_all($attr_segments, $segments);
 		} else if ($matching_mode === ShortCode_TMA_CONTENT::$match_mode_any) {
-//			$matching = ShortCode_TMA_CONTENT::matching_mode_any(ShortCode_TMA_CONTENT::array_flat($segments), $attr_segments);
 			$matching = tma_exm_array_match_any($attr_segments, $segments);
 		} else if ($matching_mode === ShortCode_TMA_CONTENT::$match_mode_none) {
-//			$matching = !ShortCode_TMA_CONTENT::matching_mode_any(ShortCode_TMA_CONTENT::array_flat($segments), $attr_segments);
 			$matching = !tma_exm_array_match_all($attr_segments, $segments);
 		}
 

@@ -39,6 +39,8 @@ class DiviBuilder_Integration extends \TMA\ExperienceManager\Integration {
 
 	public function init() {
 		$this->register_taxonomy();
+		$this->register_get_terms();
+
 		$divi_elements = ["et_pb_section"];
 
 		$divi_elements = apply_filters("experience-manager/editor/divi/elements", $divi_elements);
@@ -46,6 +48,21 @@ class DiviBuilder_Integration extends \TMA\ExperienceManager\Integration {
 		foreach ($divi_elements as $element) {
 			$this->exm_divi_config_fields($element);
 		}
+	}
+
+	function register_get_terms() {
+		add_filter('get_terms', function($terms, $taxonomies, $args, $term_query) {
+			if (in_array("exm_segments", $taxonomies)) {
+				$segment_options = tma_exm_get_segments_as_array_flat();
+				$exm_terms = [];
+				foreach ($segment_options as $key => $value) {
+					$exm_terms[] = (object) ['term_id' => $key, "name" => $value];
+				}
+				return $exm_terms;
+			} else {
+				return $terms;
+			}
+		}, 1, 4);
 	}
 
 	function exm_divi_config_fields($tag) {
@@ -124,32 +141,8 @@ class DiviBuilder_Integration extends \TMA\ExperienceManager\Integration {
 					"exm_targeting" => "on"
 				]
 			];
-//			$fields['checkboxes_category'] = array(
-//				'label' => esc_html__('Checkboxes Audiences', 'tma-webtools'),
-//				'type' => 'categories',
-//				'option_category' => 'basic_option',
-//				'taxonomy_name' => 'exm_segments',
-////				'term_name' => 'exm_segments',
-////				'use_terms' => true,
-//				"tab_slug" => "custom_css",
-//				"toggle_slug" => "visibility",
-//			);
 			return array_merge($fields_uncompressed, $fields);
 		});
-
-		add_filter('get_terms', function($terms, $taxonomies, $args, $term_query) {
-			if (in_array("exm_segments", $taxonomies)) {
-				$segment_options = tma_exm_get_segments_as_array_flat();
-				$exm_terms = [];
-				foreach ($segment_options as $key => $value) {
-					$exm_terms[] = (object) ['term_id' => $key, "name" => $value];
-				}
-				return $exm_terms;
-			} else {
-				return $terms;
-			}
-		}, 10, 4);
-
 
 		add_filter("${tag}_data_attributes", function ($attributes, $properties, $count) {
 			if (array_key_exists('exm_targeting', $properties) && 'on' === $properties['exm_targeting']) {

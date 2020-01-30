@@ -55,12 +55,8 @@ class Elementor_Integration extends Integration {
 			$attrs["data-tma-segments"] = $settings['tma_segment'];
 		}
 		if (!$in_edit) {
-			if (tma_exm_is_frontend_mode_enabled() && Elementor_Integration::_isActivated($settings)) {
+			if (Elementor_Integration::_isActivated($settings)) {
 				if ($settings['tma_default'] === "no") {
-					$attrs["class"] = 'tma-hide';
-				}
-			} else {
-				if ($this->is_widget_visible($element) === FALSE) {
 					$attrs["class"] = 'tma-hide';
 				}
 			}
@@ -99,22 +95,6 @@ class Elementor_Integration extends Integration {
 
 	function isActivated($args) {
 		return Elementor_Integration::_isActivated($args);
-	}
-
-	protected function isGroupDefault($args) {
-		return (is_array($args) && !empty($args['tma_default']) && $args['tma_default'] === "yes");
-	}
-
-	function is_widget_visible($widget) {
-		$visible = TRUE;
-		$args = $widget->get_settings();
-//		var_dump($args);
-		if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
-			$visible = TRUE;
-		} else {
-			$visible = $this->is_visible($args);
-		}
-		return $visible;
 	}
 
 	function addControls($section, $section_id, $args) {
@@ -197,5 +177,3 @@ class Elementor_Integration extends Integration {
 	}
 
 }
-
-//$tma_elementor_integration = new Elementor_Integration();
