@@ -66,6 +66,9 @@ none
 
 3.1.0
  * Add possibility to disable integrations into other plugins
+	Attention: By default all integrations are disabled and must be activated first.
+ * Support for the DIVI PageBuilder was added
+ * Gutenberg class name issue fixed
 
 3.0.0
  * Generate unique id for cart tracking

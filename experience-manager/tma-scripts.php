@@ -25,9 +25,9 @@ function exm_enqueue_script () {
 		 * vielleicht, weil wir so 
 		 */
 		if (tma_exm_is_frontend_mode_enabled() /*&& !is_user_logged_in()*/) {
-			wp_enqueue_script('experience-manager-frontend', TMA_EXPERIENCE_MANAGER_URL . 'js/experience-manager-frontend.js', array("jquery", "webtools-frontend"), "1");
+			wp_enqueue_script('experience-manager-frontend', TMA_EXPERIENCE_MANAGER_URL . 'js/experience-manager-frontend.js', array("jquery", "webtools-frontend", "experience-manager-hooks"), "1");
 		} else if (/*!is_user_logged_in() && */function_exists("has_blocks") && has_blocks()) {
-			wp_enqueue_script('experience-manager-frontend', TMA_EXPERIENCE_MANAGER_URL . 'js/experience-manager-frontend.js', array("jquery", "webtools-frontend"), "1");
+			wp_enqueue_script('experience-manager-frontend', TMA_EXPERIENCE_MANAGER_URL . 'js/experience-manager-frontend.js', array("jquery", "webtools-frontend", "experience-manager-hooks"), "1");
 		}
 	}
 }

@@ -29,3 +29,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .tma-hide {
 	display: none;
 }
+[data-tma-divi-default="no"] {
+	display: none;
+}

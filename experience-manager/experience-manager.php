@@ -60,12 +60,14 @@ function tma_webtools_init() {
 	do_action("experience-manager/init/before");
 	
 	tma_exm_log("tma_webtools_init");
-	wp_register_style('experience-manager', plugins_url('css/experience-manager.css', __FILE__));
-	wp_enqueue_style('experience-manager');
-	// has to be global
-	// Settings
-//	require_once 'includes/frontend/class.tma_script_helper.php';
-	//require_once 'includes/frontend/class.shortcode_tma_content.php';
+	if (!is_admin()) {
+		wp_register_style('experience-manager', plugins_url('css/experience-manager.css', __FILE__));
+		wp_enqueue_style('experience-manager');
+		
+		wp_register_script("experience-manager-hooks", plugins_url('assets/hook.js', __FILE__), [], "1.0.0", false);
+//		wp_enqueue_script("experience-manager-hooks", plugins_url('assets/hook.js', __FILE__), [], "1.0.0", false);
+	}
+	
 	require_once 'includes/frontend/template_tags.php';
 
 	// IS not stored

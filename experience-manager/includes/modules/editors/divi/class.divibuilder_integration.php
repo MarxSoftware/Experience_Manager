@@ -48,6 +48,12 @@ class DiviBuilder_Integration extends \TMA\ExperienceManager\Integration {
 		foreach ($divi_elements as $element) {
 			$this->exm_divi_config_fields($element);
 		}
+		
+		add_filter( 'wp_enqueue_scripts', [$this, "init_frontent_scripts"], 0 );
+	}
+	
+	function init_frontent_scripts () {
+		wp_enqueue_script('experience-manager-divi', TMA_EXPERIENCE_MANAGER_URL . 'assets/divi/experience-manager-divi.js', array("experience-manager-hooks"), "1");
 	}
 
 	function register_get_terms() {
@@ -72,7 +78,7 @@ class DiviBuilder_Integration extends \TMA\ExperienceManager\Integration {
 			$fields = [];
 			$fields['exm_targeting'] = [
 				'label' => 'Targeting',
-				'description' => 'Enable targeting',
+				'description' => __('If enabled, the content will only be visible to users matching the selected segments.', 'tma-webtools'),
 				'type' => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options' => [
@@ -85,7 +91,7 @@ class DiviBuilder_Integration extends \TMA\ExperienceManager\Integration {
 			];
 			$fields['exm_targeting_matching'] = [
 				'label' => 'Matching mode',
-				'description' => 'matching mode',
+				'description' => __('User must match all or just a single segment.', 'tma-webtools'),
 				'type' => 'select',
 				'option_category' => 'basic_option',
 				'default' => 'all',
@@ -102,7 +108,7 @@ class DiviBuilder_Integration extends \TMA\ExperienceManager\Integration {
 			];
 			$fields['exm_targeting_group'] = [
 				'label' => 'Group',
-				'description' => 'Targeting group',
+				'description' => __('The name of the group. Groups can be used to group elements together', 'tma-webtools'),
 				'type' => 'text',
 				'option_category' => 'basic_option',
 				"default" => "default",
@@ -114,7 +120,7 @@ class DiviBuilder_Integration extends \TMA\ExperienceManager\Integration {
 			];
 			$fields['exm_targeting_group_default'] = [
 				'label' => 'Group default',
-				'description' => 'Is the group default!',
+				'description' => __('Is group default element. The default is used if not other element of the groups matchs the user. The default element must be the last element on the page.', 'tma-webtools'),
 				'type' => 'yes_no_button',
 				'option_category' => 'configuration',
 				'options' => [
@@ -131,7 +137,7 @@ class DiviBuilder_Integration extends \TMA\ExperienceManager\Integration {
 
 			$fields['exm_targeting_audiences'] = [
 				'label' => 'Audiences',
-				'description' => 'Das ist meine Test einstellung',
+				"description" => __("For which audiences the content should be visible.", "tma-webtools"),
 				'type' => 'categories',
 				'option_category' => 'basic_option',
 				'taxonomy_name' => 'exm_segments',
@@ -150,7 +156,8 @@ class DiviBuilder_Integration extends \TMA\ExperienceManager\Integration {
 				$attributes["tma-personalization"] = "enabled";
 				$attributes["tma-matching"] = $properties['exm_targeting_matching'];
 				$attributes["tma-group"] = $properties['exm_targeting_group'];
-				$attributes["tma-default"] = $properties['exm_targeting_group_default'];
+				$attributes["tma-default"] = $properties['exm_targeting_group_default'] === "on" ? "yes" : "no";
+				$attributes["tma-divi-default"] = $properties['exm_targeting_group_default'] === "on" ? "yes" : "no";
 				if (is_array($properties['exm_targeting_audiences'])) {
 					$attributes["tma-segments"] = implode(",", $properties['exm_targeting_audiences']);
 				} else {
