@@ -2,6 +2,7 @@ target/
 build/
 nbproject/
 gutenberg/block-targeting/node_modules
+gutenberg/targeting/node_modules
 environment/plugins
 query-editor/node_modules
 /node_modules

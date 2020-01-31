@@ -26,7 +26,7 @@ class Gutenberg_Integration {
 	 */
 	public function __construct() {
 
-		add_action( 'enqueue_block_editor_assets', array( $this, 'register_block_assets' ) );
+		add_action('enqueue_block_editor_assets', array($this, 'register_block_assets'));
 	}
 
 	/**
@@ -38,38 +38,17 @@ class Gutenberg_Integration {
 	 * @return void
 	 */
 	public function register_block_assets() {
-		$block_js = 'assets/gutenberg/script.js';
-		$block_css = 'assets/gutenberg/style.css';
-
+		$block_js = 'assets/gutenberg/index.js';
 		// Script
 		wp_register_script(
 				'targeting-block-js',
 				TMA_EXPERIENCE_MANAGER_URL . $block_js,
 				array(
-					'wp-i18n',
-					'wp-blocks',
-					'wp-components',
-					'wp-hooks',
-					'wp-element',
-					'wp-editor'
+					'lodash', 'wp-components', 'wp-compose', 'wp-editor', 'wp-element', 'wp-hooks', 'wp-i18n', 'wp-polyfill'
 				),
 				filemtime(TMA_EXPERIENCE_MANAGER_DIR . $block_js)
 		);
-
-		// Common stlyes
-		wp_register_style(
-				'targeting-block-style',
-				TMA_EXPERIENCE_MANAGER_URL . $block_css,
-				array(
-					'wp-blocks',
-				),
-				filemtime(TMA_EXPERIENCE_MANAGER_DIR . $block_css)
-		);
-
-		wp_enqueue_style('targeting-block-style');
 		wp_enqueue_script('targeting-block-js');
 	}
 
 }
-
-//$tma_elementor_integration = new Elementor_Integration();
