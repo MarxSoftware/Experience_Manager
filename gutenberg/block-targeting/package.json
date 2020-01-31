@@ -55,6 +55,7 @@
     "raw-loader": "^0.5.1",
     "sass-loader": "^6.0.7",
     "webpack": "^3.12.0",
-    "webpack-rtl-plugin": "^1.8.2"
+    "webpack-rtl-plugin": "^1.8.2",
+    "mem": ">=4.0.0"
   }
 }
