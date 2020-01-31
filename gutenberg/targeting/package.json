@@ -1,5 +1,5 @@
 {
-	"name": "01-basic-esnext",
+	"name": "targeting",
 	"version": "1.1.0",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
