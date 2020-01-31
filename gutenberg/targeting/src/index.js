@@ -34,7 +34,7 @@ function addAttributes(settings) {
 
 /**
  * Override the default edit UI to include a new block inspector control for
- * background settings.
+ * targeting settings.
  *
  * @param {function|Component} BlockEdit Original component.
  * @return {string} Wrapped component.
@@ -52,7 +52,7 @@ const withInspectorControl = createHigherOrderComponent(BlockEdit => {
 }, "withInspectorControl");
 
 /**
- * Override props assigned to save component to inject background atttributes
+ * Override props assigned to save component to inject targeting atttributes
  *
  * @param {Object} extraProps Additional props applied to save element.
  * @param {Object} blockType  Block type.
@@ -91,7 +91,7 @@ function addTargetingAttributes(extraProps, blockType, attributes) {
 
 		assign(extraProps, settings);
 
-		console.log(extraProps);
+		//console.log(extraProps);
 	}
 
 	return extraProps;
