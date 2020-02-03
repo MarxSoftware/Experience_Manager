@@ -4,7 +4,7 @@
   Plugin URI: https://wp-digitalexperience.com/experience-manager/
   Description: The integration for the experience platform.
   Author: Thorsten Marx
-  Version: 3.0.0
+  Version: 3.1.0
   Author URI: https://wp-digitalexperience.com/
   Text Domain: tma-webtools
   Domain Path: /languages
