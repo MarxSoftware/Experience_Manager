@@ -125,12 +125,14 @@ class TMA_Settings {
 					'desc' => __("Activate tracking of logged in users.", "tma-webtools"),
 					'type' => 'toggle'
 				),
+				/*
 				array(
 					'name' => 'webtools_score',
 					'label' => __("Enable Scoring?", "tma-webtools"),
 					'desc' => __("If enabled, you can user the scoring metabox to set scorings for all your post types.", "tma-webtools"),
 					'type' => 'toggle'
 				)
+				 */
 			),
 //			'tma_webtools_option_targeting' => array(
 //				/*
