@@ -22,6 +22,7 @@ Features:
 * Segment simulator in the preview
 * Support for [Elementor Page Builder](https://elementor.com/)
 * Support For [Gutenberg](https://wordpress.org/gutenberg/)
+* Support For [Divi](https://www.elegantthemes.com/gallery/divi/)
 * Template-Tag to check if a user match a specific segment ( e.q. tma_exm_is_in_segment("a_segment_id"))
 * Support for Cache Plugins
 * Support for [Popup Maker](https://wppopupmaker.com/)
