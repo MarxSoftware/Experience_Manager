@@ -49,5 +49,5 @@ add_action('wp_enqueue_scripts', function () {
 		wp_enqueue_script('tma-beaver-audiences', TMA_EXPERIENCE_MANAGER_URL . 'assets/beaver/audiences.js', array("fl-builder-min", "tma-webtools-backend"), "1");
 	}
 	
-	wp_enqueue_style('tma-beaver-audiences', TMA_EXPERIENCE_MANAGER_URL . 'assets/beaver.css', array(), "1");
+	wp_enqueue_style('tma-beaver-audiences', TMA_EXPERIENCE_MANAGER_URL . 'assets/beaver/beaver.css', array(), "1");
 });

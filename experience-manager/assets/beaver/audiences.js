@@ -76,9 +76,11 @@
 			$(".tma-hide").removeClass("tma-hide");
 			if (this.previewActive) {
 				var selectedSegments = this.selectedSegments();
-				console.log(selectedSegments);
+				//webtools.Frontend.update(selectedSegments);
 
-				webtools.Frontend.update(selectedSegments);
+				
+				let flat_segments = selectedSegments.map(segment => "" + segment);
+				webtools.Frontend.update(flat_segments);
 			}
 		},
 		selectedSegments: function () {

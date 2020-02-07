@@ -48,7 +48,7 @@ class Integrations {
 
 		if (\TMA\ExperienceManager\Plugins::getInstance()->beaver() && $this->shouldInit("editors_beaver")) {
 			new \TMA\ExperienceManager\Beaver\BeaverBuilder_Integration();
-			//\TMA\ExperienceManager\Beaver\BeaverBuilder_Preview::getInstance()->init();
+			\TMA\ExperienceManager\Beaver\BeaverBuilder_Preview::getInstance()->init();
 		}
 
 
