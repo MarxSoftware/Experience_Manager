@@ -68,9 +68,9 @@
 			<b>rule(PAGEVIEW)</b>
 			<br />
 			<span class="subheadline">Examples</span><br/>
-			<span>User has visited the homepage: </span><b>.rule(PAGEVIEW).page('page#home').count(1)</b>
+			<span>User has visited the homepage: </span><b>.rule(PAGEVIEW).page('the id').type('page').count(1)</b>
 			<br />
-			<span>User has visited a product page: </span><b>.rule(PAGEVIEW).page('product#home').count(1)</b>
+			<span>User has visited a product page: </span><b>.rule(PAGEVIEW).page('the id').type('product').count(1)</b>
 		</p>
 		<p>
 			<span class="headline">EVENT</span>

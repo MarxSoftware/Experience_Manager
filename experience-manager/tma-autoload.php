@@ -35,6 +35,9 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	"TMA\ExperienceManager\Gutenberg_Integration" => "includes/modules/editors/gutenberg/class.gutenberg_integration.php",
 	// DIVI
 	"TMA\ExperienceManager\Modules\Editors\Divi\DiviBuilder_Integration" => "includes/modules/editors/divi/class.divibuilder_integration.php",
+	// Beaver Builder
+	"TMA\ExperienceManager\Beaver\BeaverBuilder_Integration" => "includes/modules/editors/beaver/class.beaverbuilder_integration.php",
+	"TMA\ExperienceManager\Beaver\BeaverBuilder_Preview" => "includes/modules/editors/beaver/class.beaverbuilder.preview.php",
 	
 	// Audience Editor
 	"TMA\ExperienceManager\Segment\SegmentType" => "includes/backend/segment/class.segment-type.php",

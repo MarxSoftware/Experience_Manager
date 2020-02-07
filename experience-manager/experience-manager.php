@@ -39,15 +39,17 @@ tma_exm_log("register segment postype");
 
 add_action("init", "tma_webtools_init");
 add_action("rest_api_init", "tma_webtools_rest_init");
-//add_action("plugins_loaded", "tma_webtools_plugins_loaded");
-add_action("init", "tma_webtools_plugins_loaded");
+add_action("plugins_loaded", "tma_webtools_plugins_loaded");
+add_action("init", "tma_webtools_theme_loaded");
+
+function tma_webtools_theme_loaded() {
+	tma_exm_log("init - integrations");
+	\TMA\ExperienceManager\Modules\Integrations::getInstance()->theme_init();
+}
 
 function tma_webtools_plugins_loaded() {
-	tma_exm_log("load editor plugins");
-
+	tma_exm_log("plugins loaded - integrations");
 	\TMA\ExperienceManager\Modules\Integrations::getInstance()->init();
-
-//	require_once 'includes/modules/events/class.ecommerce_events.php';
 }
 
 function tma_webtools_rest_init() {

@@ -49,6 +49,10 @@ class Plugins {
 	public function advanced_ads() {
 		return in_array('advanced-ads/advanced-ads.php', $this->plugins);
 	}
+	
+	public function beaver() {
+		return class_exists('FLBuilder');
+	}
 
 	public function gutenberg() {
 		//if (function_exists('is_gutenberg_page') && is_gutenberg_page()) {

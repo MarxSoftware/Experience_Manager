@@ -26,11 +26,13 @@ class Integrations {
 	 */
 	protected function __construct() {
 		$this->options = get_option('tma-webtools-Integrations');
-
+	}
+	
+	public function theme_init () {
 		add_filter('experience-manager/settings/fields', [$this, 'intregrations_settings']);
 		add_filter('experience-manager/settings/sections', [$this, 'integrations_sections']);
 	}
-
+	
 	public function init() {
 		if (\TMA\ExperienceManager\Plugins::getInstance()->elementor() && $this->shouldInit("editors_elementor")) {
 			\TMA\ExperienceManager\Elementor_Integration::getInstance();
@@ -43,9 +45,13 @@ class Integrations {
 		if (\TMA\ExperienceManager\Plugins::getInstance()->divi() && $this->shouldInit("editors_divi")) {
 			\TMA\ExperienceManager\Modules\Editors\Divi\DiviBuilder_Integration::getInstance()->init();
 		}
-		
-		
-		
+
+		if (\TMA\ExperienceManager\Plugins::getInstance()->beaver() && $this->shouldInit("editors_beaver")) {
+			new \TMA\ExperienceManager\Beaver\BeaverBuilder_Integration();
+			//\TMA\ExperienceManager\Beaver\BeaverBuilder_Preview::getInstance()->init();
+		}
+
+
 		if (\TMA\ExperienceManager\Plugins::getInstance()->popup_maker() && $this->shouldInit("messaging_popupmaker")) {
 			\TMA\ExperienceManager\TMA_PopupMakerIntegration::getInstance()->init();
 		}
@@ -93,6 +99,14 @@ class Integrations {
 				'label' => __("Enable DIVI integration?", "tma-webtools"),
 				'desc' => __("Enable targeting in the DIVI page builder", "tma-webtools"),
 				'disable' => !\TMA\ExperienceManager\Plugins::getInstance()->divi(),
+				'type' => 'toggle',
+				'default' => ''
+			),
+			array(
+				'name' => 'editors_beaver',
+				'label' => __("Enable Beaver integration?", "tma-webtools"),
+				'desc' => __("Enable targeting in the Beaver page builder", "tma-webtools"),
+				'disable' => !\TMA\ExperienceManager\Plugins::getInstance()->beaver(),
 				'type' => 'toggle',
 				'default' => ''
 			),

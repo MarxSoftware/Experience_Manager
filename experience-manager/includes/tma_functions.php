@@ -147,13 +147,18 @@ function tma_exm_is_elementor_preview() {
 function tma_exm_is_elementor_active() {
 	return \TMA\ExperienceManager\Plugins::getInstance()->elementor() && (\Elementor\Plugin::$instance->editor->is_edit_mode() || \Elementor\Plugin::$instance->preview->is_preview_mode());
 }
-
+function tma_exm_beaver_is_preview() {
+	return \TMA\ExperienceManager\Plugins::getInstance()->beaver() && \FLBuilderModel::is_builder_active();
+}
 function tma_exm_is_editor_active() {
 	if (isset($_GET['action']) && ($_GET['action'] === 'edit')) { // || $_GET['action'] === 'elementor')
 		tma_exm_log("editor is active gutenberg");
 		return true;
 	} else if (tma_exm_is_elementor_active()) {
 		tma_exm_log("editor is active elementor");
+		return true;
+	} else if (tma_exm_beaver_is_preview()) {
+		tma_exm_log("editor is active beaver");
 		return true;
 	}
 

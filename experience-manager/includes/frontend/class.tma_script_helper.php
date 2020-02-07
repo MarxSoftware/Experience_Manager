@@ -106,9 +106,9 @@ class TMAScriptHelper {
 			/* if (is_home()) {
 			  $output .= 'webtools.Tracking.init("' . $this->getWebTools_Url() . '", "' . $siteid . '", "/");';
 			  } else */if (!is_404()) {
-				$output .= 'webtools.Tracking.init("' . $this->getWebTools_Url() . '", "' . $siteid . '", "' . (get_post()->post_type . '%23' . get_post()->post_name) . '");';
+				$output .= 'webtools.Tracking.init("' . $this->getWebTools_Url() . '", "' . $siteid . '", "' . get_post()->ID  . '", "' . get_post()->post_type . '");';
 			} else {
-				$output .= 'webtools.Tracking.init("' . $this->getWebTools_Url() . '", "' . $siteid . '", "404");';
+				$output .= 'webtools.Tracking.init("' . $this->getWebTools_Url() . '", "' . $siteid . '", "404", "error");';
 			}
 			if ($cookieDomain !== FALSE) {
 				$output .= 'webtools.Tracking.setCookieDomain("' . $cookieDomain . '");';

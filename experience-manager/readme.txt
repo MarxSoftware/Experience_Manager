@@ -65,6 +65,10 @@ none
 
 == Changelog ==
 
+3.2.0
+ * Update to new trackig api
+Important: This version needs at least version 4.2.0 of the Experience Platform to run correctly!
+
 3.1.0
  * Add possibility to disable integrations into other plugins
 	Attention: By default all integrations are disabled and must be activated first.
