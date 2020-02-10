@@ -39,7 +39,7 @@ class Plugins {
 		return in_array('elementor/elementor.php', $this->plugins);
 	}
 	public function divi() {
-		return function_exists("et_setup_theme");
+		return function_exists("et_setup_theme") || class_exists("ET_Builder_Plugin");
 	}
 
 	public function popup_maker() {
