@@ -3,8 +3,8 @@ Contributors: thmarx
 Tags: digital experience platform, experience manager, targeting, analytics, tracking, product targeting, behaviour targets
 Requires at least: 4.4.1
 Tested up to: 5.3.2
-Stable tag: 3.1.0
-Version: 3.1.0
+Stable tag: 3.2.0
+Version: 3.2.0
 License: GPLv2 or later
 
 Do not treat all your customers the same, create a digital experience!
@@ -16,13 +16,13 @@ This plugin is an integration for the Experience Platform an opensource event an
 Features:
 
 * Tracking of user events
-* Scoring for user behaviour
 * User segmentation
 * Content targeting via shortcodes fro classic editor
 * Segment simulator in the preview
 * Support for [Elementor Page Builder](https://elementor.com/)
-* Support For [Gutenberg](https://wordpress.org/gutenberg/)
-* Support For [Divi](https://www.elegantthemes.com/gallery/divi/)
+* Support for [Gutenberg](https://wordpress.org/gutenberg/)
+* Support for [Divi](https://www.elegantthemes.com/gallery/divi/)
+* Support for [Beaver](https://www.wpbeaverbuilder.com/)
 * Template-Tag to check if a user match a specific segment ( e.q. tma_exm_is_in_segment("a_segment_id"))
 * Support for Cache Plugins
 * Support for [Popup Maker](https://wppopupmaker.com/)
@@ -66,7 +66,8 @@ none
 == Changelog ==
 
 3.2.0
- * Update to new trackig api
+ * Update to new tracking api
+ * Add Integration for the Beaver Builder
 Important: This version needs at least version 4.2.0 of the Experience Platform to run correctly!
 
 3.1.0
