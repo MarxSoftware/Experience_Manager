@@ -48,7 +48,7 @@ class TMA_Request {
 	/**
 	 * setup the request object and return
 	 */
-	public function get($url, $parameters = [], $headers = ['Content-Type' => 'text/plain', 'Accept' => 'application/json']) {
+	public function get($url, $parameters = NULL, $headers = ['Content-Type' => 'text/plain', 'Accept' => 'application/json']) {
 
 		if (!isset($this->options["webtools_apikey"]) || !isset($this->options['webtools_url'])) {
 			return FALSE;
@@ -65,6 +65,7 @@ class TMA_Request {
 //		$parameters['headers']['Content-Type'] = "application/json";
 //		$parameters['headers']['Content-Type'] = "text/plain";
 		$parameters['headers']['apikey'] = $this->options["webtools_apikey"];
+		$parameters['headers']['site'] = tma_exm_get_site();
 
 		tma_exm_log(json_encode($parameters));
 		
@@ -92,6 +93,7 @@ class TMA_Request {
 		$parameters['headers'] = array();
 		$parameters['headers']['Content-Type'] = "application/json";
 		$parameters['headers']['apikey'] = $this->options["webtools_apikey"];
+		$parameters['headers']['site'] = tma_exm_get_site();
 
 		return $this->garded(function () use ($webtools_url, $parameters) {
 					$response = wp_remote_request($webtools_url, $parameters);
@@ -117,6 +119,7 @@ class TMA_Request {
 		$parameters['headers']['Content-Type'] = "application/json";
 		$parameters['headers']['Accept'] = "application/json";
 		$parameters['headers']['apikey'] = $this->options["webtools_apikey"];
+		$parameters['headers']['site'] = tma_exm_get_site();
 
 		return $this->garded(function () use ($webtools_url, $parameters) {
 					$response = wp_remote_post($webtools_url, $parameters);
@@ -142,6 +145,7 @@ class TMA_Request {
 		$parameters['headers']['Content-Type'] = "application/json";
 		$parameters['headers']['Accept'] = "application/json";
 		$parameters['headers']['apikey'] = $this->options["webtools_apikey"];
+		$parameters['headers']['site'] = tma_exm_get_site();
 
 		return $this->garded(function () use ($webtools_url, $parameters) {
 					tma_exm_log("url " . $webtools_url);
