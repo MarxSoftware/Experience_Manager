@@ -61,8 +61,13 @@ class SegmentEditor {
 			return;
 		}
 
-		$value = get_post_meta($post->ID, 'tma_segment_synced', true);
-
+		$segment = SegmentRequest::getInstance()->load_segment($post->ID);
+		
+		$value = FALSE;
+		if ($segment && property_exists($segment, "attributes") && property_exists($segment->attributes, "modified") && 
+				$post->post_modified === $segment->attributes->modified) {
+			$value = true;
+		}
 		if ($value) {
 			?>
 			<div class="">
@@ -134,57 +139,24 @@ class SegmentEditor {
 		tma_exm_log("publish");
 
 		$siteid = tma_exm_get_site();
-		$post_data = array(
+		$segment = array(
 			'name' => $post->post_title,
 			'externalId' => $ID,
 			'site' => $siteid,
 			'active' => $post->post_status === "publish",
 			'dsl' => $this->get_segment_dsl($post->ID),
-			'period' => $this->get_segment_period($post->ID)
+			'period' => $this->get_segment_period($post->ID),
+			'attributes' => [
+				'modified' => $post->post_modified
+			]
 		);
 
 		tma_exm_log("post data");
-		tma_exm_log(json_encode($post_data));
+		tma_exm_log(json_encode($segment));
 
-		$request = new \TMA\ExperienceManager\TMA_Request();
-		$error = FALSE;
-		try {
-			$response = $request->post("/rest/audience", $post_data);
-
-			if ($response !== FALSE) {
-				$code = wp_remote_retrieve_response_code($response);
-				$body_string = wp_remote_retrieve_body($response);
-				$body = json_decode($body_string);
-				tma_exm_log("code " . $code);
-				tma_exm_log("body " . $body_string);
-
-				if ($code === 200) {
-					if ($body->status === "ok") {
-						update_post_meta(
-								$ID,
-								'tma_segment_synced',
-								true
-						);
-					} else {
-						$error = new \WP_Error("error", $response->body->message);
-					}
-				} else {
-					$error = new \WP_Error("error", "Error while accessing Experience Platform");
-				}
-			} else {
-				$error = new \WP_Error("error", "Error while accessing Experience Platform");
-			}
-		} catch (Exception $ex) {
-			$error = new \WP_Error("error", "error publishing audience: " . $ex->getMessage());
-		} catch (\Unirest\Exception $uex) {
-			$error = new \WP_Error("error", "error publishing audience: " . $uex->getMessage());
-		}
-		if ($error) {
-			update_post_meta(
-					$ID,
-					'tma_segment_synced',
-					false
-			);
+		$error = SegmentRequest::getInstance()->save_segment($ID, $post, $segment);
+		
+		if ($error !== FALSE) {
 			$user_id = get_current_user_id();
 			set_transient("tma_segment_errors_{$post->ID}_{$user_id}", $error, 45);
 		}
@@ -197,11 +169,6 @@ class SegmentEditor {
 	 */
 	public function delete($ID) {
 		tma_exm_log("delete");
-
-		delete_post_meta(
-				$ID,
-				'tma_segment_synced'
-		);
 
 		$site = tma_exm_get_site();
 		$request = new \TMA\ExperienceManager\TMA_Request();
@@ -219,11 +186,6 @@ class SegmentEditor {
 		$site = tma_exm_get_site();
 		$request = new \TMA\ExperienceManager\TMA_Request();
 		$request->delete("/rest/audience?wpid=" . $ID . "&site=" . $site);
-		update_post_meta(
-				$ID,
-				'tma_segment_synced',
-				false
-		);
 	}
 
 	public function get_segment_dsl($post_id) {

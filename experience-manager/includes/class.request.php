@@ -48,7 +48,7 @@ class TMA_Request {
 	/**
 	 * setup the request object and return
 	 */
-	public function get($url, $parameters = NULL, $headers = ['Content-Type' => "application/json"]) {
+	public function get($url, $parameters = [], $headers = ['Content-Type' => 'text/plain', 'Accept' => 'application/json']) {
 
 		if (!isset($this->options["webtools_apikey"]) || !isset($this->options['webtools_url'])) {
 			return FALSE;
@@ -59,7 +59,6 @@ class TMA_Request {
 		$webtools_url = $this->clean_webtools_url($this->options['webtools_url']) . $this->clean_url($url);
 //		$headers["apikey"] = $this->options["webtools_apikey"];
 
-		$parameters = array();
 		$parameters['method'] = "GET";
 		$parameters['timeout'] = "45";
 		$parameters['headers'] = $headers;
