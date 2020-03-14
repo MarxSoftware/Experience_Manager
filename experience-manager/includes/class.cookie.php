@@ -54,7 +54,7 @@ class TMA_COOKIE_HELPER {
 					$cookieDomain = "." . $cookieDomain;
 				}
 			}
-			setcookie($name, $value, time() + $expire, '/', $cookieDomain, true);
+			setcookie($name, $value, time() + $expire, '/', $cookieDomain, false, false);
 		}
 
 		return $value;
