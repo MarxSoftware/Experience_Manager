@@ -29,10 +29,12 @@ class Plugins {
 	}
 
 	public function woocommerce() {
-		return in_array('woocommerce/woocommerce.php', $this->plugins);
+		return in_array('woocommerce/woocommerce.php', $this->plugins)
+				&& is_plugin_active('woocommerce/woocommerce.php');
 	}
 	public function easydigitaldownloads() {
-		return in_array('easy-digital-downloads/easy-digital-downloads.php', $this->plugins);
+		return in_array('easy-digital-downloads/easy-digital-downloads.php', $this->plugins)
+				&& is_plugin_active('easy-digital-downloads/easy-digital-downloads.php') ;
 	}
 
 	public function elementor() {
