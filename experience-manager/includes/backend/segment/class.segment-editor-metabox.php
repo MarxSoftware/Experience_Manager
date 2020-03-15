@@ -103,7 +103,8 @@ class SegmentEditorMetaBoxes {
 			window.exmSegmentEditor = CodeMirror.fromTextArea(document.getElementById("exm_audience_editor"), {
 				lineNumbers: true,
 				matchBrackets: true,
-				mode: "javascript"
+				//mode: "javascript"
+				mode : "application/json"
 			});
 		</script>
 		<?php

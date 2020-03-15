@@ -89,40 +89,40 @@ class SegmentEditorHelp {
 					segmentObject.site = exm_siteid;
 					segmentObject.conditional = "and";
 
-					segmentObject.conditionals = [];
+					segmentObject.conditions = [];
 					let selectedVisit = document.querySelector("input[name='exm_visit']:checked").value;
 					if (selectedVisit === "first") {
-						segmentObject.conditionals.push({"conditional": "firstvisit"})
+						segmentObject.conditions.push({"conditional": "firstvisit"})
 					} else if (selectedVisit === "returning") {
-						segmentObject.conditionals.push({"conditional": "not", "conditionals": [{"conditional": "firstvisit"}]})
+						segmentObject.conditions.push({"conditional": "not", "conditions": [{"conditional": "firstvisit"}]})
 					}
 					let devices = [];
 					if (document.querySelector("[name='exm_device_mobile']").checked) {
-						devices.push("'Mobile Phone'");
+						devices.push("Mobile Phone");
 					}
 					if (document.querySelector("[name='exm_device_desktop']").checked) {
-						devices.push("'Desktop'");
+						devices.push("Desktop");
 					}
 					if (document.querySelector("[name='exm_device_tablet']").checked) {
-						devices.push("'Tablet'");
+						devices.push("Tablet");
 					}
 					if (devices.length > 0) {
-						segmentObject.conditionals.push({"conditional": "keyvalue", "name": "device.type", "values": devices});
+						segmentObject.conditions.push({"conditional": "keyvalue", "name": "device.type", "values": devices});
 					}
 
 					let selectedOrder = document.querySelector("input[name='exm_order']:checked").value;
 					if (selectedOrder === "none") {
-						segmentObject.conditionals.push({"conditional": "ecommerce_order", "count": 0, "exact" : true});
+						segmentObject.conditions.push({"conditional": "ecommerce_order", "count": 0, "exact" : true});
 					} else if (selectedOrder === "first") {
-						segmentObject.conditionals.push({"conditional": "ecommerce_order", "count": 1});
+						segmentObject.conditions.push({"conditional": "ecommerce_order", "count": 1});
 					} else if (selectedOrder === "active") {
-						segmentObject.conditionals.push({"conditional": "ecommerce_order", "count": 3});
+						segmentObject.conditions.push({"conditional": "ecommerce_order", "count": 3});
 					}
 					let selectedCoupon = document.querySelector("input[name='exm_coupon']:checked").value;
 					if (selectedCoupon === "none") {
-						segmentObject.conditionals.push({"conditional": "ecommerce_coupon", "count": 0, "exact" : true});
+						segmentObject.conditions.push({"conditional": "ecommerce_coupon", "count": 0, "exact" : true});
 					} else if (selectedCoupon === "lover") {
-						segmentObject.conditionals.push({"conditional": "ecommerce_coupon", "count": 1});
+						segmentObject.conditions.push({"conditional": "ecommerce_coupon", "count": 1});
 					}
 
 					window.exmSegmentEditor.setValue(JSON.stringify(segmentObject, null, "\t"));
