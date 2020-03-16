@@ -72,11 +72,17 @@ class SegmentRequest {
 				if ($code === 200) {
 					if ($body->status === "ok") {
 						
+					} else if ($body->status === "error") {
+						$error = new \WP_Error("error", $body->message);
 					} else {
-						$error = new \WP_Error("error", $response->body->message);
+						$error = new \WP_Error("error", $body->message);
 					}
 				} else {
-					$error = new \WP_Error("error", "Error while accessing Experience Platform");
+					if ($body) {
+						$error = new \WP_Error("error", $body->message);
+					} else {
+						$error = new \WP_Error("error", "Error while accessing Experience Platform");
+					}
 				}
 			} else {
 				$error = new \WP_Error("error", "Error while accessing Experience Platform");

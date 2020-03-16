@@ -144,7 +144,7 @@ class SegmentEditor {
 			'externalId' => $ID,
 			'site' => $siteid,
 			'active' => $post->post_status === "publish",
-			'dsl' => $this->get_segment_dsl($post->ID),
+			'content' => $this->get_segment_dsl($post->ID),
 			'period' => $this->get_segment_period($post->ID),
 			'attributes' => [
 				'modified' => $post->post_modified
