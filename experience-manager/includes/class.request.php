@@ -56,7 +56,7 @@ class TMA_Request {
 
 		tma_exm_log("get request: " . $url);
 
-		$webtools_url = $this->clean_webtools_url($this->options['webtools_url']) . $this->clean_url($url);
+		$webtools_url = $this->get_webtools_url() . $this->clean_url($url);
 //		$headers["apikey"] = $this->options["webtools_apikey"];
 
 		$parameters['method'] = "GET";
@@ -84,7 +84,7 @@ class TMA_Request {
 			return FALSE;
 		}
 
-		$webtools_url = $this->clean_webtools_url($this->options['webtools_url']) . $this->clean_url($url);
+		$webtools_url = $this->get_webtools_url() . $this->clean_url($url);
 
 		$parameters = array();
 		$parameters['method'] = "DELETE";
@@ -109,7 +109,7 @@ class TMA_Request {
 		if (!isset($this->options["webtools_apikey"]) || !isset($this->options['webtools_url'])) {
 			return FALSE;
 		}
-		$webtools_url = $this->clean_webtools_url($this->options['webtools_url']) . $this->clean_url($url);
+		$webtools_url = $this->get_webtools_url() . $this->clean_url($url);
 
 		$parameters = array();
 		$parameters['method'] = "POST";
@@ -135,7 +135,7 @@ class TMA_Request {
 		if (!isset($this->options["webtools_apikey"]) || !isset($this->options['webtools_url'])) {
 			return FALSE;
 		}
-		$webtools_url = $this->clean_webtools_url($this->options['webtools_url']) . $this->clean_url($url);
+		$webtools_url = $this->get_webtools_url() . $this->clean_url($url);
 
 		$parameters = array();
 		$parameters['method'] = "PUT";
@@ -229,6 +229,14 @@ class TMA_Request {
 
 		return FALSE;
 	}
+	
+	private function get_webtools_url() {
+		$url = $this->options['webtools_url'];
+		if (!tma_endsWith($url, "/")) {
+			return $url . "/";
+		}
+		return $url;
+	}
 
 	public function track($event, $page, $customAttributes = null) {
 		if (!isset($this->options["webtools_apikey"]) || !isset($this->options['webtools_url'])) {
@@ -240,7 +248,7 @@ class TMA_Request {
 		$rid = $_REQUEST[\TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_REQUEST];
 		$vid = \TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(TMA_COOKIE_HELPER::$COOKIE_VISIT, UUID::v4(), TMA_COOKIE_HELPER::$COOKIE_VISIT_EXPIRE);
 		$apikey = $this->options["webtools_apikey"];
-		$url = $this->options['webtools_url'];
+		$url = $this->get_webtools_url();
 		$siteid = tma_exm_get_site();
 
 		// http://localhost:8082/rest/track?
@@ -287,6 +295,7 @@ class TMA_Request {
 		if (false === $result) {
 			$url = $this->options['webtools_url'] . 'rest/userinformation/user?apikey=' . $apikey . '&user=' . $userid
 					 . '&site=' . $site;
+			tma_exm_log("url: " . $url);
 			$result = $this->loadContent($url, '{"user" : {"segments" : []}, "status" : "ok", "default": true}');
 
 			wp_cache_set($userid, $result, "", 60);

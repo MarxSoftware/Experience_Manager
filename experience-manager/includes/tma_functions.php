@@ -31,9 +31,10 @@ function tma_exm_array_match_any($settings_segments, $user_segments) {
 }
 
 function tma_exm_get_user_segments($defaultValue = []) {
+	tma_exm_log("tma_exm_get_user_segments");
 	$request = new TMA\ExperienceManager\TMA_Request();
 	$response = $request->getSegments(\TMA\ExperienceManager\TMA_Request::getUserID());
-	tma_exm_log(json_encode($response));
+	tma_exm_log("tma_exm_get_user_segments: " . json_encode($response));
 	if ($response !== NULL && $response !== FALSE && $response->status === "ok" && property_exists($response->user, "actionSystem")) {
 //		$tma_config['user_segments'] = $response->user->actionSystem->segments;
 		return $response->user->actionSystem->segments;
