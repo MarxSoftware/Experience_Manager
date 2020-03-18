@@ -51,13 +51,17 @@ class TMA_Settings {
 				__("Experience Manager", "tma-webtools"), __("Experience Manager", "tma-webtools"), 'manage_options', 'experience-manager/pages/tma-webtools-admin.php', null, plugins_url('experience-manager/images/settings.png'), 50);
 		add_submenu_page('experience-manager/pages/tma-webtools-admin.php', __("Dashboard", "tma-webtools"), __("Dashboard", "tma-webtools"), 'manage_options', 'experience-manager/pages/tma-webtools-admin.php', null);
 		add_submenu_page('experience-manager/pages/tma-webtools-admin.php', __("Settings", "tma-webtools"), __("Settings", "tma-webtools"), 'manage_options', 'tma-webtools-setting-admin', array($this, 'plugin_page'));
+		
+		if (tma_exm_dependencies_fulfilled(["module-hosting"])) {
+			add_submenu_page('experience-manager/pages/tma-webtools-admin.php', __("Hosting", "tma-webtools"), __("Hosting", "tma-webtools"), 'manage_options', 'experience-manager/pages/hosting.php', null);
+		}
 	}
 
 	function get_settings_sections() {
 		$sections = array(
 			array(
 				'id' => 'tma_webtools_option',
-				'title' => __('Basic Settings', 'wedevs')
+				'title' => __('Basic Settings', 'tma-webtools')
 			),
 //			array(
 //				'id' => 'tma_webtools_option_targeting',

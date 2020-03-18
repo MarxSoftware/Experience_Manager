@@ -56,8 +56,19 @@ class SegmentEditorMetaBoxes {
 				[$this, 'time_meta_box'], // Content callback, must be of type callable
 				SegmentType::$TYPE   // Post type
 		);
+		
+		add_meta_box(
+				'tma_segment_editor_support', // Unique ID
+				'Support', // Box title
+				[$this, 'support_banner'], // Content callback, must be of type callable
+				SegmentType::$TYPE   // Post type
+		);
 	}
 
+	public function support_banner($post) {
+		include 'banner.php';
+	}
+	
 	public function description($post) {
 		include 'description.php';
 	}
