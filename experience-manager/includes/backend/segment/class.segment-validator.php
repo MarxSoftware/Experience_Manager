@@ -45,6 +45,35 @@ class SegmentValidator {
 		$this->defineType("and", [
 			"conditions" => "array"
 		]);
+		$this->defineType("or", [
+			"conditions" => "array"
+		]);
+		$this->defineType("not", [
+			"conditions" => "array"
+		]);
+		$this->defineType("pageview", [
+			"page" => "string",
+			"type" => "string",
+			"count" => "integer"
+		]);
+		$this->defineType("event", [
+			"event" => "string",
+			"count" => "integer"
+		]);
+		$this->defineType("visit", [
+			"count" => "integer"
+		]);
+		$this->defineType("category", [
+			"path" => "string",
+			"field" => "string",
+			"count" => "integer"
+		]);
+		$this->defineType("ecommerce_coupon", [
+			"count" => "integer"
+		]);
+		$this->defineType("ecommerce_order", [
+			"count" => "integer"
+		]);
 	}
 
 	public function defineType($type, $attributes) {
@@ -76,15 +105,38 @@ class SegmentValidator {
 				}
 			}
 		}
+		if (property_exists($conditional, "conditions")) {
+			foreach ($conditional->conditions as $condition) {
+				$valid = $this->validate_conditional($condition);
+				if ($valid !== TRUE) {
+					return $valid;
+				}
+			}
+		}
 
 		return TRUE;
 	}
-	
-	private function validate_property ($property, $type) {
-		if ($type === "array"){
-			return $this->isArray($property);
+
+	private function validate_property($property, $type) {
+		switch ($type) {
+			case "array":
+				return $this->isArray($property);
+			case "boolean":
+				return is_bool($property);
+			case "integer":
+				return is_integer($property);
+			case "double":
+				return is_double($property);
+			case "string":
+				return is_string($property);
+			default:
+				break;
 		}
-		return true;
+		return false;
+	}
+
+	protected function isNumber($data) {
+		return is_integer($data) || is_float($data);
 	}
 
 	protected function isArray($data) {
