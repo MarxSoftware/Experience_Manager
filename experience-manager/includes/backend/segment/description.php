@@ -24,9 +24,6 @@
 	<h2>Your Site id: <b><?php echo $siteid; ?></b></h2>
 	<div>
 		<p>
-			Your segment definition must start with: <b>{ "site" : "<?php echo $siteid; ?>" }</b>
-		</p>
-		<p>
 			The segment definition is basicly a list of conditionals, written in a simple JSON format.
 		</p>
 	</div>
@@ -38,21 +35,21 @@
 			<br />
 			All nested rules must match.
 			<br />
-			<b>{ "conditional" : "and", "conditionals" : [...]}</b>
+			<b>{ "conditional" : "and", "conditions" : [...]}</b>
 		</p>
 		<p>
 			<span class="headline">OR</span>
 			<br />
 			One of the nested rules must match.
 			<br />
-			<b>{ "conditional" : "or", "conditionals" : [...]}</b>
+			<b>{ "conditional" : "or", "conditions" : [...]}</b>
 		</p>
 		<p>
 			<span class="headline">NOT</span>
 			<br />
 			None of the nested rules must match.
 			<br />
-			<b>{ "conditional" : "not", "conditionals" : [...]}</b>
+			<b>{ "conditional" : "not", "conditions" : [...]}</b>
 		</p>
 		<p>
 			<span class="headline">PageView</span>

@@ -26,6 +26,7 @@ Features:
 * Template-Tag to check if a user match a specific segment ( e.q. tma_exm_is_in_segment("a_segment_id"))
 * Support for Cache Plugins
 * Support for [Popup Maker](https://wppopupmaker.com/)
+* Support for [WP Popups](https://wppopups.com/)
 * Support for [Advanced Ads](https://wpadvancedads.com/)
 
 
@@ -66,8 +67,11 @@ none
 == Changelog ==
 
 4.0.0
+ * New json based segment definition language introduced
+ * Fix segmente sync state
+ * Integration into WP Popups added
 
-Important: This versoin needs at least version 5.0.0 of the Experience Platform!
+Important: This version needs at least version 5.0.0 of the Experience Platform!
 
 3.2.0
  * Update to new tracking api

@@ -55,6 +55,10 @@ class Integrations {
 		if (\TMA\ExperienceManager\Plugins::getInstance()->popup_maker() && $this->shouldInit("messaging_popupmaker")) {
 			\TMA\ExperienceManager\TMA_PopupMakerIntegration::getInstance()->init();
 		}
+		if (\TMA\ExperienceManager\Plugins::getInstance()->wp_popups() && $this->shouldInit("messaging_wp-popups")) {
+			\TMA\ExperienceManager\WP_Popups::getInstance();
+		}
+		
 		if (\TMA\ExperienceManager\Plugins::getInstance()->advanced_ads() && $this->shouldInit("messaging_advancedads")) {
 			\TMA\ExperienceManager\TMA_AdvancedAdsIntegration::getInstance()->init();
 		}
@@ -121,6 +125,14 @@ class Integrations {
 				'label' => __("Enable popup maker integration?", "tma-webtools"),
 				'desc' => __("Enable targeting in the popup maker", "tma-webtools"),
 				'disable' => !\TMA\ExperienceManager\Plugins::getInstance()->popup_maker(),
+				'type' => 'toggle',
+				'default' => ''
+			),
+			array(
+				'name' => 'messaging_wp-popups',
+				'label' => __("Enable WP Popups integration?", "tma-webtools"),
+				'desc' => __("Enable targeting in the WP Popups", "tma-webtools"),
+				'disable' => !\TMA\ExperienceManager\Plugins::getInstance()->wp_popups(),
 				'type' => 'toggle',
 				'default' => ''
 			),

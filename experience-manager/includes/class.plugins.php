@@ -47,6 +47,10 @@ class Plugins {
 	public function popup_maker() {
 		return in_array('popup-maker/popup-maker.php', $this->plugins);
 	}
+	
+	public function wp_popups() {
+		return in_array('wp-popups-lite/wp-popups-lite.php', $this->plugins);
+	}
 
 	public function advanced_ads() {
 		return in_array('advanced-ads/advanced-ads.php', $this->plugins);

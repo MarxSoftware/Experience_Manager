@@ -24,6 +24,8 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	"TMA\ExperienceManager\Modules\Integrations" => "includes/modules/class.integrations.php",
 	// Popup Maker
 	"TMA\ExperienceManager\TMA_PopupMakerIntegration" => "includes/modules/messages/popup-maker/class.popup-maker.php",
+	// WP Popups
+	"TMA\ExperienceManager\WP_Popups" => "includes/modules/messages/wp-popups/class.wp-popups.php",
 	// Elementor
 	"TMA\ExperienceManager\Elementor_Integration" => "includes/modules/editors/elementor/class.elementor_integration.php",
 	"TMA\ExperienceManager\Elementor_Preview" => "includes/modules/editors/elementor/class.elementor_preview.php",
@@ -45,6 +47,7 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	"TMA\ExperienceManager\Segment\SegmentEditorHelp" => "includes/backend/segment/class.segment-editor-help.php",
 	"TMA\ExperienceManager\Segment\SegmentEditorMetaBoxes" => "includes/backend/segment/class.segment-editor-metabox.php",
 	"TMA\ExperienceManager\Segment\SegmentRequest" => "includes/backend/segment/class.segment-request.php",
+	"TMA\ExperienceManager\Segment\SegmentValidator" => "includes/backend/segment/class.segment-validator.php",
 	// Event Tracking
 	"TMA\ExperienceManager\Events\WC_TRACKER" => "includes/modules/events/class.woocommerce_tracker.php",
 	"TMA\ExperienceManager\Events\EDD_TRACKER" => "includes/modules/events/class.edd_tracker.php",

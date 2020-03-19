@@ -154,8 +154,12 @@ class SegmentEditor {
 		tma_exm_log("post data");
 		tma_exm_log(json_encode($segment));
 
-		$error = SegmentRequest::getInstance()->save_segment($ID, $post, $segment);
-		
+		$valid = SegmentValidator::getInstance()->validate($segment['content']);
+		if ($valid !== TRUE) {
+			$error = new \WP_Error("error", $valid);
+		} else {
+			$error = SegmentRequest::getInstance()->save_segment($ID, $post, $segment);
+		}
 		if ($error !== FALSE) {
 			$user_id = get_current_user_id();
 			set_transient("tma_segment_errors_{$post->ID}_{$user_id}", $error, 45);
