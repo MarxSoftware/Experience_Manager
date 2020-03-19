@@ -53,14 +53,7 @@ final class TMA_AdvancedAdsIntegration {
 
 		$settings_segments = $settings['segments'];
 
-		$uid = \TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(TMA_COOKIE_HELPER::$COOKIE_USER, UUID::v4(), TMA_COOKIE_HELPER::$COOKIE_USER_EXPIRE);
-		$request = new TMA_Request();
-		$response = $request->getSegments($uid);
-
-		$user_segments = [];
-		if ($response !== NULL) {
-			$user_segments = tma_exm_get_user_segments();
-		}
+		$user_segments = tma_exm_get_user_segments();
 
 		//$user_segments = array_map('trim', $user_segments);
 		$settings_segments = array_map('trim', $settings_segments);
