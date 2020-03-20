@@ -70,7 +70,8 @@ none
  * New json based segment definition language introduced
  * Fix segmente sync state
  * Integration into WP Popups added
-
+ * JS <-> PHP cookie issue fixed
+ 
 Important: This version needs at least version 5.0.0 of the Experience Platform!
 
 3.2.0
