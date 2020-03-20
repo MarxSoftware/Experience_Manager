@@ -15,13 +15,7 @@
 	}
 </style>
 <div class="tma_webtools">
-	<?php
-	$siteid = "";
-	if (isset(get_option('tma_webtools_option')['webtools_siteid'])) {
-		$siteid = get_option('tma_webtools_option')['webtools_siteid'];
-	}
-	?>
-	<h2>Your Site id: <b><?php echo $siteid; ?></b></h2>
+	
 	<div>
 		<p>
 			The segment definition is basicly a list of conditionals, written in a simple JSON format.
@@ -89,9 +83,9 @@
 			<b>{ "conditional" : "category", "field" : "c_categories"}</b>
 			<br />
 			<span class="subheadline">Examples</span><br/>
-			<span>User has visited at least two post of a category: </span><b>{ "conditional" : "category", "field" : "c_categories", "path" : "/news/local/", count: "2" }</b>
+			<span>User has visited at least two post of a category: </span><b>{ "conditional" : "category", "field" : "c_categories", "path" : "/news/local/", count: 2 }</b>
 			<br/>
-			<span>User has visited at least two products of the category T-Shirts: </span><b>{ "conditional" : "category", "field" : "c_categories", "path" : "/tshirts/", count: "2" }</b>
+			<span>User has visited at least two products of the category T-Shirts: </span><b>{ "conditional" : "category", "field" : "c_categories", "path" : "/tshirts/", count: 2 }</b>
 		</p>
 		<p>
 			<span class="headline">KeyValue</span>

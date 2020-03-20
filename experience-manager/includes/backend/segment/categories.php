@@ -3,6 +3,7 @@
 	<a name="exm_categories"></a>
 	<p>
 		Generate category pathes to use in the category rule <b>&quot;rule(CATEGORY).field("c_categories").path(...)&quot;</b>.
+		Generate category pathes to use in the category rule <b>&quot;{ "conditional" : "category", "field" : "c_categories", "path" : "..." }&quot;</b>.
 		Copy the value with leading und ending slash.
 	</p>
 	<h2><?php echo __('Wordpress Categories:', "tma-webtools"); ?></h2>
