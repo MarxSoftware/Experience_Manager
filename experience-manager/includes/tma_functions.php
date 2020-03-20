@@ -17,7 +17,10 @@ function tma_exm_array_match_all($settings_segments, $user_segments) {
 	tma_exm_log(json_encode($settings_segments));
 	$user_segments = TMA\ExperienceManager\ShortCode_TMA_CONTENT::array_flat($user_segments);
 	tma_exm_log(json_encode($user_segments));
-	
+	$settings_segments = array_map('trim', $settings_segments);
+	$user_segments = array_map('trim', $user_segments);
+	$attr_segments = array_map('intval', $attr_segments);
+	$user_segments = array_map('intval', $user_segments);
 	return TMA\ExperienceManager\ShortCode_TMA_CONTENT::matching_mode_all($user_segments, $settings_segments);
 }
 
@@ -25,6 +28,10 @@ function tma_exm_array_match_any($settings_segments, $user_segments) {
 	tma_exm_log("tma_exm_array_match_all");
 	tma_exm_log(json_encode($settings_segments));
 	$user_segments = TMA\ExperienceManager\ShortCode_TMA_CONTENT::array_flat($user_segments);
+	$settings_segments = array_map('trim', $settings_segments);
+	$user_segments = array_map('trim', $user_segments);
+	$attr_segments = array_map('intval', $attr_segments);
+	$user_segments = array_map('intval', $user_segments);
 	tma_exm_log(json_encode($user_segments));
 	
 	return TMA\ExperienceManager\ShortCode_TMA_CONTENT::matching_mode_any($user_segments, $settings_segments);
