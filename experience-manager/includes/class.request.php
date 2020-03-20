@@ -48,7 +48,7 @@ class TMA_Request {
 	/**
 	 * setup the request object and return
 	 */
-	public function get($url, $parameters = NULL, $headers = ['Content-Type' => 'text/plain', 'Accept' => 'application/json']) {
+	public function get($url, $parameters = [], $headers = ['Content-Type' => 'text/plain', 'Accept' => 'application/json']) {
 
 		if (!isset($this->options["webtools_apikey"]) || !isset($this->options['webtools_url'])) {
 			return FALSE;
@@ -68,14 +68,22 @@ class TMA_Request {
 		$parameters['headers']['site'] = tma_exm_get_site();
 
 		tma_exm_log(json_encode($parameters));
-		
-		return $this->garded(function () use ($webtools_url, $parameters) {
-					$response = wp_remote_get($webtools_url, $parameters);
-					if (is_array($response) && !is_wp_error($response)) {
-						return $response; // use the content
-					}
-					return FALSE;
-				});
+
+		$cache_key = $webtools_url . "_" . json_encode($parameters);
+		$result = wp_cache_get($cache_key);
+		if (false === $result) {
+			$result = $this->garded(function () use ($webtools_url, $parameters) {
+				$response = wp_remote_get($webtools_url, $parameters);
+				if (is_array($response) && !is_wp_error($response)) {
+					return $response; // use the content
+				}
+				return FALSE;
+			});
+
+			wp_cache_set($cache_key, $result);
+		}
+
+		return $result;
 	}
 
 	public function delete($url) {
@@ -229,7 +237,7 @@ class TMA_Request {
 
 		return FALSE;
 	}
-	
+
 	private function get_webtools_url() {
 		$url = $this->options['webtools_url'];
 		if (!tma_endsWith($url, "/")) {
@@ -248,7 +256,6 @@ class TMA_Request {
 		$rid = $_REQUEST[\TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_REQUEST];
 		$vid = \TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(TMA_COOKIE_HELPER::$COOKIE_VISIT, UUID::v4(), TMA_COOKIE_HELPER::$COOKIE_VISIT_EXPIRE);
 		$apikey = $this->options["webtools_apikey"];
-		$url = $this->get_webtools_url();
 		$siteid = tma_exm_get_site();
 
 		// http://localhost:8082/rest/track?
@@ -293,8 +300,8 @@ class TMA_Request {
 		$apikey = $this->options["webtools_apikey"];
 		$site = tma_exm_get_site();
 		if (false === $result) {
-			$url = $this->options['webtools_url'] . 'rest/userinformation/user?apikey=' . $apikey . '&user=' . $userid
-					 . '&site=' . $site;
+			$url = 'rest/userinformation/user?apikey=' . $apikey . '&user=' . $userid
+					. '&site=' . $site;
 			tma_exm_log("url: " . $url);
 			$result = $this->loadContent($url, '{"user" : {"segments" : []}, "status" : "ok", "default": true}');
 
@@ -306,124 +313,6 @@ class TMA_Request {
 		return $result;
 	}
 
-	/**
-	 * REST call to get defined segments
-	 * 
-	 * @return object the segments
-	 */
-	public function getAllSegments() {
-		if (!isset($this->options["webtools_apikey"]) || !isset($this->options['webtools_url'])) {
-			$result = '{"status" : "default", segments" : []}';
-			return json_decode($result);
-		}
-		$result = wp_cache_get("tma-all-segments");
-		$apikey = $this->options["webtools_apikey"];
-		if (false === $result) {
-			$url = $this->options['webtools_url'] . 'rest/segments/all?apikey=' . $apikey;
-			$result = $this->loadContent($url, '{"status" : "default", segments" : []}');
-			wp_cache_set("tma-all-segments", $result, "", 60);
-		}
-
-		$result = apply_filters("experience-manager/request/all_segments", $result);
-		return $result;
-	}
-
-	/**
-	 * calls a rest extension
-	 * 
-	 * e.g. the recommendation module:
-	 * <url>/rest/extension?extension=recommendation-module&recommendation=<recommendation_id>&id=<user id or item id> 
-	 * 
-	 * @param type $cachekey
-	 * @param type $extension
-	 * @param type $attributes
-	 * @return type
-	 */
-	public function extension_get($cachekey, $extension, $attributes) {
-		$result = NULL;
-		if (!isset($this->options["webtools_apikey"]) || !isset($this->options['webtools_url'])) {
-			$result = '{"error" : true}';
-			return json_decode($result);
-		}
-
-		if (!is_null($cachekey)) {
-			$result = wp_cache_get($cachekey);
-		}
-		$apikey = $this->options["webtools_apikey"];
-
-		$url = $this->options['webtools_url'] . "rest/extension?extension={$extension}&apikey=" . $apikey;
-
-		// add the custom parameters
-		if (isset($attributes)) {
-			foreach ($attributes as $key => $value) {
-				if (is_array($value)) {
-					foreach ($value as $vk) {
-						$url .= '&' . urldecode($key) . '=' . urlencode($vk);
-					}
-				} else {
-					$url .= '&' . urldecode($key) . '=' . urlencode($value);
-				}
-			}
-		}
-		if ($result === false) {
-			$result = $this->loadContent($url, '{"error" : true}');
-
-			if ($cachekey !== NULL) {
-				wp_cache_set($cachekey, $result, "", 60);
-			}
-		}
-
-		return $result;
-	}
-
-	/**
-	 * calls a rest extension
-	 * 
-	 * e.g. the recommendation module:
-	 * <url>/rest/extension?extension=recommendation-module&recommendation=<recommendation_id>&id=<user id or item id> 
-	 * 
-	 * @param type $cachekey
-	 * @param type $extension
-	 * @param type $attributes
-	 * @param type $body
-	 * @return type
-	 */
-	public function extension_post($cachekey, $extension, $attributes, $body) {
-		$result = NULL;
-		if (!isset($this->options["webtools_apikey"]) || !isset($this->options['webtools_url'])) {
-			$result = '{"error" : true}';
-			return json_decode($result);
-		}
-
-		if (!is_null($cachekey)) {
-			$result = wp_cache_get($cachekey);
-		}
-		$apikey = $this->options["webtools_apikey"];
-
-		$url = $this->options['webtools_url'] . "rest/extension?extension={$extension}&apikey=" . $apikey;
-
-		// add the custom parameters
-		if (isset($attributes)) {
-			foreach ($attributes as $key => $value) {
-				if (is_array($value)) {
-					foreach ($value as $vk) {
-						$url .= '&' . urldecode($key) . '=' . urlencode($vk);
-					}
-				} else {
-					$url .= '&' . urldecode($key) . '=' . urlencode($value);
-				}
-			}
-		}
-
-		if (is_null($result)) {
-			$result = $this->postContent($url, $body, '{"error" : true}');
-			if ($cachekey !== NULL) {
-				wp_cache_set($cachekey, $result, "", 60);
-			}
-		}
-
-		return $result;
-	}
 
 	private function loadContent($url, $defaultContent) {
 		$result = $defaultContent;
@@ -434,9 +323,10 @@ class TMA_Request {
 		$parameters['headers'] = array();
 		$parameters['headers']['Content-Type'] = "text/plain";
 
-		$response = wp_remote_get($url, $parameters);
+//		$response = wp_remote_get($url, $parameters);
+		$response = $this->get($url, [], ['Content-Type' => "text/plain"]);
 		tma_exm_log(json_encode($response));
-		if ((is_object($response) || is_array($response)) && !is_wp_error($response)) {
+		if ($response !== FALSE && (is_object($response) || is_array($response)) && !is_wp_error($response)) {
 			$result = $response['body']; // use the content
 		}
 

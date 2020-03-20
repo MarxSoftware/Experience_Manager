@@ -60,8 +60,6 @@ if (!class_exists('TMA_Widget_Targeting')) {
 			$group = isset($instance['tma_group']) ? $instance['tma_group'] : '';
 			$group_default = isset($instance['tma_default']) ? $instance['tma_default'] : '';
 
-//			$request = new TMA_Request();
-//			$response = $request->getAllSegments();
 			$segments = tma_exm_get_segments_as_array();
 			?>
 			<p>

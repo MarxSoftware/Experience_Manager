@@ -74,6 +74,7 @@ class TMA_MetaBox {
 				$postScores = $metaData[0];
 			}
 			
+			// das ist komplett defekt und muss überarbeitet werden
 			$request = new TMA_Request();
 			$response = $request->getAllSegments();
 			if ($response !== NULL && $response->status === "ok") {
