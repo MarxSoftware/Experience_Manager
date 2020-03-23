@@ -18,7 +18,7 @@
 }
 */
 /*tooltip*/
-[data-tma-personalization]::before {
+[data-tma-personalization=enabled]::before {
 	content: 'group: ' attr(data-tma-group) ' | default: ' attr(data-tma-default) ' | matching: ' attr(data-tma-matching) ' | segments: ' attr(data-tma-segment-names) ;   
 	font-size: 15px;
 	position:absolute;

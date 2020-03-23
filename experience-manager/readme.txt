@@ -4,7 +4,7 @@ Tags: digital experience platform, experience manager, targeting, analytics, tra
 Requires at least: 4.4.1
 Tested up to: 5.3.2
 Stable tag: 4.1.0
-Version: 4.1.0
+Version: 4.1.1
 License: GPLv2 or later
 
 Do not treat all your customers the same, create a digital experience!
@@ -65,6 +65,9 @@ Yes, since version 2 the Experience Manager supports frontend and backend target
 none
 
 == Changelog ==
+
+4.1.1
+ * bug fix in backend tracking
 
 4.1.0
  * Fixed a type in a variable name
