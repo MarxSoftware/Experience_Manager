@@ -63,9 +63,12 @@ class Integrations {
 			\TMA\ExperienceManager\TMA_AdvancedAdsIntegration::getInstance()->init();
 		}
 
+		tma_exm_log("try to init woocommerce");
 		if (\TMA\ExperienceManager\Plugins::getInstance()->woocommerce() && $this->shouldInit("ecommerce_woocommerce")) {
+			tma_exm_log("init woocommerce");
 			$tracker = new \TMA\ExperienceManager\Events\WC_TRACKER();
 			$tracker->init();
+			tma_exm_log("init woocommerce done");
 		}
 		if (\TMA\ExperienceManager\Plugins::getInstance()->easydigitaldownloads() && $this->shouldInit("ecommerce_edd")) {
 			$edd_tracker = \TMA\ExperienceManager\Events\EDD_TRACKER::getInstance();

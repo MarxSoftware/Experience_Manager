@@ -67,6 +67,8 @@ class TMA_Request {
 		$parameters['headers']['apikey'] = $this->options["webtools_apikey"];
 		$parameters['headers']['site'] = tma_exm_get_site();
 
+		tma_exm_log("calling");
+		tma_exm_log($webtools_url);
 		tma_exm_log(json_encode($parameters));
 
 		$cache_key = $webtools_url . "_" . json_encode($parameters);
