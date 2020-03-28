@@ -1,0 +1,52 @@
+.exm-content-info > * {
+  float: left;
+}
+.exm-content-editor {
+  /* Style the tab */
+  /* Style the buttons inside the tab */
+  /* Change background color of buttons on hover */
+  /* Create an active/current tablink class */
+  /* Style the tab content */
+}
+.exm-content-editor .tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+.exm-content-editor .tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+.exm-content-editor .tab button:hover {
+  background-color: #ddd;
+}
+.exm-content-editor .tab button.active {
+  background-color: #ccc;
+}
+.exm-content-editor .tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+.exm-content-editor #html-editor,
+.exm-content-editor #css-editor,
+.exm-content-editor #js-editor {
+  height: 250px;
+  width: 100%;
+  font-size: 14px;
+}
+.exm-content-editor .preview-container .preview-iframe {
+  height: 100%;
+  width: 100%;
+  border: none;
+  /* margin-bottom: -0.6%; */
+  /* padding: -3.2%; */
+}
+/*# sourceMappingURL=content-editor.css.map */

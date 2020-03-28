@@ -37,6 +37,12 @@ tma_exm_log("register segment postype");
 \TMA\ExperienceManager\Segment\SegmentEditorHelp::getInstance()->register();
 \TMA\ExperienceManager\Segment\SegmentEditorMetaBoxes::getInstance()->register();
 
+tma_exm_log("register content postype");
+\TMA\ExperienceManager\Content\ContentType::getInstance()->register();
+\TMA\ExperienceManager\Content\ContentEditor::getInstance()->register();
+\TMA\ExperienceManager\Content\ContentEditorMetaBoxes::getInstance()->register();
+TMA\ExperienceManager\Content\ContentShortCode::getInstance()->register();
+
 add_action("init", "tma_webtools_init");
 add_action("rest_api_init", "tma_webtools_rest_init");
 add_action("plugins_loaded", "tma_webtools_plugins_loaded");

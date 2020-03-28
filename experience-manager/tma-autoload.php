@@ -52,6 +52,11 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	"TMA\ExperienceManager\Events\WC_TRACKER" => "includes/modules/events/class.woocommerce_tracker.php",
 	"TMA\ExperienceManager\Events\EDD_TRACKER" => "includes/modules/events/class.edd_tracker.php",
 	"TMA\ExperienceManager\Events\Base" => "includes/modules/events/class.ecommerce_base.php",	
+	// Content Editor
+	"TMA\ExperienceManager\Content\ContentType" => "includes/backend/content/class.content-type.php",
+	"TMA\ExperienceManager\Content\ContentEditor" => "includes/backend/content/class.content-editor.php",
+	"TMA\ExperienceManager\Content\ContentEditorMetaBoxes" => "includes/backend/content/class.content-editor-metabox.php",
+	"TMA\ExperienceManager\Content\ContentShortCode" => "includes/backend/content/class.content-shortcode.php",
 ));
 
 function tma_webtools_autoload($class_name) {
