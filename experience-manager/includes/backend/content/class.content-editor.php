@@ -37,6 +37,7 @@ class ContentEditor {
 				wp_enqueue_script('tma-webtools-backend');
 				wp_enqueue_script('experience-manager-ace', TMA_EXPERIENCE_MANAGER_URL . 'assets/ace/ace.js', array(), "1.4.8", false);
 				wp_enqueue_script('experience-manager-content-editor-js', TMA_EXPERIENCE_MANAGER_URL . 'assets/content-editor/content-editor.js', array("experience-manager-ace", "jquery"), "1", false);
+				wp_enqueue_script('experience-manager-content-settings-js', TMA_EXPERIENCE_MANAGER_URL . 'assets/content-editor/content-settings.js', array("jquery"), "1", false);
 				wp_enqueue_style('experience-manager-content-editor-css', TMA_EXPERIENCE_MANAGER_URL . 'assets/content-editor/css/content-editor.css', array(), "1", false);
 			}
 		}
@@ -73,6 +74,13 @@ class ContentEditor {
 					$post_id,
 					'exm_content_editor_css',
 					$_POST['exm_content_editor_css']
+			);
+		}
+		if (array_key_exists('exm_content_settings', $_POST)) {
+			update_post_meta(
+					$post_id,
+					'exm_content_settings',
+					$_POST['exm_content_settings']
 			);
 		}
 	}

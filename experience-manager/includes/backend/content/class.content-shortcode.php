@@ -1,4 +1,5 @@
 <?php
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -29,17 +30,27 @@ class ContentShortCode {
 
 	public function exm_content($args) {
 		if (!array_key_exists("id", $args)) {
-			return "test";
+			return "";
 		}
-		
-		$html = get_post_meta( $args["id"], 'exm_content_editor_html', true );
-		$css = get_post_meta( $args["id"], 'exm_content_editor_css', true );
-		$js = get_post_meta( $args["id"], 'exm_content_editor_js', true );
-		
-		return "
-			<style>${css}</style>
-			${html}
-			<script>${js}</script>
-		";
+
+		$settings_string = get_post_meta($args["id"], 'exm_content_settings', true);
+		$settings = json_decode($settings_string);
+
+		$html = "<div data-exm-flex-content='${args["id"]}'>";
+
+		if (property_exists($settings, "loading") && $settings->loading->animation === true) {
+			$html .= "<div class='spinner'>
+					<div class='rect1' style='background-color: {$settings->loading->color};'></div>
+					<div class='rect2' style='background-color: {$settings->loading->color};'></div>
+					<div class='rect3' style='background-color: {$settings->loading->color};'></div>
+					<div class='rect4' style='background-color: {$settings->loading->color};'></div>
+					<div class='rect5' style='background-color: {$settings->loading->color};'></div>
+				</div>";
+		}
+
+		$html .= "</div>";
+
+		return $html;
 	}
+
 }

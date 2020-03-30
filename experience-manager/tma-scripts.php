@@ -28,6 +28,8 @@ function exm_enqueue_script () {
 //			wp_enqueue_script('experience-manager-frontend', TMA_EXPERIENCE_MANAGER_URL . 'js/experience-manager-frontend.js', array("jquery", "webtools-frontend", "experience-manager-hooks"), "1");
 //		} else if (/*!is_user_logged_in() && */function_exists("has_blocks") && has_blocks()) {
 			wp_enqueue_script('experience-manager-frontend', TMA_EXPERIENCE_MANAGER_URL . 'js/experience-manager-frontend.js', array("jquery", "webtools-frontend", "experience-manager-hooks"), "1");
+			wp_enqueue_script('experience-manager-flex-content', TMA_EXPERIENCE_MANAGER_URL . 'js/experience-manager-flex-content.js', array("experience-manager-frontend"), "1");
+			wp_localize_script('experience-manager-frontend', 'EXM', array('ajax_url' => admin_url('admin-ajax.php')));
 //		}
 	}
 }

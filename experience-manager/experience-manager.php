@@ -22,6 +22,8 @@ define("TMA_EXPERIENCE_MANAGER_DIR", plugin_dir_path(__FILE__));
 define("TMA_EXPERIENCE_MANAGER_URL", plugins_url('/', __FILE__));
 
 require_once 'tma-autoload.php';
+require 'modules/Mustache/Autoloader.php';
+\Mustache_Autoloader::register();
 require_once 'includes/tma_functions.php';
 require_once 'tma-scripts.php';
 
@@ -33,15 +35,10 @@ function tma_load_textdomain() {
 
 tma_exm_log("register segment postype");
 \TMA\ExperienceManager\Segment\SegmentType::getInstance()->register();
-\TMA\ExperienceManager\Segment\SegmentEditor::getInstance()->register();
-\TMA\ExperienceManager\Segment\SegmentEditorHelp::getInstance()->register();
-\TMA\ExperienceManager\Segment\SegmentEditorMetaBoxes::getInstance()->register();
 
 tma_exm_log("register content postype");
 \TMA\ExperienceManager\Content\ContentType::getInstance()->register();
-\TMA\ExperienceManager\Content\ContentEditor::getInstance()->register();
-\TMA\ExperienceManager\Content\ContentEditorMetaBoxes::getInstance()->register();
-TMA\ExperienceManager\Content\ContentShortCode::getInstance()->register();
+
 
 add_action("init", "tma_webtools_init");
 add_action("rest_api_init", "tma_webtools_rest_init");

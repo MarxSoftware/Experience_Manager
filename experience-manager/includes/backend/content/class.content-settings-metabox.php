@@ -12,7 +12,7 @@ namespace TMA\ExperienceManager\Content;
  *
  * @author marx
  */
-class ContentEditorMetaBox {
+class ContentSettingsMetaBox {
 
 	protected static $_instance = null;
 
@@ -32,32 +32,26 @@ class ContentEditorMetaBox {
 			return;
 		}
 		add_meta_box(
-				'tma_content_editor', // Unique ID
-				'Flex Content editor', // Box title
-				[$this, 'editor'], // Content callback, must be of type callable
+				'tma_content_settings', // Unique ID
+				'Flex Content settings', // Box title
+				[$this, 'settings'], // Content callback, must be of type callable
 				ContentType::$TYPE   // Post type
 		);
 	}
 
 	
 
-	public function editor($post) {
-		include 'editor-box.php';
+	public function settings($post) {
+		$settings = get_post_meta($post->ID, 'exm_content_settings', true);
 		
-		$html = get_post_meta($post->ID, 'exm_content_editor_html', true);
-		$css = get_post_meta($post->ID, 'exm_content_editor_css', true);
-		$js = get_post_meta($post->ID, 'exm_content_editor_js', true);
-		
-		$editor = [
-			"js" => $js,
-			"css" => $css,
-			"html" => $html
-		];
+		$settings_json = json_decode($settings);
 		?>
+		
 		<script type="text/javascript">
-			window.exmContentEditorValue = <?php echo json_encode($editor) ?>
+			window.exmContentSettingsValue = <?php echo json_encode($settings_json) ?>
 		</script>
 		<?php
+		include 'settings-box.php';
 	}
 
 }

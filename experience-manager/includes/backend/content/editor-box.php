@@ -3,9 +3,9 @@
 	<input type="hidden" name="exm_content_editor_js" id="exm_content_editor_js" />
 	<input type="hidden" name="exm_content_editor_css" id="exm_content_editor_css"/>
 	<div class="tab">
-		<button id="defaultOpen" class="tablinks" onclick="openCity(event, 'London')">Html</button>
-		<button class="tablinks" onclick="openCity(event, 'Paris')">Css</button>
-		<button class="tablinks" onclick="openCity(event, 'Tokyo')">JavaScript</button>
+		<button id="defaultOpen" class="tablinks" onclick="selectTab(event, 'London')">Html</button>
+		<button class="tablinks" onclick="selectTab(event, 'Paris')">Css</button>
+		<button class="tablinks" onclick="selectTab(event, 'Tokyo')">JavaScript</button>
 	</div>
 
 	<div id="London" class="tabcontent">

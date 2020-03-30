@@ -55,8 +55,10 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	// Content Editor
 	"TMA\ExperienceManager\Content\ContentType" => "includes/backend/content/class.content-type.php",
 	"TMA\ExperienceManager\Content\ContentEditor" => "includes/backend/content/class.content-editor.php",
-	"TMA\ExperienceManager\Content\ContentEditorMetaBoxes" => "includes/backend/content/class.content-editor-metabox.php",
+	"TMA\ExperienceManager\Content\ContentEditorMetaBox" => "includes/backend/content/class.content-editor-metabox.php",
+	"TMA\ExperienceManager\Content\ContentSettingsMetaBox" => "includes/backend/content/class.content-settings-metabox.php",
 	"TMA\ExperienceManager\Content\ContentShortCode" => "includes/backend/content/class.content-shortcode.php",
+	"TMA\ExperienceManager\Content\ContentAjax" => "includes/backend/content/class.content-ajax.php",
 ));
 
 function tma_webtools_autoload($class_name) {

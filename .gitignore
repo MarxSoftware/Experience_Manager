@@ -7,3 +7,4 @@ environment/plugins
 query-editor/node_modules
 /node_modules
 *.exe
+experience-manager/vendor
