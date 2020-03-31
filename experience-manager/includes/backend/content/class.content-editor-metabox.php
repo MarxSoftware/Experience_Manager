@@ -26,6 +26,8 @@ class ContentEditorMetaBox {
 	public function register() {
 		add_action('add_meta_boxes', [$this, 'add_meta_box']);
 	}
+	
+
 
 	public function add_meta_box() {
 		if (!ContentType::isContentEditor()) {
@@ -37,9 +39,17 @@ class ContentEditorMetaBox {
 				[$this, 'editor'], // Content callback, must be of type callable
 				ContentType::$TYPE   // Post type
 		);
+		add_meta_box(
+				'tma_content_editor_support', // Unique ID
+				'Support', // Box title
+				[$this, 'support_banner'], // Content callback, must be of type callable
+				ContentType::$TYPE   // Post type
+		);
 	}
 
-	
+		public function support_banner($post) {
+		include TMA_EXPERIENCE_MANAGER_DIR . 'includes/backend/banner.php';
+	}
 
 	public function editor($post) {
 		include 'editor-box.php';

@@ -66,7 +66,7 @@ class SegmentEditorMetaBoxes {
 	}
 
 	public function support_banner($post) {
-		include 'banner.php';
+		include TMA_EXPERIENCE_MANAGER_DIR . 'includes/backend/banner.php';
 	}
 	
 	public function description($post) {
