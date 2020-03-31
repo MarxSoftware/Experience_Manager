@@ -47,12 +47,66 @@
 	}
 
 	.preview-container {
-		.preview-iframe {
-			height: 100%;
-			width: 100%;
-			border: none;
-			/* margin-bottom: -0.6%; */
-			/* padding: -3.2%; */
+		margin-top: 5px;
+		height: 500px;
+		display: flex;
+		flex-direction: column;
+
+		.devices {
+			display: flex;
+			list-style: none;
+			justify-content: center;
+			height: 15%;
+			.selected{
+				box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			}
+			p {
+				height: 45px;
+				width: 45px;
+			}
+			button {
+				.phone {
+					background-image: url(../images/phone.svg), none;
+				}
+				.desktop {
+					background-image: url(../images/laptop.svg), none;
+				}
+				.tablet {
+					background-image: url(../images/tablet.svg), none;
+				}
+			}
 		}
+		.preview {
+			width: 100%;
+			height: 85%;
+			overflow: hidden;
+			
+			display: flex;
+			justify-content: center;
+			
+			.preview-wrapper {
+				border: 1px solid black;
+				overflow: scroll;
+
+				.preview-iframe {
+					height: 100%;
+					width: 100%;
+
+				}
+			}
+			.phone {
+				width:335px;
+				height: 100%;
+			}
+			.desktop {
+				width:1200px;
+				height: 100%;
+			}
+			.tablet {
+				width:783px;
+				height: 100%;
+			}
+		}
+
 	}
 }

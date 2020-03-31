@@ -59,9 +59,9 @@ class ContentAjax {
 		$css = get_post_meta($content_id, 'exm_content_editor_css', true);
 		$js = get_post_meta($content_id, 'exm_content_editor_js', true);
 
-		$response["html"] = $this->compile_template($html, $settings);
-		$response["js"] = $this->compile_template($js, $settings);
-		$response["css"] = $this->compile_template($css, $settings);
+		$response["html"] = $this->compile_template($html, $settings, $content_id);
+		$response["js"] = $this->compile_template($js, $settings, $content_id);
+		$response["css"] = $this->compile_template($css, $settings, $content_id);
 		$response["error"] = false;
 
 		wp_send_json($response);
@@ -80,11 +80,13 @@ class ContentAjax {
 		return $user;
 	}
 
-	private function get_context ($settings) {
+	private function get_context ($settings, $id) {
 		$context = [
-			"user" => $this->get_user()
+			"user"			=>		$this->get_user(),
+			"content_id"	=>		$id,
+			"unique_id"		=>		uniqid()
 		];
-		if ($settings->content_type === "recommendation") {
+		if ($settings->recommendations) {
 			$context["recommendation"] = [
 				[
 					"name" => "Turnschuh"
@@ -98,10 +100,10 @@ class ContentAjax {
 		return $context;
 	}
 	
-	private function compile_template($template, $settings) {
+	private function compile_template($template, $settings, $id) {
 		
 
-		$context = $this->get_context($settings);
+		$context = $this->get_context($settings, $id);
 		
 		return self::$engine->render($template, $context);
 	}

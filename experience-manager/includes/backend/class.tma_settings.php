@@ -48,7 +48,7 @@ class TMA_Settings {
 
 	function admin_menu() {
 		add_menu_page(
-				__("Experience Manager", "tma-webtools"), __("Experience Manager", "tma-webtools"), 'manage_options', 'experience-manager/pages/tma-webtools-admin.php', null, plugins_url('experience-manager/images/settings.png'), 50);
+				__("Experience Manager", "tma-webtools"), __("Experience Manager", "tma-webtools"), 'manage_options', 'experience-manager/pages/tma-webtools-admin.php', null, plugins_url('experience-manager/images/settings_16.png'), 50);
 		add_submenu_page('experience-manager/pages/tma-webtools-admin.php', __("Dashboard", "tma-webtools"), __("Dashboard", "tma-webtools"), 'manage_options', 'experience-manager/pages/tma-webtools-admin.php', null);
 		add_submenu_page('experience-manager/pages/tma-webtools-admin.php', __("Settings", "tma-webtools"), __("Settings", "tma-webtools"), 'manage_options', 'tma-webtools-setting-admin', array($this, 'plugin_page'));
 		

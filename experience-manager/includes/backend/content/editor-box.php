@@ -3,24 +3,34 @@
 	<input type="hidden" name="exm_content_editor_js" id="exm_content_editor_js" />
 	<input type="hidden" name="exm_content_editor_css" id="exm_content_editor_css"/>
 	<div class="tab">
-		<button id="defaultOpen" class="tablinks" onclick="selectTab(event, 'London')">Html</button>
-		<button class="tablinks" onclick="selectTab(event, 'Paris')">Css</button>
-		<button class="tablinks" onclick="selectTab(event, 'Tokyo')">JavaScript</button>
+		<button id="defaultOpen" class="tablinks" onclick="selectTab(event, 'exm_html_editor')">Html</button>
+		<button class="tablinks" onclick="selectTab(event, 'exm_css_editor')">Css</button>
+		<button class="tablinks" onclick="selectTab(event, 'exm_javascript_editor')">JavaScript</button>
 	</div>
 
-	<div id="London" class="tabcontent">
+	<div id="exm_html_editor" class="tabcontent">
 		<div class="editor" id="html-editor"></div>
 	</div>
 
-	<div id="Paris" class="tabcontent">
+	<div id="exm_css_editor" class="tabcontent">
 		<div class="editor" id="css-editor"></div>
 	</div>
 
-	<div id="Tokyo" class="tabcontent">
+	<div id="exm_javascript_editor" class="tabcontent">
 		<div class="editor" id="js-editor"></div>
 	</div>
-	
+
 	<div class="preview-container">
-		<iframe class="preview-iframe" id="exm-preview-target"></iframe>
+		<div class="devices">
+			<button class="selected" data-exm-device="desktop"><p class="desktop" /></button>
+			<button data-exm-device="tablet"><p class="tablet" /></button>
+			<button data-exm-device="phone"><p class="phone" /></button>
+		</div>
+		<hr />
+		<div class="preview">
+			<div class="preview-wrapper desktop">
+				<iframe class="preview-iframe " id="exm-preview-target"></iframe>
+			</div>
+		</div>
 	</div>
 </div>

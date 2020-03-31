@@ -9,8 +9,18 @@
 			<td>
 				<select class="exm_settings_change" id="exm_content_type" name="exm_content_type">
 					<option value="simple_content">Simple Content</option>
-					<option value="recommendation">Recommendation</option>
+					<option value="popup" disabled="disabled">Popup</option>
 				</select>
+			</td>
+		</tr>
+        <tr>
+			<th scope="row">Insert recommendations</th>
+			<td>
+				<fieldset>
+					<label for="exm_recommendation">
+						<input id="exm_recommendation" class="exm_settings_change" value="true" name="exm_recommendation" type="checkbox" /> Enable recommendations
+					</label>
+				</fieldset>
 			</td>
 		</tr>
 		<tr>

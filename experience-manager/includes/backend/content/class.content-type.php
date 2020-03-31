@@ -123,7 +123,7 @@ class ContentType {
 			'description' => __("Flex Segment", "tma-webtools"),
 			'public' => true,
 			'show_in_menu' => true,
-			'menu_icon' => plugins_url('experience-manager/images/audience.png'),
+			'menu_icon' => plugins_url('experience-manager/images/flex-content_16.png'),
 			'publicly_queryable' => false,
 			//'rewrite'            => array( 'slug' => 'targetaudience' ),
 			'supports' => array('title', 'custom-fields'),

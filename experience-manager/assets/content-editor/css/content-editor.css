@@ -42,11 +42,59 @@
   width: 100%;
   font-size: 14px;
 }
-.exm-content-editor .preview-container .preview-iframe {
+.exm-content-editor .preview-container {
+  margin-top: 5px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+.exm-content-editor .preview-container .devices {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  height: 15%;
+}
+.exm-content-editor .preview-container .devices .selected {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.exm-content-editor .preview-container .devices p {
+  height: 45px;
+  width: 45px;
+}
+.exm-content-editor .preview-container .devices button .phone {
+  background-image: url(../images/phone.svg), none;
+}
+.exm-content-editor .preview-container .devices button .desktop {
+  background-image: url(../images/laptop.svg), none;
+}
+.exm-content-editor .preview-container .devices button .tablet {
+  background-image: url(../images/tablet.svg), none;
+}
+.exm-content-editor .preview-container .preview {
+  width: 100%;
+  height: 85%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+.exm-content-editor .preview-container .preview .preview-wrapper {
+  border: 1px solid black;
+  overflow: scroll;
+}
+.exm-content-editor .preview-container .preview .preview-wrapper .preview-iframe {
   height: 100%;
   width: 100%;
-  border: none;
-  /* margin-bottom: -0.6%; */
-  /* padding: -3.2%; */
+}
+.exm-content-editor .preview-container .preview .phone {
+  width: 335px;
+  height: 100%;
+}
+.exm-content-editor .preview-container .preview .desktop {
+  width: 1200px;
+  height: 100%;
+}
+.exm-content-editor .preview-container .preview .tablet {
+  width: 783px;
+  height: 100%;
 }
 /*# sourceMappingURL=content-editor.css.map */

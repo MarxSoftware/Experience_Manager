@@ -43,12 +43,12 @@ class ContentSettingsMetaBox {
 
 	public function settings($post) {
 		$settings = get_post_meta($post->ID, 'exm_content_settings', true);
-		
+		tma_exm_log("loaded: " . $settings);
 		$settings_json = json_decode($settings);
 		?>
 		
 		<script type="text/javascript">
-			window.exmContentSettingsValue = <?php echo json_encode($settings_json) ?>
+			window.exmContentSettingsValue = <?php echo $settings ?>;
 		</script>
 		<?php
 		include 'settings-box.php';
