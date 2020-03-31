@@ -47,7 +47,7 @@ class ContentEditorMetaBox {
 		);
 	}
 
-		public function support_banner($post) {
+	public function support_banner($post) {
 		include TMA_EXPERIENCE_MANAGER_DIR . 'includes/backend/banner.php';
 	}
 
