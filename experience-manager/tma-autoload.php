@@ -5,7 +5,7 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	"TMA\ExperienceManager\Plugins" => "includes/class.plugins.php",
 	"TMA\ExperienceManager\TMA_Request" => "includes/class.request.php",
 	"TMA\ExperienceManager\TMA_COOKIE_HELPER" => "includes/class.cookie.php",
-	"TMA_Settings_API" => "modules/class.settings-api.php",
+	"TMA_Settings_API" => "dependencies/class.settings-api.php",
 	"TMA\ExperienceManager\TMAScriptHelper" => "includes/frontend/class.tma_script_helper.php",
 	"TMA\ExperienceManager\Constants" => "includes/class.constants.php",
 	"TMA\ExperienceManager\TMA_MetaBox" => "includes/backend/class.tma_metabox.php",
@@ -59,6 +59,10 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	"TMA\ExperienceManager\Content\ContentSettingsMetaBox" => "includes/backend/content/class.content-settings-metabox.php",
 	"TMA\ExperienceManager\Content\ContentShortCode" => "includes/backend/content/class.content-shortcode.php",
 	"TMA\ExperienceManager\Content\ContentAjax" => "includes/backend/content/class.content-ajax.php",
+	// Ecommerce Helper classes
+	"TMA\ExperienceManager\Modules\ECommerce\Ecommerce" => "includes/modules/ecommerce/class.ecommerce.php",
+	"TMA\ExperienceManager\Modules\ECommerce\Ecommerce_EDD" => "includes/modules/ecommerce/class.ecommerce-edd.php",
+	"TMA\ExperienceManager\Modules\ECommerce\Ecommerce_Woo" => "includes/modules/ecommerce/class.ecommerce-woo.php",
 ));
 
 function tma_webtools_autoload($class_name) {

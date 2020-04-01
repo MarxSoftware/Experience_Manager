@@ -86,15 +86,12 @@ class ContentAjax {
 			"content_id"	=>		$id,
 			"unique_id"		=>		uniqid()
 		];
-		if ($settings->recommendations) {
-			$context["recommendation"] = [
-				[
-					"name" => "Turnschuh"
-				],
-				[
-					"name" => "Handschuh"
-				]
-			];
+		tma_exm_log("settings: " . json_encode($settings));
+		if ($settings->recommendation && $settings->recommendation->enabled) {
+			$ecom = new \TMA\ExperienceManager\Modules\ECommerce\Ecommerce_Woo();
+			$context["recommendation"] = $ecom->popular_products($settings->recommendation->count);
+//			$context["recommendation"] = [
+//				      ["title" => "eins"],[ "title" => "zwei"]];
 		}
 		
 		return $context;

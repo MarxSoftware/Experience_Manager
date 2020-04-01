@@ -55,7 +55,7 @@
 						<option value="frequently_purchased">Frequently purchased</option>
 						<option value="popular">Popular products</option>
 						<option value="similar_products">Similar products</option>
-						<option value="similar_user">Similar user</option>
+						<option value="similar_user">Similapr user</option>
 					</select>
 				</td>
 			</tr>

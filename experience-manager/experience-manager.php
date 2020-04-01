@@ -22,7 +22,7 @@ define("TMA_EXPERIENCE_MANAGER_DIR", plugin_dir_path(__FILE__));
 define("TMA_EXPERIENCE_MANAGER_URL", plugins_url('/', __FILE__));
 
 require_once 'tma-autoload.php';
-require 'modules/Mustache/Autoloader.php';
+require 'dependencies/Mustache/Autoloader.php';
 \Mustache_Autoloader::register();
 require_once 'includes/tma_functions.php';
 require_once 'tma-scripts.php';
