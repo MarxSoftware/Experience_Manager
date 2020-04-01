@@ -2,9 +2,9 @@
 Contributors: thmarx
 Tags: digital experience platform, experience manager, targeting, analytics, tracking, product targeting, behaviour targets
 Requires at least: 4.4.1
-Tested up to: 5.3.2
-Stable tag: 4.1.0
-Version: 4.1.1
+Tested up to: 5.4
+Stable tag: 4.2.0
+Version: 4.2.0
 License: GPLv2 or later
 
 Do not treat all your customers the same, create a digital experience!
