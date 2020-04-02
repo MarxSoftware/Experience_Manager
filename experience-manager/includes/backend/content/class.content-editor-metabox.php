@@ -40,6 +40,12 @@ class ContentEditorMetaBox {
 				ContentType::$TYPE   // Post type
 		);
 		add_meta_box(
+				'tma_content_editor_preview', // Unique ID
+				'Flex Content Preview', // Box title
+				[$this, 'preview'], // Content callback, must be of type callable
+				ContentType::$TYPE   // Post type
+		);
+		add_meta_box(
 				'tma_content_editor_support', // Unique ID
 				'Support', // Box title
 				[$this, 'support_banner'], // Content callback, must be of type callable
@@ -49,6 +55,9 @@ class ContentEditorMetaBox {
 
 	public function support_banner($post) {
 		include TMA_EXPERIENCE_MANAGER_DIR . 'includes/backend/banner.php';
+	}
+	public function preview($post) {
+		include 'preview-box.php';
 	}
 
 	public function editor($post) {

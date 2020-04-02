@@ -83,11 +83,9 @@ var exm_content_form = {
 };
 jQuery(function () {
 	if (window.exmContentSettingsValue) {
-		console.log(window.exmContentSettingsValue);
 		Object.keys(exm_content_form.fields).forEach((key) => {
 			var field = exm_content_form.fields[key];
 			if (field.exists_function && !field.exists_function(window.exmContentSettingsValue)) {
-				console.log(key + " / not set");
 				return;
 			}
 			var value = field.get_function(window.exmContentSettingsValue);
@@ -118,16 +116,6 @@ jQuery(function () {
 });
 
 function exm_content_settings_update_fields() {
-//	let settings = {};
-//	settings.content_type = document.querySelector("#exm_content_type").value;
-//	settings.recommendation = {};
-//	settings.recommendation.enabled = document.querySelector("#exm_recommendation").checked;
-//	settings.recommendation.type = document.querySelector("#exm_recommendation_type").value;
-//	settings.recommendation.count = document.querySelector("#exm_recommendation_count").value;
-//	settings.loading = {};
-//	settings.loading.animation = document.querySelector("#exm_content_loading_animation").checked;
-//	settings.loading.color = document.querySelector("#exm_content_loading_animation_color").value;
-
 	let settings = exm_content_form.default_settings();
 	Object.keys(exm_content_form.fields).forEach((key) => {
 		var field = exm_content_form.fields[key];
@@ -138,6 +126,6 @@ function exm_content_settings_update_fields() {
 			field.set_function(settings, document.querySelector("#" + key).value);
 		}
 	});
-	console.log(settings);
 	document.querySelector("#exm_content_settings").value = JSON.stringify(settings);
+	window.exmContentSettingsValue = settings;
 }

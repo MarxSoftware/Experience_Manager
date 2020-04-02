@@ -19,18 +19,4 @@
 	<div id="exm_javascript_editor" class="tabcontent">
 		<div class="editor" id="js-editor"></div>
 	</div>
-
-	<div class="preview-container">
-		<div class="devices">
-			<button class="selected" data-exm-device="desktop"><p class="desktop" /></button>
-			<button data-exm-device="tablet"><p class="tablet" /></button>
-			<button data-exm-device="phone"><p class="phone" /></button>
-		</div>
-		<hr />
-		<div class="preview">
-			<div class="preview-wrapper desktop">
-				<iframe class="preview-iframe " id="exm-preview-target"></iframe>
-			</div>
-		</div>
-	</div>
 </div>

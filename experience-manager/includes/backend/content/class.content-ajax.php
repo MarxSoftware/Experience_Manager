@@ -36,8 +36,23 @@ class ContentAjax {
 
 		add_action('wp_ajax_exm_content', array($this, 'exm_content'));
 		add_action('wp_ajax_nopriv_exm_content', array($this, 'exm_content'));
+		
+		add_action('wp_ajax_exm_random_products', array($this, 'exm_random_products'));
 	}
 
+	public function exm_random_products () {
+		$count = filter_input(INPUT_POST, 'count', FILTER_DEFAULT);
+		if ($count === FALSE || $count === NULL) {
+			$count = 3;
+		} else {
+			$count = intval($count);
+		}
+		$ecom = new \TMA\ExperienceManager\Modules\ECommerce\Ecommerce_Woo();
+		$products = $ecom->random_products($count);
+		
+		wp_send_json($products);
+	} 
+	
 	public function exm_content() {
 		$response = [];
 

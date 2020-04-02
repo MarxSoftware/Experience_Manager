@@ -2,6 +2,7 @@
   float: left;
 }
 .exm-content-editor {
+  height: 100%;
   /* Style the tab */
   /* Style the buttons inside the tab */
   /* Change background color of buttons on hover */
@@ -44,7 +45,6 @@
 }
 .exm-content-editor .preview-container {
   margin-top: 5px;
-  height: 500px;
   display: flex;
   flex-direction: column;
 }
@@ -72,17 +72,41 @@
 }
 .exm-content-editor .preview-container .preview {
   width: 100%;
-  height: 85%;
+  /*height: 85%;*/
   overflow: hidden;
-  display: flex;
-  justify-content: center;
+  /*display: flex;
+			justify-content: center;
+			*/
+  /* The device with borders */
+  /* The horizontal line on the top of the device */
+  /* The circle on the bottom of the device */
+  /* The screen (or content) of the device */
+  /* The laptop with borders */
+  /* The keyboard of the laptop */
+  /* The top of the keyboard */
+  /* The screen (or content) of the device */
+  /* The device with borders */
+  /* The horizontal line on the top of the device */
+  /* The circle on the bottom of the device */
+  /* The screen (or content) of the device */
 }
 .exm-content-editor .preview-container .preview .preview-wrapper {
   border: 1px solid black;
-  overflow: scroll;
+  overflow: hidden;
+  padding-top: 56.25%;
+  position: relative;
 }
 .exm-content-editor .preview-container .preview .preview-wrapper .preview-iframe {
+  /*height: 100%;
+					width: 100%;
+					border: none;
+					*/
+  overflow: scroll;
+  border: 0;
   height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
   width: 100%;
 }
 .exm-content-editor .preview-container .preview .phone {
@@ -96,5 +120,133 @@
 .exm-content-editor .preview-container .preview .tablet {
   width: 783px;
   height: 100%;
+}
+.exm-content-editor .preview-container .preview .smartphone {
+  position: relative;
+  width: 360px;
+  height: 640px;
+  margin: auto;
+  border: 16px black solid;
+  border-top-width: 60px;
+  border-bottom-width: 60px;
+  border-radius: 36px;
+}
+.exm-content-editor .preview-container .preview .smartphone:before {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 5px;
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #333;
+  border-radius: 10px;
+}
+.exm-content-editor .preview-container .preview .smartphone:after {
+  content: '';
+  display: block;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  left: 50%;
+  bottom: -65px;
+  transform: translate(-50%, -50%);
+  background: #333;
+  border-radius: 50%;
+}
+.exm-content-editor .preview-container .preview .smartphone .content {
+  width: 360px;
+  height: 640px;
+  background: white;
+}
+.exm-content-editor .preview-container .preview .laptop {
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scale(0.6) translate(-50%);
+  /* Scaled down for a better Try-it experience (change to 1 for full scale) */
+  transform: scale(0.6) translate(-50%);
+  /* Scaled down for a better Try-it experience (change to 1 for full scale) */
+  left: 50%;
+  position: relative;
+  margin: auto;
+  width: 1366px;
+  height: 800px;
+  border-radius: 6px;
+  border-style: solid;
+  border-color: black;
+  border-width: 24px 24px 80px;
+  /*background-color: black;*/
+}
+.exm-content-editor .preview-container .preview .laptop:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 1600px;
+  height: 60px;
+  margin: 80px 0 0 -110px;
+  background: black;
+  border-radius: 6px;
+}
+.exm-content-editor .preview-container .preview .laptop:before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 250px;
+  height: 30px;
+  bottom: -110px;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+  transform: translate(-50%);
+  background: #f1f1f1;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  z-index: 1;
+}
+.exm-content-editor .preview-container .preview .laptop .content {
+  width: 1366px;
+  height: 800px;
+  overflow: hidden;
+  border: none;
+}
+.exm-content-editor .preview-container .preview .tablet {
+  position: relative;
+  width: 768px;
+  height: 1024px;
+  margin: auto;
+  border: 16px black solid;
+  border-top-width: 60px;
+  border-bottom-width: 60px;
+  border-radius: 36px;
+}
+.exm-content-editor .preview-container .preview .tablet:before {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 5px;
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #333;
+  border-radius: 10px;
+}
+.exm-content-editor .preview-container .preview .tablet:after {
+  content: '';
+  display: block;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  left: 50%;
+  bottom: -65px;
+  transform: translate(-50%, -50%);
+  background: #333;
+  border-radius: 50%;
+}
+.exm-content-editor .preview-container .preview .tablet .content {
+  width: 768px;
+  height: 1024px;
+  background: white;
+  margin: -1px;
 }
 /*# sourceMappingURL=content-editor.css.map */

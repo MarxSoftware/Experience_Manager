@@ -19,6 +19,20 @@ abstract class Ecommerce {
 	protected abstract function _random_products($count);
 
 	protected abstract function _popular_products($count);
+	
+	protected abstract function _map_product($product);
+
+	public function random_products($count) {
+		$products = $this->_random_products($count);
+		$result = [];
+		foreach ($products as $product) {
+			$prod = $this->_load_product($product->ID);
+			if ($prod !== FALSE) {
+				$result[] = $prod;
+			}
+		}
+		return $result;
+	}
 
 	protected function load_products($exp_products) {
 		$products = [];
@@ -37,7 +51,7 @@ abstract class Ecommerce {
 			$products[] = $this->_load_product($product->ID);
 		}
 		if (sizeof($products) < $count) {
-			$random = $this->_random_products($count - sizeof($products));
+			$random = $this->random_products($count - sizeof($products));
 			foreach ($random as $product) {
 				$products[] = $this->_load_product($product->ID);
 			}
@@ -103,7 +117,7 @@ abstract class Ecommerce {
 		}
 		return $products;
 	}
-	
+
 	public function bought_together($product, $count = 3) {
 		$values = $this->recommendations_bought_together($product);
 
@@ -123,8 +137,8 @@ abstract class Ecommerce {
 		}
 		return $products;
 	}
-	
-		public function similar_user($count = 3) {
+
+	public function similar_user($count = 3) {
 		$values = $this->recommendations_similar_users();
 
 		$products = [];
@@ -163,7 +177,7 @@ abstract class Ecommerce {
 		$request = new \TMA\ExperienceManager\TMA_Request();
 		return $request->module("module-ecommerce", "/userprofile", $parameters);
 	}
-	
+
 	private function recommendations_bought_together($product) {
 		$parameters = [
 			"product" => $product,
@@ -173,7 +187,7 @@ abstract class Ecommerce {
 		$request = new \TMA\ExperienceManager\TMA_Request();
 		return $request->module("module-ecommerce", "/recommendations/bought_together", $parameters);
 	}
-	
+
 	private function recommendations_similar_users() {
 		$parameters = [
 			"userid" => exm_get_userid(),

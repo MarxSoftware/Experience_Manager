@@ -54,9 +54,13 @@ class Ecommerce_Woo extends Ecommerce {
 		if ($woo_product == null || $woo_product === false) {
 			return FALSE;
 		}
-		
+
+		return $this->_map_product($woo_product);
+	}
+	
+	protected function _map_product ($woo_product) {
 		$product = [
-			"id" => $product_id,
+			"id" => $woo_product->get_id(),
 			"title" => $woo_product->get_title(),
 			"sku" => $woo_product->get_sku("edit"),
 			"price" => $woo_product->get_price_html(),
@@ -64,7 +68,7 @@ class Ecommerce_Woo extends Ecommerce {
 			"image" => $woo_product->get_image("woocommerce_thumbnail", ['class' => 'image']),
 			"url" => $woo_product->get_permalink()
 		];
-
+		
 		return $product;
 	}
 
