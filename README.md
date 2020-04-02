@@ -10,3 +10,6 @@ For configuration the Experience Platform use following url: http://host.docker.
 
 Use Composer to load dependencies:
 --prefer-dist
+
+
+Flex Content Preview: https://www.w3schools.com/howto/howto_css_devices.asp
