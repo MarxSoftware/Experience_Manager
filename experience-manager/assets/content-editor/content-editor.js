@@ -25,7 +25,7 @@ function exm_content_update_preview() {
 		}
 	};
 
-	if (window.exmContentSettingsValue.recommendation && window.exmContentSettingsValue.recommendation.enabled) {
+	if (window.exmContentSettingsValue && window.exmContentSettingsValue.recommendation && window.exmContentSettingsValue.recommendation.enabled) {
 		EXM.AJAX.request("exm_random_products", function (data) {
 			console.log(data);
 			view.recommendation = data;
