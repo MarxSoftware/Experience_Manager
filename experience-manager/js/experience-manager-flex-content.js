@@ -17,13 +17,17 @@
 webtools.domReady(function (event) {
 	document.querySelectorAll("[data-exm-flex-content]").forEach(function ($item) {
 		let content_id = $item.dataset.exmFlexContent;
+		let current_id = $item.dataset.exmCurrentId;
+		console.log(content_id);
+		console.log(current_id);
 		EXM.AJAX.request("exm_content", function (data) {
+//			console.log(data);
 			if (!data.error) {
 				EXM.DOM.insertElement("style", "text/css", data.css);
 				$item.innerHTML = data.html;
 				EXM.DOM.insertElement("script", "text/javascript", data.js);
 			}
-		}, "&id=" + content_id);
+		}, "&id=" + content_id + "&post_id=" + current_id);
 	});
 });
 

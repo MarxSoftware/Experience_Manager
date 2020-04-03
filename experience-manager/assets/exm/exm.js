@@ -54,7 +54,7 @@ EXM.AJAX.request = function (ajax_action, callback, parameters) {
 	.then(function (data) {
 		callback(data);
 	}).catch(function (error) {
-		console.log(JSON.stringify(error));
+		console.log(error);
 	});
 };
 

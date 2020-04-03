@@ -50,12 +50,12 @@
 					<label for="exm_recommendation_type">Recommendation type</label>
 				</th>
 				<td>
-					<select class="exm_settings_change" id="exm_recommendation_type" name="exm_content_type">
+					<select class="exm_settings_change" id="exm_recommendation_type" name="exm_recommendation_type">
 						<option value="recently_viewed">Recently viewed</option>
 						<option value="frequently_purchased">Frequently purchased</option>
 						<option value="popular">Popular products</option>
-						<option value="similar_products">Similar products</option>
-						<option value="similar_user">Similapr user</option>
+						<option value="bought_together">Bought together</option>
+						<option value="similar_user">Similar user</option>
 					</select>
 				</td>
 			</tr>

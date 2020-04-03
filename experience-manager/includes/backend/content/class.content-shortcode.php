@@ -36,7 +36,8 @@ class ContentShortCode {
 		$settings_string = get_post_meta($args["id"], 'exm_content_settings', true);
 		$settings = json_decode($settings_string);
 
-		$html = "<div data-exm-flex-content='${args["id"]}'>";
+		$current_id = get_the_ID();
+		$html = "<div data-exm-flex-content='${args["id"]}' data-exm-current-id='${current_id}'>";
 
 		if (property_exists($settings, "loading") && $settings->loading->animation === true) {
 			$html .= "<div class='spinner'>
