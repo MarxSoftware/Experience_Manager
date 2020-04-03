@@ -48,8 +48,11 @@ class ContentAjax {
 		} else {
 			$count = intval($count);
 		}
-		$ecom = new \TMA\ExperienceManager\Modules\ECommerce\Ecommerce_Woo();
-		$products = $ecom->random_products($count);
+		$products = [];
+		if (\TMA\ExperienceManager\Plugins::getInstance()->woocommerce()) {
+			$ecom = new \TMA\ExperienceManager\Modules\ECommerce\Ecommerce_Woo();
+			$products = $ecom->random_products($count);
+		}
 
 		wp_send_json($products);
 	}
