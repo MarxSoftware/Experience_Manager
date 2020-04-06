@@ -20,12 +20,11 @@ webtools.domReady(function (event) {
 		let current_id = $item.dataset.exmCurrentId;
 		console.log(content_id);
 		console.log(current_id);
-		EXM.AJAX.request("exm_content", function (data) {
-//			console.log(data);
+		EXM.Ajax.request("exm_content", function (data) {
 			if (!data.error) {
-				EXM.DOM.insertElement("style", "text/css", data.css);
+				EXM.Dom.insertElement("style", "text/css", data.css);
 				$item.innerHTML = data.html;
-				EXM.DOM.insertElement("script", "text/javascript", data.js);
+				EXM.Dom.insertElement("script", "text/javascript", data.js);
 			}
 		}, "&id=" + content_id + "&post_id=" + current_id);
 	});

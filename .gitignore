@@ -3,6 +3,8 @@ build/
 nbproject/
 gutenberg/block-targeting/node_modules
 gutenberg/targeting/node_modules
+exm/node_modules
+exm/dist
 environment/plugins
 query-editor/node_modules
 /node_modules

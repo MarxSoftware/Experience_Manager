@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Getting Started</title>
+    <script>
+
+      function fadeIn(){
+        document.querySelector(".popup").classList.add('animation-fade-in');
+        document.querySelector(".popup").classList.remove('animation-fade-out');  
+      }
+      
+      function fadeOut(){
+          document.querySelector(".popup").classList.add('animation-fade-out');
+          document.querySelector(".popup").classList.remove('animation-fade-in');
+      }
+      </script>
+  </head>
+  <body>
+    <script src="./dist/exm.js"></script>
+
+    <div class="exm">
+      <div class="popup position-top-center animation-fade-out">
+        <div style="border: 1px solid red; width: 250px; height: 250px;">
+          <h3>Ich bin ein popup</h3>
+          <p>
+            Das ist mein inhalt
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <button onclick="fadeIn()">FadeIn</button><button onclick="fadeOut()">FadeOut</button>
+  </body>
+</html>
