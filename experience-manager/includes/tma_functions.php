@@ -52,7 +52,9 @@ function tma_exm_get_user_segments($defaultValue = []) {
 	$request = new TMA\ExperienceManager\TMA_Request();
 	$response = $request->getSegments(\TMA\ExperienceManager\TMA_Request::getUserID());
 	tma_exm_log("tma_exm_get_user_segments: " . json_encode($response));
-	if ($response !== NULL && $response !== FALSE && $response->status === "ok" && property_exists($response->user, "actionSystem")) {
+	if ($response !== NULL && $response !== FALSE 
+			&& property_exists($response, "status")
+			&& $response->status === "ok" && property_exists($response->user, "actionSystem")) {
 //		$tma_config['user_segments'] = $response->user->actionSystem->segments;
 		return $response->user->actionSystem->segments;
 	}
