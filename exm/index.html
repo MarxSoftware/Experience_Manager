@@ -5,13 +5,22 @@
     <script>
 
       function fadeIn(){
-        document.querySelector(".popup").classList.add('animation-fade-in');
-        document.querySelector(".popup").classList.remove('animation-fade-out');  
+        document.querySelector("#pop1").classList.add('animation-fade-in');
+        document.querySelector("#pop1").classList.remove('animation-fade-out');  
       }
       
       function fadeOut(){
-          document.querySelector(".popup").classList.add('animation-fade-out');
-          document.querySelector(".popup").classList.remove('animation-fade-in');
+          document.querySelector("#pop1").classList.add('animation-fade-out');
+          document.querySelector("#pop1").classList.remove('animation-fade-in');
+      }
+      function slideIn(selector, pos){
+        document.querySelector(selector).classList.add('show');
+        document.querySelector(selector).classList.remove('slide-out-' + pos);  
+      }
+      
+      function slideOut(selector, pos){
+          document.querySelector(selector).classList.add('slide-out-' + pos);
+          document.querySelector(selector).classList.remove('show');
       }
       </script>
   </head>
@@ -19,16 +28,47 @@
     <script src="./dist/exm.js"></script>
 
     <div class="exm">
-      <div class="popup position-top-center animation-fade-out">
-        <div style="border: 1px solid red; width: 250px; height: 250px;">
-          <h3>Ich bin ein popup</h3>
-          <p>
-            Das ist mein inhalt
-          </p>
+      <div class="popup-container position-top-center" style="width: 260px; height: 260px;">
+        <div id="pop1" class="popup  animation-fade-out">
+          <div style="border: 1px solid red; width: 250px; height: 250px;">
+            <h3>Ich bin ein popup</h3>
+            <p>
+              Das ist mein inhalt
+            </p>
+          </div>
         </div>
       </div>
-    </div>
 
+      <div class="popup-container position-bottom-left" style="width: 260px; height:
+      260px;">
+        <div id="pop2" class="popup slide-out-left" >
+          <div style="border: 1px solid red; width: 250px; height: 250px;">
+            <h3>Ich bin ein popup</h3>
+            <p>
+              Das ist mein inhalt
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="popup-container position-bottom-right" style="width: 260px;
+        height: 260px;">
+        <div id="pop3" class="popup slide-out-right">
+          <div style="border: 1px solid red; width: 250px; height: 250px;">
+            <h3>Ich bin ein popup</h3>
+            <p>
+              Das ist mein inhalt
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <button onclick="slideIn('#pop3', 'right')">SlideIn right</button><button
+      onclick="slideOut('#pop3', 'right')">SlideOut right</button>
+    <br>
+    <button onclick="slideIn('#pop2', 'left')">SlideIn left</button><button
+      onclick="slideOut('#pop2', 'left')">SlideOut left</button>
+    <br>
     <button onclick="fadeIn()">FadeIn</button><button onclick="fadeOut()">FadeOut</button>
   </body>
 </html>

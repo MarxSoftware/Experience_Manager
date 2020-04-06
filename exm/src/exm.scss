@@ -1,53 +1,7 @@
 .exm {
     .popup {
         position: absolute;
-
-        &.position-top-left {
-            left: 10px;
-            top: 10px;
-        }
-        &.position-top-right {
-            right: 10px;
-            top: 10px;
-        }
-        &.position-top-center {
-            top: 10px;
-            left: 50%; /* position the left edge of the element at the middle of the parent */
-
-            transform: translateX(-50%);
-        }
-        &.position-center {
-            top: 50%; /* position the top  edge of the element at the middle of the parent */
-            left: 50%; /* position the left edge of the element at the middle of the parent */
-
-            transform: translate(-50%, -50%); /* This is a shorthand of translateX(-50%) and translateY(-50%) */
-        }
-        &.position-center-left {
-            top: 50%; /* position the top  edge of the element at the middle of the parent */
-            left: 10px;
-
-            transform: translateY(-50%);
-        }
-        &.position-center-right {
-            top: 50%; /* position the top  edge of the element at the middle of the parent */
-            right: 10px;
-
-            transform: translateY(-50%);
-        }
-        &.position-bottom-left {
-            left: 10px;
-            bottom: 10px;
-        }
-        &.position-bottom-right {
-            right: 10px;
-            bottom: 10px;
-        }
-        &.position-bottom-center {
-            bottom: 10px;
-            left: 50%; /* position the left edge of the element at the middle of the parent */
-
-            transform: translateX(-50%);
-        }
+        transition: transform 0.5s ease;
 
         &.animation-fade-in {
             opacity: 1;
@@ -62,6 +16,71 @@
             -moz-transition: opacity 0.5s ease-out;
             -o-transition: opacity 0.5s ease-out;
             transition: opacity 0.5s ease-out;
+        }
+
+        &.slide-out-left {
+            transform: translateX(-200%);
+            -webkit-transform: translateX(-200%);
+        }
+        &.slide-out-right {
+            transform: translateX(200%);
+            -webkit-transform: translateX(200%);
+        }
+        &.show {
+            transform: translateX(0);
+            -webkit-transform: translateX(0);
+        }
+    }
+
+    .popup-container {
+        position: absolute;
+        overflow: hidden;
+
+        &.position-top-left {
+            left: 0px;
+            top: 0px;
+        }
+        &.position-top-right {
+            right: 0px;
+            top: 0px;
+        }
+        &.position-top-center {
+            top: 0px;
+            left: 50%; /* position the left edge of the element at the middle of the parent */
+
+            transform: translateX(-50%);
+        }
+        &.position-center {
+            top: 50%; /* position the top  edge of the element at the middle of the parent */
+            left: 50%; /* position the left edge of the element at the middle of the parent */
+
+            transform: translate(-50%, -50%); /* This is a shorthand of translateX(-50%) and translateY(-50%) */
+        }
+        &.position-center-left {
+            top: 50%; /* position the top  edge of the element at the middle of the parent */
+            left: 0px;
+
+            transform: translateY(-50%);
+        }
+        &.position-center-right {
+            top: 50%; /* position the top  edge of the element at the middle of the parent */
+            right: 0px;
+
+            transform: translateY(-50%);
+        }
+        &.position-bottom-left {
+            left: 0px;
+            bottom: 0px;
+        }
+        &.position-bottom-right {
+            right: 0px;
+            bottom: 0px;
+        }
+        &.position-bottom-center {
+            bottom: 0px;
+            left: 50%; /* position the left edge of the element at the middle of the parent */
+
+            transform: translateX(-50%);
         }
     }
 }
