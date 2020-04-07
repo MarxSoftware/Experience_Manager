@@ -42,7 +42,8 @@ class ContentSettingsMetaBox {
 	
 
 	public function settings($post) {
-		$settings = get_post_meta($post->ID, 'exm_content_settings', true);
+		$content = new Flex_Content($post->ID);
+		$settings = $content->get_meta_settings();
 		tma_exm_log("loaded: " . $settings);
 		$settings_json = json_decode($settings);
 		?>

@@ -53,6 +53,8 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	"TMA\ExperienceManager\Events\EDD_TRACKER" => "includes/modules/events/class.edd_tracker.php",
 	"TMA\ExperienceManager\Events\Base" => "includes/modules/events/class.ecommerce_base.php",	
 	// Content Editor
+	"TMA\ExperienceManager\Content\Flex_Content" => "includes/backend/content/class.content.php",
+	"TMA\ExperienceManager\Content\Flex_Content_Engine" => "includes/backend/content/class.content-engine.php",
 	"TMA\ExperienceManager\Content\ContentType" => "includes/backend/content/class.content-type.php",
 	"TMA\ExperienceManager\Content\ContentEditor" => "includes/backend/content/class.content-editor.php",
 	"TMA\ExperienceManager\Content\ContentEditorMetaBox" => "includes/backend/content/class.content-editor-metabox.php",

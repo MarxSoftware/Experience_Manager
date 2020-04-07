@@ -55,34 +55,19 @@ class ContentEditor {
 
 	public function save($post_id) {
 		tma_exm_log("save");
+		$content = new Flex_Content($post_id);
 		if (array_key_exists('exm_content_editor_html', $_POST)) {
 			$editor_value = filter_input(INPUT_POST, 'exm_content_editor_html');
-			update_post_meta(
-					$post_id,
-					'exm_content_editor_html',
-					$editor_value
-			);
+			$content->set_meta_editor_html($editor_value);
 		}
 		if (array_key_exists('exm_content_editor_js', $_POST)) {
-			update_post_meta(
-					$post_id,
-					'exm_content_editor_js',
-					$_POST['exm_content_editor_js']
-			);
+			$content->set_meta_editor_js($_POST['exm_content_editor_js']);
 		}
 		if (array_key_exists('exm_content_editor_css', $_POST)) {
-			update_post_meta(
-					$post_id,
-					'exm_content_editor_css',
-					$_POST['exm_content_editor_css']
-			);
+			$content->set_meta_editor_css($_POST['exm_content_editor_css']);
 		}
 		if (array_key_exists('exm_content_settings', $_POST)) {
-			update_post_meta(
-					$post_id,
-					'exm_content_settings',
-					$_POST['exm_content_settings']
-			);
+			$content->set_meta_settings($_POST['exm_content_settings']);
 		}
 	}
 }

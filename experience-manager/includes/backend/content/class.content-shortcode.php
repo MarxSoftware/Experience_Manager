@@ -33,7 +33,8 @@ class ContentShortCode {
 			return "";
 		}
 
-		$settings_string = get_post_meta($args["id"], 'exm_content_settings', true);
+		$content = new Flex_Content($args["id"]);
+		$settings_string = $content->get_meta_settings();
 		$settings = json_decode($settings_string);
 
 		$current_id = get_the_ID();
