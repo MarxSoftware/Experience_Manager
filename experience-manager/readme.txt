@@ -23,7 +23,8 @@ Features:
 * Support for [Gutenberg](https://wordpress.org/gutenberg/)
 * Support for [Divi](https://www.elegantthemes.com/gallery/divi/)
 * Support for [Beaver](https://www.wpbeaverbuilder.com/)
-* Template-Tag to check if a user match a specific segment ( e.q. tma_exm_is_in_segment("a_segment_id"))
+* Template-Tag to check if a user match a specific segment ( e.q. exm_is_in_segment("a_segment_id"))
+* Template-Tag to to insert felx content ( e.q. exm_content(<content_id>))
 * Support for Cache Plugins
 * Support for [Popup Maker](https://wppopupmaker.com/)
 * Support for [WP Popups](https://wppopups.com/)
