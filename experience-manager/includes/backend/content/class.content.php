@@ -47,16 +47,19 @@ class Flex_Content {
 	}
 
 	public function set_meta_settings($value) {
-		
-		tma_exm_log("settings: " . $value);
-		
 		$this->update_meta('exm_content_settings', $value);
 
-		$settings_obj = json_decode($value);
-		$this->set_meta_content_type($settings_obj->content_type);
+		$settings = $this->get_settings();
+		$this->set_meta_content_type($settings->content_type);
+	}
+	
+	public function get_settings () {
+		$settings = $this->get_meta_settings();
+		return json_decode(stripslashes($settings));
 	}
 
 	public function set_meta_content_type($value) {
+		tma_exm_log("content type: " . $value);
 		$this->update_meta("exm_content_type", $value);
 	}
 

@@ -43,7 +43,7 @@ class Flex_Content_Engine {
 
 	private function get_settings_json() {
 		if ($this->settings == null) {
-			$this->settings = json_decode($this->content->get_meta_settings());
+			$this->settings = $this->content->get_settings();
 		}
 		return $this->settings;
 	}

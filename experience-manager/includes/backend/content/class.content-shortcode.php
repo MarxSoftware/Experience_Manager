@@ -34,8 +34,7 @@ class ContentShortCode {
 		}
 
 		$content = new Flex_Content($args["id"]);
-		$settings_string = $content->get_meta_settings();
-		$settings = json_decode($settings_string);
+		$settings = $content->get_settings();
 
 		$current_id = get_the_ID();
 		$html = "<div data-exm-flex-content='${args["id"]}' data-exm-current-id='${current_id}'>";
