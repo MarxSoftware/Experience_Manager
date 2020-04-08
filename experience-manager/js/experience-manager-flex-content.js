@@ -22,9 +22,9 @@ webtools.domReady(function (event) {
 		console.log(current_id);
 		EXM.Ajax.request("exm_content", function (data) {
 			if (!data.error) {
-				EXM.Dom.insertElement("style", "text/css", data.css);
+				EXM.Dom.insertHeadElement("style", "text/css", data.css);
 				$item.innerHTML = data.html;
-				EXM.Dom.insertElement("script", "text/javascript", data.js);
+				EXM.Dom.insertHeadElement("script", "text/javascript", data.js);
 			}
 		}, "&id=" + content_id + "&post_id=" + current_id);
 	});
