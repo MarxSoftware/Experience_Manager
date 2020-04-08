@@ -2,7 +2,7 @@ if (typeof EXM === "undefined") {
 	window.EXM = {};
 }
 
-if (typeof EXM.WOO == "undefined") {
+if (typeof EXM.WOO === "undefined") {
 	EXM.WOO = {};
 }
 EXM.WOO.addToBasket = function (product_id, product_sku, quantity, callback) {

@@ -24,7 +24,7 @@ class ContentEditor {
 	}
 
 	public function register() {
-		add_action('save_post_tma_content', [$this, 'save']);
+		add_action('save_post_exm_content', [$this, 'save']);
 		add_filter('gutenberg_can_edit_post_type', [$this, "disable_gutenberg"], 10, 2);
 		add_action('admin_enqueue_scripts', [$this, "query_editor_scripts"]);
 	}
@@ -54,7 +54,7 @@ class ContentEditor {
 
 
 	public function save($post_id) {
-		tma_exm_log("save");
+		tma_exm_log("save: " . $_POST['exm_content_settings']);
 		$content = new Flex_Content($post_id);
 		if (array_key_exists('exm_content_editor_html', $_POST)) {
 			$editor_value = filter_input(INPUT_POST, 'exm_content_editor_html');

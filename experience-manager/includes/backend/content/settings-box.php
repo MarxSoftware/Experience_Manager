@@ -9,7 +9,7 @@
 			<td>
 				<select class="exm_settings_change" id="exm_content_type" name="exm_content_type">
 					<option value="simple_content">Simple Content</option>
-					<option value="popup" disabled="disabled">Popup</option>
+					<option value="popup" >Popup</option>
 				</select>
 			</td>
 		</tr>
@@ -42,7 +42,7 @@
 
 <div id="exm_recommendation_settings" style="display: none;">
 	<h3>Recommendation settings</h3>
-	<p>These are settings related to content type recommendation</p>
+	<p>These are settings related to recommendation</p>
 	<table class="form-table">
 		<tbody>
 			<tr>
@@ -72,4 +72,54 @@
 		</tbody>
 	</table>
 </div>
+
+<div id="exm_popup_settings" style="display: none;">
+	<h3>Popup settings</h3>
+	<p>These are settings related to content type popup</p>
+	<table class="form-table">
+		<tbody>
+			<tr>
+				<th scope="row">
+					<label for="exm_popup_position">Position</label>
+				</th>
+				<td>
+					<select class="exm_settings_change" id="exm_popup_position" name="exm_popup_position">
+						<option value="tl">Top left</option>
+						<option value="tc">Top center</option>
+						<option value="tr">Top right</option>
+						<option value="ml">Middle left</option>
+						<option value="mc">Middle center</option>
+						<option value="mr">Middle right</option>
+						<option value="bl">Bottom left</option>
+						<option value="bc">Bottom center</option>
+						<option value="br">Bottom right</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">
+					<label for="exm_popup_animation">Animation</label>
+				</th>
+				<td>
+					<select class="exm_settings_change" id="exm_popup_animation" name="exm_popup_animation">
+						<option value="fade">Fade</option>
+						<option value="slide">Slide</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">
+					<label for="exm_popup_trigger">Trigger</label>
+				</th>
+				<td>
+					<select class="exm_settings_change" id="exm_popup_trigger" name="exm_popup_trigger">
+						<option value="5seconds">After 5 seconds</option>
+						<option value="exitintend">Exit intent</option>
+					</select>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
 <input type="hidden" name="exm_content_settings" id="exm_content_settings" />

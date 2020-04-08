@@ -4,12 +4,16 @@ let exm_contains_recommendation = (config) => {
 let exm_contains_loading = (config) => {
 	return typeof config.loading !== "undefined";
 };
+let exm_contains_popup = (config) => {
+	return typeof config.popup !== "undefined";
+};
 
 var exm_content_form = {
 	"default_settings": () => {
 		return {
 			recommendation: {},
-			loading: {}
+			loading: {},
+			popup: {}
 		};
 	},
 	"fields": {
@@ -71,12 +75,47 @@ var exm_content_form = {
 			set_function: (config, value) => {
 				config.loading.color = value;
 			}
+		},
+		"exm_popup_animation": {
+			type: "select",
+			exists_function: exm_contains_popup,
+			get_function: (config) => {
+				return config.popup.animation;
+			},
+			set_function: (config, value) => {
+				config.popup.animation = value;
+			}
+		},
+		"exm_popup_position": {
+			type: "select",
+			exists_function: exm_contains_popup,
+			get_function: (config) => {
+				return config.popup.position;
+			},
+			set_function: (config, value) => {
+				config.popup.position = value;
+			}
+		},
+		"exm_popup_trigger": {
+			type: "select",
+			exists_function: exm_contains_popup,
+			get_function: (config) => {
+				return config.popup.trigger;
+			},
+			set_function: (config, value) => {
+				config.popup.trigger = value;
+			}
 		}
 	},
 	functions: [
 		(config) => {
 			if (config.recommendation && config.recommendation.enabled) {
 				document.querySelector("#exm_recommendation_settings").style.display = "block";
+			}
+		},
+		(config) => {
+			if (config.content_type === "popup") {
+				document.querySelector("#exm_popup_settings").style.display = "block";
 			}
 		}
 	]
@@ -108,6 +147,13 @@ jQuery(function () {
 			document.querySelector("#exm_recommendation_settings").style.display = "none";
 		}
 	});
+	document.querySelector("#exm_content_type").addEventListener("change", (event) => {
+		if (event.target.value === "popup") {
+			document.querySelector("#exm_popup_settings").style.display = "block";
+		} else {
+			document.querySelector("#exm_popup_settings").style.display = "none";
+		}
+	});
 	document.querySelectorAll(".exm_settings_change").forEach(function ($item) {
 		$item.addEventListener("change", (event) => {
 			exm_content_settings_update_fields();
@@ -128,4 +174,6 @@ function exm_content_settings_update_fields() {
 	});
 	document.querySelector("#exm_content_settings").value = JSON.stringify(settings);
 	window.exmContentSettingsValue = settings;
+	
+	console.log(settings);
 }

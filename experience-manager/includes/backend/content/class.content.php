@@ -14,53 +14,74 @@ namespace TMA\ExperienceManager\Content;
  * @author marx
  */
 class Flex_Content {
-	
+
 	var $content_id = 0;
-	
-    public function __construct($post_id) {
+
+	public function __construct($post_id) {
 		$this->content_id = $post_id;
 	}
-	
-	public function get_id () {
+
+	public function get_type() {
+		return $this->get_meta('exm_content_type');
+	}
+
+	public function get_id() {
 		return $this->content_id;
 	}
-	
-	public function get_meta_settings () {
+
+	public function get_meta_settings() {
 		$settings = $this->get_meta('exm_content_settings');
-		tma_exm_log("loaded settings: " . $settings);
 		return $settings;
 	}
-	public function get_meta_editor_html () {
+
+	public function get_meta_editor_html() {
 		return $this->get_meta('exm_content_editor_html');
 	}
-	public function get_meta_editor_css () {
+
+	public function get_meta_editor_css() {
 		return $this->get_meta('exm_content_editor_css');
 	}
-	public function get_meta_editor_js () {
+
+	public function get_meta_editor_js() {
 		return $this->get_meta('exm_content_editor_js');
 	}
-	
-	public function set_meta_settings ($value) {
+
+	public function set_meta_settings($value) {
+		
+		tma_exm_log("settings: " . $value);
+		
 		$this->update_meta('exm_content_settings', $value);
+
+		$settings_obj = json_decode($value);
+		$this->set_meta_content_type($settings_obj->content_type);
 	}
-	public function set_meta_editor_html ($value) {
+
+	public function set_meta_content_type($value) {
+		$this->update_meta("exm_content_type", $value);
+	}
+
+	public function set_meta_editor_html($value) {
 		$this->update_meta('exm_content_editor_html', $value);
 	}
-	public function set_meta_editor_css ($value) {
+
+	public function set_meta_editor_css($value) {
 		$this->update_meta('exm_content_editor_css', $value);
 	}
-	public function set_meta_editor_js ($value) {
+
+	public function set_meta_editor_js($value) {
 		$this->update_meta('exm_content_editor_js', $value);
 	}
-	
-	private function get_meta ($key) {
+
+	private function get_meta($key) {
 		return get_post_meta($this->content_id, $key, true);
 	}
-	private function update_meta ($key, $value) {
+
+	private function update_meta($key, $value) {
 		update_post_meta(
-					$this->content_id,
-					$key,
-					$value
-			);
+				$this->content_id,
+				$key,
+				$value
+		);
 	}
+
 }

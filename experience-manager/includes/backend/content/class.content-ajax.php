@@ -36,10 +36,48 @@ class ContentAjax {
 
 		add_action('wp_ajax_exm_content', array($this, 'exm_content'));
 		add_action('wp_ajax_nopriv_exm_content', array($this, 'exm_content'));
+		
+		add_action('wp_ajax_exm_content_popups', array($this, 'load_popups'));
+		add_action('wp_ajax_nopriv_exm_content_popups', array($this, 'load_popups'));
 
 		add_action('wp_ajax_exm_random_products', array($this, 'exm_random_products'));
 	}
 
+	public function load_popups () {
+		
+		$post_id = FALSE;
+		if ($_POST['post_id']) {
+			$post_id = filter_input(INPUT_POST, 'post_id', FILTER_DEFAULT);
+		}
+		
+		$args = array(
+			'post_type' => array( 'exm_content' ),
+			'meta_key' => 'exm_content_type',
+			'meta_key' => 'popup',
+			'orderby' => 'rand',
+			'order' => 'desc',
+			'posts_per_page' => 1000
+		);
+
+		$post_list = get_posts($args);
+
+		$popups = [];
+		foreach ( $post_list as $post ) {
+			$content = new Flex_Content($post->ID);
+			$content_engine = new Flex_Content_Engine($content);
+
+			$popup_content = "<style>" . $content_engine->get_compiled_css($post_id) . "</style>";
+			$popup_content .= $content_engine->get_compiled_html($post_id);
+			$popup_content .= "<script>" . $content_engine->get_compiled_js($post_id) . "</script>";
+		
+			$popup = [
+				"content" => $popup_content
+			];
+			$popups[] = $popup;		}
+		
+		return json_encode($popups);
+	}
+	
 	public function exm_random_products() {
 		$count = filter_input(INPUT_POST, 'count', FILTER_DEFAULT);
 		if ($count === FALSE || $count === NULL) {

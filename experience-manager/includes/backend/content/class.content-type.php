@@ -15,7 +15,7 @@ namespace TMA\ExperienceManager\Content;
  */
 class ContentType {
 
-	public static $TYPE = "tma_content";
+	public static $TYPE = "exm_content";
 
 	/**
 	 * instance

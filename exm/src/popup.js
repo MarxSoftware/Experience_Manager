@@ -3,7 +3,7 @@
 {
     'id' : "#id",
     'trigger' : {
-        'type' : 'after'
+        'type' : 'after<exit_intent'
     },
     'position' : 'tl|tc|tr|ml|mc|mr|bl|bc|br',
     'animation' : 'fade|slide,
@@ -60,7 +60,7 @@ var Popup = function () {
             default:
                 return ''
         }
-    }   
+    }
 
     var init = function (configuration) {
         let exm_container = document.getElementById("exm_container");
@@ -82,9 +82,9 @@ var Popup = function () {
         popup_container.style.zIndex = "1000"
         popup_container.appendChild(popup)
 
-        
+
         exm_container.appendChild(popup_container)
-        
+
         popup_container.style.width = (popup.offsetWidth + 10) + "px"
         popup_container.style.height = (popup.offsetHeight + 10) + "px"
 
@@ -94,11 +94,27 @@ var Popup = function () {
 
         popups[configuration.id] = configuration;
 
-        setTimeout(() => {
-            document.querySelector("#" + configuration.id).classList.toggle("animation-fade-out")
-            document.querySelector("#" + configuration.id).classList.toggle("animation-fade-in")
-        }, 5000);
-        
+        if (configuration.trigger.type === "after5") {
+            setTimeout(() => {
+                document.querySelector("#" + configuration.id).classList.toggle("animation-fade-out")
+                document.querySelector("#" + configuration.id).classList.toggle("animation-fade-in")
+            }, 5000);
+        } else if (configuration.trigger.type === "exit_intent") {
+            let onMouseOut = (event) => {
+                if (
+                    event.clientY < 50 &&
+                    event.relatedTarget == null &&
+                    event.target.nodeName.toLowerCase() !== 'select') {
+                    // Remove this event listener
+                    document.removeEventListener("mouseout", onMouseOut);
+                    // Show the popup
+                    document.querySelector("#" + configuration.id).classList.toggle("animation-fade-out")
+                    document.querySelector("#" + configuration.id).classList.toggle("animation-fade-in")
+                }
+            };
+            document.addEventListener("mouseout", onMouseOut);
+        }
+
     }
 
     var close = function (id) {
