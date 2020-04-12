@@ -28,32 +28,30 @@ class ContentAjax {
 		
 	}
 
-	
-
 	public function register() {
 		add_action('wp_ajax_exm_user', array($this, 'exm_user'));
 		add_action('wp_ajax_nopriv_exm_user', array($this, 'exm_user'));
 
 		add_action('wp_ajax_exm_content', array($this, 'exm_content'));
 		add_action('wp_ajax_nopriv_exm_content', array($this, 'exm_content'));
-		
+
 		add_action('wp_ajax_exm_content_popups', array($this, 'load_popups'));
 		add_action('wp_ajax_nopriv_exm_content_popups', array($this, 'load_popups'));
 
 		add_action('wp_ajax_exm_random_products', array($this, 'exm_random_products'));
 	}
 
-	public function load_popups () {
-		
+	public function load_popups() {
+
 		$post_id = FALSE;
 		if ($_POST['post_id']) {
 			$post_id = filter_input(INPUT_POST, 'post_id', FILTER_DEFAULT);
 		}
-		
+
 		$args = array(
-			'post_type' => array( 'exm_content' ),
+			'post_type' => array('exm_content'),
 			'meta_key' => 'exm_content_type',
-			'meta_key' => 'popup',
+			'meta_value' => 'popup',
 			'orderby' => 'rand',
 			'order' => 'desc',
 			'posts_per_page' => 1000
@@ -62,22 +60,27 @@ class ContentAjax {
 		$post_list = get_posts($args);
 
 		$popups = [];
-		foreach ( $post_list as $post ) {
+		foreach ($post_list as $post) {
 			$content = new Flex_Content($post->ID);
 			$content_engine = new Flex_Content_Engine($content);
 
 			$popup_content = "<style>" . $content_engine->get_compiled_css($post_id) . "</style>";
 			$popup_content .= $content_engine->get_compiled_html($post_id);
 			$popup_content .= "<script>" . $content_engine->get_compiled_js($post_id) . "</script>";
-		
+
 			$popup = [
-				"content" => $popup_content
+				"content" => $popup_content,
+				"settings" => $content->get_settings()
 			];
-			$popups[] = $popup;		}
-		
-		return json_encode($popups);
+			$popups[] = $popup;
+		}
+		$response = [
+			"error" => false,
+			"popups" => $popups
+		];
+		wp_send_json($response);
 	}
-	
+
 	public function exm_random_products() {
 		$count = filter_input(INPUT_POST, 'count', FILTER_DEFAULT);
 		if ($count === FALSE || $count === NULL) {
@@ -111,7 +114,7 @@ class ContentAjax {
 
 			wp_send_json($response);
 		}
-		
+
 		$content = new Flex_Content($content_id);
 		$content_engine = new Flex_Content_Engine($content);
 
@@ -126,7 +129,5 @@ class ContentAjax {
 	public function exm_user() {
 		wp_send_json($this->get_user());
 	}
-
-	
 
 }

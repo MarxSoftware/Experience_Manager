@@ -63,7 +63,7 @@ function exm_content_update_fields() {
 
 jQuery(function () {
 
-	document.getElementById("defaultOpen").click();
+	//document.getElementById("defaultOpen").click();
 
 	EXM.htmlEditor = ace.edit("html-editor");
 	EXM.htmlEditor.session.setMode("ace/mode/html");

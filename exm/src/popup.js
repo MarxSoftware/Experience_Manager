@@ -47,9 +47,12 @@ var Popup = function () {
         popup_container.style.width = (popup.offsetWidth + 10) + "px"
         popup_container.style.height = (popup.offsetHeight + 10) + "px"
 
-        document.querySelector("#" + configuration.id + " .close").addEventListener("click", () => {
-            close(configuration.id)
-        });
+        let $closeElement = document.querySelector("#" + configuration.id + " .close");
+        if ($closeElement) {
+            $closeElement.addEventListener("click", () => {
+                close(configuration.id)
+            });
+        }
 
         popups[configuration.id] = configuration;
 
@@ -70,6 +73,8 @@ var Popup = function () {
             let config = popups[id]
             document.querySelector("#" + config.id).classList.toggle("animation-fade-in")
             document.querySelector("#" + config.id).classList.toggle("animation-fade-out")
+
+            document.querySelector("#" + config.id).closest(".popup-container").remove();
         }
     }
 

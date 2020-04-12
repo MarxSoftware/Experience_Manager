@@ -36,6 +36,15 @@ var exm_content_form = {
 				config.recommendation.enabled = value;
 			}
 		},
+		"exm_shortcode": {
+			type: "checkbox",
+			get_function: (config) => {
+				return config.shortcode;
+			},
+			set_function: (config, value) => {
+				config.shortcode = value;
+			}
+		},
 		"exm_recommendation_count": {
 			type: "number",
 			exists_function: exm_contains_recommendation,

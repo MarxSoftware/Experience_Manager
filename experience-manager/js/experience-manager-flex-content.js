@@ -14,7 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-webtools.domReady(function (event) {
+
+EXM.Dom.ready(function (event) {
 	document.querySelectorAll("[data-exm-flex-content]").forEach(function ($item) {
 		let content_id = $item.dataset.exmFlexContent;
 		let current_id = $item.dataset.exmCurrentId;
@@ -27,6 +28,19 @@ webtools.domReady(function (event) {
 				EXM.Dom.insertHeadElement("script", "text/javascript", data.js);
 			}
 		}, "&id=" + content_id + "&post_id=" + current_id);
+
+		EXM.Ajax.request("exm_content_popups", function (data) {
+			console.log(data);
+			if (!data.error) {
+				EXM.Popup.init({
+					'id': "pop1",
+					'animation': 'fade',
+					'position': "mc",
+					'trigger': {type: "exit_intent"},
+					'content': data.popups[0].content
+				});
+			}
+		}, "&post_id=" + current_id)
 	});
 });
 
