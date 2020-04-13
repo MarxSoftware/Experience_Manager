@@ -59,20 +59,22 @@ function tma_webtools_rest_init() {
 	tma_exm_log("tma_webtools_rest_init");
 	$tma_rest = new \TMA\ExperienceManager\TMA_Rest();
 }
+
 new \TMA\ExperienceManager\TMA_Backend_Ajax();
+
 function tma_webtools_init() {
 
 	do_action("experience-manager/init/before");
-	
+
 	tma_exm_log("tma_webtools_init");
 	if (!is_admin()) {
 		wp_register_style('experience-manager', plugins_url('css/experience-manager.css', __FILE__));
 		wp_enqueue_style('experience-manager');
-		
+
 		wp_register_script("experience-manager-hooks", plugins_url('assets/hook.js', __FILE__), [], "1.0.0", false);
 //		wp_enqueue_script("experience-manager-hooks", plugins_url('assets/hook.js', __FILE__), [], "1.0.0", false);
 	}
-	
+
 	require_once 'includes/frontend/template_tags.php';
 
 	// IS not stored
@@ -110,7 +112,7 @@ function tma_webtools_init() {
 	add_action('admin_head', 'tma_js_variables', -100);
 
 	tma_init_cookie();
-	
+
 	do_action("experience-manager/init/after");
 }
 
@@ -140,10 +142,6 @@ function tma_js_variables() {
 
 	$tma_config = apply_filters("tma_config", $tma_config);
 
-//	$data = "var TMA_CONFIG = ". json_encode($tma_config);
-//	wp_register_script( 'webtools-dummy-handle', '' );
-//	wp_enqueue_script( 'webtools-dummy-handle' );
-//	wp_add_inline_script( 'webtools-dummy-handle', $data );
 	?>
 	<script type='text/javascript'>
 		var TMA_CONFIG = <?php echo json_encode($tma_config); ?>;
@@ -152,8 +150,9 @@ function tma_js_variables() {
 
 function tma_webtools_hook_js() {
 	$scriptHelper = new \TMA\ExperienceManager\TMAScriptHelper();
-	wp_enqueue_script("webtools-library", $scriptHelper->getLibrary(), [], "2.0.0", false);
-	wp_add_inline_script("webtools-library", $scriptHelper->getCode());
+	wp_register_script('exm-dummy-handle-header', '');
+	wp_enqueue_script('exm-dummy-handle-header');
+	wp_add_inline_script("exm-dummy-handle-header", $scriptHelper->getCode());
 }
 
 function tma_init_cookie() {

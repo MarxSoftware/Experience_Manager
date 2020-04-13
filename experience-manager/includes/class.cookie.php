@@ -54,7 +54,17 @@ class TMA_COOKIE_HELPER {
 					$cookieDomain = "." . $cookieDomain;
 				}
 			}
-			setcookie($name, $value, time() + $expire, '/', $cookieDomain, false, false);
+			if (PHP_VERSION_ID < 70300) {
+				setcookie($name, $value, time() + $expire, '/; samesite=strict', $cookieDomain, false, false);
+			} else {
+				setcookie($name, $value, [
+					'expires' => time() + $expire,
+					'path' => '/',
+					'secure' => true,
+					'domain' => $cookieDomain,
+					'samesite' => 'Strict',
+				]);
+			}
 		}
 
 		return $value;

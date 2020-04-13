@@ -32,13 +32,13 @@ EXM.Dom.ready(function (event) {
 		EXM.Ajax.request("exm_content_popups", function (data) {
 			console.log(data);
 			if (!data.error) {
-				EXM.Popup.init({
-					'id': "pop1",
-					'animation': 'fade',
-					'position': "mc",
-					'trigger': {type: "exit_intent"},
-					'content': data.popups[0].content
-				});
+//				EXM.Popup.init({
+//					'id': "pop1",
+//					'animation': 'fade',
+//					'position': "mc",
+//					'trigger': {type: "exit_intent"},
+//					'content': data.popups[0].content
+//				});
 			}
 		}, "&post_id=" + current_id)
 	});

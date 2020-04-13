@@ -57,10 +57,6 @@ class TMAScriptHelper {
 		return isset(get_option('tma_webtools_option')['webtools_score']) && get_option('tma_webtools_option')['webtools_score'] && (is_single() || is_page());
 	}
 
-	public function getLibrary() {
-		//return '<script src="' . $this->getWebTools_Url() . '/js/webtools.js"></script>';
-		return $this->getWebTools_Url() . '/tracking/js/webtools.js';
-	}
 
 	private function getWebTools_Url() {
 		$url = get_option('tma_webtools_option')['webtools_url'];
@@ -106,17 +102,17 @@ class TMAScriptHelper {
 			/* if (is_home()) {
 			  $output .= 'webtools.Tracking.init("' . $this->getWebTools_Url() . '", "' . $siteid . '", "/");';
 			  } else */if (!is_404()) {
-				$output .= 'webtools.Tracking.init("' . $this->getWebTools_Url() . '", "' . $siteid . '", "' . get_post()->ID  . '", "' . get_post()->post_type . '");';
+				$output .= 'EXM.Tracking.init("' . $this->getWebTools_Url() . '", "' . $siteid . '", "' . get_post()->ID  . '", "' . get_post()->post_type . '");';
 			} else {
-				$output .= 'webtools.Tracking.init("' . $this->getWebTools_Url() . '", "' . $siteid . '", "404", "error");';
+				$output .= 'EXM.Tracking.init("' . $this->getWebTools_Url() . '", "' . $siteid . '", "404", "error");';
 			}
 			if ($cookieDomain !== FALSE) {
-				$output .= 'webtools.Tracking.setCookieDomain("' . $cookieDomain . '");';
+				$output .= 'EXM.Tracking.setCookieDomain("' . $cookieDomain . '");';
 			}
-			$output .= 'webtools.Tracking.customParameters(';
+			$output .= 'EXM.Tracking.customParameters(';
 			$output .= $customParameters;
 			$output .= ');';
-			$output .= 'webtools.Tracking.register();';
+			$output .= 'EXM.Tracking.register();';
 
 			if ($this->shouldScore()) {
 				$score = $this->getScoring();

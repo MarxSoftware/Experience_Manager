@@ -67,9 +67,9 @@ function tma_selected_elements() {
 function tma_highlight($clickedElement) {
 	if ($clickedElement.classList.contains('tma-selected')) {
 		$clickedElement.classList.remove('tma-selected');
-		webtools.Highlight.deactivate();
+		EXM.Highlight.deactivate();
 	} else {
 		$clickedElement.classList.add('tma-selected');
-		webtools.Highlight.activate(Array.apply([], document.querySelectorAll('[data-tma-group]')));
+		EXM.Highlight.activate(Array.apply([], document.querySelectorAll('[data-tma-group]')));
 	}
 }
