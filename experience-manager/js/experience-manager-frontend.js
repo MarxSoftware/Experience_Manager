@@ -17,7 +17,7 @@
 (function ($) {
 	function tma_webtools_update(segments) {
 
-		EXM_Hook.call("experience-manager/frontend/update/before", {});
+		EXM.Hook.call("experience-manager/frontend/update/before", {});
 
 		let flat_segments = segments.user_segments.map(segment => "" + segment.wpid);
 		EXM.Frontend.update(flat_segments);

@@ -6,6 +6,7 @@ import Cookie from './cookie'
 import Tracking from './tracking'
 import Highlight from './highlight'
 import Frontend from './frontend'
+import Hook from './hook'
 import './exm.scss';
 
 export {
@@ -16,5 +17,6 @@ export {
   Cookie,
   Tracking,
   Highlight,
-  Frontend
+  Frontend,
+  Hook
 }
