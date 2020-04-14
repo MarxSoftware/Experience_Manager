@@ -129,7 +129,7 @@ class TMA_WPAdminBar {
 	}
 
 	public function init_javascript() {
-		wp_enqueue_script('experience-manager', TMA_EXPERIENCE_MANAGER_URL . 'js/experience-manager.js', array("webtools-frontend"), "1");
+		wp_enqueue_script('experience-manager', TMA_EXPERIENCE_MANAGER_URL . 'js/experience-manager.js', array("experience-manager-exm"), "1");
 	}
 
 }

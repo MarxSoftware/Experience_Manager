@@ -23,6 +23,10 @@ var Dom = function () {
 		}
 	}
 
+	var on = function ($element, type, callback) {
+        $element.addEventListener(type, callback);
+    };
+
 	return {
 		insertHeadElement: insertHeadElement,
 		ready : ready

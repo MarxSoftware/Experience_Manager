@@ -117,16 +117,6 @@ var exm_content_form = {
 		}
 	},
 	functions: [
-		(config) => {
-			if (config.recommendation && config.recommendation.enabled) {
-				document.querySelector("#exm_recommendation_settings").style.display = "block";
-			}
-		},
-		(config) => {
-			if (config.content_type === "popup") {
-				document.querySelector("#exm_popup_settings").style.display = "block";
-			}
-		}
 	]
 };
 jQuery(function () {
@@ -149,20 +139,7 @@ jQuery(function () {
 
 		exm_content_settings_update_fields();
 	}
-	document.querySelector("#exm_recommendation").addEventListener("change", (event) => {
-		if (event.target.checked) {
-			document.querySelector("#exm_recommendation_settings").style.display = "block";
-		} else {
-			document.querySelector("#exm_recommendation_settings").style.display = "none";
-		}
-	});
-	document.querySelector("#exm_content_type").addEventListener("change", (event) => {
-		if (event.target.value === "popup") {
-			document.querySelector("#exm_popup_settings").style.display = "block";
-		} else {
-			document.querySelector("#exm_popup_settings").style.display = "none";
-		}
-	});
+
 	document.querySelectorAll(".exm_settings_change").forEach(function ($item) {
 		$item.addEventListener("change", (event) => {
 			exm_content_settings_update_fields();

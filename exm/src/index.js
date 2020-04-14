@@ -5,6 +5,7 @@ import Woo from './woo'
 import Cookie from './cookie'
 import Tracking from './tracking'
 import Highlight from './highlight'
+import Frontend from './frontend'
 import './exm.scss';
 
 export {
@@ -14,5 +15,6 @@ export {
   Woo,
   Cookie,
   Tracking,
-  Highlight
+  Highlight,
+  Frontend
 }

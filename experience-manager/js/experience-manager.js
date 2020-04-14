@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-webtools.domReady(function (event) {
+EXM.Dom.ready(function (event) {
 	var selectedSegments = document.querySelectorAll("[data-tma-group]");
 	if (selectedSegments.length > 0) {
 		// change icon
@@ -34,13 +34,13 @@ webtools.domReady(function (event) {
 
 function tma_segment_selector(clickedElement) {
 	clickedElement.classList.toggle('tma-selected');
-	webtools.Frontend.update(tma_selected_elements());
+	EXM.Frontend.update(tma_selected_elements());
 }
 
 function tma_show_variants ($clickedElement) {
 	if ($clickedElement.classList.contains('tma-selected')) {
 		$clickedElement.classList.remove('tma-selected');
-		webtools.Frontend.update([]);
+		EXM.Frontend.update([]);
 	} else {
 		$clickedElement.classList.add('tma-selected');
 		document.querySelectorAll(".tma-hide").forEach (function ($item) {
@@ -49,7 +49,7 @@ function tma_show_variants ($clickedElement) {
 	}
 }
 function tma_segment_clear() {
-	webtools.Frontend.update([]);
+	EXM.Frontend.update([]);
 	var selectedSegments = document.querySelectorAll(".tma-selected");
 	selectedSegments.forEach(function ($e)  {
 		$e.classList.remove('tma-selected');

@@ -100,7 +100,7 @@ class TMAScriptHelper {
 			 * Wenn die Einstellungen auf default bleiben, sind beide TRUE
 			 */
 			/* if (is_home()) {
-			  $output .= 'webtools.Tracking.init("' . $this->getWebTools_Url() . '", "' . $siteid . '", "/");';
+			  $output .= 'EXM.Tracking.init("' . $this->getWebTools_Url() . '", "' . $siteid . '", "/");';
 			  } else */if (!is_404()) {
 				$output .= 'EXM.Tracking.init("' . $this->getWebTools_Url() . '", "' . $siteid . '", "' . get_post()->ID  . '", "' . get_post()->post_type . '");';
 			} else {
@@ -218,7 +218,7 @@ class TMAScriptHelper {
 
 		$score .= '}';
 		if ($hasScore) {
-			return 'webtools.Tracking.score(' . $score . ');';
+			return 'EXM.Tracking.score(' . $score . ');';
 		} else {
 			return '';
 		}

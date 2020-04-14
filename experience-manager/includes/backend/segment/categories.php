@@ -13,13 +13,13 @@
 		<b id="exm_wp_cat_path"></b>
 	</div>
 	<script>
-		webtools.domReady(function () {
-			webtools.Tools.on(document.getElementById("exm-category-select"), "click", e => {
+		EXM.Dom.ready(function () {
+			EXM.Dom.on(document.getElementById("exm-category-select"), "click", e => {
 				e.preventDefault();
 				var $element = document.querySelector("#exm-wp-category-select-categories select");
 
 				var value = $element.options[$element.selectedIndex].value;
-				window.fetch(TMA_CONFIG.rest_url + "experience-manager/v1/category-path?taxonomy=category&category=" + value).then(function (response) {
+				fetch(TMA_CONFIG.rest_url + "experience-manager/v1/category-path?taxonomy=category&category=" + value).then(function (response) {
 					response.json().then(data => {
 						document.getElementById("exm_wp_cat_path").innerHTML = data.path;
 					});
@@ -40,8 +40,8 @@
 	</div>
 	
 	<script>
-		webtools.domReady(function () {
-			webtools.Tools.on(document.getElementById("exm-wc-category-select"), "click", e => {
+		EXM.Dom.ready(function () {
+			EXM.Dom.on(document.getElementById("exm-wc-category-select"), "click", e => {
 				e.preventDefault();
 				var $element = document.querySelector("#exm-wc-category-select-categories select");
 
@@ -68,8 +68,8 @@
 	</div>
 	
 	<script>
-		webtools.domReady(function () {
-			webtools.Tools.on(document.getElementById("exm-edd-category-select"), "click", e => {
+		EXM.Dom.ready(function () {
+			EXM.Dom.on(document.getElementById("exm-edd-category-select"), "click", e => {
 				e.preventDefault();
 				var $element = document.querySelector("#exm-edd-category-select-categories select");
 

@@ -95,7 +95,7 @@ class SegmentEditor {
 				  wp_enqueue_style('experience-manager-query-editor-styles_main', TMA_EXPERIENCE_MANAGER_URL . 'assets/query-editor/css/main.8881f70e.chunk.css', array('experience-manager-query-editor-styles_1'), "1.2");
 				 */
 
-				wp_enqueue_script('tma-webtools-backend');
+//				wp_enqueue_script('tma-webtools-backend');
 				wp_enqueue_style('experience-manager-codemirror-styles', TMA_EXPERIENCE_MANAGER_URL . 'assets/codemirror/codemirror.css', array(), "5.48.4", false);
 				wp_enqueue_script('experience-manager-codemirror', TMA_EXPERIENCE_MANAGER_URL . 'assets/codemirror/codemirror.js', array(), "5.48.4", false);
 				wp_enqueue_script('experience-manager-codemirror-javascript', TMA_EXPERIENCE_MANAGER_URL . 'assets/codemirror/mode/javascript/javascript.js', array("experience-manager-codemirror"), "5.48.4", false);

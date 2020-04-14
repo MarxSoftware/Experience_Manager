@@ -33,7 +33,7 @@ class TMA_Settings {
 
 
 
-			wp_register_script('exm-dashboard-js', plugins_url('experience-manager/assets/dashboard/exm-dashboard.js'), ['exm-c3-js', 'tma-webtools-backend']);
+			wp_register_script('exm-dashboard-js', plugins_url('experience-manager/assets/dashboard/exm-dashboard.js'), ['exm-c3-js', 'experience-manager-exm']);
 			wp_enqueue_script('exm-dashboard-js');
 			wp_register_style('exm-dashboard-css', plugins_url('experience-manager/assets/dashboard/exm-dashboard.css'));
 			wp_enqueue_style('exm-dashboard-css');

@@ -34,7 +34,7 @@ class ContentEditor {
 		if (in_array($hook_suffix, array('post.php', 'post-new.php'))) {
 			if (ContentType::isContentEditor()) {
 
-				wp_enqueue_script('tma-webtools-backend');
+//				wp_enqueue_script('tma-webtools-backend');
 				wp_enqueue_script('experience-manager-ace', TMA_EXPERIENCE_MANAGER_URL . 'assets/ace/ace.js', array(), "1.4.8", false);
 				wp_enqueue_script('experience-manager-mustache', TMA_EXPERIENCE_MANAGER_URL . 'assets/mustache/mustache.min.js', array(), "4.0.1", false);
 				wp_enqueue_script('experience-manager-content-tabs', TMA_EXPERIENCE_MANAGER_URL . 'assets/content-editor/content-tabs.js', array(), "1", false);
