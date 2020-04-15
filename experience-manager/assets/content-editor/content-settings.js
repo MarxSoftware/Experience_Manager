@@ -7,13 +7,21 @@ let exm_contains_loading = (config) => {
 let exm_contains_popup = (config) => {
 	return typeof config.popup !== "undefined";
 };
+let exm_contains_conditions = (config) => {
+	return typeof config.conditions !== "undefined";
+};
 
 var exm_content_form = {
 	"default_settings": () => {
 		return {
 			recommendation: {},
 			loading: {},
-			popup: {}
+			popup: {},
+			conditions: {
+				post_types: [],
+				audiences: [],
+				weekdays: []
+			}
 		};
 	},
 	"fields": {
@@ -114,21 +122,109 @@ var exm_content_form = {
 			set_function: (config, value) => {
 				config.popup.trigger = value;
 			}
+		},
+		"exm_popup_cookie_name": {
+			type: "text",
+			exists_function: exm_contains_popup,
+			get_function: (config) => {
+				return config.popup.cookie_name;
+			},
+			set_function: (config, value) => {
+				config.popup.cookie_name = value;
+			}
+		},
+		"exm_popup_cookie_lifetime": {
+			type: "number",
+			exists_function: exm_contains_popup,
+			get_function: (config) => {
+				return config.popup.cookie_lifetime;
+			},
+			set_function: (config, value) => {
+				config.popup.cookie_lifetime = value;
+			}
+		},
+		"exm_popup_cookie_lifetime_unit": {
+			type: "select",
+			exists_function: exm_contains_popup,
+			get_function: (config) => {
+				return config.popup.cookie_lifetime_unit;
+			},
+			set_function: (config, value) => {
+				config.popup.cookie_lifetime_unit = value;
+			}
+		},
+		"exm_condition_post_type": {
+			type: "multi_checkbox",
+			exists_function: exm_contains_conditions,
+			get_function: (config) => {
+				return config.conditions.post_types;
+			},
+			set_function: (config, value) => {
+				config.conditions.post_types = value;
+			}
+		},
+		"exm_condition_audiences": {
+			type: "multi_checkbox",
+			exists_function: exm_contains_conditions,
+			get_function: (config) => {
+				return config.conditions.audiences;
+			},
+			set_function: (config, value) => {
+				config.conditions.audiences = value;
+			}
+		},
+		"exm_condition_weekdays": {
+			type: "multi_checkbox",
+			exists_function: exm_contains_conditions,
+			get_function: (config) => {
+				return config.conditions.weekdays;
+			},
+			set_function: (config, value) => {
+				config.conditions.weekdays = value;
+			}
 		}
 	},
 	functions: [
+		(config) => {
+			$cookie_name = document.getElementById("exm_popup_cookie_name");
+			value = $cookie_name.value;
+			if (value === null || value === "") {
+				$cookie_name.value = "exm_popup-" + EXMCONFIG.post_id;
+			}
+			
+			$cookie_lifetime = document.getElementById("exm_popup_cookie_lifetime");
+			value = $cookie_lifetime.value;
+			console.log(value);
+			if (value === null || value === "") {
+				console.log("set lifetime");
+				$cookie_lifetime.value = '30';				
+				document.getElementById("exm_popup_cookie_lifetime_unit").value = "day";
+
+			}
+			
+		}
 	]
 };
-jQuery(function () {
+EXM.Dom.ready(function (event) {
 	if (window.exmContentSettingsValue) {
 		Object.keys(exm_content_form.fields).forEach((key) => {
-			var field = exm_content_form.fields[key];
+			let field = exm_content_form.fields[key];
 			if (field.exists_function && !field.exists_function(window.exmContentSettingsValue)) {
 				return;
 			}
-			var value = field.get_function(window.exmContentSettingsValue);
+			let value = field.get_function(window.exmContentSettingsValue);
+			if (typeof value === "undefined") {
+				return;
+			}
 			if (field.type === "checkbox") {
 				document.querySelector("#" + key).checked = value;
+			} else if (field.type === "multi_checkbox") {
+				document.querySelectorAll("[name=" + key + "]").forEach(($element) => {
+					let attr_value = $element.getAttribute("value");
+					if (value.includes(attr_value)) {
+						$element.checked = true;
+					}
+				});
 			} else {
 				document.querySelector("#" + key).value = value;
 			}
@@ -151,15 +247,30 @@ function exm_content_settings_update_fields() {
 	let settings = exm_content_form.default_settings();
 	Object.keys(exm_content_form.fields).forEach((key) => {
 		var field = exm_content_form.fields[key];
-		
+
 		if (field.type === "checkbox") {
 			field.set_function(settings, document.querySelector("#" + key).checked);
+		} else if (field.type === "multi_checkbox") {
+			let values = [];
+			document.querySelectorAll("[name='" + key + "']").forEach(($element) => {
+				console.log("update value");
+				if ($element.checked) {
+					values.push($element.getAttribute("value"));
+				}
+			});
+			field.set_function(settings, values);
 		} else {
 			field.set_function(settings, document.querySelector("#" + key).value);
 		}
 	});
 	document.querySelector("#exm_content_settings").value = JSON.stringify(settings);
 	window.exmContentSettingsValue = settings;
-	
+
 	console.log(settings);
+}
+
+function exm_content_settings_check_all (selector) {
+	document.querySelectorAll(selector).forEach(($element) => {
+		$element.checked = true;
+	});
 }

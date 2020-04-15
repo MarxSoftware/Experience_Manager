@@ -27,6 +27,17 @@ class ContentEditor {
 		add_action('save_post_exm_content', [$this, 'save']);
 		add_filter('gutenberg_can_edit_post_type', [$this, "disable_gutenberg"], 10, 2);
 		add_action('admin_enqueue_scripts', [$this, "query_editor_scripts"]);
+		
+		add_action('edit_form_top', [$this, 'top_buttons']);
+	}
+	
+	function top_buttons($post) {
+		if ($post->post_type !== ContentType::$TYPE) {
+			return;
+		}
+		echo "<a class='ui button primary' id='tma_content_library' href='#'>" . __("Open library", "tma-webtools") . "</a>";
+		
+		include 'content-library.php';
 	}
 	
 
@@ -38,6 +49,7 @@ class ContentEditor {
 				wp_enqueue_script('experience-manager-ace', TMA_EXPERIENCE_MANAGER_URL . 'assets/ace/ace.js', array(), "1.4.8", false);
 				wp_enqueue_script('experience-manager-mustache', TMA_EXPERIENCE_MANAGER_URL . 'assets/mustache/mustache.min.js', array(), "4.0.1", false);
 				wp_enqueue_script('experience-manager-content-tabs', TMA_EXPERIENCE_MANAGER_URL . 'assets/content-editor/content-tabs.js', array(), "1", false);
+				wp_enqueue_script('experience-manager-content-library', TMA_EXPERIENCE_MANAGER_URL . 'assets/content-editor/content-library.js', array(), "1", false);
 				wp_enqueue_script('experience-manager-content-editor-js', TMA_EXPERIENCE_MANAGER_URL . 'assets/content-editor/content-editor.js', array("experience-manager-ace", "experience-manager-mustache", "jquery", "experience-manager-content-tabs"), "1", false);
 				wp_enqueue_script('experience-manager-content-settings-js', TMA_EXPERIENCE_MANAGER_URL . 'assets/content-editor/content-settings.js', array("jquery"), "1", false);
 				wp_enqueue_style('experience-manager-content-editor-css', TMA_EXPERIENCE_MANAGER_URL . 'assets/content-editor/css/content-editor.css', array(), "1", false);

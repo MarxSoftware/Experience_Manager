@@ -1,4 +1,4 @@
-var Dom = function () {
+var Hook = function () {
 
 	var hooks = [];
 	var register = function (name, callback, priority) {
@@ -16,10 +16,10 @@ var Dom = function () {
 		}
 	};
 
-	var call = function (name, arguments) {
+	var call = function (name, attributes) {
 		if (typeof hooks[name] !== "undefined") {
 			for (var i = 0, len = hooks[name].length; i < len; ++i) {
-				if (hooks[name][i](arguments) !== true)
+				if (hooks[name][i](attributes) !== true)
 					break;
 			}
 		}
@@ -31,4 +31,4 @@ var Dom = function () {
 	}
 }();
 
-export default Dom;
+export default Hook;
