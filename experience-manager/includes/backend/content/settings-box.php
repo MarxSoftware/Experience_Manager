@@ -179,7 +179,7 @@
 							</th>
 							<td>
 								<label>
-									<button onclick='exm_content_settings_check_all("[name=exm_condition_post_type]"); return false;'><?php echo __("All post types", "tma-webtools") ?></button>
+									<button class="button" onclick='exm_content_settings_check_all("[name=exm_condition_post_type]"); return false;'><?php echo __("All post types", "tma-webtools") ?></button>
 								</label>
 								<?php
 								$post_types = get_post_types([
@@ -211,7 +211,7 @@
 							</th>
 							<td>
 								<label>
-									<button onclick='exm_content_settings_check_all("[name=exm_condition_audiences]"); return false;'><?php echo __("All audiences", "tma-webtools") ?></button>
+									<button class="button" onclick='exm_content_settings_check_all("[name=exm_condition_audiences]"); return false;'><?php echo __("All audiences", "tma-webtools") ?></button>
 								</label>
 								<?php
 								$audiences = tma_exm_get_segments_as_array_flat();
@@ -234,7 +234,7 @@
 							</th>
 							<td>
 								<label>
-									<button onclick='exm_content_settings_check_all("[name=exm_condition_weekdays]"); return false;'><?php echo __("Every day", "tma-webtools") ?></button>
+									<button class="button" onclick='exm_content_settings_check_all("[name=exm_condition_weekdays]"); return false;'><?php echo __("Every day", "tma-webtools") ?></button>
 								</label>
 								<?php
 								$weekdays = [
