@@ -44,8 +44,12 @@ class ContentAjax {
 	public function load_popups() {
 
 		$post_id = FALSE;
-		if ($_POST['post_id']) {
+		$frontpage = FALSE;
+		if (array_key_exists('post_id', $_POST)) {
 			$post_id = filter_input(INPUT_POST, 'post_id', FILTER_DEFAULT);
+		}
+		if (array_key_exists('frontpage', $_POST)) {
+			$frontpage = filter_input(INPUT_POST, 'frontpage', FILTER_DEFAULT);
 		}
 
 		$args = array(
@@ -62,6 +66,12 @@ class ContentAjax {
 		$popups = [];
 		foreach ($post_list as $post) {
 			$content = new Flex_Content($post->ID);
+			
+			$validator = new Flex_Content_Validator($content, $post_id, $frontpage);
+			if (!$validator->validate_conditions()) {
+				continue;
+			}
+			
 			$content_engine = new Flex_Content_Engine($content);
 
 			$popup_content = "<style>" . $content_engine->get_compiled_css($post_id) . "</style>";

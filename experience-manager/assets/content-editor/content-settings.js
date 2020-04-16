@@ -182,7 +182,16 @@ var exm_content_form = {
 			set_function: (config, value) => {
 				config.conditions.weekdays = value;
 			}
-		}
+		},
+		"exm_condition_homepage": {
+			type: "checkbox",
+			get_function: (config) => {
+				return config.conditions.homepage;
+			},
+			set_function: (config, value) => {
+				config.conditions.homepage = value;
+			}
+		},
 	},
 	functions: [
 		(config) => {

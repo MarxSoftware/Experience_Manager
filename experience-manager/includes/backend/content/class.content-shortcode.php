@@ -37,7 +37,8 @@ class ContentShortCode {
 		$settings = $content->get_settings();
 
 		$current_id = get_the_ID();
-		$html = "<div data-exm-flex-content='${args["id"]}' data-exm-current-id='${current_id}'>";
+		$frontpage = is_front_page() ? "true" : "false";
+		$html = "<div data-exm-flex-content='${args["id"]}' data-exm-current-id='${current_id}' data-exm-frontpage='${frontpage}'>";
 
 		if (property_exists($settings, "loading") && $settings->loading->animation === true) {
 			$html .= "<div class='spinner'>

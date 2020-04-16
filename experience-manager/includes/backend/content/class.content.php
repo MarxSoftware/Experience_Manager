@@ -57,6 +57,15 @@ class Flex_Content {
 		$settings = $this->get_meta_settings();
 		return json_decode(stripslashes($settings));
 	}
+	
+	public function get_conditions () {
+		$settings = $this->get_settings();
+		if (property_exists($settings, "conditions")) {
+			return $settings->conditions;
+		}
+		return FALSE;
+	}
+	
 
 	public function set_meta_content_type($value) {
 		tma_exm_log("content type: " . $value);

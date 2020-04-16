@@ -229,6 +229,18 @@
 							</td>
 						</tr>
 						<tr>
+							<th scope="row">Display only on homepage</th>
+							<td>
+								<fieldset>
+									<label for="exm_condition_homepage">
+										<input id="exm_condition_homepage" class="exm_settings_change" value="true" name="exm_condition_homepage" type="checkbox" />
+									</label>
+								</fieldset>
+								<br />
+								<span class="description">If enabled, the popup will only be shown on your homepage.</span>
+							</td>
+						</tr>
+						<tr>
 							<th scope="row">
 								<label for="exm_condition_weekdays">Weekdays</label>
 							</th>
@@ -238,13 +250,13 @@
 								</label>
 								<?php
 								$weekdays = [
-									"mon" => __("Monday", "tma-webtools"),
-									"tue" => __("Tuesday", "tma-webtools"),
-									"wed" => __("Wednesday", "tma-webtools"),
-									"thu" => __("Thursday", "tma-webtools"),
-									"fri" => __("Friday", "tma-webtools"),
-									"sat" => __("Saturday", "tma-webtools"),
-									"sun" => __("Sunday", "tma-webtools"),
+									"1" => __("Monday", "tma-webtools"),
+									"2" => __("Tuesday", "tma-webtools"),
+									"3" => __("Wednesday", "tma-webtools"),
+									"4" => __("Thursday", "tma-webtools"),
+									"5" => __("Friday", "tma-webtools"),
+									"6" => __("Saturday", "tma-webtools"),
+									"7" => __("Sunday", "tma-webtools"),
 									
 								];
 								foreach ($weekdays as $key => $label) {

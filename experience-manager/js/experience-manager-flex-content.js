@@ -19,6 +19,7 @@ EXM.Dom.ready(function (event) {
 	document.querySelectorAll("[data-exm-flex-content]").forEach(function ($item) {
 		let content_id = $item.dataset.exmFlexContent;
 		let current_id = $item.dataset.exmCurrentId;
+		let frontpage = $item.dataset.exmFrontpage;
 		console.log(content_id);
 		console.log(current_id);
 		EXM.Ajax.request("exm_content", function (data) {
@@ -40,7 +41,7 @@ EXM.Dom.ready(function (event) {
 //					'content': data.popups[0].content
 //				});
 			}
-		}, "&post_id=" + current_id)
+		}, "&post_id=" + current_id + "&frontpage=" + frontpage)
 	});
 });
 

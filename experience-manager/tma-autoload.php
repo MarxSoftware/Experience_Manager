@@ -55,6 +55,7 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	// Content Editor
 	"TMA\ExperienceManager\Content\Flex_Content" => "includes/backend/content/class.content.php",
 	"TMA\ExperienceManager\Content\Flex_Content_Engine" => "includes/backend/content/class.content-engine.php",
+	"TMA\ExperienceManager\Content\Flex_Content_Validator" => "includes/backend/content/class.content-validator.php",
 	"TMA\ExperienceManager\Content\ContentType" => "includes/backend/content/class.content-type.php",
 	"TMA\ExperienceManager\Content\ContentEditor" => "includes/backend/content/class.content-editor.php",
 	"TMA\ExperienceManager\Content\ContentEditorMetaBox" => "includes/backend/content/class.content-editor-metabox.php",
