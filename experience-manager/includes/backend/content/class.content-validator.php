@@ -37,34 +37,62 @@ class Flex_Content_Validator {
 		if (!$this->validate_post_type($conditions)) {
 			return false;
 		}
+		
+		if (!$this->validate_audience($conditions)) {
+			return false;
+		}
 
 		return true;
+	}
+
+	private function validate_audience($conditions) {
+		if (!property_exists($conditions, "audiences") || !is_array($conditions->audiences)) {
+			return true;
+		}
+		$audiences = $conditions->audiences;
+		
+		if (size_format($audiences) === 0) {
+			return true;
+		}
+		
+		$matching_mode = $conditions->audiences_matching_mode;
+		
+		$user_segments = tma_exm_get_user_segments(["default"]);
+		$matching = false;
+		if ($matching_mode === \TMA\ExperienceManager\ShortCode_TMA_CONTENT::$match_mode_all) {
+			$matching = tma_exm_array_match_all($audiences, $user_segments);
+		} else if ($matching_mode === \TMA\ExperienceManager\ShortCode_TMA_CONTENT::$match_mode_any) {
+			$matching = tma_exm_array_match_any($audiences, $user_segments);
+		} else if ($matching_mode === \TMA\ExperienceManager\ShortCode_TMA_CONTENT::$match_mode_none) {
+			$matching = !tma_exm_array_match_all($audiences, $user_segments);
+		}
+
+		return $matching;
 	}
 
 	private function validate_homepage($conditions) {
-		if (property_exists($conditions, "homepage")) {
-			if ($conditions->homepage) {
-				return filter_var($this->frontpage, FILTER_VALIDATE_BOOLEAN);
-				;
-			}
+		if (!property_exists($conditions, "homepage")) {
+			return true;
 		}
-		return true;
+		if ($conditions->homepage) {
+			return filter_var($this->frontpage, FILTER_VALIDATE_BOOLEAN);
+		}
 	}
 
 	private function validate_post_type($conditions) {
-		if (property_exists($conditions, "post_types")) {
-			$current_post_type = get_post_type($this->post_id);
-			return in_array($current_post_type, $conditions->post_types);
+		if (!property_exists($conditions, "post_types")) {
+			return true;
 		}
-		return true;
+		$current_post_type = get_post_type($this->post_id);
+		return in_array($current_post_type, $conditions->post_types);
 	}
 
 	private function validate_weekday($conditions) {
-		if (property_exists($conditions, "weekdays")) {
-			$current_day_of_week = date('N');
-			return in_array($current_day_of_week, $conditions->weekdays);
+		if (!property_exists($conditions, "weekdays")) {
+			return true;
 		}
-		return true;
+		$current_day_of_week = date('N');
+		return in_array($current_day_of_week, $conditions->weekdays);
 	}
 
 }

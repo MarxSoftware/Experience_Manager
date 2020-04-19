@@ -229,6 +229,20 @@
 							</td>
 						</tr>
 						<tr>
+							<th scope="row">
+								<label for="exm_condition_audiences_matching_mode">Audience matching mode</label>
+							</th>
+							<td>
+								<select class="exm_settings_change" id="exm_condition_audiences_matching_mode" name="exm_condition_audiences_matching_mode">
+									<option value="any">Any</option>
+									<option value="all">All</option>
+									<option value="none">None</option>
+								</select>
+								<br />
+								<span class="description">User must match all or just a single segment.</span>
+							</td>
+						</tr>
+						<tr>
 							<th scope="row">Display only on homepage</th>
 							<td>
 								<fieldset>

@@ -79,6 +79,7 @@ class ContentAjax {
 			$popup_content .= "<script>" . $content_engine->get_compiled_js($post_id) . "</script>";
 
 			$popup = [
+				"id" => $popup->get_id(),
 				"content" => $popup_content,
 				"settings" => $content->get_settings()
 			];

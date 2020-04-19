@@ -8,6 +8,9 @@
     'position' : 'tl|tc|tr|ml|mc|mr|bl|bc|br',
     'animation' : 'fade|slide,
     'content' : '<div></div>'
+    'conditions' : {
+        'weekdays' : ['1']
+    }
 }
 
 
@@ -34,7 +37,13 @@ var Popup = function () {
         popup.innerHTML = configuration.content
         popup.setAttribute("id", configuration.id)
         popup.classList.add("popup")
-        popup.classList.add(PopupAnimation.getInitialAnimationState(configuration))
+        popup.classList.add(PopupAnimation.getCloseAnimation(configuration))
+        
+        if (PopupPosition.isLeft(configuration)) {
+            popup.style.right = 0
+        } else if (PopupPosition.isRight(configuration)) {
+            popup.style.left = 0
+        }
 
         popup_container.classList.add("popup-container")
         popup_container.classList.add(PopupPosition.getPosition(configuration))
@@ -57,10 +66,6 @@ var Popup = function () {
         popups[configuration.id] = configuration;
 
         if (configuration.trigger.type === "after5") {
-            setTimeout(() => {
-                document.querySelector("#" + configuration.id).classList.toggle("animation-fade-out")
-                document.querySelector("#" + configuration.id).classList.toggle("animation-fade-in")
-            }, 5000);
             PopupTrigger.after5(configuration)
         } else if (configuration.trigger.type === "exit_intent") {
             PopupTrigger.exitIntent(configuration)
@@ -70,11 +75,13 @@ var Popup = function () {
 
     var close = function (id) {
         if (typeof popups[id] !== "undefined") {
-            let config = popups[id]
-            document.querySelector("#" + config.id).classList.toggle("animation-fade-in")
-            document.querySelector("#" + config.id).classList.toggle("animation-fade-out")
+            let popup = popups[id]
+            const openAnimationClass = PopupAnimation.getOpenAnimation(popup);
+            const closeAnimationClass = PopupAnimation.getCloseAnimation(popup);
+            document.querySelector("#" + popup.id).classList.toggle(openAnimationClass)
+            document.querySelector("#" + popup.id).classList.toggle(closeAnimationClass)
 
-            document.querySelector("#" + config.id).closest(".popup-container").remove();
+            //document.querySelector("#" + popup.id).closest(".popup-container").remove();
         }
     }
 

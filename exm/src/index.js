@@ -1,4 +1,4 @@
-import Popup from './popup'
+import Popup from './popup/popup'
 import Dom from './dom'
 import Ajax from './ajax'
 import Woo from './woo'

@@ -32,14 +32,14 @@ EXM.Dom.ready(function (event) {
 
 		EXM.Ajax.request("exm_content_popups", function (data) {
 			console.log(data);
-			if (!data.error) {
-//				EXM.Popup.init({
-//					'id': "pop1",
-//					'animation': 'fade',
-//					'position': "mc",
-//					'trigger': {type: "exit_intent"},
-//					'content': data.popups[0].content
-//				});
+			if (!data.error && data.popups.length > 0) {
+				EXM.Popup.init({
+					'id': "pop-" + data.popups[0].id,
+					'animation': data.popups[0].settings.popup.animation,
+					'position': data.popups[0].settings.popup.position,
+					'trigger': {type: data.popups[0].settings.popup.trigger},
+					'content': data.popups[0].content
+				});
 			}
 		}, "&post_id=" + current_id + "&frontpage=" + frontpage)
 	});

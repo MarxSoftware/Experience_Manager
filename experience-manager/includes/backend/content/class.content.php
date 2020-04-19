@@ -15,10 +15,10 @@ namespace TMA\ExperienceManager\Content;
  */
 class Flex_Content {
 
-	var $content_id = 0;
+	var $ID = 0;
 
 	public function __construct($post_id) {
-		$this->content_id = $post_id;
+		$this->ID = $post_id;
 	}
 
 	public function get_type() {
@@ -26,7 +26,7 @@ class Flex_Content {
 	}
 
 	public function get_id() {
-		return $this->content_id;
+		return $this->ID;
 	}
 
 	public function get_meta_settings() {
@@ -85,12 +85,12 @@ class Flex_Content {
 	}
 
 	private function get_meta($key) {
-		return get_post_meta($this->content_id, $key, true);
+		return get_post_meta($this->ID, $key, true);
 	}
 
 	private function update_meta($key, $value) {
 		update_post_meta(
-				$this->content_id,
+				$this->ID,
 				$key,
 				$value
 		);

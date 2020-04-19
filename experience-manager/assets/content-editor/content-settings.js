@@ -173,6 +173,16 @@ var exm_content_form = {
 				config.conditions.audiences = value;
 			}
 		},
+		"exm_condition_audiences_matching_mode": {
+			type: "select",
+			exists_function: exm_contains_popup,
+			get_function: (config) => {
+				return config.conditions.audiences_matching_mode;
+			},
+			set_function: (config, value) => {
+				config.conditions.audiences_matching_mode = value;
+			}
+		},
 		"exm_condition_weekdays": {
 			type: "multi_checkbox",
 			exists_function: exm_contains_conditions,

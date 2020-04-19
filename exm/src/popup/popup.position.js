@@ -26,29 +26,32 @@ var PopupPosition = function () {
         }
     }
 
-    var _getInitialAnimationState = function (config) {
-        switch (config.animation) {
-            case 'fade':
-                return 'animation-fade-out'
-            case 'slide':
-                switch (config.position) {
-                    case 'tl':
-                    case 'ml':
-                    case 'bl':
-                        return 'slide-out-left'
-                    case 'tr':
-                    case 'mr':
-                    case 'br':
-                        return 'slide-out-right'
-                }
+    var isLeft = function (config) {
+        switch (config.position) {
+            case 'tl':
+            case 'ml':
+            case 'bl':
+                return true
             default:
-                return ''
+                return false
+        }
+    }
+    
+    var isRight = function (config) {
+        switch (config.position) {
+            case 'tr':
+            case 'mr':
+            case 'br':
+                return true
+            default:
+                return false
         }
     }
 
-    
     return {
         getPosition: getPosition
+        ,isLeft : isLeft
+        ,isRight : isRight
     }
 }()
 
