@@ -3,6 +3,11 @@
   <head>
     <title>Getting Started</title>
     <script src="./dist/exm.js"></script>
+    <style>
+      .a_popup {
+        background-color: aliceblue;
+      }
+    </style>
     <script>
       EXM.Dom.ready(() => {
         EXM.Popup.init({
@@ -10,7 +15,7 @@
         'animation' : 'fade',
         'position' : "mc",
         'trigger' : { type: "exit_intent"},
-        'content' : "<div style='border: 1px solid red; width: 250px; height: 250px;'><h3>Ich bin ein popup</h3><p>Das ist mein inhalt</p><p class='close'>X</p></div>"
+        'content' : "<div class='a_popup' style='border: 1px solid red; width: 250px; height: 250px;'><h3>Ich bin ein popup</h3><p>Das ist mein inhalt</p><p class='close'>X</p></div>"
       });
       })
       

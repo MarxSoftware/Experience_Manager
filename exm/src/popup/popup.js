@@ -19,18 +19,33 @@
 import PopupTrigger from './popup.trigger'
 import PopupAnimation from './popup.animation'
 import PopupPosition from './popup.position'
+import PopupOverlay from './popup.overlay'
 
 var Popup = function () {
 
     var popups = []
 
-    var init = function (configuration) {
-        let exm_container = document.getElementById("exm_container");
+    var _addContainers = function () {
+        let exm_container = document.getElementById("exm_container")
         if (exm_container == null) {
             exm_container = document.createElement("div")
             exm_container.classList.add("exm")
+            exm_container.id = "exm_container"
             document.body.appendChild(exm_container)
         }
+        PopupOverlay.addOverlay(exm_container, _closeHandler.bind(this));
+
+        return exm_container;
+    }
+
+    var _closeHandler = function () {
+        closeAll()
+    }
+
+    var init = function (configuration) {
+
+        let exm_container = _addContainers();
+
         let popup_container = document.createElement("div")
         let popup = document.createElement("div")
 
@@ -38,11 +53,15 @@ var Popup = function () {
         popup.setAttribute("id", configuration.id)
         popup.classList.add("popup")
         popup.classList.add(PopupAnimation.getCloseAnimation(configuration))
-        
+
         if (PopupPosition.isLeft(configuration)) {
             popup.style.right = 0
         } else if (PopupPosition.isRight(configuration)) {
             popup.style.left = 0
+        } else if (PopupPosition.isTopCenter(configuration)) {
+            popup.style.bottom = 0
+        } else if (PopupPosition.isBottomCenter(configuration)) {
+            popup.style.top = 0
         }
 
         popup_container.classList.add("popup-container")
@@ -63,7 +82,7 @@ var Popup = function () {
             });
         }
 
-        popups[configuration.id] = configuration;
+        popups.push(configuration);
 
         if (configuration.trigger.type === "after5") {
             PopupTrigger.after5(configuration)
@@ -74,20 +93,30 @@ var Popup = function () {
     }
 
     var close = function (id) {
-        if (typeof popups[id] !== "undefined") {
-            let popup = popups[id]
-            const openAnimationClass = PopupAnimation.getOpenAnimation(popup);
-            const closeAnimationClass = PopupAnimation.getCloseAnimation(popup);
-            document.querySelector("#" + popup.id).classList.toggle(openAnimationClass)
-            document.querySelector("#" + popup.id).classList.toggle(closeAnimationClass)
-
+        let popup = popups.find((element) => element.id === id);
+        if (typeof popup !== "undefined") {
+            _close(popup)
             //document.querySelector("#" + popup.id).closest(".popup-container").remove();
         }
     }
 
+    var _close = function (popup) {
+        const openAnimationClass = PopupAnimation.getOpenAnimation(popup)
+        const closeAnimationClass = PopupAnimation.getCloseAnimation(popup)
+        document.querySelector("#" + popup.id).classList.toggle(openAnimationClass)
+        document.querySelector("#" + popup.id).classList.toggle(closeAnimationClass)
+
+        PopupOverlay.hide()
+    }
+
+    var closeAll = function () {
+        popups.forEach(_close)
+    }
+
     return {
         init: init,
-        close: close
+        close: close,
+        closeAll: closeAll
     }
 }()
 

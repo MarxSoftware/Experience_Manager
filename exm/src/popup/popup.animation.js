@@ -9,11 +9,15 @@ var PopupAnimation = function () {
                     case 'tl':
                     case 'ml':
                     case 'bl':
-                        return 'slide-in-left'
+                        return 'animation-slide-in-left'
                     case 'tr':
                     case 'mr':
                     case 'br':
-                        return 'slide-in-right'
+                        return 'animation-slide-in-right'
+                    case 'bc':
+                        return 'animation-slide-in-bottom'
+                    case 'tc':
+                        return 'animation-slide-in-top'
                 }
             default:
                 return ''
@@ -28,20 +32,24 @@ var PopupAnimation = function () {
                     case 'tl':
                     case 'ml':
                     case 'bl':
-                        return 'slide-out-left'
+                        return 'animation-slide-out-left'
                     case 'tr':
                     case 'mr':
                     case 'br':
-                        return 'slide-out-right'
+                        return 'animation-slide-out-right'
+                    case 'bc':
+                        return 'animation-slide-out-bottom'
+                    case 'tc':
+                        return 'animation-slide-out-top'
                 }
             default:
                 return ''
         }
     }
 
-    
+
     return {
-        getCloseAnimation : getCloseAnimation,
+        getCloseAnimation: getCloseAnimation,
         getOpenAnimation: getOpenAnimation
     }
 }()

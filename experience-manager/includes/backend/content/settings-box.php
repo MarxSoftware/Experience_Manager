@@ -33,16 +33,6 @@
 							</td>
 						</tr>
 						<tr>
-							<th scope="row">Insert recommendations</th>
-							<td>
-								<fieldset>
-									<label for="exm_recommendation">
-										<input id="exm_recommendation" class="exm_settings_change" value="true" name="exm_recommendation" type="checkbox" /> Enable recommendations
-									</label>
-								</fieldset>
-							</td>
-						</tr>
-						<tr>
 							<th scope="row">Loading animation</th>
 							<td>
 								<fieldset>
@@ -63,6 +53,16 @@
 			<div id="exm_settings_recommendation" class="tabcontent">
 				<table class="form-table">
 					<tbody>
+						<tr>
+							<th scope="row">Insert recommendations</th>
+							<td>
+								<fieldset>
+									<label for="exm_recommendation">
+										<input id="exm_recommendation" class="exm_settings_change" value="true" name="exm_recommendation" type="checkbox" /> Enable recommendations
+									</label>
+								</fieldset>
+							</td>
+						</tr>
 						<tr>
 							<th scope="row">
 								<label for="exm_recommendation_type">Recommendation type</label>

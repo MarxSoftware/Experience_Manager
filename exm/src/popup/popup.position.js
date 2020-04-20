@@ -26,6 +26,24 @@ var PopupPosition = function () {
         }
     }
 
+    var isTopCenter = function (config) {
+        switch (config.position) {
+            case 'tc':
+                return true
+            default:
+                return false
+        }
+    }
+
+    var isBottomCenter = function (config) {
+        switch (config.position) {
+            case 'bc':
+                return true
+            default:
+                return false
+        }
+    }
+
     var isLeft = function (config) {
         switch (config.position) {
             case 'tl':
@@ -52,6 +70,8 @@ var PopupPosition = function () {
         getPosition: getPosition
         ,isLeft : isLeft
         ,isRight : isRight
+        , isTopCenter: isTopCenter
+        , isBottomCenter: isBottomCenter
     }
 }()
 

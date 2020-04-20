@@ -1,4 +1,5 @@
 import PopupAnimation from './popup.animation'
+import PopupOverlay from './popup.overlay'
 
 var PopupTrigger = function () {
 
@@ -7,7 +8,7 @@ var PopupTrigger = function () {
         const closeAnimationClass = PopupAnimation.getCloseAnimation(popup);
         PopupAnimation.getCloseAnimation(popup);
         setTimeout(() => {
-            console.log("show popup", popup);
+            PopupOverlay.show();
             document.querySelector("#" + popup.id).classList.toggle(closeAnimationClass)
             document.querySelector("#" + popup.id).classList.toggle(openAnimationClass)
         }, seconds);
@@ -24,6 +25,7 @@ var PopupTrigger = function () {
                 event.target.nodeName.toLowerCase() !== 'select') {
                 // Remove this event listener
                 document.removeEventListener("mouseout", onMouseOut);
+                PopupOverlay.show();
                 // Show the popup
                 const openAnimationClass = PopupAnimation.getOpenAnimation(popup);
                 const closeAnimationClass = PopupAnimation.getCloseAnimation(popup);
