@@ -33,13 +33,45 @@ EXM.Dom.ready(function (event) {
 		EXM.Ajax.request("exm_content_popups", function (data) {
 			console.log(data);
 			if (!data.error && data.popups.length > 0) {
-				EXM.Popup.init({
-					'id': "pop-" + data.popups[0].id,
-					'animation': data.popups[0].settings.popup.animation,
-					'position': data.popups[0].settings.popup.position,
-					'trigger': {type: data.popups[0].settings.popup.trigger},
-					'content': data.popups[0].content
+				let popups = data.popups.filter((popup) => {
+					const cookie_name = popup.settings.popup.cookie_name ? popup.settings.popup.cookie_name : null;
+					if (typeof cookie_name !== "undefined" 
+							&& cookie_name !== null 
+							&& cookie_name !== "") {
+						return EXM.Cookie.get(cookie_name) === null;
+					}
+					return true;
 				});
+				console.log("filtered", popups);
+				if (popups.length > 0) {
+					const popup = popups[0];
+
+					// set the cookie
+					const cookie_name = popup.settings.popup.cookie_name ? popup.settings.popup.cookie_name : null;
+					if (typeof cookie_name !== "undefined" && cookie_name !== null && cookie_name !== "") {
+						const cookie_lifetime = popup.settings.popup.cookie_lifetime;
+						const cookie_lifetime_unit = popup.settings.popup.cookie_lifetime_unit;
+
+						let life_time = 0;
+						if (cookie_lifetime_unit === "day") {
+							life_time = (cookie_lifetime * 24 * 60 * 60 * 1000);
+						} else if (cookie_lifetime_unit === "week") {
+							life_time = (cookie_lifetime * 7 * 24 * 60 * 60 * 1000);
+						} else if (cookie_lifetime_unit === "month") {
+							life_time = (cookie_lifetime * 30 * 24 * 60 * 60 * 1000);
+						}
+
+						EXM.Cookie.set(cookie_name, true, life_time);
+					}
+					console.log("display", popup);
+					EXM.Popup.init({
+						'id': "pop-" + popup.id,
+						'animation': popup.settings.popup.animation,
+						'position': popup.settings.popup.position,
+						'trigger': {type: popup.settings.popup.trigger},
+						'content': popup.content
+					});
+				}
 			}
 		}, "&post_id=" + current_id + "&frontpage=" + frontpage)
 	});

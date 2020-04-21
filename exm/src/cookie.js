@@ -29,7 +29,7 @@ var Cookie = function () {
                 return unescape(document.cookie.substring(c_start, c_end));
             }
         }
-        return "";
+        return null;
 	}
 
 	return {

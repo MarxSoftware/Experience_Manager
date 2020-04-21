@@ -7,7 +7,7 @@ var PopupPosition = function () {
                 return 'position-top-left'
             case 'tc':
                 return 'position-top-center'
-            case 'tc':
+            case 'tr':
                 return 'position-top-right'
             case 'ml':
                 return 'position-middle-left'
@@ -34,6 +34,26 @@ var PopupPosition = function () {
                 return false
         }
     }
+    var isTop = function (config) {
+        switch (config.position) {
+            case 'tr':
+            case 'tl':
+            case 'tc':
+                return true
+            default:
+                return false
+        }
+    }
+    var isBottom = function (config) {
+        switch (config.position) {
+            case 'br':
+            case 'bl':
+            case 'bc':
+                return true
+            default:
+                return false
+        }
+    }
 
     var isBottomCenter = function (config) {
         switch (config.position) {
@@ -54,7 +74,7 @@ var PopupPosition = function () {
                 return false
         }
     }
-    
+
     var isRight = function (config) {
         switch (config.position) {
             case 'tr':
@@ -68,8 +88,10 @@ var PopupPosition = function () {
 
     return {
         getPosition: getPosition
-        ,isLeft : isLeft
-        ,isRight : isRight
+        , isLeft: isLeft
+        , isRight: isRight
+        , isTop: isTop
+        , isBottom: isBottom
         , isTopCenter: isTopCenter
         , isBottomCenter: isBottomCenter
     }

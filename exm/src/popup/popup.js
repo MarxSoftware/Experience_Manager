@@ -58,15 +58,16 @@ var Popup = function () {
             popup.style.right = 0
         } else if (PopupPosition.isRight(configuration)) {
             popup.style.left = 0
-        } else if (PopupPosition.isTopCenter(configuration)) {
+        } 
+        if (PopupPosition.isTop(configuration)) {
             popup.style.bottom = 0
-        } else if (PopupPosition.isBottomCenter(configuration)) {
+        } else if (PopupPosition.isBottom(configuration)) {
             popup.style.top = 0
         }
 
         popup_container.classList.add("popup-container")
         popup_container.classList.add(PopupPosition.getPosition(configuration))
-        popup_container.style.zIndex = "1000"
+        popup_container.style.zIndex = "2000"
         popup_container.appendChild(popup)
 
 

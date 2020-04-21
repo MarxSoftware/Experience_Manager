@@ -29,16 +29,20 @@ class Flex_Content_Validator {
 		$conditions = $this->content->get_conditions();
 
 		if (!$this->validate_weekday($conditions)) {
+			tma_exm_log("popup not display in current day");
 			return false;
 		}
 		if (!$this->validate_homepage($conditions)) {
+			tma_exm_log("popup just visible on homepage");
 			return false;
 		}
 		if (!$this->validate_post_type($conditions)) {
+			tma_exm_log("popup not visible on current post type");
 			return false;
 		}
 		
 		if (!$this->validate_audience($conditions)) {
+			tma_exm_log("popup not visible for current audiences");
 			return false;
 		}
 
@@ -51,7 +55,7 @@ class Flex_Content_Validator {
 		}
 		$audiences = $conditions->audiences;
 		
-		if (size_format($audiences) === 0) {
+		if (sizeof($audiences) === 0) {
 			return true;
 		}
 		

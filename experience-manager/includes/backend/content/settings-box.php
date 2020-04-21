@@ -128,8 +128,8 @@
 							</th>
 							<td>
 								<select class="exm_settings_change" id="exm_popup_trigger" name="exm_popup_trigger">
-									<option value="5seconds">After 5 seconds</option>
-									<option value="exitintend">Exit intent</option>
+									<option value="after5">After 5 seconds</option>
+									<option value="exit_intent">Exit intent</option>
 								</select>
 							</td>
 						</tr>
