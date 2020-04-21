@@ -53,7 +53,7 @@ class DiviBuilder_Integration extends \TMA\ExperienceManager\Integration {
 	}
 	
 	function init_frontent_scripts () {
-		wp_enqueue_script('experience-manager-divi', TMA_EXPERIENCE_MANAGER_URL . 'assets/divi/experience-manager-divi.js', array("experience-manager-hooks"), "1");
+//		wp_enqueue_script('experience-manager-divi', TMA_EXPERIENCE_MANAGER_URL . 'assets/divi/experience-manager-divi.js', array("experience-manager-hooks"), "1");
 	}
 
 	function register_get_terms() {

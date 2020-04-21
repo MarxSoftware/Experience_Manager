@@ -24,11 +24,15 @@ function exm_enqueue_script() {
 		'front_page' => is_front_page() ? "true" : "false"
 	));
 
+	$scriptHelper = new \TMA\ExperienceManager\TMAScriptHelper();
+//	wp_enqueue_script('experience-manager-exm-tracker', TMA_EXPERIENCE_MANAGER_URL . 'assets/exm/tracker.js', array('experience-manager-exm'), "1");
+	wp_add_inline_script("experience-manager-exm", $scriptHelper->getCode());
+
 	//$scriptHelper = new \TMA\ExperienceManager\TMAScriptHelper();
 	//wp_add_inline_script("experience-manager-exm", $scriptHelper->getCode());
-	
+
 	if (!tma_exm_is_editor_active()) {
-		wp_enqueue_script('experience-manager-frontend', TMA_EXPERIENCE_MANAGER_URL . 'js/experience-manager-frontend.js', array("jquery", "experience-manager-exm", "experience-manager-hooks"), "1");
+		wp_enqueue_script('experience-manager-frontend', TMA_EXPERIENCE_MANAGER_URL . 'js/experience-manager-frontend.js', array("jquery", "experience-manager-exm"), "1");
 		wp_enqueue_script('experience-manager-flex-content', TMA_EXPERIENCE_MANAGER_URL . 'js/experience-manager-flex-content.js', array("experience-manager-frontend", "experience-manager-exm"), "1");
 	}
 }

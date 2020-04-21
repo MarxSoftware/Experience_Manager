@@ -1,8 +1,23 @@
 const path = require('path');
 
-module.exports = {
+var config = {
+    module: {},
+};
+
+var trackerConfig = Object.assign({}, config, {
     mode: 'development',
-    entry: './src/index.js',
+    entry: "./src/tracker.js",
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
+    },
+    output: {
+        filename: 'tracker.js',
+        path: path.resolve(__dirname, 'dist'),
+    },
+});
+var exmConfig = Object.assign({}, config, {
+    mode: 'development',
+    entry: './src/exm/exm.js',
     output: {
         filename: 'exm.js',
         path: path.resolve(__dirname, 'dist'),
@@ -31,4 +46,8 @@ module.exports = {
             },
         ],
     },
-};
+});
+
+module.exports = [
+    exmConfig, trackerConfig,       
+];

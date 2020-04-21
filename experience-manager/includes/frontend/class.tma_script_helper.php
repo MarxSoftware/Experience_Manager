@@ -35,11 +35,7 @@ class TMAScriptHelper {
 			$trackUser = !is_user_logged_in();
 		}
 
-		if (function_exists('vc_is_frontend_editor') && vc_is_frontend_editor()) {
-			return false;
-		} else if (function_exists('siteorigin_panels_is_preview') && siteorigin_panels_is_preview()) {
-			return false;
-		} else if (is_preview()) {
+		if (is_preview()) {
 			return false;
 		}
 
@@ -120,7 +116,21 @@ class TMAScriptHelper {
 				$output .= $score;
 			}
 
-
+			$output = "var _exm = window._exm || [];\r\n";
+			$output .= "_exm.push(['init']);\r\n";
+			$output .= "_exm.push(['setTrackerUrl', '{$this->getWebTools_Url()}']);\r\n";
+			$output .= "_exm.push(['setSite', '$siteid']);\r\n";
+			$output .= "_exm.push(['setPage', '" . get_post()->ID . "']);\r\n";
+			$output .= "_exm.push(['setType', '" . get_post()->post_type . "']);\r\n";
+			$output .= "_exm.push(['setCustomParameters', $customParameters]);\r\n";
+			if ($cookieDomain !== FALSE) {
+				$output .= "_exm.push(['setCookieDomain', '$cookieDomain']);\r\n";
+			}
+			$output .= "(function() {\r\n";
+			$output .= "var u='" . TMA_EXPERIENCE_MANAGER_URL . "assets/exm/tracker.js';\r\n";
+			$output .= "var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];\r\n";
+			$output .= "g.type='text/javascript'; g.async=true; g.defer=true; g.src=u; s.parentNode.insertBefore(g,s);\r\n";
+			$output .= "})();\r\n";
 			//$output .= '</script>';
 		}
 

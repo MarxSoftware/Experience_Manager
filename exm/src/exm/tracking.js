@@ -21,20 +21,26 @@ var Tracking = function () {
     }
    
 
-    var init = function (host, site, page, type) {
-        Context.site = site;
-        Context.page = page;
-        Context.host = host;
-        Context.type = type
+    var init = function () {
         Context.uid = "";			// the userid
         Context.rid = _uuid();			// the requestid
         Context.vid = "";			// the visitid
         Context.pixelImage = new Image();
     };
-    var page = function (page) {
+    var setPage = function (page) {
         Context.page = page;
     };
-    var customParameters = function (customParameters) {
+    var setSite = function (page) {
+        Context.page = page;
+    };
+    var setType = function (type) {
+        Context.type = type
+    };
+    var setTrackerUrl = function (host) {
+        console.log("set host: ", host)
+        Context.host = host;
+    };
+    var setCustomParameters = function (customParameters) {
         Context.custom_parameter = customParameters;
     };
     var setCookieDomain = function (domain) {
@@ -139,8 +145,11 @@ var Tracking = function () {
 
     return {
         init: init
-        , page: page
-        , customParameters: customParameters
+        , setPage: setPage
+        , setSite: setSite
+        , setType: setType
+        , setTrackerUrl: setTrackerUrl
+        , setCustomParameters: setCustomParameters
         , setCookieDomain: setCookieDomain
         , optOut: optOut
         , dnt: dnt

@@ -71,7 +71,7 @@ function tma_webtools_init() {
 		wp_register_style('experience-manager', plugins_url('css/experience-manager.css', __FILE__));
 		wp_enqueue_style('experience-manager');
 
-		wp_register_script("experience-manager-hooks", plugins_url('assets/hook.js', __FILE__), [], "1.0.0", false);
+//		wp_register_script("experience-manager-hooks", plugins_url('assets/hook.js', __FILE__), [], "1.0.0", false);
 //		wp_enqueue_script("experience-manager-hooks", plugins_url('assets/hook.js', __FILE__), [], "1.0.0", false);
 	}
 
@@ -149,10 +149,10 @@ function tma_js_variables() {
 }
 
 function tma_webtools_hook_js() {
-	$scriptHelper = new \TMA\ExperienceManager\TMAScriptHelper();
-	wp_register_script('exm-dummy-handle-header', '');
-	wp_enqueue_script('exm-dummy-handle-header');
-	wp_add_inline_script("exm-dummy-handle-header", $scriptHelper->getCode());
+//	$scriptHelper = new \TMA\ExperienceManager\TMAScriptHelper();
+//	wp_register_script('exm-dummy-handle-header', '');
+//	wp_enqueue_script('exm-dummy-handle-header');
+//	wp_add_inline_script("exm-dummy-handle-header", $scriptHelper->getCode());
 }
 
 function tma_init_cookie() {
