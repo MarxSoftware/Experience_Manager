@@ -53,7 +53,6 @@ class TMAScriptHelper {
 		return isset(get_option('tma_webtools_option')['webtools_score']) && get_option('tma_webtools_option')['webtools_score'] && (is_single() || is_page());
 	}
 
-
 	private function getWebTools_Url() {
 		$url = get_option('tma_webtools_option')['webtools_url'];
 		return rtrim($url, "/");
@@ -95,33 +94,25 @@ class TMAScriptHelper {
 			 * 
 			 * Wenn die Einstellungen auf default bleiben, sind beide TRUE
 			 */
-			/* if (is_home()) {
-			  $output .= 'EXM.Tracking.init("' . $this->getWebTools_Url() . '", "' . $siteid . '", "/");';
-			  } else */if (!is_404()) {
-				$output .= 'EXM.Tracking.init("' . $this->getWebTools_Url() . '", "' . $siteid . '", "' . get_post()->ID  . '", "' . get_post()->post_type . '");';
-			} else {
-				$output .= 'EXM.Tracking.init("' . $this->getWebTools_Url() . '", "' . $siteid . '", "404", "error");';
-			}
-			if ($cookieDomain !== FALSE) {
-				$output .= 'EXM.Tracking.setCookieDomain("' . $cookieDomain . '");';
-			}
-			$output .= 'EXM.Tracking.customParameters(';
-			$output .= $customParameters;
-			$output .= ');';
-			$output .= 'EXM.Tracking.register();';
 
-			if ($this->shouldScore()) {
-				$score = $this->getScoring();
-
-				$output .= $score;
-			}
+//			if ($this->shouldScore()) {
+//				$score = $this->getScoring();
+//
+//				$output .= $score;
+//			}
 
 			$output = "var _exm = window._exm || [];\r\n";
 			$output .= "_exm.push(['init']);\r\n";
 			$output .= "_exm.push(['setTrackerUrl', '{$this->getWebTools_Url()}']);\r\n";
 			$output .= "_exm.push(['setSite', '$siteid']);\r\n";
-			$output .= "_exm.push(['setPage', '" . get_post()->ID . "']);\r\n";
-			$output .= "_exm.push(['setType', '" . get_post()->post_type . "']);\r\n";
+			if (!is_404) {
+				$output .= "_exm.push(['setPage', '" . get_post()->ID . "']);\r\n";
+				$output .= "_exm.push(['setType', '" . get_post()->post_type . "']);\r\n";
+			} else {
+				$output .= "_exm.push(['setPage', '404']);\r\n";
+				$output .= "_exm.push(['setType', 'error']);\r\n";
+			}
+
 			$output .= "_exm.push(['setCustomParameters', $customParameters]);\r\n";
 			if ($cookieDomain !== FALSE) {
 				$output .= "_exm.push(['setCookieDomain', '$cookieDomain']);\r\n";
@@ -161,7 +152,7 @@ class TMAScriptHelper {
 
 	private function add_categories(& $meta) {
 		$cats = [];
-		$term = get_term_by( 'slug', get_query_var('term'), get_query_var('taxonomy') );
+		$term = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'));
 		if (is_category()) {
 			$term_list = get_categories();
 			foreach ($term_list as $cat) {
