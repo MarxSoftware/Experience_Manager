@@ -105,7 +105,7 @@ class TMAScriptHelper {
 			$output .= "_exm.push(['init']);\r\n";
 			$output .= "_exm.push(['setTrackerUrl', '{$this->getWebTools_Url()}']);\r\n";
 			$output .= "_exm.push(['setSite', '$siteid']);\r\n";
-			if (!is_404) {
+			if (!is_404()) {
 				$output .= "_exm.push(['setPage', '" . get_post()->ID . "']);\r\n";
 				$output .= "_exm.push(['setType', '" . get_post()->post_type . "']);\r\n";
 			} else {

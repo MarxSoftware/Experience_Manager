@@ -5,7 +5,7 @@ var config = {
 };
 
 var trackerConfig = Object.assign({}, config, {
-    mode: 'development',
+    mode: 'production',
     entry: "./src/tracker.js",
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
@@ -16,7 +16,7 @@ var trackerConfig = Object.assign({}, config, {
     },
 });
 var exmConfig = Object.assign({}, config, {
-    mode: 'development',
+    mode: 'production',
     entry: './src/exm/exm.js',
     output: {
         filename: 'exm.js',
