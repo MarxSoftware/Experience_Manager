@@ -37,7 +37,6 @@ var Tracking = function () {
         Context.type = type
     };
     var setTrackerUrl = function (host) {
-        console.log("set host: ", host)
         Context.host = host;
     };
     var setCustomParameters = function (customParameters) {
