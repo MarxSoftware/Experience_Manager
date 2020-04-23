@@ -25,23 +25,24 @@ class Flex_Content_Validator {
 		$this->frontpage = $frontpage;
 	}
 
-	public function validate_conditions() {
+	public function validate_conditions($features = []) {
 		$conditions = $this->content->get_conditions();
 
-		if (!$this->validate_weekday($conditions)) {
+		tma_exm_log("flex content validation " . $this->content->ID);
+		if (in_array("weekday", $features) && !$this->validate_weekday($conditions)) {
 			tma_exm_log("popup not display in current day");
 			return false;
 		}
-		if (!$this->validate_homepage($conditions)) {
+		if (in_array("homepage", $features) && !$this->validate_homepage($conditions)) {
 			tma_exm_log("popup just visible on homepage");
 			return false;
 		}
-		if (!$this->validate_post_type($conditions)) {
+		if (in_array("post_type", $features) && !$this->validate_post_type($conditions)) {
 			tma_exm_log("popup not visible on current post type");
 			return false;
 		}
 		
-		if (!$this->validate_audience($conditions)) {
+		if (in_array("audience", $features) && !$this->validate_audience($conditions)) {
 			tma_exm_log("popup not visible for current audiences");
 			return false;
 		}
@@ -78,9 +79,10 @@ class Flex_Content_Validator {
 		if (!property_exists($conditions, "homepage")) {
 			return true;
 		}
-		if ($conditions->homepage) {
+		if ($conditions->homepage === true) {
 			return filter_var($this->frontpage, FILTER_VALIDATE_BOOLEAN);
 		}
+		return true;
 	}
 
 	private function validate_post_type($conditions) {

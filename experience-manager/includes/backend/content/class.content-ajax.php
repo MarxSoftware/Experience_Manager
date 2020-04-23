@@ -66,12 +66,12 @@ class ContentAjax {
 		$popups = [];
 		foreach ($post_list as $post) {
 			$content = new Flex_Content($post->ID);
-			
+
 			$validator = new Flex_Content_Validator($content, $post_id, $frontpage);
-			if (!$validator->validate_conditions()) {
+			if (!$validator->validate_conditions(['weekday', 'post_type', 'homepage', 'audience'])) {
 				continue;
 			}
-			
+
 			$content_engine = new Flex_Content_Engine($content);
 
 			$popup_content = "<style>" . $content_engine->get_compiled_css($post_id) . "</style>";
@@ -119,6 +119,9 @@ class ContentAjax {
 		if ($_POST['post_id']) {
 			$post_id = filter_input(INPUT_POST, 'post_id', FILTER_DEFAULT);
 		}
+		if (array_key_exists('frontpage', $_POST)) {
+			$frontpage = filter_input(INPUT_POST, 'frontpage', FILTER_DEFAULT);
+		}
 		if (!$content_id) {
 			$response["error"] = true;
 			$response["message"] = __("No flex content id", "tma-webtools");
@@ -127,12 +130,24 @@ class ContentAjax {
 		}
 
 		$content = new Flex_Content($content_id);
-		$content_engine = new Flex_Content_Engine($content);
+		$validator = new Flex_Content_Validator($content, $post_id, $frontpage);
+		if ($validator->validate_conditions(['weekday', 'homepage', 'audience'])) {
+			$content_engine = new Flex_Content_Engine($content);
 
-		$response["html"] = $content_engine->get_compiled_html($post_id);
-		$response["js"] = $content_engine->get_compiled_js($post_id);
-		$response["css"] = $content_engine->get_compiled_css($post_id);
-		$response["error"] = false;
+			$response["html"] = $content_engine->get_compiled_html($post_id);
+			$response["js"] = $content_engine->get_compiled_js($post_id);
+			$response["css"] = $content_engine->get_compiled_css($post_id);
+			$response["error"] = false;
+		} else {
+			$content_engine = new Flex_Content_Engine($content);
+
+			$response["html"] = "";
+			$response["js"] = "";
+			$response["css"] = "";
+			$response["error"] = false;
+		}
+
+
 
 		wp_send_json($response);
 	}

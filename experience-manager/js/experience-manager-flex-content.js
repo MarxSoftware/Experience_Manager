@@ -20,18 +20,15 @@ EXM.Dom.ready(function (event) {
 		let content_id = $item.dataset.exmFlexContent;
 		let current_id = $item.dataset.exmCurrentId;
 		let frontpage = $item.dataset.exmFrontpage;
-		console.log(content_id);
-		console.log(current_id);
 		EXM.Ajax.request("exm_content", function (data) {
 			if (!data.error) {
 				EXM.Dom.insertHeadElement("style", "text/css", data.css);
 				$item.innerHTML = data.html;
 				EXM.Dom.insertHeadElement("script", "text/javascript", data.js);
 			}
-		}, "&id=" + content_id + "&post_id=" + current_id);
+		}, "&id=" + content_id + "&post_id=" + current_id + "&frontpage=" + frontpage);
 
 		EXM.Ajax.request("exm_content_popups", function (data) {
-			console.log(data);
 			if (!data.error && data.popups.length > 0) {
 				let popups = data.popups.filter((popup) => {
 					const cookie_name = popup.settings.popup.cookie_name ? popup.settings.popup.cookie_name : null;
@@ -42,7 +39,6 @@ EXM.Dom.ready(function (event) {
 					}
 					return true;
 				});
-				console.log("filtered", popups);
 				if (popups.length > 0) {
 					const popup = popups[0];
 
@@ -63,7 +59,6 @@ EXM.Dom.ready(function (event) {
 
 						EXM.Cookie.set(cookie_name, true, life_time);
 					}
-					console.log("display", popup);
 					EXM.Popup.init({
 						'id': "pop-" + popup.id,
 						'animation': popup.settings.popup.animation,

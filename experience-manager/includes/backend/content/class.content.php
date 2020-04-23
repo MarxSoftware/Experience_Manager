@@ -55,6 +55,8 @@ class Flex_Content {
 	
 	public function get_settings () {
 		$settings = $this->get_meta_settings();
+		tma_exm_log("get_settings: " . $settings);
+		tma_exm_log("stripslashes: " . stripslashes($settings));
 		return json_decode(stripslashes($settings));
 	}
 	

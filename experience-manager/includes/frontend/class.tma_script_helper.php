@@ -60,7 +60,7 @@ class TMAScriptHelper {
 
 	public function getCode() {
 		$output = '';
-		if ($this->isTrackingEnabled()) {
+		if ($this->isTrackingEnabled() && !is_admin()) {
 
 			$siteid = tma_exm_get_site();
 			$cookieDomain = FALSE;
