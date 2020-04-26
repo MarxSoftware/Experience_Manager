@@ -1,6 +1,6 @@
 === Experience Manager ===
 Contributors: thmarx
-Tags: digital experience platform, experience manager, targeting, analytics, tracking, product targeting, behaviour targets
+Tags: digital experience platform, experience manager, targeting, analytics, tracking, product targeting, behaviour targets, popup, popups
 Requires at least: 4.4.1
 Tested up to: 5.4
 Stable tag: 4.2.0
@@ -19,6 +19,7 @@ Features:
 * User segmentation
 * Content targeting via shortcodes fro classic editor
 * Segment simulator in the preview
+* Flex Content
 * Support for [Elementor Page Builder](https://elementor.com/)
 * Support for [Gutenberg](https://wordpress.org/gutenberg/)
 * Support for [Divi](https://www.elegantthemes.com/gallery/divi/)

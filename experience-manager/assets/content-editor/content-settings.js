@@ -20,7 +20,8 @@ var exm_content_form = {
 			conditions: {
 				post_types: [],
 				audiences: [],
-				weekdays: []
+				weekdays: [],
+				roles: []
 			}
 		};
 	},
@@ -195,11 +196,32 @@ var exm_content_form = {
 		},
 		"exm_condition_homepage": {
 			type: "checkbox",
+			exists_function: exm_contains_conditions,
 			get_function: (config) => {
 				return config.conditions.homepage;
 			},
 			set_function: (config, value) => {
 				config.conditions.homepage = value;
+			}
+		},
+		"exm_condition_logged_in": {
+			type: "checkbox",
+			exists_function: exm_contains_conditions,
+			get_function: (config) => {
+				return config.conditions.logged_in;
+			},
+			set_function: (config, value) => {
+				config.conditions.logged_in = value;
+			}
+		},
+		"exm_condition_roles": {
+			type: "multi_checkbox",
+			exists_function: exm_contains_conditions,
+			get_function: (config) => {
+				return config.conditions.roles;
+			},
+			set_function: (config, value) => {
+				config.conditions.roles = value;
 			}
 		},
 	},

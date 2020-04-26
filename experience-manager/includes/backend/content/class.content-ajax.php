@@ -68,7 +68,7 @@ class ContentAjax {
 			$content = new Flex_Content($post->ID);
 
 			$validator = new Flex_Content_Validator($content, $post_id, $frontpage);
-			if (!$validator->validate_conditions(['weekday', 'post_type', 'homepage', 'audience'])) {
+			if (!$validator->validate_conditions(['weekday', 'post_type', 'homepage', 'audience', 'logged_in', 'roles'])) {
 				continue;
 			}
 
@@ -131,7 +131,7 @@ class ContentAjax {
 
 		$content = new Flex_Content($content_id);
 		$validator = new Flex_Content_Validator($content, $post_id, $frontpage);
-		if ($validator->validate_conditions(['weekday', 'homepage', 'audience'])) {
+		if ($validator->validate_conditions(['weekday', 'homepage', 'audience', 'logged_in', 'roles'])) {
 			$content_engine = new Flex_Content_Engine($content);
 
 			$response["html"] = $content_engine->get_compiled_html($post_id);

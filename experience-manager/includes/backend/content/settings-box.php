@@ -202,7 +202,7 @@
 								}
 								?>
 								<br />
-								<span class="description">Display popup just on these post types.</span>
+								<span class="description">Display content just on these post types.</span>
 							</td>
 						</tr>
 						<tr>
@@ -225,7 +225,7 @@
 								}
 								?>
 								<br />
-								<span class="description">Display popup just for these audiences.</span>
+								<span class="description">Display content just for these audiences.</span>
 							</td>
 						</tr>
 						<tr>
@@ -251,7 +251,7 @@
 									</label>
 								</fieldset>
 								<br />
-								<span class="description">If enabled, the popup will only be shown on your homepage.</span>
+								<span class="description">If enabled, the content will only be shown on your homepage.</span>
 							</td>
 						</tr>
 						<tr>
@@ -283,7 +283,43 @@
 								}
 								?>
 								<br />
-								<span class="description">Display popup just on these weekdays.</span>
+								<span class="description">Display content just on these weekdays.</span>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">Show only for logged in users</th>
+							<td>
+								<fieldset>
+									<label for="exm_condition_logged_in">
+										<input id="exm_condition_logged_in" class="exm_settings_change" value="true" name="exm_condition_logged_in" type="checkbox" />
+									</label>
+								</fieldset>
+								<br />
+								<span class="description">If enabled, the flex content will only be visible for logged in users.</span>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">
+								<label for="exm_condition_roles">Display only for selected roles</label>
+							</th>
+							<td>
+								<label>
+									<button class="button" onclick='exm_content_settings_check_all("[name=exm_condition_roles]"); return false;'><?php echo __("All roles", "tma-webtools") ?></button>
+								</label>
+								<?php
+								$editable_roles = array_reverse( get_editable_roles() );
+								foreach ( $editable_roles as $role => $details ) {
+									$name = translate_user_role( $details['name'] );
+									?>
+									<label>
+										<input type="checkbox" class="exm_condition_roles" name="exm_condition_roles" value="<?php echo esc_attr( $role ); ?>" />
+										<?php echo $name; ?>
+									</label>
+									<?php
+								}
+								?>
+								<br />
+								<span class="description">Display flex content only for selected roles. If no role is selected this condition will be ignored.</span>
 							</td>
 						</tr>
 					</tbody>
