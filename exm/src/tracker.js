@@ -1,7 +1,6 @@
 if (typeof _exm !== 'object') {
     _exm = [];
 }
-console.log(_exm);
 (function () {
 
     function apply(functionObj) {

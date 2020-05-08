@@ -107,7 +107,6 @@ function tma_webtools_init() {
 		});
 	}
 
-	add_action('wp_head', 'tma_webtools_hook_js');
 	add_action('wp_head', 'tma_js_variables', -100);
 	add_action('admin_head', 'tma_js_variables', -100);
 
@@ -148,16 +147,17 @@ function tma_js_variables() {
 	</script><?php
 }
 
-function tma_webtools_hook_js() {
-//	$scriptHelper = new \TMA\ExperienceManager\TMAScriptHelper();
-//	wp_register_script('exm-dummy-handle-header', '');
-//	wp_enqueue_script('exm-dummy-handle-header');
-//	wp_add_inline_script("exm-dummy-handle-header", $scriptHelper->getCode());
-}
+
 
 function tma_init_cookie() {
+	/**
+	 * cookies are only used if set via js, 
+	 * so the option implementation is easier
+	 */
+	if( !session_id() ) {
+        session_start();
+	}
 	$_REQUEST[\TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_REQUEST] = \TMA\ExperienceManager\UUID::v4();
-	\TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(\TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_USER, \TMA\ExperienceManager\UUID::v4(), \TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_USER_EXPIRE, true);
-	//\TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(\TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_REQUEST, \TMA\ExperienceManager\UUID::v4(), \TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_REQUEST_EXPIRE, true);
-	\TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(\TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_VISIT, \TMA\ExperienceManager\UUID::v4(), \TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_VISIT_EXPIRE, true);
+//	\TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(\TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_USER, \TMA\ExperienceManager\UUID::v4(), \TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_USER_EXPIRE, true);
+//	\TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(\TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_VISIT, \TMA\ExperienceManager\UUID::v4(), \TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_VISIT_EXPIRE, true);
 }

@@ -42,6 +42,10 @@ class TMA_COOKIE_HELPER {
 	public function getCookie($name, $value, $expire, $setNew = false) {
 		if (isset($_COOKIE[$name])) {
 			$value = $_COOKIE[$name];
+		} else {
+			// no cookie set, so maybe there is no optin
+			// we use the session id for tracking
+			return session_id();
 		}
 		if ($setNew) {
 

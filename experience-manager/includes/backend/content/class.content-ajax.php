@@ -139,8 +139,6 @@ class ContentAjax {
 			$response["css"] = $content_engine->get_compiled_css($post_id);
 			$response["error"] = false;
 		} else {
-			$content_engine = new Flex_Content_Engine($content);
-
 			$response["html"] = "";
 			$response["js"] = "";
 			$response["css"] = "";

@@ -68,6 +68,11 @@ none
 
 == Changelog ==
 
+4.2.0
+ * Flex Content
+ * Refactoring tracking code
+ * Prepared the php cookie management for OPT-In implementations
+
 4.1.1
  * bug fix in backend tracking
 
