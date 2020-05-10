@@ -66,17 +66,8 @@ abstract class Integration {
 
 		$matching_mode = $args['tma_matching'];
 		
-		$attr_segments = $this->getSegments($args);
-
-		$uid = \TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(TMA_COOKIE_HELPER::$COOKIE_USER, UUID::v4(), TMA_COOKIE_HELPER::$COOKIE_USER_EXPIRE);
-		$request = new TMA_Request();
-		$response = $request->getSegments($uid);
-		
-		$segments = ["default"];
-		if ($response !== NULL) {
-			$segments = tma_exm_get_user_segments(["default"]);
-		}
-
+		$attr_segments = $this->getSegments($args);		
+		$segments = tma_exm_get_user_segments(["default"]);
 		$matching = false;
 //		$segments = array_map('trim', $segments);
 		$attr_segments = array_map('trim', $attr_segments);

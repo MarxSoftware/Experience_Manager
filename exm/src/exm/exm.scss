@@ -18,14 +18,24 @@
             transition: opacity 0.5s ease-out;
         }
 
-        &.slide-out-left {
+        &.animation-slide-out-left {
             transform: translateX(-200%);
             -webkit-transform: translateX(-200%);
         }
-        &.slide-out-right {
+        &.animation-slide-out-right {
             transform: translateX(200%);
             -webkit-transform: translateX(200%);
         }
+
+        &.animation-slide-out-top {
+            transform: translateY(-200%);
+            -webkit-transform: translateY(-200%);
+        }
+        &.animation-slide-out-bottom {
+            transform: translateY(200%);
+            -webkit-transform: translateY(200%);
+        }
+
         &.show {
             transform: translateX(0);
             -webkit-transform: translateX(0);
@@ -50,19 +60,19 @@
 
             transform: translateX(-50%);
         }
-        &.position-center {
+        &.position-middle-center {
             top: 50%; /* position the top  edge of the element at the middle of the parent */
             left: 50%; /* position the left edge of the element at the middle of the parent */
 
             transform: translate(-50%, -50%); /* This is a shorthand of translateX(-50%) and translateY(-50%) */
         }
-        &.position-center-left {
+        &.position-middle-left {
             top: 50%; /* position the top  edge of the element at the middle of the parent */
             left: 0px;
 
             transform: translateY(-50%);
         }
-        &.position-center-right {
+        &.position-middle-right {
             top: 50%; /* position the top  edge of the element at the middle of the parent */
             right: 0px;
 
@@ -83,4 +93,34 @@
             transform: translateX(-50%);
         }
     }
+    .overlay {
+        position: fixed;
+        display: none;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 1900;
+        cursor: pointer;
+    }
 }
+/**
+START HIGHLIGHT
+**/
+body.exm-highlight-is-active {
+    pointer-events: none;
+}
+
+.exm-highlight {
+    box-shadow: 0 0 0 99999px rgba(0, 0, 0, 0.8);
+    position: relative;
+    z-index: 9999;
+    pointer-events: auto;
+    transition: all 0.5s ease;
+}
+/**
+  END Highlight
+  **/

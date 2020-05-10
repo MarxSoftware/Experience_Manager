@@ -128,7 +128,7 @@ class Elementor_Integration extends Integration {
 				'tma_matching', [
 			'label' => __('Matching mode', 'tma-webtools'),
 			'type' => \Elementor\Controls_Manager::SELECT,
-			'description' => __('User must match all or just a single segment.', 'tma-webtools'),
+			'description' => __('User must match all, any or just a single segment.', 'tma-webtools'),
 			'default' => 'all',
 			'options' => [
 				'all' => __('All', 'tma-webtools'),

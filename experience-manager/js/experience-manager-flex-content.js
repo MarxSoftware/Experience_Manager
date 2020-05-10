@@ -14,19 +14,61 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-webtools.domReady(function (event) {
+
+EXM.Dom.ready(function (event) {
 	document.querySelectorAll("[data-exm-flex-content]").forEach(function ($item) {
 		let content_id = $item.dataset.exmFlexContent;
 		let current_id = $item.dataset.exmCurrentId;
-		console.log(content_id);
-		console.log(current_id);
+		let frontpage = $item.dataset.exmFrontpage;
 		EXM.Ajax.request("exm_content", function (data) {
 			if (!data.error) {
-				EXM.Dom.insertElement("style", "text/css", data.css);
+				EXM.Dom.insertHeadElement("style", "text/css", data.css);
 				$item.innerHTML = data.html;
-				EXM.Dom.insertElement("script", "text/javascript", data.js);
+				EXM.Dom.insertHeadElement("script", "text/javascript", data.js);
 			}
-		}, "&id=" + content_id + "&post_id=" + current_id);
+		}, "&id=" + content_id + "&post_id=" + current_id + "&frontpage=" + frontpage);
+
+		EXM.Ajax.request("exm_content_popups", function (data) {
+			if (!data.error && data.popups.length > 0) {
+				let popups = data.popups.filter((popup) => {
+					const cookie_name = popup.settings.popup.cookie_name ? popup.settings.popup.cookie_name : null;
+					if (typeof cookie_name !== "undefined" 
+							&& cookie_name !== null 
+							&& cookie_name !== "") {
+						return EXM.Cookie.get(cookie_name) === null;
+					}
+					return true;
+				});
+				if (popups.length > 0) {
+					const popup = popups[0];
+
+					// set the cookie
+					const cookie_name = popup.settings.popup.cookie_name ? popup.settings.popup.cookie_name : null;
+					if (typeof cookie_name !== "undefined" && cookie_name !== null && cookie_name !== "") {
+						const cookie_lifetime = popup.settings.popup.cookie_lifetime;
+						const cookie_lifetime_unit = popup.settings.popup.cookie_lifetime_unit;
+
+						let life_time = 0;
+						if (cookie_lifetime_unit === "day") {
+							life_time = (cookie_lifetime * 24 * 60 * 60 * 1000);
+						} else if (cookie_lifetime_unit === "week") {
+							life_time = (cookie_lifetime * 7 * 24 * 60 * 60 * 1000);
+						} else if (cookie_lifetime_unit === "month") {
+							life_time = (cookie_lifetime * 30 * 24 * 60 * 60 * 1000);
+						}
+
+						EXM.Cookie.set(cookie_name, true, life_time);
+					}
+					EXM.Popup.init({
+						'id': "pop-" + popup.id,
+						'animation': popup.settings.popup.animation,
+						'position': popup.settings.popup.position,
+						'trigger': {type: popup.settings.popup.trigger},
+						'content': popup.content
+					});
+				}
+			}
+		}, "&post_id=" + current_id + "&frontpage=" + frontpage)
 	});
 });
 

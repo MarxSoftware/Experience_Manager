@@ -62,10 +62,10 @@ class ContentEditorMetaBox {
 
 	public function editor($post) {
 		include 'editor-box.php';
-		
-		$html = get_post_meta($post->ID, 'exm_content_editor_html', true);
-		$css = get_post_meta($post->ID, 'exm_content_editor_css', true);
-		$js = get_post_meta($post->ID, 'exm_content_editor_js', true);
+		$content = new Flex_Content($post->ID);
+		$html = $content->get_meta_editor_html();
+		$css = $content->get_meta_editor_css();
+		$js = $content->get_meta_editor_js();
 		
 		$editor = [
 			"js" => $js,

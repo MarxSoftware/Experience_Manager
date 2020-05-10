@@ -126,10 +126,29 @@ class TMA_WPAdminBar {
 		for ($a = 0; $a < sizeOf($args); $a++) {
 			$wp_admin_bar->add_node($args[$a]);
 		}
+		
+		/*
+		 * TODO: Popup tools hier einbauen
+		$wp_admin_bar->add_node(array(
+			'parent' => "webtools-adminbar",
+			'id' => 'exm-popups',
+			'title' => __("Popups", "tma-webtools"),
+			'href' => '#'
+		));
+		$wp_admin_bar->add_node(array(
+			'parent' => "exm-popups",
+			'id' => 'exm-popups-321423',
+			'title' => __("Simple Exit Intent", "tma-webtools"),
+			'href' => '#',
+			'meta' => array(
+				'onclick' => "console.log('select a popup to show'); return false;"
+			)
+		));
+		 */
 	}
 
 	public function init_javascript() {
-		wp_enqueue_script('experience-manager', TMA_EXPERIENCE_MANAGER_URL . 'js/experience-manager.js', array("webtools-frontend"), "1");
+		wp_enqueue_script('experience-manager', TMA_EXPERIENCE_MANAGER_URL . 'js/experience-manager.js', array("experience-manager-exm"), "1");
 	}
 
 }

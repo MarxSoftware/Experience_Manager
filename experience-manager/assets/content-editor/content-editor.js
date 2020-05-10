@@ -1,22 +1,3 @@
-if (typeof window.EXM === "undefined") {
-	window.EXM = {};
-}
-
-function selectTab(evt, cityName) {
-	evt.preventDefault();
-	var i, tabcontent, tablinks;
-	tabcontent = document.getElementsByClassName("tabcontent");
-	for (i = 0; i < tabcontent.length; i++) {
-		tabcontent[i].style.display = "none";
-	}
-	tablinks = document.getElementsByClassName("tablinks");
-	for (i = 0; i < tablinks.length; i++) {
-		tablinks[i].className = tablinks[i].className.replace(" active", "");
-	}
-	document.getElementById(cityName).style.display = "block";
-	evt.currentTarget.className += " active";
-}
-
 function exm_content_update_preview() {
 
 	var view = {
@@ -63,7 +44,7 @@ function exm_content_update_fields() {
 
 jQuery(function () {
 
-	document.getElementById("defaultOpen").click();
+	//document.getElementById("defaultOpen").click();
 
 	EXM.htmlEditor = ace.edit("html-editor");
 	EXM.htmlEditor.session.setMode("ace/mode/html");

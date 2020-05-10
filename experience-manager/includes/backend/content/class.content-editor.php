@@ -24,9 +24,20 @@ class ContentEditor {
 	}
 
 	public function register() {
-		add_action('save_post_tma_content', [$this, 'save']);
+		add_action('save_post_exm_content', [$this, 'save']);
 		add_filter('gutenberg_can_edit_post_type', [$this, "disable_gutenberg"], 10, 2);
 		add_action('admin_enqueue_scripts', [$this, "query_editor_scripts"]);
+		
+		add_action('edit_form_top', [$this, 'top_buttons']);
+	}
+	
+	function top_buttons($post) {
+		if ($post->post_type !== ContentType::$TYPE) {
+			return;
+		}
+		echo "<a class='ui button primary' id='tma_content_library' href='#'>" . __("Open library", "tma-webtools") . "</a>";
+		
+		include 'content-library.php';
 	}
 	
 
@@ -34,10 +45,12 @@ class ContentEditor {
 		if (in_array($hook_suffix, array('post.php', 'post-new.php'))) {
 			if (ContentType::isContentEditor()) {
 
-				wp_enqueue_script('tma-webtools-backend');
+//				wp_enqueue_script('tma-webtools-backend');
 				wp_enqueue_script('experience-manager-ace', TMA_EXPERIENCE_MANAGER_URL . 'assets/ace/ace.js', array(), "1.4.8", false);
 				wp_enqueue_script('experience-manager-mustache', TMA_EXPERIENCE_MANAGER_URL . 'assets/mustache/mustache.min.js', array(), "4.0.1", false);
-				wp_enqueue_script('experience-manager-content-editor-js', TMA_EXPERIENCE_MANAGER_URL . 'assets/content-editor/content-editor.js', array("experience-manager-ace", "experience-manager-mustache", "jquery"), "1", false);
+				wp_enqueue_script('experience-manager-content-tabs', TMA_EXPERIENCE_MANAGER_URL . 'assets/content-editor/content-tabs.js', array(), "1", false);
+				wp_enqueue_script('experience-manager-content-library', TMA_EXPERIENCE_MANAGER_URL . 'assets/content-editor/content-library.js', array(), "1", false);
+				wp_enqueue_script('experience-manager-content-editor-js', TMA_EXPERIENCE_MANAGER_URL . 'assets/content-editor/content-editor.js', array("experience-manager-ace", "experience-manager-mustache", "jquery", "experience-manager-content-tabs"), "1", false);
 				wp_enqueue_script('experience-manager-content-settings-js', TMA_EXPERIENCE_MANAGER_URL . 'assets/content-editor/content-settings.js', array("jquery"), "1", false);
 				wp_enqueue_style('experience-manager-content-editor-css', TMA_EXPERIENCE_MANAGER_URL . 'assets/content-editor/css/content-editor.css', array(), "1", false);
 			}
@@ -54,35 +67,19 @@ class ContentEditor {
 
 
 	public function save($post_id) {
-		tma_exm_log("save");
+		$content = new Flex_Content($post_id);
 		if (array_key_exists('exm_content_editor_html', $_POST)) {
 			$editor_value = filter_input(INPUT_POST, 'exm_content_editor_html');
-			update_post_meta(
-					$post_id,
-					'exm_content_editor_html',
-					$editor_value
-			);
+			$content->set_meta_editor_html($editor_value);
 		}
 		if (array_key_exists('exm_content_editor_js', $_POST)) {
-			update_post_meta(
-					$post_id,
-					'exm_content_editor_js',
-					$_POST['exm_content_editor_js']
-			);
+			$content->set_meta_editor_js($_POST['exm_content_editor_js']);
 		}
 		if (array_key_exists('exm_content_editor_css', $_POST)) {
-			update_post_meta(
-					$post_id,
-					'exm_content_editor_css',
-					$_POST['exm_content_editor_css']
-			);
+			$content->set_meta_editor_css($_POST['exm_content_editor_css']);
 		}
 		if (array_key_exists('exm_content_settings', $_POST)) {
-			update_post_meta(
-					$post_id,
-					'exm_content_settings',
-					$_POST['exm_content_settings']
-			);
+			$content->set_meta_settings($_POST['exm_content_settings']);
 		}
 	}
 }

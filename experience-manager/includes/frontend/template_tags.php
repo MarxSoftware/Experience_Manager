@@ -17,27 +17,46 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class TMA_ExperienceManager_Template_Tag extends TMA\ExperienceManager\Integration {
-	
+class TMA_ExperienceManager_Template_Tag extends \TMA\ExperienceManager\Integration {
+
 	/**
 	 * Start up
 	 */
 	public function __construct() {
 		parent::__construct();
 	}
-	
+
 	function matchs($args) {
 		return $this->matching($args);
 	}
+
 }
 
-function tma_exm_is_in_segment ($segment) {
-	$templateTag = new TMA_ExperienceManager_Template_Tag();
-	$arguments = [
-		"segments" => $segment,
-		"tma_matching" => TMA_EXPERIENCE_MANAGER_SEGMENT_MATCHING_ANY
+if (!function_exists('exm_is_in_segment')) {
+
+	function exm_is_in_segment($segment) {
+		$templateTag = new TMA_ExperienceManager_Template_Tag();
+		$arguments = [
+			"segments" => $segment,
+			"tma_matching" => TMA_EXPERIENCE_MANAGER_SEGMENT_MATCHING_ANY
 		];
-	
-	
-	return $templateTag->matchs($arguments);
+
+
+		return $templateTag->matchs($arguments);
+	}
+
+}
+
+if (!function_exists('exm_content')) {
+
+	function exm_content($content_id) {
+		$short_code = \TMA\ExperienceManager\Content\ContentShortCode();
+		
+		$args = [
+			"id" => $content_id
+		];
+
+		return $short_code->exm_content($args);
+	}
+
 }

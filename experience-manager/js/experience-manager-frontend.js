@@ -17,14 +17,14 @@
 (function ($) {
 	function tma_webtools_update(segments) {
 
-		EXM_Hook.call("experience-manager/frontend/update/before", {});
+		EXM.Hook.call("experience-manager/frontend/update/before", {});
 
 		let flat_segments = segments.user_segments.map(segment => "" + segment.wpid);
-		webtools.Frontend.update(flat_segments);
+		EXM.Frontend.update(flat_segments);
 	}
 
-	webtools.domReady(function (event) {
-		webtools.Request.get(TMA_CONFIG.rest_url + "experience-manager/v1/segments").then(function (response) {
+	EXM.Dom.ready(function (event) {
+		fetch(TMA_CONFIG.rest_url + "experience-manager/v1/segments").then(function (response) {
 			response.json().then(tma_webtools_update);
 		});
 	});

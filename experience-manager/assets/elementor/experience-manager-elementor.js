@@ -21,10 +21,10 @@ var tma_exm_elementor_highlight = false;
 function tma_toggle_highlight() {
 	if (tma_exm_elementor_highlight) {
 		tma_exm_elementor_highlight = false;
-		webtools.Highlight.deactivate();
+		EXM.Highlight.deactivate();
 	} else {
 		tma_exm_elementor_highlight = true;
-		webtools.Highlight.activate(Array.apply([], document.querySelectorAll('[data-tma-group]')));
+		EXM.Highlight.activate(Array.apply([], document.querySelectorAll('[data-tma-group]')));
 	}
 }
 

@@ -35,11 +35,7 @@ class TMAScriptHelper {
 			$trackUser = !is_user_logged_in();
 		}
 
-		if (function_exists('vc_is_frontend_editor') && vc_is_frontend_editor()) {
-			return false;
-		} else if (function_exists('siteorigin_panels_is_preview') && siteorigin_panels_is_preview()) {
-			return false;
-		} else if (is_preview()) {
+		if (is_preview()) {
 			return false;
 		}
 
@@ -57,11 +53,6 @@ class TMAScriptHelper {
 		return isset(get_option('tma_webtools_option')['webtools_score']) && get_option('tma_webtools_option')['webtools_score'] && (is_single() || is_page());
 	}
 
-	public function getLibrary() {
-		//return '<script src="' . $this->getWebTools_Url() . '/js/webtools.js"></script>';
-		return $this->getWebTools_Url() . '/tracking/js/webtools.js';
-	}
-
 	private function getWebTools_Url() {
 		$url = get_option('tma_webtools_option')['webtools_url'];
 		return rtrim($url, "/");
@@ -69,7 +60,7 @@ class TMAScriptHelper {
 
 	public function getCode() {
 		$output = '';
-		if ($this->isTrackingEnabled()) {
+		if ($this->isTrackingEnabled() && !is_admin()) {
 
 			$siteid = tma_exm_get_site();
 			$cookieDomain = FALSE;
@@ -103,28 +94,34 @@ class TMAScriptHelper {
 			 * 
 			 * Wenn die Einstellungen auf default bleiben, sind beide TRUE
 			 */
-			/* if (is_home()) {
-			  $output .= 'webtools.Tracking.init("' . $this->getWebTools_Url() . '", "' . $siteid . '", "/");';
-			  } else */if (!is_404()) {
-				$output .= 'webtools.Tracking.init("' . $this->getWebTools_Url() . '", "' . $siteid . '", "' . get_post()->ID  . '", "' . get_post()->post_type . '");';
+
+//			if ($this->shouldScore()) {
+//				$score = $this->getScoring();
+//
+//				$output .= $score;
+//			}
+
+			$output = "var _exm = window._exm || [];\r\n";
+			$output .= "_exm.push(['init']);\r\n";
+			$output .= "_exm.push(['setTrackerUrl', '{$this->getWebTools_Url()}']);\r\n";
+			$output .= "_exm.push(['setSite', '$siteid']);\r\n";
+			if (!is_404()) {
+				$output .= "_exm.push(['setPage', '" . get_post()->ID . "']);\r\n";
+				$output .= "_exm.push(['setType', '" . get_post()->post_type . "']);\r\n";
 			} else {
-				$output .= 'webtools.Tracking.init("' . $this->getWebTools_Url() . '", "' . $siteid . '", "404", "error");';
+				$output .= "_exm.push(['setPage', '404']);\r\n";
+				$output .= "_exm.push(['setType', 'error']);\r\n";
 			}
+
+			$output .= "_exm.push(['setCustomParameters', $customParameters]);\r\n";
 			if ($cookieDomain !== FALSE) {
-				$output .= 'webtools.Tracking.setCookieDomain("' . $cookieDomain . '");';
+				$output .= "_exm.push(['setCookieDomain', '$cookieDomain']);\r\n";
 			}
-			$output .= 'webtools.Tracking.customParameters(';
-			$output .= $customParameters;
-			$output .= ');';
-			$output .= 'webtools.Tracking.register();';
-
-			if ($this->shouldScore()) {
-				$score = $this->getScoring();
-
-				$output .= $score;
-			}
-
-
+			$output .= "(function() {\r\n";
+			$output .= "var u='" . TMA_EXPERIENCE_MANAGER_URL . "assets/exm/tracker.js';\r\n";
+			$output .= "var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];\r\n";
+			$output .= "g.type='text/javascript'; g.async=true; g.defer=true; g.src=u; s.parentNode.insertBefore(g,s);\r\n";
+			$output .= "})();\r\n";
 			//$output .= '</script>';
 		}
 
@@ -155,7 +152,7 @@ class TMAScriptHelper {
 
 	private function add_categories(& $meta) {
 		$cats = [];
-		$term = get_term_by( 'slug', get_query_var('term'), get_query_var('taxonomy') );
+		$term = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'));
 		if (is_category()) {
 			$term_list = get_categories();
 			foreach ($term_list as $cat) {
@@ -222,7 +219,7 @@ class TMAScriptHelper {
 
 		$score .= '}';
 		if ($hasScore) {
-			return 'webtools.Tracking.score(' . $score . ');';
+			return 'EXM.Tracking.score(' . $score . ');';
 		} else {
 			return '';
 		}

@@ -44,9 +44,9 @@ final class BeaverBuilder_Preview {
 
 add_action('wp_enqueue_scripts', function () {
 	if (tma_exm_is_debug()) {
-		wp_enqueue_script('tma-beaver-audiences', TMA_EXPERIENCE_MANAGER_URL . 'assets/beaver/audiences.js', array("fl-builder", "tma-webtools-backend"), "1");
+		wp_enqueue_script('tma-beaver-audiences', TMA_EXPERIENCE_MANAGER_URL . 'assets/beaver/audiences.js', array("fl-builder", "experience-manager-exm"), "1");
 	} else {
-		wp_enqueue_script('tma-beaver-audiences', TMA_EXPERIENCE_MANAGER_URL . 'assets/beaver/audiences.js', array("fl-builder-min", "tma-webtools-backend"), "1");
+		wp_enqueue_script('tma-beaver-audiences', TMA_EXPERIENCE_MANAGER_URL . 'assets/beaver/audiences.js', array("fl-builder-min", "experience-manager-exm"), "1");
 	}
 	
 	wp_enqueue_style('tma-beaver-audiences', TMA_EXPERIENCE_MANAGER_URL . 'assets/beaver/beaver.css', array(), "1");

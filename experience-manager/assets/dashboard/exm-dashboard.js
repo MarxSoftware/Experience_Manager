@@ -19,7 +19,7 @@ function exm_fetch_kpi(body_string, ok_function) {
 	).then(ok_function);
 }
 
-webtools.domReady(function () {
+EXM.Dom.ready(function () {
 	
 	if (document.querySelector(".webtools-dashboard") === null) {
 		return;

@@ -28,17 +28,68 @@ class ContentAjax {
 		
 	}
 
-	private static $engine;
-
 	public function register() {
-		self::$engine = new \Mustache_Engine();
 		add_action('wp_ajax_exm_user', array($this, 'exm_user'));
 		add_action('wp_ajax_nopriv_exm_user', array($this, 'exm_user'));
 
 		add_action('wp_ajax_exm_content', array($this, 'exm_content'));
 		add_action('wp_ajax_nopriv_exm_content', array($this, 'exm_content'));
 
+		add_action('wp_ajax_exm_content_popups', array($this, 'load_popups'));
+		add_action('wp_ajax_nopriv_exm_content_popups', array($this, 'load_popups'));
+
 		add_action('wp_ajax_exm_random_products', array($this, 'exm_random_products'));
+	}
+
+	public function load_popups() {
+
+		$post_id = FALSE;
+		$frontpage = FALSE;
+		if (array_key_exists('post_id', $_POST)) {
+			$post_id = filter_input(INPUT_POST, 'post_id', FILTER_DEFAULT);
+		}
+		if (array_key_exists('frontpage', $_POST)) {
+			$frontpage = filter_input(INPUT_POST, 'frontpage', FILTER_DEFAULT);
+		}
+
+		$args = array(
+			'post_type' => array('exm_content'),
+			'meta_key' => 'exm_content_type',
+			'meta_value' => 'popup',
+			'orderby' => 'rand',
+			'order' => 'desc',
+			'posts_per_page' => 1000
+		);
+
+		$post_list = get_posts($args);
+
+		$popups = [];
+		foreach ($post_list as $post) {
+			$content = new Flex_Content($post->ID);
+
+			$validator = new Flex_Content_Validator($content, $post_id, $frontpage);
+			if (!$validator->validate_conditions(['weekday', 'post_type', 'homepage', 'audience', 'logged_in', 'roles'])) {
+				continue;
+			}
+
+			$content_engine = new Flex_Content_Engine($content);
+
+			$popup_content = "<style>" . $content_engine->get_compiled_css($post_id) . "</style>";
+			$popup_content .= $content_engine->get_compiled_html($post_id);
+			$popup_content .= "<script>" . $content_engine->get_compiled_js($post_id) . "</script>";
+
+			$popup = [
+				"id" => $content->get_id(),
+				"content" => $popup_content,
+				"settings" => $content->get_settings()
+			];
+			$popups[] = $popup;
+		}
+		$response = [
+			"error" => false,
+			"popups" => $popups
+		];
+		wp_send_json($response);
 	}
 
 	public function exm_random_products() {
@@ -68,6 +119,9 @@ class ContentAjax {
 		if ($_POST['post_id']) {
 			$post_id = filter_input(INPUT_POST, 'post_id', FILTER_DEFAULT);
 		}
+		if (array_key_exists('frontpage', $_POST)) {
+			$frontpage = filter_input(INPUT_POST, 'frontpage', FILTER_DEFAULT);
+		}
 		if (!$content_id) {
 			$response["error"] = true;
 			$response["message"] = __("No flex content id", "tma-webtools");
@@ -75,76 +129,29 @@ class ContentAjax {
 			wp_send_json($response);
 		}
 
-		$settings_string = get_post_meta($content_id, 'exm_content_settings', true);
-		$settings = json_decode($settings_string);
+		$content = new Flex_Content($content_id);
+		$validator = new Flex_Content_Validator($content, $post_id, $frontpage);
+		if ($validator->validate_conditions(['weekday', 'homepage', 'audience', 'logged_in', 'roles'])) {
+			$content_engine = new Flex_Content_Engine($content);
 
-		$html = get_post_meta($content_id, 'exm_content_editor_html', true);
-		$css = get_post_meta($content_id, 'exm_content_editor_css', true);
-		$js = get_post_meta($content_id, 'exm_content_editor_js', true);
+			$response["html"] = $content_engine->get_compiled_html($post_id);
+			$response["js"] = $content_engine->get_compiled_js($post_id);
+			$response["css"] = $content_engine->get_compiled_css($post_id);
+			$response["error"] = false;
+		} else {
+			$response["html"] = "";
+			$response["js"] = "";
+			$response["css"] = "";
+			$response["error"] = false;
+		}
 
-		$response["html"] = $this->compile_template($html, $settings, $content_id, $post_id);
-		$response["js"] = $this->compile_template($js, $settings, $content_id, $post_id);
-		$response["css"] = $this->compile_template($css, $settings, $content_id, $post_id);
-		$response["error"] = false;
+
 
 		wp_send_json($response);
 	}
 
 	public function exm_user() {
 		wp_send_json($this->get_user());
-	}
-
-	private function get_user() {
-		$user = [
-			"logged_in" => is_user_logged_in(),
-			"segments" => tma_exm_get_user_segments()
-		];
-
-		return $user;
-	}
-
-	private function get_context($settings, $content_id, $post_id) {
-		$context = [
-			"user" => $this->get_user(),
-			"content_id" => $content_id,
-			"unique_id" => uniqid()
-		];
-		tma_exm_log("settings: " . json_encode($settings));
-		if ($settings->recommendation && $settings->recommendation->enabled) {
-			$context["recommendation"] = $this->get_recommendations($settings->recommendation->type, $settings->recommendation->count, $post_id);
-//			$context["recommendation"] = [];
-		}
-
-		return $context;
-	}
-
-	private function get_recommendations($type, $count, $post_id) {
-		if (!\TMA\ExperienceManager\Plugins::getInstance()->woocommerce()) {
-			return [];
-		}
-		$ecom = new \TMA\ExperienceManager\Modules\ECommerce\Ecommerce_Woo();
-		switch ($type) {
-			case "recently_viewed":
-				return $ecom->recently_viewed($count);
-			case "frequently_purchased":
-				return $ecom->recently_viewed($count);
-			case "popular":
-				return $ecom->popular_products($count);
-			case "bought_together":
-				return $ecom->bought_together($post_id, $count);
-			case "similar_user":
-				return $ecom->similar_user($count);
-			default:
-				return [];
-		}
-	}
-
-	private function compile_template($template, $settings, $content_id, $post_id) {
-
-
-		$context = $this->get_context($settings, $content_id, $post_id);
-
-		return self::$engine->render($template, $context);
 	}
 
 }

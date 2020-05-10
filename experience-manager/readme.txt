@@ -1,6 +1,6 @@
 === Experience Manager ===
 Contributors: thmarx
-Tags: digital experience platform, experience manager, targeting, analytics, tracking, product targeting, behaviour targets
+Tags: digital experience platform, experience manager, targeting, analytics, tracking, product targeting, behaviour targets, popup, popups
 Requires at least: 4.4.1
 Tested up to: 5.4
 Stable tag: 4.2.0
@@ -19,11 +19,13 @@ Features:
 * User segmentation
 * Content targeting via shortcodes fro classic editor
 * Segment simulator in the preview
+* Flex Content
 * Support for [Elementor Page Builder](https://elementor.com/)
 * Support for [Gutenberg](https://wordpress.org/gutenberg/)
 * Support for [Divi](https://www.elegantthemes.com/gallery/divi/)
 * Support for [Beaver](https://www.wpbeaverbuilder.com/)
-* Template-Tag to check if a user match a specific segment ( e.q. tma_exm_is_in_segment("a_segment_id"))
+* Template-Tag to check if a user match a specific segment ( e.q. exm_is_in_segment("a_segment_id"))
+* Template-Tag to to insert felx content ( e.q. exm_content(<content_id>))
 * Support for Cache Plugins
 * Support for [Popup Maker](https://wppopupmaker.com/)
 * Support for [WP Popups](https://wppopups.com/)
@@ -65,6 +67,11 @@ Yes, since version 2 the Experience Manager supports frontend and backend target
 none
 
 == Changelog ==
+
+4.2.0
+ * Flex Content
+ * Refactoring tracking code
+ * Prepared the php cookie management for OPT-In implementations
 
 4.1.1
  * bug fix in backend tracking

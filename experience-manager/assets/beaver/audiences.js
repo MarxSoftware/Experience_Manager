@@ -66,21 +66,21 @@
 		},
 
 		highlight: function () {
-			if (webtools.Highlight.is()) {
-				webtools.Highlight.deactivate();
+			if (EXM.Highlight.is()) {
+				EXM.Highlight.deactivate();
 			} else {
-				webtools.Highlight.activate(Array.apply([], document.querySelectorAll('[data-tma-group]')));
+				EXM.Highlight.activate(Array.apply([], document.querySelectorAll('[data-tma-group]')));
 			}
 		},
 		updatePreview: function () {
 			$(".tma-hide").removeClass("tma-hide");
 			if (this.previewActive) {
 				var selectedSegments = this.selectedSegments();
-				//webtools.Frontend.update(selectedSegments);
+				//EXM.Frontend.update(selectedSegments);
 
 				
 				let flat_segments = selectedSegments.map(segment => "" + segment);
-				webtools.Frontend.update(flat_segments);
+				EXM.Frontend.update(flat_segments);
 			}
 		},
 		selectedSegments: function () {
