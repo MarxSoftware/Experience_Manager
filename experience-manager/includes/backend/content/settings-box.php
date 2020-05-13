@@ -312,7 +312,7 @@
 									$name = translate_user_role( $details['name'] );
 									?>
 									<label>
-										<input type="checkbox" class="exm_condition_roles" name="exm_condition_roles" value="<?php echo esc_attr( $role ); ?>" />
+										<input type="checkbox" class="exm_settings_change" name="exm_condition_roles" value="<?php echo esc_attr( $role ); ?>" />
 										<?php echo $name; ?>
 									</label>
 									<?php

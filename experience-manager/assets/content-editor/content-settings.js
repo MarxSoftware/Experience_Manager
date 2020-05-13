@@ -314,4 +314,5 @@ function exm_content_settings_check_all (selector) {
 	document.querySelectorAll(selector).forEach(($element) => {
 		$element.checked = true;
 	});
+	exm_content_settings_update_fields();
 }
