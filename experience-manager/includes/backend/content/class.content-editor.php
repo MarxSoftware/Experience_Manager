@@ -28,7 +28,7 @@ class ContentEditor {
 		add_filter('gutenberg_can_edit_post_type', [$this, "disable_gutenberg"], 10, 2);
 		add_action('admin_enqueue_scripts', [$this, "query_editor_scripts"]);
 		
-		add_action('edit_form_top', [$this, 'top_buttons']);
+		//add_action('edit_form_top', [$this, 'top_buttons']);
 	}
 	
 	function top_buttons($post) {

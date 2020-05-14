@@ -3,8 +3,8 @@ Contributors: thmarx
 Tags: digital experience platform, experience manager, targeting, analytics, tracking, product targeting, behaviour targets, popup, popups
 Requires at least: 4.4.1
 Tested up to: 5.4
-Stable tag: 4.2.2
-Version: 4.2.2
+Stable tag: 4.2.3
+Version: 4.2.3
 License: GPLv2 or later
 
 Do not treat all your customers the same, create a digital experience!
@@ -67,6 +67,9 @@ Yes, since version 2 the Experience Manager supports frontend and backend target
 none
 
 == Changelog ==
+
+4.2.3
+ * Debug code removed
 
 4.2.2
  * Fixed popup JavaScript
