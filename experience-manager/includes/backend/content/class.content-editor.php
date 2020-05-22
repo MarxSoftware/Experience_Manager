@@ -81,7 +81,7 @@ class ContentEditor {
 		if (array_key_exists('exm_content_settings', $_POST)) {
 			$content->set_meta_settings($_POST['exm_content_settings']);
 		}
-		
+
 		//$this->pmr_save_post($post_id, $post);
 	}
 
@@ -125,16 +125,25 @@ class ContentEditor {
 	}
 
 	function pmr_save_post($post_id, $post) {
-		if ($parent_id = wp_is_post_revision($post_id)) {
+		$parent_id = wp_is_post_revision($post_id);
+		if ($parent_id !== FALSE) {
 			$parent = get_post($parent_id);
 			$fields = $this->pmr_fields([]);
 			foreach ($fields AS $key => $value) {
-				$meta = get_post_meta($parent->ID, $key, true);
-
-				if (false !== $meta) {
-					add_metadata('post', $post_id, $key, $meta);
+				if (array_key_exists($key, $_POST)) {
+					$meta_value = filter_input(INPUT_POST, $key);
+					add_metadata('post', $post_id, $key, $meta_value);
 				}
 			}
+			/*
+			  $fields = $this->pmr_fields([]);
+			  foreach ($fields AS $key => $value) {
+			  $meta = get_post_meta($parent->ID, $key, true);
+
+			  if (false !== $meta) {
+			  add_metadata('post', $post_id, $key, $meta);
+			  }
+			  } */
 		}
 	}
 
