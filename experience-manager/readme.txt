@@ -3,8 +3,8 @@ Contributors: thmarx
 Tags: digital experience platform, experience manager, targeting, analytics, tracking, product targeting, behaviour targets, popup, popups
 Requires at least: 4.4.1
 Tested up to: 5.4
-Stable tag: 4.2.4
-Version: 4.2.4
+Stable tag: 4.3.0
+Version: 4.3.0
 License: GPLv2 or later
 
 Do not treat all your customers the same, create a digital experience!
@@ -68,8 +68,8 @@ none
 
 == Changelog ==
 
-4.2.4
- * Enable revisoins for flex content
+4.3.0
+ * Enable revisions for flex content
 
 4.2.3
  * Debug code removed
