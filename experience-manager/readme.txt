@@ -1,6 +1,6 @@
 === Experience Manager ===
 Contributors: thmarx
-Tags: digital experience platform, experience manager, targeting, analytics, tracking, product targeting, behaviour targets, popup, popups
+Tags: user experience, personalization, targeting, product targeting, behaviour targets, popup, experience manager
 Requires at least: 4.4.1
 Tested up to: 5.4
 Stable tag: 4.3.0
