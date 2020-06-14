@@ -1,10 +1,10 @@
 === Experience Manager ===
 Contributors: thmarx
-Tags: digital experience platform, experience manager, targeting, analytics, tracking, product targeting, behaviour targets, popup, popups
+Tags: user experience, personalization, targeting, product targeting, behaviour targets, popup, experience manager
 Requires at least: 4.4.1
 Tested up to: 5.4
-Stable tag: 4.2.0
-Version: 4.2.0
+Stable tag: 4.3.0
+Version: 4.3.0
 License: GPLv2 or later
 
 Do not treat all your customers the same, create a digital experience!
@@ -37,7 +37,7 @@ Features:
 == Installation ==
 
 This section describes how to install the plugin and get it working.
-You need to install webTools from https://wp-digitalexperience.com/experience-platform/
+You need to install the Experience Platform from https://wp-digitalexperience.com/experience-platform/
 
 1. Upload the plugin files to the `/wp-content/plugins/plugin-name` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
@@ -67,6 +67,18 @@ Yes, since version 2 the Experience Manager supports frontend and backend target
 none
 
 == Changelog ==
+
+4.3.0
+ * Enable revisions for flex content
+
+4.2.3
+ * Debug code removed
+
+4.2.2
+ * Fixed popup JavaScript
+
+4.2.1
+ * Fixed a Flex Content settings bug
 
 4.2.0
  * Flex Content

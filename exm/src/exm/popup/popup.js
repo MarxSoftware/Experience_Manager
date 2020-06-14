@@ -73,8 +73,10 @@ var Popup = function () {
 
         exm_container.appendChild(popup_container)
 
+        var adminbar = document.getElementById('wpadminbar');
+
         popup_container.style.width = (popup.offsetWidth + 10) + "px"
-        popup_container.style.height = (popup.offsetHeight + 10) + "px"
+        popup_container.style.height = (popup.offsetHeight + 10 + (adminbar ? adminbar.offsetHeight : 0)) + "px"
 
         let $closeElement = document.querySelector("#" + configuration.id + " .close");
         if ($closeElement) {

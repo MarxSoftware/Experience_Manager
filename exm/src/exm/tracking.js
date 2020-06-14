@@ -30,8 +30,8 @@ var Tracking = function () {
     var setPage = function (page) {
         Context.page = page;
     };
-    var setSite = function (page) {
-        Context.page = page;
+    var setSite = function (site) {
+        Context.site = site;
     };
     var setType = function (type) {
         Context.type = type

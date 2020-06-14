@@ -1,4 +1,5 @@
 <?php
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -24,22 +25,22 @@ class ContentEditor {
 	}
 
 	public function register() {
-		add_action('save_post_exm_content', [$this, 'save']);
-		add_filter('gutenberg_can_edit_post_type', [$this, "disable_gutenberg"], 10, 2);
-		add_action('admin_enqueue_scripts', [$this, "query_editor_scripts"]);
-		
-		add_action('edit_form_top', [$this, 'top_buttons']);
+		add_action('save_post_exm_content', [$this, 'save'], 9, 2);
+		add_filter('gutenberg_can_edit_post_type', [$this, "disable_gutenberg"], 9, 2);
+		add_action('admin_enqueue_scripts', [$this, "query_editor_scripts"], 9);
+
+		//add_action('edit_form_top', [$this, 'top_buttons']);
+		$this->enable_revision();
 	}
-	
+
 	function top_buttons($post) {
 		if ($post->post_type !== ContentType::$TYPE) {
 			return;
 		}
 		echo "<a class='ui button primary' id='tma_content_library' href='#'>" . __("Open library", "tma-webtools") . "</a>";
-		
+
 		include 'content-library.php';
 	}
-	
 
 	function query_editor_scripts($hook_suffix) {
 		if (in_array($hook_suffix, array('post.php', 'post-new.php'))) {
@@ -65,8 +66,7 @@ class ContentEditor {
 		return $is_enabled;
 	}
 
-
-	public function save($post_id) {
+	public function save($post_id, $post) {
 		$content = new Flex_Content($post_id);
 		if (array_key_exists('exm_content_editor_html', $_POST)) {
 			$editor_value = filter_input(INPUT_POST, 'exm_content_editor_html');
@@ -81,5 +81,70 @@ class ContentEditor {
 		if (array_key_exists('exm_content_settings', $_POST)) {
 			$content->set_meta_settings($_POST['exm_content_settings']);
 		}
+
+		//$this->pmr_save_post($post_id, $post);
 	}
+
+	private function enable_revision() {
+		add_filter('_wp_post_revision_field_exm_content_editor_html', [$this, 'pmr_field'], 10, 3);
+		add_filter('_wp_post_revision_field_exm_content_editor_js', [$this, 'pmr_field'], 10, 3);
+		add_filter('_wp_post_revision_field_exm_content_editor_css', [$this, 'pmr_field'], 10, 3);
+		add_filter('_wp_post_revision_field_exm_content_settings', [$this, 'pmr_field'], 10, 3);
+		add_action('save_post', [$this, 'pmr_save_post'], 10, 2);
+		add_action('wp_restore_post_revision', [$this, 'pmr_restore_revision'], 10, 2);
+		add_filter('_wp_post_revision_fields', [$this, 'pmr_fields']);
+	}
+
+	function pmr_fields($fields) {
+		$fields['exm_content_editor_html'] = 'Flex Content HTML';
+		$fields['exm_content_editor_js'] = 'Flex Content JS';
+		$fields['exm_content_editor_css'] = 'Flex Content CSS';
+		$fields['exm_content_settings'] = 'Flex Content Settings';
+		return $fields;
+	}
+
+// global $revision doesn't work, using third parameter $post instead
+	function pmr_field($value, $field, $post) {
+		return get_metadata('post', $post->ID, $field, true);
+	}
+
+	function pmr_restore_revision($post_id, $revision_id) {
+		$post = get_post($post_id);
+		$revision = get_post($revision_id);
+
+		$fields = $this->pmr_fields([]);
+		foreach ($fields AS $key => $value) {
+			$meta = get_metadata('post', $revision->ID, $key, true);
+
+			if (false === $meta) {
+				delete_post_meta($post_id, $key);
+			} else {
+				update_post_meta($post_id, $key, $meta);
+			}
+		}
+	}
+
+	function pmr_save_post($post_id, $post) {
+		$parent_id = wp_is_post_revision($post_id);
+		if ($parent_id !== FALSE) {
+			$parent = get_post($parent_id);
+			$fields = $this->pmr_fields([]);
+			foreach ($fields AS $key => $value) {
+				if (array_key_exists($key, $_POST)) {
+					$meta_value = filter_input(INPUT_POST, $key);
+					add_metadata('post', $post_id, $key, $meta_value);
+				}
+			}
+			/*
+			  $fields = $this->pmr_fields([]);
+			  foreach ($fields AS $key => $value) {
+			  $meta = get_post_meta($parent->ID, $key, true);
+
+			  if (false !== $meta) {
+			  add_metadata('post', $post_id, $key, $meta);
+			  }
+			  } */
+		}
+	}
+
 }
