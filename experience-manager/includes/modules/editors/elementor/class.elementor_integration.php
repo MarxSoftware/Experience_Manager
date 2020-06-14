@@ -38,7 +38,8 @@ class Elementor_Integration extends Integration {
 		parent::__construct();
 
 		add_action('elementor/element/after_section_end', array($this, 'addControls'), 10, 3);
-		add_action('elementor/frontend/widget/before_render', array($this, 'widget_before_render'), 10, 2);
+//		add_action('elementor/frontend/widget/before_render', array($this, 'widget_before_render'), 10, 2);
+		add_action('elementor/frontend/before_render', array($this, 'widget_before_render'), 10, 2);
 	}
 
 	function getAttributes($element, $in_edit = false) {
