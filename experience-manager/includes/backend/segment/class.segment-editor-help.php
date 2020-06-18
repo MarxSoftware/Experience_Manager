@@ -124,6 +124,12 @@ class SegmentEditorHelp {
 					} else if (selectedCoupon === "lover") {
 						segmentObject.conditions.push({"conditional": "ecommerce_coupon", "count": 1});
 					}
+					let selectedAOV = document.querySelector("input[name='exm_aov']:checked").value;
+					if (selectedAOV === "big_spender") {
+						segmentObject.conditions.push({"conditional": "ecommerce_aov_percentage", "percentage": 100, "comparator" : "GREATER_EQUALS"});
+					} else if (selectedAOV === "thrifty") {
+						segmentObject.conditions.push({"conditional": "ecommerce_aov_percentage", "percentage": 50, "comparator" : "LESS"});
+					}
 
 					window.exmSegmentEditor.setValue(JSON.stringify(segmentObject, null, "\t"));
 				}
@@ -131,7 +137,6 @@ class SegmentEditorHelp {
 
 
 			function start_exm_wizard() {
-				console.log("open wizard")
 				jQuery("#exm_audience_wizard").modal(
 						{
 							onApprove: e => {

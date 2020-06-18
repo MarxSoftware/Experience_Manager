@@ -104,6 +104,32 @@
 					</div>
 				</div>
 			</div>
+			<h6 class="ui horizontal divider header">
+				Average Order Value
+			</h6>
+			<div class="ui info message">
+				Use the <b>Average Order Value</b> for segmentation. <b>Big Spender</b> spend on average 200% of the average. <b>Thrifty</b> people spend only 50% of the average.
+			</div>
+			<div class="inline fields">
+				<div class="field">
+					<div class="ui radio checkbox">
+						<input type="radio" name="exm_aov" value="any" tabindex="0" class="hidden" checked="">
+						<label>Any</label>
+					</div>
+				</div>
+				<div class="field">
+					<div class="ui radio checkbox">
+						<input type="radio" name="exm_aov" value="big_spender" tabindex="0" class="hidden">
+						<label>Big Spender</label>
+					</div>
+				</div>
+				<div class="field">
+					<div class="ui radio checkbox">
+						<input type="radio" name="exm_aov" value="thrifty" tabindex="0" class="hidden">
+						<label>Thrifty</label>
+					</div>
+				</div>
+			</div>
 			
 		</div>
 	</div>
