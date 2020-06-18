@@ -21,6 +21,9 @@ define("TMA_EXPERIENCE_MANAGER_SEGMENT_MATCHING_NONE", "none");
 define("TMA_EXPERIENCE_MANAGER_DIR", plugin_dir_path(__FILE__));
 define("TMA_EXPERIENCE_MANAGER_URL", plugins_url('/', __FILE__));
 
+define( 'TMA_EXPERIENCE__FILE__', __FILE__ );
+define( 'TMA_EXPERIENCE_PLUGIN_BASE', plugin_basename( TMA_EXPERIENCE__FILE__ ) );
+
 require_once 'tma-autoload.php';
 require 'dependencies/Mustache/Autoloader.php';
 \Mustache_Autoloader::register();
@@ -70,9 +73,6 @@ function tma_webtools_init() {
 	if (!is_admin()) {
 		wp_register_style('experience-manager', plugins_url('css/experience-manager.css', __FILE__));
 		wp_enqueue_style('experience-manager');
-
-//		wp_register_script("experience-manager-hooks", plugins_url('assets/hook.js', __FILE__), [], "1.0.0", false);
-//		wp_enqueue_script("experience-manager-hooks", plugins_url('assets/hook.js', __FILE__), [], "1.0.0", false);
 	}
 
 	require_once 'includes/frontend/template_tags.php';
@@ -84,6 +84,19 @@ function tma_webtools_init() {
 
 	require_once 'includes/backend/class.tma_wpadminbar.php';
 	if (is_user_logged_in() && (is_admin() || tma_exm_is_preview() )) {
+
+		add_filter('plugin_row_meta', function ($plugin_meta, $plugin_file) {
+			if (TMA_EXPERIENCE_PLUGIN_BASE === $plugin_file) {
+				$row_meta = [
+					'docs' => '<a href="https://wp-digitalexperience.com/documentation/experience-manager/" aria-label="' . esc_attr(__('View Elementor Documentation', 'elementor')) . '" target="_blank">' . __('Documentation', 'tma-webtools') . '</a>',
+				];
+
+				$plugin_meta = array_merge($plugin_meta, $row_meta);
+			}
+
+			return $plugin_meta;
+		}, 10, 2);
+
 		//require_once 'includes/backend/class.tma_metabox.php';
 		require_once 'includes/backend/class.tma_shortcodes_plugin.php';
 
@@ -140,22 +153,19 @@ function tma_js_variables() {
 	$tma_config['user_segments'] = tma_exm_get_user_segments();
 
 	$tma_config = apply_filters("tma_config", $tma_config);
-
 	?>
 	<script type='text/javascript'>
 		var TMA_CONFIG = <?php echo json_encode($tma_config); ?>;
 	</script><?php
 }
 
-
-
 function tma_init_cookie() {
 	/**
 	 * cookies are only used if set via js, 
 	 * so the option implementation is easier
 	 */
-	if( !session_id() ) {
-        session_start();
+	if (!session_id()) {
+		session_start();
 	}
 	$_REQUEST[\TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_REQUEST] = \TMA\ExperienceManager\UUID::v4();
 //	\TMA\ExperienceManager\TMA_COOKIE_HELPER::getInstance()->getCookie(\TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_USER, \TMA\ExperienceManager\UUID::v4(), \TMA\ExperienceManager\TMA_COOKIE_HELPER::$COOKIE_USER_EXPIRE, true);

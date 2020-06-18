@@ -29,7 +29,8 @@ var Dom = function () {
 
 	return {
 		insertHeadElement: insertHeadElement,
-		ready : ready
+		ready : ready,
+		on : on
 	}
 }();
 

@@ -39,12 +39,6 @@ class SegmentEditorMetaBoxes {
 		);
 
 		add_meta_box(
-				'tma_segment_editor_help', // Unique ID
-				'Segment editor help', // Box title
-				[$this, 'description'], // Content callback, must be of type callable
-				SegmentType::$TYPE   // Post type
-		);
-		add_meta_box(
 				'tma_segment_editor_categories', // Unique ID
 				'Categorie Helper', // Box title
 				[$this, 'categories'], // Content callback, must be of type callable
@@ -67,10 +61,6 @@ class SegmentEditorMetaBoxes {
 
 	public function support_banner($post) {
 		include TMA_EXPERIENCE_MANAGER_DIR . 'includes/backend/banner.php';
-	}
-	
-	public function description($post) {
-		include 'description.php';
 	}
 
 	public function categories($post) {

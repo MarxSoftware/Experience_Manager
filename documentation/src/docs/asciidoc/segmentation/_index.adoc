@@ -1,0 +1,156 @@
+== Segmentation
+
+Segmentation is used to divide your customers into target audiences.
+
+=== Create a segment
+
+
+[source,json]
+.Base segment definition
+----
+include::{sourcedir}/segments/base.json[indent=0]
+----
+<1> Here comes your site id
+<2> Here comes the name of the conditional
+<3> The rest are attributes for your conditional
+
+=== Conditionals
+There are many
+
+==== *AND*
+[source,json]
+.The and condition
+----
+{
+	"conditional": "and", // <1>
+	"conditions": [] // <2>
+} 
+----
+<1> The *AND* condition
+<2> List of conditions that *must* match
+
+==== *NOT*
+[source,json]
+.The not condition
+----
+{
+	"conditional": "not", // <1>
+	"conditions": [] // <2>
+} 
+----
+<1> The *NOT* condition
+<2> List of conditions that *must not* match
+
+====  *OR*
+[source,json]
+.The or condition
+----
+{
+	"conditional": "or", // <1>
+	"conditions": [] // <2>
+} 
+----
+<1> The *OR* condition
+<2> List of conditions of which *at least one must* match
+
+==== *PageView*
+[source,json]
+.User has viewed the page with id 2 at least twice.
+----
+{ 
+	"conditional" : "pageview", 
+	"page" : "2",       <1>
+	"type" : "page",    <2>
+	"count" : 2
+}
+----
+<1> The Id of the WordPress element
+<2> The post type of the WordPress element
+
+==== *Category*
+[source,json]
+.User has viewd at least 2 posts in category */CAT1/CAT2/*
+----
+{ 
+	"conditional" : "category", 
+	"path" : "/CAT1/CAT2/",   <1>  
+    "field" : "c_categories", <2>
+	"count" : 2
+}
+----
+<1> This is the category path to the desired category. If you use */CAT1/*, the condition will also match for *CAT2* as child categories are included.
+<2> This field is only neccessary, if you use *Experience Platform* newer then 5.2.0. This is a fixed value, that must not be changed.
+
+If *WooCommerce* is installed, this condition can also be used to match *WooCommerce* categories.
+
+==== *Event*
+[source,json]
+.User hast fired the *order* event at least twice
+----
+{ 
+    "conditional" : "event", 
+    "event" : "ecommerce_order", <1> 
+    "count" : 2
+}
+----
+<1> The name of the event.
+Read more about <<events>>.
+
+==== *FirstVisit*
+[source,json]
+.The FirstVisit conditional
+----
+{ "conditional" : "firstvisit"}
+----
+
+==== *Visit*
+[source,json]
+.At least one visit
+----
+{ "conditional" : "visit", "count" : 1}
+----
+
+
+[source,json]
+.Exactly one visit
+----
+{ "conditional" : "visit", "count" : 1, "exact": true}
+----
+
+==== e-Commerce: *Orders*
+[source,json]
+.The user submitted at least 3 orders.
+----
+{ "conditional" : "ecommerce_order", "count" : 3}
+----
+
+==== e-Commerce: *Coupon*
+
+[source,json]
+.The user has used at least 3 coupons.
+----
+{ "conditional" : "ecommerce_coupon", "count" : 3}
+----
+
+==== e-Commerce: *Average Order Value*
+
+
+[[events]]
+=== Events
+These events are tracked by the Experience Manager.
+
+==== *pageview*
+
+Every page your visitor visits is tracked as pageview.
+
+==== *ecommerce_cart_item_add*
+
+If a customer adds a product to the shopping cart, a *ecommerce_cart_item_add* event is tracked.
+
+==== *ecommerce_cart_item_remove*
+
+If a customer removes a product from the shopping cart, a *ecommerce_cart_item_remove* event is tracked.
+
+==== *ecommerce_order*
+
+If the customer submits the order, a *ecommerce_order* event is tracked.

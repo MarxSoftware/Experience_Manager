@@ -1,0 +1,5 @@
+{
+	"site" : "HERE COMES YOUR SITE ID", // <1>
+	"conditional": "and", // <2>
+	"conditions": [] // <3>
+} 

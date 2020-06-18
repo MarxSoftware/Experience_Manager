@@ -55,6 +55,8 @@ class TMA_Settings {
 		if (tma_exm_dependencies_fulfilled(["module-hosting"])) {
 			add_submenu_page('experience-manager/pages/tma-webtools-admin.php', __("Hosting", "tma-webtools"), __("Hosting", "tma-webtools"), 'manage_options', 'experience-manager/pages/hosting.php', null);
 		}
+		
+		add_submenu_page('experience-manager/pages/tma-webtools-admin.php', __("Documentation", "tma-webtools"), __("Documentation", "tma-webtools"), 'manage_options', 'https://wp-digitalexperience.com/documentation/experience-manager/', null);
 	}
 
 	function get_settings_sections() {

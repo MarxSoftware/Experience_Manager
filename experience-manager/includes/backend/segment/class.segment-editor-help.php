@@ -64,8 +64,8 @@ class SegmentEditorHelp {
 			'intro' => "This little helper will help you determine the category path for the category rule."
 		];
 		$introConfig['steps'][] = [
-			'element' => "#tma_segment_editor_help",
-			'intro' => "Here you can find all events that can be used for segmentation."
+			'element' => "#exm_support",
+			'intro' => "Here you find the link to our documentation and support."
 		];
 
 		include 'class.segment-editor-help-wizard.php';
@@ -77,7 +77,6 @@ class SegmentEditorHelp {
 		<script>
 			var exm_siteid = "<?php echo $siteid; ?>";
 			function start_exm_intro() {
-				console.log("start intro");
 				var intro = introJs();
 				intro.setOptions(<?php echo json_encode($introConfig); ?>);
 				intro.start();
@@ -126,7 +125,7 @@ class SegmentEditorHelp {
 					}
 					let selectedAOV = document.querySelector("input[name='exm_aov']:checked").value;
 					if (selectedAOV === "big_spender") {
-						segmentObject.conditions.push({"conditional": "ecommerce_aov_percentage", "percentage": 100, "comparator" : "GREATER_EQUALS"});
+						segmentObject.conditions.push({"conditional": "ecommerce_aov_percentage", "percentage": 200, "comparator" : "GREATER_EQUALS"});
 					} else if (selectedAOV === "thrifty") {
 						segmentObject.conditions.push({"conditional": "ecommerce_aov_percentage", "percentage": 50, "comparator" : "LESS"});
 					}
