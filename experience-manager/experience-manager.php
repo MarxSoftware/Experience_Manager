@@ -88,7 +88,8 @@ function tma_webtools_init() {
 		add_filter('plugin_row_meta', function ($plugin_meta, $plugin_file) {
 			if (TMA_EXPERIENCE_PLUGIN_BASE === $plugin_file) {
 				$row_meta = [
-					'docs' => '<a href="https://wp-digitalexperience.com/documentation/experience-manager/" aria-label="' . esc_attr(__('View Elementor Documentation', 'elementor')) . '" target="_blank">' . __('Documentation', 'tma-webtools') . '</a>',
+					'docs' => '<a href="https://wp-digitalexperience.com/documentation/experience-manager/" aria-label="' . esc_attr(__('View Documentation', 'tma-webtools')) . '" target="_blank">' . __('Documentation', 'tma-webtools') . '</a>',
+					'support' => '<a href="https://wp-digitalexperience.com/plans-prices/" aria-label="' . esc_attr(__('Premium Support', 'tma-webtools')) . '" target="_blank">' . __('Premium Support', 'tma-webtools') . '</a>',
 				];
 
 				$plugin_meta = array_merge($plugin_meta, $row_meta);
