@@ -1,0 +1,20 @@
+= Experience Manager Manual
+WP-DigitalExperience <contact@wp-digitalexperience.com>
+{docdate}
+:example-caption!:
+ifndef::imagesdir[:imagesdir: images]
+ifndef::sourcedir[:sourcedir: ../../main/]
+:toc:
+
+This is a user manual for the Experience Manager WordPress plugin.
+
+NOTE: This is a work in progress and far away from being complete.
+
+== Introduction
+
+
+
+include::segmentation/_index.adoc[]
+
+include::flex_content/_index.adoc[]
+

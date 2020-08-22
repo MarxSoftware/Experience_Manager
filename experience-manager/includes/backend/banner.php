@@ -65,15 +65,23 @@
 		background-color: white;
 		color: #33cccc;
 	}
+	
+	.exm .links a {
+		font-size: x-large;
+	}
 </style>
 
-<div class="exm">
+<div class="exm" id="exm_support">
 	<div class="banner">
 		<section>
 			<h1>WP-DigitialExperience</h1>
 			<p>Need support?</p>
 			<a class="btn-bgstroke" href="https://wp-digitalexperience.com/plans-prices/" target="_blank">Plans & Prices</a>
 		</section>
+	</div>
+	<hr />
+	<div class="links">
+		<a href="https://wp-digitalexperience.com/documentation/experience-manager">Dokumentation</a>
 	</div>
 </div>
 

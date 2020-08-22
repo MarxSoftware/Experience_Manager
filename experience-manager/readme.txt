@@ -3,8 +3,8 @@ Contributors: thmarx
 Tags: user experience, personalization, targeting, product targeting, behaviour targets, popup, experience manager
 Requires at least: 4.4.1
 Tested up to: 5.4
-Stable tag: 4.3.0
-Version: 4.3.0
+Stable tag: 4.4.0
+Version: 4.4.0
 License: GPLv2 or later
 
 Do not treat all your customers the same, create a digital experience!
@@ -67,6 +67,12 @@ Yes, since version 2 the Experience Manager supports frontend and backend target
 none
 
 == Changelog ==
+
+4.4.0
+ * Fix bug in new tracking code
+ * Remove legacy code
+ * Link to new documentation added
+ * Add AverageOrderValue rule to segment wizard
 
 4.3.0
  * Enable revisions for flex content
