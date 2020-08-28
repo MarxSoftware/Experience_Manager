@@ -1,0 +1,48 @@
+{
+	"elements": [
+		{
+			"id": "template1",
+			"title": "Simple product recommendation",
+			"description": "The widgets shows the recently viewed products",
+			"image_url": "https://wp-digitalexperience.com/documentation/flex-content/template1.png",
+			"templates": {
+				"css": "snippets/template1.css",
+				"js": "snippets/template1.js",
+				"html": "snippets/template1.html"
+			}
+		},
+		{
+			"id": "template1",
+			"title": "Das ist ein Titel",
+			"description": "Das ist die Bescheibung",
+			"image_url": "https://via.placeholder.com/150",
+			"templates": {
+				"css": "snippets/template1.css",
+				"js": "snippets/template1.js",
+				"html": "snippets/template1.html"
+			}
+		},
+		{
+			"id": "template1",
+			"title": "Das ist ein Titel",
+			"description": "Das ist die Bescheibung",
+			"image_url": "https://via.placeholder.com/150",
+			"templates": {
+				"css": "snippets/template1.css",
+				"js": "snippets/template1.js",
+				"html": "snippets/template1.html"
+			}
+		},
+		{
+			"id": "template1",
+			"title": "Das ist ein Titel",
+			"description": "Das ist die Bescheibung",
+			"image_url": "https://via.placeholder.com/150",
+			"templates": {
+				"css": "snippets/template1.css",
+				"js": "snippets/template1.js",
+				"html": "snippets/template1.html"
+			}
+		}
+	]
+}

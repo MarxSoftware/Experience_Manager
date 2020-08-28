@@ -29,7 +29,7 @@ class ContentEditor {
 		add_filter('gutenberg_can_edit_post_type', [$this, "disable_gutenberg"], 9, 2);
 		add_action('admin_enqueue_scripts', [$this, "query_editor_scripts"], 9);
 
-		//add_action('edit_form_top', [$this, 'top_buttons']);
+		add_action('edit_form_top', [$this, 'top_buttons']);
 		$this->enable_revision();
 	}
 
@@ -54,6 +54,10 @@ class ContentEditor {
 				wp_enqueue_script('experience-manager-content-editor-js', TMA_EXPERIENCE_MANAGER_URL . 'assets/content-editor/content-editor.js', array("experience-manager-ace", "experience-manager-mustache", "jquery", "experience-manager-content-tabs"), "1", false);
 				wp_enqueue_script('experience-manager-content-settings-js', TMA_EXPERIENCE_MANAGER_URL . 'assets/content-editor/content-settings.js', array("jquery"), "1", false);
 				wp_enqueue_style('experience-manager-content-editor-css', TMA_EXPERIENCE_MANAGER_URL . 'assets/content-editor/css/content-editor.css', array(), "1", false);
+			
+				wp_enqueue_style('experience-manager-semantic-css', TMA_EXPERIENCE_MANAGER_URL . 'assets/semantic/semantic.min.css', array(), "2.4.1", false);
+				wp_enqueue_script('experience-manager-semantic-js', TMA_EXPERIENCE_MANAGER_URL . 'assets/semantic/semantic.min.js', array("jquery"), "2.4.1", true);
+				
 			}
 		}
 	}

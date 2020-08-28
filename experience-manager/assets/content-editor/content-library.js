@@ -7,27 +7,45 @@
 
 EXM.Dom.ready(() => {
 
-	// Get the modal
-	var modal = document.getElementById("myModal");
-// Get the button that opens the modal
-	var btn = document.getElementById("myBtn");
-// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on <span> (x), close the modal
-	span.addEventListener("click", function () {
-		modal.style.display = "none";
-	});
-
-// When the user clicks anywhere outside of the modal, close it
-	window.addEventListener("click", function (event) {
-		if (event.target == modal) {
-			modal.style.display = "none";
-		}
-	});
-
 	document.querySelector("#tma_content_library").addEventListener("click", (event) => {
 		event.preventDefault();
-		modal.style.display = "block";
+
+		fetch(TMA_CONFIG.plugin_url + "/assets/content-editor/content-library/index.json")
+				.then(response => response.json())
+				.then(contentLibrary => {
+					let templateContent = document.getElementById("exm_content_element_template").innerHTML;
+					var rendered = Mustache.render(templateContent, contentLibrary);
+					document.getElementById('exm_content_element_container').innerHTML = rendered;
+
+					jQuery("#exm_content_library").modal('show');
+				});
 	});
 });
+
+function exm_content_library_element_insert(ce_id) {
+	exm_content_library_element_update_editor(ce_id + ".html", (content) => {
+		EXM.htmlEditor.setValue(content);
+	});
+	exm_content_library_element_update_editor(ce_id + ".css", (content) => {
+		EXM.cssEditor.setValue(content);
+	});
+	exm_content_library_element_update_editor(ce_id + ".js", (content) => {
+		EXM.jsEditor.setValue(content);
+	});
+
+	fetch(TMA_CONFIG.plugin_url + "/assets/content-editor/content-library/snippets/" + ce_id + ".json")
+			.then(response => response.json())
+			.then(settings => {
+				exm_update_settings_form(settings)
+			});
+
+	jQuery("#exm_content_library").modal('hide');
+}
+
+function exm_content_library_element_update_editor(template, updateCallback) {
+	fetch(TMA_CONFIG.plugin_url + "/assets/content-editor/content-library/snippets/" + template)
+			.then(response => response.text())
+			.then(content => {
+				updateCallback(content)
+			});
+}
