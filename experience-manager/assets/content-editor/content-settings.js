@@ -11,7 +11,7 @@ let exm_contains_conditions = (config) => {
 	return typeof config.conditions !== "undefined";
 };
 
-var exm_content_form = {
+var exm_content_formDefinition = {
 	"default_settings": () => {
 		return {
 			recommendation: {},
@@ -244,9 +244,9 @@ var exm_content_form = {
 		}
 	]
 };
-const exm_update_settings_form = (settings) => {
-	Object.keys(exm_content_form.fields).forEach((key) => {
-		let field = exm_content_form.fields[key];
+const exm_update_form_from_settings = (settings) => {
+	Object.keys(exm_content_formDefinition.fields).forEach((key) => {
+		let field = exm_content_formDefinition.fields[key];
 		if (field.exists_function && !field.exists_function(settings)) {
 			return;
 		}
@@ -267,28 +267,18 @@ const exm_update_settings_form = (settings) => {
 			document.querySelector("#" + key).value = value;
 		}
 	});
-	exm_content_form.functions.forEach((fn) => {
+	exm_content_formDefinition.functions.forEach((fn) => {
 		fn(settings);
 	});
 
-	exm_content_settings_update_fields();
+	exm_content_update_formdata_from_form();
 };
-EXM.Dom.ready(function (event) {
-	if (window.exmContentSettingsValue) {
-		exm_update_settings_form(window.exmContentSettingsValue);
-	}
 
-	document.querySelectorAll(".exm_settings_change").forEach(function ($item) {
-		$item.addEventListener("change", (event) => {
-			exm_content_settings_update_fields();
-		});
-	});
-});
 
-function exm_content_settings_update_fields() {
-	let settings = exm_content_form.default_settings();
-	Object.keys(exm_content_form.fields).forEach((key) => {
-		var field = exm_content_form.fields[key];
+function exm_content_update_formdata_from_form() {
+	let settings = exm_content_formDefinition.default_settings();
+	Object.keys(exm_content_formDefinition.fields).forEach((key) => {
+		var field = exm_content_formDefinition.fields[key];
 
 		if (field.type === "checkbox") {
 			field.set_function(settings, document.querySelector("#" + key).checked);
@@ -312,5 +302,17 @@ function exm_content_settings_check_all(selector) {
 	document.querySelectorAll(selector).forEach(($element) => {
 		$element.checked = true;
 	});
-	exm_content_settings_update_fields();
+	exm_content_update_formdata_from_form();
 }
+
+EXM.Dom.ready(function (event) {
+	if (window.exmContentSettingsValue) {
+		exm_update_form_from_settings(window.exmContentSettingsValue);
+	}
+
+	document.querySelectorAll(".exm_settings_change").forEach(function ($item) {
+		$item.addEventListener("change", (event) => {
+			exm_content_update_formdata_from_form();
+		});
+	});
+});

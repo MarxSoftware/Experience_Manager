@@ -36,7 +36,7 @@ function exm_content_library_element_insert(ce_id) {
 	fetch(TMA_CONFIG.plugin_url + "/assets/content-editor/content-library/snippets/" + ce_id + ".json")
 			.then(response => response.json())
 			.then(settings => {
-				exm_update_settings_form(settings)
+				exm_update_form_from_settings(settings)
 			});
 
 	jQuery("#exm_content_library").modal('hide');
