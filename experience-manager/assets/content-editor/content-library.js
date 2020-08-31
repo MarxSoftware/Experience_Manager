@@ -4,47 +4,71 @@
  * and open the template in the editor.
  */
 
-
+const FUNCTION_EMPTY = () => {};
+const FILTER_ALL = () => true;
+const EXM_RESPONSE_JSON = (response) => response.json();
+const EXM_RESPONSE_TEXT = (response) => response.text();
 EXM.Dom.ready(() => {
 
 	document.querySelector("#tma_content_library").addEventListener("click", (event) => {
 		event.preventDefault();
 
-		fetch(TMA_CONFIG.plugin_url + "/assets/content-editor/content-library/index.json")
+		fetch(TMA_CONFIG.plugin_url + "/assets/content-editor/content-library/index.json?_t=" + new Date().getTime())
 				.then(response => response.json())
 				.then(contentLibrary => {
-					let templateContent = document.getElementById("exm_content_element_template").innerHTML;
-					var rendered = Mustache.render(templateContent, contentLibrary);
-					document.getElementById('exm_content_element_container').innerHTML = rendered;
-
-					jQuery("#exm_content_library").modal('show');
+					window.EXM_CONTENT_LIBRARY = contentLibrary
+					display_content_library(FILTER_ALL, () => {
+						jQuery("#exm_content_library").modal('show');
+					});
 				});
+		jQuery("#exm_content_type_filter").dropdown({
+			onChange: function (value, text, $selectedItem) {
+				let filterFunction = (element) => element.category === value;
+				if (value === "ALL") {
+					filterFunction = FILTER_ALL;
+				}
+				display_content_library(
+						filterFunction,
+						FUNCTION_EMPTY
+						);
+			}
+		});
 	});
 });
 
-function exm_content_library_element_insert(ce_id) {
-	exm_content_library_element_update_editor(ce_id + ".html", (content) => {
+
+const display_content_library = (filterFunction, callbackFunction) => {
+	let templateContent = document.getElementById("exm_content_element_template").innerHTML;
+	let data = {
+		'elements': window.EXM_CONTENT_LIBRARY.elements.filter(filterFunction)
+	};
+	var rendered = Mustache.render(templateContent, data);
+	document.getElementById('exm_content_element_container').innerHTML = rendered;
+	callbackFunction();
+}
+
+
+
+const exm_content_library_element_insert = (ce_id) => {
+	exm_content_library_element_load(ce_id + ".html", EXM_RESPONSE_TEXT, (content) => {
 		EXM.htmlEditor.setValue(content);
 	});
-	exm_content_library_element_update_editor(ce_id + ".css", (content) => {
+	exm_content_library_element_load(ce_id + ".css", EXM_RESPONSE_TEXT, (content) => {
 		EXM.cssEditor.setValue(content);
 	});
-	exm_content_library_element_update_editor(ce_id + ".js", (content) => {
+	exm_content_library_element_load(ce_id + ".js", EXM_RESPONSE_TEXT, (content) => {
 		EXM.jsEditor.setValue(content);
 	});
-
-	fetch(TMA_CONFIG.plugin_url + "/assets/content-editor/content-library/snippets/" + ce_id + ".json")
-			.then(response => response.json())
-			.then(settings => {
-				exm_update_form_from_settings(settings)
-			});
+	exm_content_library_element_load(ce_id + ".json", EXM_RESPONSE_JSON, (content) => {
+		exm_update_form_from_settings(content)
+	});
 
 	jQuery("#exm_content_library").modal('hide');
 }
 
-function exm_content_library_element_update_editor(template, updateCallback) {
+const  exm_content_library_element_load = (template, responseHandler, updateCallback) => {
 	fetch(TMA_CONFIG.plugin_url + "/assets/content-editor/content-library/snippets/" + template)
-			.then(response => response.text())
+			.then(responseHandler)
 			.then(content => {
 				updateCallback(content)
 			});

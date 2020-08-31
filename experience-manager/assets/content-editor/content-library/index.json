@@ -4,44 +4,39 @@
 			"id": "template1",
 			"title": "Simple product recommendation",
 			"description": "The widgets shows the recently viewed products",
+			"category" : "product_recommendation",
 			"image_url": "https://wp-digitalexperience.com/documentation/flex-content/template1.png",
 			"templates": {
 				"css": "snippets/template1.css",
 				"js": "snippets/template1.js",
-				"html": "snippets/template1.html"
+				"html": "snippets/template1.html",
+				"settings" : "snippets/template1.json"
 			}
 		},
 		{
-			"id": "template1",
-			"title": "Das ist ein Titel",
-			"description": "Das ist die Bescheibung",
-			"image_url": "https://via.placeholder.com/150",
+			"id": "template2",
+			"title": "Single product recommendation slider",
+			"description": "A single product recommendation slider",
+			"category" : "product_recommendation",
+			"image_url": "https://wp-digitalexperience.com/documentation/flex-content/template2.png",
 			"templates": {
-				"css": "snippets/template1.css",
-				"js": "snippets/template1.js",
-				"html": "snippets/template1.html"
+				"css": "snippets/template2.css",
+				"js": "snippets/template2.js",
+				"html": "snippets/template2.html",
+				"settings" : "snippets/template2.json"
 			}
 		},
 		{
-			"id": "template1",
-			"title": "Das ist ein Titel",
-			"description": "Das ist die Bescheibung",
-			"image_url": "https://via.placeholder.com/150",
+			"id": "template3",
+			"title": "Leaderboard banner",
+			"description": "A nice leader board banner (728x90",
+			"category" : "banner",
+			"image_url": "https://wp-digitalexperience.com/documentation/flex-content/template3.png",
 			"templates": {
-				"css": "snippets/template1.css",
-				"js": "snippets/template1.js",
-				"html": "snippets/template1.html"
-			}
-		},
-		{
-			"id": "template1",
-			"title": "Das ist ein Titel",
-			"description": "Das ist die Bescheibung",
-			"image_url": "https://via.placeholder.com/150",
-			"templates": {
-				"css": "snippets/template1.css",
-				"js": "snippets/template1.js",
-				"html": "snippets/template1.html"
+				"css": "snippets/template3.css",
+				"js": "snippets/template3.js",
+				"html": "snippets/template3.html",
+				"settings" : "snippets/template3.json"
 			}
 		}
 	]
