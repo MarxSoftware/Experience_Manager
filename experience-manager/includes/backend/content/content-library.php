@@ -29,7 +29,7 @@
 		Flex Content Library
 	</div>
 	<div class="scrolling  content">
-		<div class="ui menu">
+		<div class="ui text menu">
 			<div class="item">
 				<div class="field">
 					<div class="ui selection dropdown" id="exm_content_type_filter">
