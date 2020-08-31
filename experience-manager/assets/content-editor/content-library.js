@@ -62,8 +62,9 @@ const exm_content_library_element_insert = (ce_id) => {
 	exm_content_library_element_load(ce_id + ".json", EXM_RESPONSE_JSON, (content) => {
 		exm_update_form_from_settings(content)
 	});
-
 	jQuery("#exm_content_library").modal('hide');
+	
+	exm_content_editor_update_preview();
 }
 
 const  exm_content_library_element_load = (template, responseHandler, updateCallback) => {
