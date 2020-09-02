@@ -89,4 +89,17 @@ jQuery(function () {
 			document.querySelector(".exm-content-editor #exm-preview-wrapper").classList.add(device);
 		});
 	});
+	document.querySelectorAll(".exm-content-editor .size-select").forEach(($button) => {
+		console.log($button)
+		$button.addEventListener("change", (event) => {
+			event.preventDefault();
+
+			let device = event.target.value;
+			console.log("selecte", device);
+			document.getElementById("exm-preview-target").classList.remove("tablet");
+			document.getElementById("exm-preview-target").classList.remove("desktop");
+			document.getElementById("exm-preview-target").classList.remove("smartphone");
+			document.getElementById("exm-preview-target").classList.add(device);
+		});
+	});
 });

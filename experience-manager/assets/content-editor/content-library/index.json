@@ -38,6 +38,19 @@
 				"html": "snippets/template3.html",
 				"settings" : "snippets/template3.json"
 			}
+		},
+		{
+			"id": "template4",
+			"title": "Fly out",
+			"description": "a fly out with product recommendations",
+			"category" : "banner",
+			"image_url": "https://wp-digitalexperience.com/documentation/flex-content/template3.png",
+			"templates": {
+				"css": "snippets/template4.css",
+				"js": "snippets/template4.js",
+				"html": "snippets/template4.html",
+				"settings" : "snippets/template4.json"
+			}
 		}
 	]
 }

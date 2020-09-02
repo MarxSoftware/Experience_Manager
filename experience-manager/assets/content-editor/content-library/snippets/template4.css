@@ -1,0 +1,88 @@
+#flyout {
+	width: 350px;
+	min-height: 150px;
+	background: #A50000;
+	background: -moz-radial-gradient(90% 50%, ellipse cover, #f20000 0%, #A50000 75%);
+	background: -webkit-gradient(radial, 90% 50%, 0px, 90% 50%, 75%, color-stop(0%, #f20000), color-stop(75%, #A50000));
+	background: -webkit-radial-gradient(90% 50%, ellipse cover, #f20000 0%, #A50000 40%);
+	background: -o-radial-gradient(90% 50%, ellipse cover, #f20000 0%, #A50000 75%);
+	background: -ms-radial-gradient(90% 50%, ellipse cover, #f20000 0%, #A50000 75%);
+	background: radial-gradient(ellipse at 90% 50%, #f20000 0%, #a50000 75%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=lighten($color,15%), endColorstr=$color,GradientType=1);
+	border: 1px solid #A50000;
+	position: absolute;
+	top: 30px;
+	right: -350px;
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+	-webkit-border-radius: 4px 0 0 4px;
+	border-radius: 4px 0 0 4px;
+	padding: 15px;
+}
+#flyout h3 {
+	margin: 0;
+	color: #fff;
+}
+#flyout h4 {
+	color: #fff;
+	margin: 0 0 20px 0;
+}
+#flyout .form-control {
+	color: #A50000;
+}
+#flyout textarea {
+	min-height: 100px;
+}
+#flyout .btn-defult {
+	background-color: #fff;
+	border: none;
+	color: #A50000;
+}
+#flyout .btn-defult:hover {
+	opacity: 0.4;
+}
+
+#flyout #button {
+	position: absolute;
+	top: 64px;
+	left: -98px;
+	border-bottom: 0;
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+}
+#flyout #button .text {
+	-webkit-border-radius: 4px 4px 0 0;
+	border-radius: 4px 4px 0 0;
+	padding: 10px 20px 15px 20px;
+	opacity: 1;
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+	border-bottom: none;
+}
+#flyout #button .btn-primary {
+	background-color: #A50000;
+	border-color: #A50000;
+}
+
+#flyout:hover {
+	right: 0;
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+}
