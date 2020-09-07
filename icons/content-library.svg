@@ -15,26 +15,53 @@
    inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
    sodipodi:docname="content-library.svg">
   <defs
-     id="defs2" />
+     id="defs2">
+    <rect
+       id="rect1483"
+       height="48.380952"
+       width="65.011905"
+       y="713.61905"
+       x="-40.821429" />
+    <rect
+       x="-40.821429"
+       y="713.61905"
+       width="65.011905"
+       height="48.380952"
+       id="rect1493" />
+    <rect
+       id="rect1502"
+       height="48.380952"
+       width="65.011905"
+       y="713.61905"
+       x="-40.821429" />
+    <rect
+       x="-40.821429"
+       y="713.61905"
+       width="65.011905"
+       height="48.380952"
+       id="rect1510" />
+  </defs>
   <sodipodi:namedview
+     inkscape:snap-global="false"
      id="base"
      pagecolor="#ffffff"
      bordercolor="#666666"
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="465.02896"
-     inkscape:cy="206.80685"
+     inkscape:zoom="0.38408123"
+     inkscape:cx="-14.883172"
+     inkscape:cy="3352.908"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      inkscape:document-rotation="0"
      showgrid="false"
-     inkscape:window-width="1904"
-     inkscape:window-height="1121"
-     inkscape:window-x="-7"
-     inkscape:window-y="7"
-     inkscape:window-maximized="0" />
+     inkscape:window-width="1920"
+     inkscape:window-height="1137"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:snap-nodes="false" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -1747,60 +1774,43 @@
        id="g1607">
       <g
          id="g1550">
-	<g
-   id="g1548">
-		<polygon
-   points="207.093,128 79.093,0 48.907,30.187 146.72,128 48.907,225.813 79.093,256 "
-   id="polygon1546" />
-
-	</g>
-
-</g>
+        <g
+           id="g1548">
+          <polygon
+             points="207.093,128 79.093,0 48.907,30.187 146.72,128 48.907,225.813 79.093,256 "
+             id="polygon1546" />
+        </g>
+      </g>
       <g
-         id="g1552">
-</g>
+         id="g1552" />
       <g
-         id="g1554">
-</g>
+         id="g1554" />
       <g
-         id="g1556">
-</g>
+         id="g1556" />
       <g
-         id="g1558">
-</g>
+         id="g1558" />
       <g
-         id="g1560">
-</g>
+         id="g1560" />
       <g
-         id="g1562">
-</g>
+         id="g1562" />
       <g
-         id="g1564">
-</g>
+         id="g1564" />
       <g
-         id="g1566">
-</g>
+         id="g1566" />
       <g
-         id="g1568">
-</g>
+         id="g1568" />
       <g
-         id="g1570">
-</g>
+         id="g1570" />
       <g
-         id="g1572">
-</g>
+         id="g1572" />
       <g
-         id="g1574">
-</g>
+         id="g1574" />
       <g
-         id="g1576">
-</g>
+         id="g1576" />
       <g
-         id="g1578">
-</g>
+         id="g1578" />
       <g
-         id="g1580">
-</g>
+         id="g1580" />
     </g>
     <g
        transform="matrix(0.26458333,0,0,0.26458333,472.08711,236.68666)"
@@ -1808,131 +1818,95 @@
       <g
          transform="translate(2,-140)"
          id="g1613">
-	<g
-   id="g1611">
-		<polygon
-   points="207.093,225.813 109.28,128 207.093,30.187 176.907,0 48.907,128 176.907,256 "
-   id="polygon1609" />
-
-	</g>
-
-</g>
+        <g
+           id="g1611">
+          <polygon
+             points="207.093,225.813 109.28,128 207.093,30.187 176.907,0 48.907,128 176.907,256 "
+             id="polygon1609" />
+        </g>
+      </g>
       <g
-         id="g1615">
-</g>
+         id="g1615" />
       <g
-         id="g1617">
-</g>
+         id="g1617" />
       <g
-         id="g1619">
-</g>
+         id="g1619" />
       <g
-         id="g1621">
-</g>
+         id="g1621" />
       <g
-         id="g1623">
-</g>
+         id="g1623" />
       <g
-         id="g1625">
-</g>
+         id="g1625" />
       <g
-         id="g1627">
-</g>
+         id="g1627" />
       <g
-         id="g1629">
-</g>
+         id="g1629" />
       <g
-         id="g1631">
-</g>
+         id="g1631" />
       <g
-         id="g1633">
-</g>
+         id="g1633" />
       <g
-         id="g1635">
-</g>
+         id="g1635" />
       <g
-         id="g1637">
-</g>
+         id="g1637" />
       <g
-         id="g1639">
-</g>
+         id="g1639" />
       <g
-         id="g1641">
-</g>
+         id="g1641" />
       <g
-         id="g1643">
-</g>
+         id="g1643" />
     </g>
     <g
        transform="matrix(0.26458333,0,0,0.26458333,466.27118,-262.30555)"
        id="g1943">
       <g
          id="g1877">
-	<g
-   id="g1875">
-		<path
-   d="M 0,61 V 451 H 512 V 61 Z M 482,421 H 51.213 L 155,317.213 l 61,61 180,-180 86,86 z m 0,-179.213 -86,-86 -180,180 -61,-61 -125,125 V 91 h 452 z"
-   id="path1873" />
-
-	</g>
-
-</g>
+        <g
+           id="g1875">
+          <path
+             d="M 0,61 V 451 H 512 V 61 Z M 482,421 H 51.213 L 155,317.213 l 61,61 180,-180 86,86 z m 0,-179.213 -86,-86 -180,180 -61,-61 -125,125 V 91 h 452 z"
+             id="path1873" />
+        </g>
+      </g>
       <g
          id="g1883">
-	<g
-   id="g1881">
-		<path
-   d="m 155,121 c -33.084,0 -60,26.916 -60,60 0,33.084 26.916,60 60,60 33.084,0 60,-26.916 60,-60 0,-33.084 -26.916,-60 -60,-60 z m 0,90 c -16.542,0 -30,-13.458 -30,-30 0,-16.542 13.458,-30 30,-30 16.542,0 30,13.458 30,30 0,16.542 -13.458,30 -30,30 z"
-   id="path1879" />
-
-	</g>
-
-</g>
+        <g
+           id="g1881">
+          <path
+             d="m 155,121 c -33.084,0 -60,26.916 -60,60 0,33.084 26.916,60 60,60 33.084,0 60,-26.916 60,-60 0,-33.084 -26.916,-60 -60,-60 z m 0,90 c -16.542,0 -30,-13.458 -30,-30 0,-16.542 13.458,-30 30,-30 16.542,0 30,13.458 30,30 0,16.542 -13.458,30 -30,30 z"
+             id="path1879" />
+        </g>
+      </g>
       <g
-         id="g1885">
-</g>
+         id="g1885" />
       <g
-         id="g1887">
-</g>
+         id="g1887" />
       <g
-         id="g1889">
-</g>
+         id="g1889" />
       <g
-         id="g1891">
-</g>
+         id="g1891" />
       <g
-         id="g1893">
-</g>
+         id="g1893" />
       <g
-         id="g1895">
-</g>
+         id="g1895" />
       <g
-         id="g1897-9">
-</g>
+         id="g1897-9" />
       <g
-         id="g1899">
-</g>
+         id="g1899" />
       <g
-         id="g1901-9">
-</g>
+         id="g1901-9" />
       <g
-         id="g1903">
-</g>
+         id="g1903" />
       <g
-         id="g1905-9">
-</g>
+         id="g1905-9" />
       <g
-         id="g1907">
-</g>
+         id="g1907" />
       <g
-         id="g1909-7">
-</g>
+         id="g1909-7" />
       <g
-         id="g1911">
-</g>
+         id="g1911" />
       <g
-         id="g1913-0">
-</g>
+         id="g1913-0" />
     </g>
     <g
        style="fill:#000000"
@@ -1941,119 +1915,96 @@
       <g
          style="fill:#000000"
          id="g1949">
-	<g
-   style="fill:#000000"
-   id="g1947-1">
-		<path
-   style="fill:#000000"
-   d="M 323,31.5 H 10 c -5.5,0 -10,4.5 -10,10 0,5.5 4.5,10 10,10 h 313 c 5.5,0 10,-4.5 10,-10 0,-5.5 -4.5,-10 -10,-10 z"
-   id="path1945" />
-
-	</g>
-
-</g>
+        <g
+           style="fill:#000000"
+           id="g1947-1">
+          <path
+             style="fill:#000000"
+             d="M 323,31.5 H 10 c -5.5,0 -10,4.5 -10,10 0,5.5 4.5,10 10,10 h 313 c 5.5,0 10,-4.5 10,-10 0,-5.5 -4.5,-10 -10,-10 z"
+             id="path1945" />
+        </g>
+      </g>
       <g
          style="fill:#000000"
          id="g1955">
-	<g
-   style="fill:#000000"
-   id="g1953">
-		<path
-   style="fill:#000000"
-   d="M 230,114.5 H 10 c -5.5,0 -10,4.5 -10,10 0,5.5 4.5,10 10,10 h 220 c 5.5,0 10,-4.5 10,-10 0,-5.5 -4.5,-10 -10,-10 z"
-   id="path1951" />
-
-	</g>
-
-</g>
+        <g
+           style="fill:#000000"
+           id="g1953">
+          <path
+             style="fill:#000000"
+             d="M 230,114.5 H 10 c -5.5,0 -10,4.5 -10,10 0,5.5 4.5,10 10,10 h 220 c 5.5,0 10,-4.5 10,-10 0,-5.5 -4.5,-10 -10,-10 z"
+             id="path1951" />
+        </g>
+      </g>
       <g
          style="fill:#000000"
          id="g1961">
-	<g
-   style="fill:#000000"
-   id="g1959">
-		<path
-   style="fill:#000000"
-   d="M 323,198.5 H 10 c -5.5,0 -10,4.5 -10,10 0,5.5 4.5,10 10,10 h 313 c 5.5,0 10,-4.5 10,-10 0,-5.5 -4.5,-10 -10,-10 z"
-   id="path1957" />
-
-	</g>
-
-</g>
+        <g
+           style="fill:#000000"
+           id="g1959">
+          <path
+             style="fill:#000000"
+             d="M 323,198.5 H 10 c -5.5,0 -10,4.5 -10,10 0,5.5 4.5,10 10,10 h 313 c 5.5,0 10,-4.5 10,-10 0,-5.5 -4.5,-10 -10,-10 z"
+             id="path1957" />
+        </g>
+      </g>
       <g
          style="fill:#000000"
          id="g1967">
-	<g
-   style="fill:#000000"
-   id="g1965">
-		<path
-   style="fill:#000000"
-   d="M 151,281.5 H 10 c -5.5,0 -10,4.5 -10,10 0,5.5 4.5,10 10,10 h 141 c 5.5,0 10,-4.5 10,-10 0,-5.5 -4.5,-10 -10,-10 z"
-   id="path1963" />
-
-	</g>
-
-</g>
+        <g
+           style="fill:#000000"
+           id="g1965">
+          <path
+             style="fill:#000000"
+             d="M 151,281.5 H 10 c -5.5,0 -10,4.5 -10,10 0,5.5 4.5,10 10,10 h 141 c 5.5,0 10,-4.5 10,-10 0,-5.5 -4.5,-10 -10,-10 z"
+             id="path1963" />
+        </g>
+      </g>
       <g
          style="fill:#000000"
-         id="g1969">
-</g>
+         id="g1969" />
       <g
          style="fill:#000000"
-         id="g1971">
-</g>
+         id="g1971" />
       <g
          style="fill:#000000"
-         id="g1973">
-</g>
+         id="g1973" />
       <g
          style="fill:#000000"
-         id="g1975">
-</g>
+         id="g1975" />
       <g
          style="fill:#000000"
-         id="g1977">
-</g>
+         id="g1977" />
       <g
          style="fill:#000000"
-         id="g1979">
-</g>
+         id="g1979" />
       <g
          style="fill:#000000"
-         id="g1981">
-</g>
+         id="g1981" />
       <g
          style="fill:#000000"
-         id="g1983">
-</g>
+         id="g1983" />
       <g
          style="fill:#000000"
-         id="g1985">
-</g>
+         id="g1985" />
       <g
          style="fill:#000000"
-         id="g1987">
-</g>
+         id="g1987" />
       <g
          style="fill:#000000"
-         id="g1989">
-</g>
+         id="g1989" />
       <g
          style="fill:#000000"
-         id="g1991">
-</g>
+         id="g1991" />
       <g
          style="fill:#000000"
-         id="g1993">
-</g>
+         id="g1993" />
       <g
          style="fill:#000000"
-         id="g1995">
-</g>
+         id="g1995" />
       <g
          style="fill:#000000"
-         id="g1997">
-</g>
+         id="g1997" />
     </g>
     <g
        transform="translate(173.19065,-362.41748)"
@@ -2167,77 +2118,60 @@
         <g
            style="fill:#333333"
            id="g2079">
-	<g
-   style="fill:#333333"
-   id="g2077">
-		<polygon
-   style="fill:#333333"
-   id="polygon2075"
-   points="146.72,128 48.907,225.813 79.093,256 207.093,128 79.093,0 48.907,30.187 " />
-
-	</g>
-
-</g>
+          <g
+             style="fill:#333333"
+             id="g2077">
+            <polygon
+               style="fill:#333333"
+               id="polygon2075"
+               points="146.72,128 48.907,225.813 79.093,256 207.093,128 79.093,0 48.907,30.187 " />
+          </g>
+        </g>
         <g
            style="fill:#333333"
-           id="g2081">
-</g>
+           id="g2081" />
         <g
            style="fill:#333333"
-           id="g2083">
-</g>
+           id="g2083" />
         <g
            style="fill:#333333"
-           id="g2085">
-</g>
+           id="g2085" />
         <g
            style="fill:#333333"
-           id="g2087">
-</g>
+           id="g2087" />
         <g
            style="fill:#333333"
-           id="g2089">
-</g>
+           id="g2089" />
         <g
            style="fill:#333333"
-           id="g2091">
-</g>
+           id="g2091" />
         <g
            style="fill:#333333"
-           id="g2093">
-</g>
+           id="g2093" />
         <g
            style="fill:#333333"
-           id="g2095">
-</g>
+           id="g2095" />
         <g
            style="fill:#333333"
-           id="g2097">
-</g>
+           id="g2097" />
         <g
            style="fill:#333333"
-           id="g2099">
-</g>
+           id="g2099" />
         <g
            style="fill:#333333"
-           id="g2101">
-</g>
+           id="g2101" />
         <g
            style="fill:#333333"
-           id="g2103">
-</g>
+           id="g2103" />
         <g
            style="fill:#333333"
-           id="g2105">
-</g>
+           id="g2105" />
         <g
            style="fill:#333333"
-           id="g2107">
-</g>
+           id="g2107" />
         <g
            style="fill:#333333"
-           id="g2109">
-</g>
+           id="g2109" />
       </g>
       <g
          transform="matrix(-0.0411597,0,0,0.0411597,130.11288,145.25194)"
@@ -2246,77 +2180,60 @@
         <g
            id="g2117"
            style="fill:#333333">
-	<g
-   id="g2115"
-   style="fill:#333333">
-		<polygon
-   points="48.907,225.813 79.093,256 207.093,128 79.093,0 48.907,30.187 146.72,128 "
-   id="polygon2113"
-   style="fill:#333333" />
-
-	</g>
-
-</g>
+          <g
+             id="g2115"
+             style="fill:#333333">
+            <polygon
+               points="48.907,225.813 79.093,256 207.093,128 79.093,0 48.907,30.187 146.72,128 "
+               id="polygon2113"
+               style="fill:#333333" />
+          </g>
+        </g>
         <g
            id="g2119"
-           style="fill:#333333">
-</g>
+           style="fill:#333333" />
         <g
            id="g2121"
-           style="fill:#333333">
-</g>
+           style="fill:#333333" />
         <g
            id="g2123"
-           style="fill:#333333">
-</g>
+           style="fill:#333333" />
         <g
            id="g2125"
-           style="fill:#333333">
-</g>
+           style="fill:#333333" />
         <g
            id="g2127"
-           style="fill:#333333">
-</g>
+           style="fill:#333333" />
         <g
            id="g2129"
-           style="fill:#333333">
-</g>
+           style="fill:#333333" />
         <g
            id="g2131"
-           style="fill:#333333">
-</g>
+           style="fill:#333333" />
         <g
            id="g2133"
-           style="fill:#333333">
-</g>
+           style="fill:#333333" />
         <g
            id="g2135"
-           style="fill:#333333">
-</g>
+           style="fill:#333333" />
         <g
            id="g2137"
-           style="fill:#333333">
-</g>
+           style="fill:#333333" />
         <g
            id="g2139"
-           style="fill:#333333">
-</g>
+           style="fill:#333333" />
         <g
            id="g2141"
-           style="fill:#333333">
-</g>
+           style="fill:#333333" />
         <g
            id="g2143"
-           style="fill:#333333">
-</g>
+           style="fill:#333333" />
         <g
            id="g2145"
-           style="fill:#333333">
-</g>
+           style="fill:#333333" />
         <g
            id="g2147"
-           style="fill:#333333">
-</g>
+           style="fill:#333333" />
       </g>
     </g>
     <g
@@ -2345,12 +2262,465 @@
     <rect
        inkscape:export-ydpi="25.4"
        inkscape:export-xdpi="25.4"
-       inkscape:export-filename="C:\Users\marx\leaderboard.png"
-       y="-59.720234"
-       x="-41.577381"
+       inkscape:export-filename="C:\Users\marx\leaderboard_1.png"
+       y="695.77179"
+       x="-379.12057"
        height="90"
        width="728"
        id="rect2475"
        style="fill:#999999;stroke:none;stroke-width:0.549;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:fill markers stroke" />
+    <g
+       id="g1493"
+       transform="matrix(1.2570258,0,0,1.2570258,494.95652,289.53593)">
+      <rect
+         style="fill:#b3b3b3;stroke:none;stroke-width:0.223688;stroke-linejoin:round"
+         id="rect1457"
+         width="27.970238"
+         height="29.314453"
+         x="33.261906"
+         y="156.48215"
+         rx="4.99999"
+         ry="6.2545319" />
+      <g
+         transform="matrix(0.07639438,0,0,0.07639438,13.332436,179.57683)"
+         id="g1491"
+         style="fill:#e3dedb">
+        <g
+           id="g1461"
+           transform="matrix(0.06897829,0,0,-0.06897829,-575.5319,457.85542)"
+           style="fill:#e3dedb">
+          <path
+             d="m 16295.7,7479.44 -1622,-751.76 10.2,1839.54 1616.1,517.1 -4.3,-1604.88"
+             style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             id="path1459" />
+        </g>
+        <g
+           id="g1465"
+           transform="matrix(0.06895995,0,0,-0.06895995,-575.5319,457.85542)"
+           style="fill:#e3dedb">
+          <path
+             d="m 13470.6,9012.88 1217.1,-443.41 1612.3,517.24 -1491.9,294.88 -1337.5,-368.71"
+             style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             id="path1463" />
+        </g>
+        <g
+           id="g1469"
+           transform="matrix(0.07068256,0,0,-0.07068256,-575.5319,457.85542)"
+           style="fill:#e3dedb">
+          <path
+             d="m 14447.2,9152.95 561,279.7 1291.8,-279.7 -393,-287.68 -1459.8,287.68"
+             style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             id="path1467" />
+        </g>
+        <g
+           id="g1473"
+           transform="matrix(0.06897829,0,0,-0.06897829,-575.5319,457.85542)"
+           style="fill:#e3dedb">
+          <path
+             d="m 14804.2,9379.11 v -784.73 l 321.4,114.54 1174.4,375.4 -1495.8,294.79"
+             style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             id="path1471" />
+        </g>
+        <g
+           id="g1477"
+           transform="matrix(0.06213899,0,0,-0.06213899,-575.5319,457.85542)"
+           style="fill:#e3dedb">
+          <path
+             d="m 16300,9510.14 -11.2,-2042 -1339.6,553.5 V 10002.2 L 16300,9510.14"
+             style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             id="path1475" />
+        </g>
+        <g
+           id="g1481"
+           transform="matrix(0.07068256,0,0,-0.07068256,-575.5319,457.85542)"
+           style="fill:#e3dedb">
+          <path
+             d="m 14329.8,8360.63 363.7,-645.27 1606.5,638.43 -393,511.48 -1577.2,-504.64"
+             style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             id="path1479" />
+        </g>
+        <g
+           id="g1485"
+           transform="matrix(0.06213899,0,0,-0.06213899,-575.5319,457.85542)"
+           style="fill:#e3dedb">
+          <path
+             d="m 16300,9510.14 -420.8,-682.13 -1459,634.1 529,540.09 1350.8,-492.06"
+             style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             id="path1483" />
+        </g>
+        <g
+           id="g1489"
+           transform="matrix(0.06264805,0,0,-0.06264805,-575.5319,457.85542)"
+           style="fill:#e3dedb">
+          <path
+             d="m 14827.7,9920.95 -394.8,644.15 1511.9,289.2 355.2,-527.5 -1472.3,-405.85"
+             style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             id="path1487" />
+        </g>
+      </g>
+    </g>
+    <g
+       id="g1531"
+       transform="matrix(1.2570258,0,0,1.2570258,405.75534,358.40869)">
+      <rect
+         ry="6.2545319"
+         rx="4.99999"
+         y="101.69189"
+         x="71.415649"
+         height="29.314453"
+         width="27.970238"
+         id="rect1495"
+         style="fill:#b3b3b3;stroke:none;stroke-width:0.223688;stroke-linejoin:round" />
+      <g
+         style="fill:#e3dedb"
+         id="g1529"
+         transform="matrix(0.07639438,0,0,0.07639438,51.486176,124.78658)">
+        <g
+           style="fill:#e3dedb"
+           transform="matrix(0.06897829,0,0,-0.06897829,-575.5319,457.85542)"
+           id="g1499">
+          <path
+             id="path1497"
+             style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="m 16295.7,7479.44 -1622,-751.76 10.2,1839.54 1616.1,517.1 -4.3,-1604.88" />
+        </g>
+        <g
+           style="fill:#e3dedb"
+           transform="matrix(0.06895995,0,0,-0.06895995,-575.5319,457.85542)"
+           id="g1503">
+          <path
+             id="path1501"
+             style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="m 13470.6,9012.88 1217.1,-443.41 1612.3,517.24 -1491.9,294.88 -1337.5,-368.71" />
+        </g>
+        <g
+           style="fill:#e3dedb"
+           transform="matrix(0.07068256,0,0,-0.07068256,-575.5319,457.85542)"
+           id="g1507">
+          <path
+             id="path1505"
+             style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="m 14447.2,9152.95 561,279.7 1291.8,-279.7 -393,-287.68 -1459.8,287.68" />
+        </g>
+        <g
+           style="fill:#e3dedb"
+           transform="matrix(0.06897829,0,0,-0.06897829,-575.5319,457.85542)"
+           id="g1511">
+          <path
+             id="path1509"
+             style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="m 14804.2,9379.11 v -784.73 l 321.4,114.54 1174.4,375.4 -1495.8,294.79" />
+        </g>
+        <g
+           style="fill:#e3dedb"
+           transform="matrix(0.06213899,0,0,-0.06213899,-575.5319,457.85542)"
+           id="g1515">
+          <path
+             id="path1513"
+             style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="m 16300,9510.14 -11.2,-2042 -1339.6,553.5 V 10002.2 L 16300,9510.14" />
+        </g>
+        <g
+           style="fill:#e3dedb"
+           transform="matrix(0.07068256,0,0,-0.07068256,-575.5319,457.85542)"
+           id="g1519">
+          <path
+             id="path1517"
+             style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="m 14329.8,8360.63 363.7,-645.27 1606.5,638.43 -393,511.48 -1577.2,-504.64" />
+        </g>
+        <g
+           style="fill:#e3dedb"
+           transform="matrix(0.06213899,0,0,-0.06213899,-575.5319,457.85542)"
+           id="g1523">
+          <path
+             id="path1521"
+             style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="m 16300,9510.14 -420.8,-682.13 -1459,634.1 529,540.09 1350.8,-492.06" />
+        </g>
+        <g
+           style="fill:#e3dedb"
+           transform="matrix(0.06264805,0,0,-0.06264805,-575.5319,457.85542)"
+           id="g1527">
+          <path
+             id="path1525"
+             style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             d="m 14827.7,9920.95 -394.8,644.15 1511.9,289.2 355.2,-527.5 -1472.3,-405.85" />
+        </g>
+      </g>
+    </g>
+    <g
+       id="g1733"
+       inkscape:export-filename="C:\Users\marx\flyout.png"
+       inkscape:export-xdpi="25.400003"
+       inkscape:export-ydpi="25.400003">
+      <rect
+         style="fill:#ececec;stroke:none;stroke-width:0.532416;stroke-linejoin:round"
+         id="rect1400"
+         width="150"
+         height="150"
+         x="120.39715"
+         y="419.79205"
+         rx="10.669775"
+         ry="16.604441" />
+      <g
+         transform="translate(0,-42.862521)"
+         id="g1415">
+        <rect
+           y="475.23352"
+           x="214.94592"
+           height="36.849026"
+           width="55.316715"
+           id="rect1409"
+           style="fill:#999999;stroke:none;stroke-width:0.352486;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:fill markers stroke" />
+        <path
+           style="opacity:1;vector-effect:none;fill:#999999;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           d="m 214.94592,512.08251 -10.64979,-5.02745 v -26.45834 l 10.64979,-5.3632"
+           id="path1411"
+           sodipodi:nodetypes="cccc" />
+      </g>
+      <g
+         transform="matrix(0.85162039,0,0,0.85162039,187.68848,305.64643)"
+         id="g1455">
+        <rect
+           style="fill:#b3b3b3;stroke:none;stroke-width:0.223688;stroke-linejoin:round"
+           id="rect1419"
+           width="27.970238"
+           height="29.314453"
+           x="33.261906"
+           y="156.48215"
+           rx="4.99999"
+           ry="6.2545319" />
+        <g
+           transform="matrix(0.07639438,0,0,0.07639438,13.332436,179.57683)"
+           id="g1453"
+           style="fill:#e3dedb">
+          <g
+             id="g1423"
+             transform="matrix(0.06897829,0,0,-0.06897829,-575.5319,457.85542)"
+             style="fill:#e3dedb">
+            <path
+               d="m 16295.7,7479.44 -1622,-751.76 10.2,1839.54 1616.1,517.1 -4.3,-1604.88"
+               style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               id="path1421" />
+          </g>
+          <g
+             id="g1427"
+             transform="matrix(0.06895995,0,0,-0.06895995,-575.5319,457.85542)"
+             style="fill:#e3dedb">
+            <path
+               d="m 13470.6,9012.88 1217.1,-443.41 1612.3,517.24 -1491.9,294.88 -1337.5,-368.71"
+               style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               id="path1425" />
+          </g>
+          <g
+             id="g1431"
+             transform="matrix(0.07068256,0,0,-0.07068256,-575.5319,457.85542)"
+             style="fill:#e3dedb">
+            <path
+               d="m 14447.2,9152.95 561,279.7 1291.8,-279.7 -393,-287.68 -1459.8,287.68"
+               style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               id="path1429" />
+          </g>
+          <g
+             id="g1435"
+             transform="matrix(0.06897829,0,0,-0.06897829,-575.5319,457.85542)"
+             style="fill:#e3dedb">
+            <path
+               d="m 14804.2,9379.11 v -784.73 l 321.4,114.54 1174.4,375.4 -1495.8,294.79"
+               style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               id="path1433" />
+          </g>
+          <g
+             id="g1439"
+             transform="matrix(0.06213899,0,0,-0.06213899,-575.5319,457.85542)"
+             style="fill:#e3dedb">
+            <path
+               d="m 16300,9510.14 -11.2,-2042 -1339.6,553.5 V 10002.2 L 16300,9510.14"
+               style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               id="path1437" />
+          </g>
+          <g
+             id="g1443"
+             transform="matrix(0.07068256,0,0,-0.07068256,-575.5319,457.85542)"
+             style="fill:#e3dedb">
+            <path
+               d="m 14329.8,8360.63 363.7,-645.27 1606.5,638.43 -393,511.48 -1577.2,-504.64"
+               style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               id="path1441" />
+          </g>
+          <g
+             id="g1447"
+             transform="matrix(0.06213899,0,0,-0.06213899,-575.5319,457.85542)"
+             style="fill:#e3dedb">
+            <path
+               d="m 16300,9510.14 -420.8,-682.13 -1459,634.1 529,540.09 1350.8,-492.06"
+               style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               id="path1445" />
+          </g>
+          <g
+             id="g1451"
+             transform="matrix(0.06264805,0,0,-0.06264805,-575.5319,457.85542)"
+             style="fill:#e3dedb">
+            <path
+               d="m 14827.7,9920.95 -394.8,644.15 1511.9,289.2 355.2,-527.5 -1472.3,-405.85"
+               style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               id="path1449" />
+          </g>
+        </g>
+      </g>
+      <g
+         id="g1689"
+         transform="matrix(0.85162039,0,0,0.85162039,215.20532,305.64643)">
+        <rect
+           ry="6.2545319"
+           rx="4.99999"
+           y="156.48215"
+           x="33.261906"
+           height="29.314453"
+           width="27.970238"
+           id="rect1653"
+           style="fill:#b3b3b3;stroke:none;stroke-width:0.223688;stroke-linejoin:round" />
+        <g
+           style="fill:#e3dedb"
+           id="g1687"
+           transform="matrix(0.07639438,0,0,0.07639438,13.332436,179.57683)">
+          <g
+             style="fill:#e3dedb"
+             transform="matrix(0.06897829,0,0,-0.06897829,-575.5319,457.85542)"
+             id="g1657">
+            <path
+               id="path1655"
+               style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               d="m 16295.7,7479.44 -1622,-751.76 10.2,1839.54 1616.1,517.1 -4.3,-1604.88" />
+          </g>
+          <g
+             style="fill:#e3dedb"
+             transform="matrix(0.06895995,0,0,-0.06895995,-575.5319,457.85542)"
+             id="g1661">
+            <path
+               id="path1659"
+               style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               d="m 13470.6,9012.88 1217.1,-443.41 1612.3,517.24 -1491.9,294.88 -1337.5,-368.71" />
+          </g>
+          <g
+             style="fill:#e3dedb"
+             transform="matrix(0.07068256,0,0,-0.07068256,-575.5319,457.85542)"
+             id="g1665">
+            <path
+               id="path1663"
+               style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               d="m 14447.2,9152.95 561,279.7 1291.8,-279.7 -393,-287.68 -1459.8,287.68" />
+          </g>
+          <g
+             style="fill:#e3dedb"
+             transform="matrix(0.06897829,0,0,-0.06897829,-575.5319,457.85542)"
+             id="g1669">
+            <path
+               id="path1667"
+               style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               d="m 14804.2,9379.11 v -784.73 l 321.4,114.54 1174.4,375.4 -1495.8,294.79" />
+          </g>
+          <g
+             style="fill:#e3dedb"
+             transform="matrix(0.06213899,0,0,-0.06213899,-575.5319,457.85542)"
+             id="g1673">
+            <path
+               id="path1671"
+               style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               d="m 16300,9510.14 -11.2,-2042 -1339.6,553.5 V 10002.2 L 16300,9510.14" />
+          </g>
+          <g
+             style="fill:#e3dedb"
+             transform="matrix(0.07068256,0,0,-0.07068256,-575.5319,457.85542)"
+             id="g1677">
+            <path
+               id="path1675"
+               style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               d="m 14329.8,8360.63 363.7,-645.27 1606.5,638.43 -393,511.48 -1577.2,-504.64" />
+          </g>
+          <g
+             style="fill:#e3dedb"
+             transform="matrix(0.06213899,0,0,-0.06213899,-575.5319,457.85542)"
+             id="g1681">
+            <path
+               id="path1679"
+               style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               d="m 16300,9510.14 -420.8,-682.13 -1459,634.1 529,540.09 1350.8,-492.06" />
+          </g>
+          <g
+             style="fill:#e3dedb"
+             transform="matrix(0.06264805,0,0,-0.06264805,-575.5319,457.85542)"
+             id="g1685">
+            <path
+               id="path1683"
+               style="fill:#e3dedb;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               d="m 14827.7,9920.95 -394.8,644.15 1511.9,289.2 355.2,-527.5 -1472.3,-405.85" />
+          </g>
+        </g>
+      </g>
+    </g>
+    <text
+       transform="translate(5.2916669,8.4666671)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.3333px;line-height:1.25;font-family:'A bit sketchy';-inkscape-font-specification:'A bit sketchy, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;white-space:pre;shape-inside:url(#rect1483);fill:#ff00ff;fill-opacity:1;stroke:#ff00ff;"
+       id="text1481"
+       xml:space="preserve"><tspan
+         x="-40.822266"
+         y="751.26025"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.3333px;font-family:'A bit sketchy';-inkscape-font-specification:'A bit sketchy, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ff00ff;stroke:#ff00ff">1</tspan></tspan></text>
+    <rect
+       style="fill:#999999;stroke:none;stroke-width:0.549;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:fill markers stroke"
+       id="rect1487"
+       width="728"
+       height="90"
+       x="-377.60867"
+       y="821.25989"
+       inkscape:export-filename="C:\Users\marx\leaderboard_2.png"
+       inkscape:export-xdpi="25.4"
+       inkscape:export-ydpi="25.4" />
+    <text
+       xml:space="preserve"
+       id="text1491"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.3333px;line-height:1.25;font-family:'A bit sketchy';-inkscape-font-specification:'A bit sketchy, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;white-space:pre;shape-inside:url(#rect1493);fill:#ff00ff;fill-opacity:1;stroke:#ff00ff;"
+       transform="translate(6.8035717,133.95476)"><tspan
+         x="-40.822266"
+         y="751.26025"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.3333px;font-family:'A bit sketchy';-inkscape-font-specification:'A bit sketchy, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ff00ff;stroke:#ff00ff">2</tspan></tspan></text>
+    <rect
+       inkscape:export-ydpi="25.4"
+       inkscape:export-xdpi="25.4"
+       inkscape:export-filename="C:\Users\marx\leaderboard_3.png"
+       y="951.28369"
+       x="-377.60867"
+       height="90"
+       width="728"
+       id="rect1496"
+       style="fill:#999999;stroke:none;stroke-width:0.549;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:fill markers stroke" />
+    <text
+       transform="translate(6.8035717,263.97857)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.3333px;line-height:1.25;font-family:'A bit sketchy';-inkscape-font-specification:'A bit sketchy, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;white-space:pre;shape-inside:url(#rect1502);fill:#ff00ff;fill-opacity:1;stroke:#ff00ff;"
+       id="text1500"
+       xml:space="preserve"><tspan
+         x="-40.822266"
+         y="751.26025"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.3333px;font-family:'A bit sketchy';-inkscape-font-specification:'A bit sketchy, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ff00ff;stroke:#ff00ff">3</tspan></tspan></text>
+    <rect
+       style="fill:#999999;stroke:none;stroke-width:0.549;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:fill markers stroke"
+       id="rect1504"
+       width="728"
+       height="90"
+       x="-373.07297"
+       y="1067.7003"
+       inkscape:export-filename="C:\Users\marx\leaderboard_4.png"
+       inkscape:export-xdpi="25.4"
+       inkscape:export-ydpi="25.4" />
+    <text
+       xml:space="preserve"
+       id="text1508"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.3333px;line-height:1.25;font-family:'A bit sketchy';-inkscape-font-specification:'A bit sketchy, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;white-space:pre;shape-inside:url(#rect1510);fill:#ff00ff;fill-opacity:1;stroke:#ff00ff;"
+       transform="translate(11.339286,380.39524)"><tspan
+         x="-40.822266"
+         y="751.26023"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.3333px;font-family:'A bit sketchy';-inkscape-font-specification:'A bit sketchy, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ff00ff;stroke:#ff00ff">4</tspan></tspan></text>
   </g>
 </svg>

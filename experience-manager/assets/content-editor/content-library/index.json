@@ -41,10 +41,10 @@
 		},
 		{
 			"id": "template4",
-			"title": "Fly out",
-			"description": "a fly out with product recommendations",
-			"category" : "banner",
-			"image_url": "https://wp-digitalexperience.com/documentation/flex-content/template3.png",
+			"title": "Recommendation fly out",
+			"description": "A fly out with product recommendations",
+			"category" : ["product_recommendation"],
+			"image_url": "https://wp-digitalexperience.com/documentation/flex-content/template4.png",
 			"templates": {
 				"css": "snippets/template4.css",
 				"js": "snippets/template4.js",

@@ -1,5 +1,4 @@
 const exm_content_editor_update_preview = () => {
-
 	var view = {
 		user: {
 			logged_in: true
@@ -43,9 +42,6 @@ const exm_content_update_fields = () => {
 }
 
 jQuery(function () {
-
-	//document.getElementById("defaultOpen").click();
-
 	EXM.htmlEditor = ace.edit("html-editor");
 	EXM.htmlEditor.session.setMode("ace/mode/html");
 	EXM.htmlEditor.session.setTabSize(4);
@@ -90,12 +86,10 @@ jQuery(function () {
 		});
 	});
 	document.querySelectorAll(".exm-content-editor .size-select").forEach(($button) => {
-		console.log($button)
 		$button.addEventListener("change", (event) => {
 			event.preventDefault();
 
 			let device = event.target.value;
-			console.log("selecte", device);
 			document.getElementById("exm-preview-target").classList.remove("tablet");
 			document.getElementById("exm-preview-target").classList.remove("desktop");
 			document.getElementById("exm-preview-target").classList.remove("smartphone");

@@ -25,7 +25,7 @@
 			</div>
 
 
-			<iframe id='exm-preview-target' class="viewer" name='Viewer' src='http://www.nemenvisual.com/'></iframe>
+			<iframe id='exm-preview-target' class="viewer" name='Viewer' src='//'></iframe>
 		</div>
 	</div>
 </div>
