@@ -5,7 +5,8 @@
 	"main": "build/index.js",
 	"devDependencies": {
 		"@wordpress/scripts": "^12.2.0",
-		"minimist": ">=1.2.3"
+		"minimist": ">=1.2.3",
+		"serialize-javascript": ">=3.1.0"
 	},
 	"scripts": {
 		"start": "wp-scripts start",
