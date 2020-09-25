@@ -63,6 +63,7 @@ const exm_content_library_element_insert = (ce_id) => {
 	const update_preview = () => {
 		counter++;
 		if (counter === 4) {
+			exm_content_editor_update_fields();
 			exm_content_editor_update_preview();
 		}
 	}

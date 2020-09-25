@@ -35,7 +35,7 @@ const exm_content_update_preview_with_view = (view) => {
 	target.close();
 }
 
-const exm_content_update_fields = () => {
+const exm_content_editor_update_fields = () => {
 	document.querySelector("#exm_content_editor_css").value = EXM.cssEditor.getValue();
 	document.querySelector("#exm_content_editor_js").value = EXM.jsEditor.getValue();
 	document.querySelector("#exm_content_editor_html").value = EXM.htmlEditor.getValue();
@@ -58,11 +58,10 @@ jQuery(function () {
 	EXM.jsEditor.setValue(window.exmContentEditorValue.js);
 
 	exm_content_editor_update_preview();
-	exm_content_update_fields();
+	exm_content_editor_update_fields();
 
 	jQuery('.exm-content-editor .editor').on('keyup', function () {
-		exm_content_update_fields();
-
+		exm_content_editor_update_fields();
 		exm_content_editor_update_preview();
 	});
 

@@ -1,5 +1,15 @@
+#flyout-container {
+	width: 350px;
+	position: absolute;
+	overflow: hidden;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	z-index: -1000;
+}
+
 #flyout {
-	z-index: 1000;
 	width: 350px;
 	min-height: 150px;
 	background: #A50000;
@@ -13,7 +23,7 @@
 	border: 1px solid #A50000;
 	position: absolute;
 	top: 30px;
-	right: -350px;
+	right: -380px;
 	-webkit-transition: all 400ms ease;
 	-moz-transition: all 400ms ease;
 	-ms-transition: all 400ms ease;
@@ -22,9 +32,6 @@
 	-webkit-border-radius: 4px 0 0 4px;
 	border-radius: 4px 0 0 4px;
 	padding: 15px;
-}
-#flyout .white {
-	color: #fff;
 }
 #flyout h3 {
 	margin: 0;
