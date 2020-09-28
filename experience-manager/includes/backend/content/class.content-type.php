@@ -125,7 +125,7 @@ class ContentType {
 			'show_in_menu' => true,
 			'menu_icon' => plugins_url('experience-manager/images/flex-content_16.png'),
 			'publicly_queryable' => false,
-			'supports' => array('title', 'revisions'),
+			'supports' => array('title'),
 			'menu_position' => 51,
 			'has_archive' => false,
 			'hierarchical' => false
