@@ -10,6 +10,15 @@ let exm_contains_popup = (config) => {
 let exm_contains_conditions = (config) => {
 	return typeof config.conditions !== "undefined";
 };
+const exm_popup_table_visibility = (config) => {
+	if (config.content_type !== "popup") {
+		console.log("hide popup tab");
+		document.querySelector('[data-exm-tab-target="exm_settings_popup"]').style.display = "none";
+	} else {
+		console.log("show popup tab");
+		document.querySelector('[data-exm-tab-target="exm_settings_popup"]').style.display = "block";
+	}
+};
 
 var exm_content_formDefinition = {
 	"default_settings": () => {
@@ -240,10 +249,11 @@ var exm_content_formDefinition = {
 				document.getElementById("exm_popup_cookie_lifetime_unit").value = "day";
 
 			}
-
-		}
+		},
+		exm_popup_table_visibility
 	]
 };
+
 const exm_update_form_from_settings = (settings) => {
 	Object.keys(exm_content_formDefinition.fields).forEach((key) => {
 		let field = exm_content_formDefinition.fields[key];
@@ -296,6 +306,8 @@ function exm_content_update_formdata_from_form() {
 	});
 	document.querySelector("#exm_content_settings").value = JSON.stringify(settings);
 	window.exmContentSettingsValue = settings;
+	
+	exm_popup_table_visibility(settings)
 }
 
 function exm_content_settings_check_all(selector) {
