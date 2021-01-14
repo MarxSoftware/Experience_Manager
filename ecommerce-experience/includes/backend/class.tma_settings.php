@@ -1,0 +1,177 @@
+<?php
+
+namespace TMA\ExperienceManager;
+
+/**
+ * Description of class
+ *
+ * @author marx
+ */
+class TMA_Settings {
+
+	private $settings_api;
+
+	function __construct() {
+		$this->settings_api = new \TMA_Settings_API();
+		add_action('admin_init', array($this, 'admin_init'));
+		add_action('admin_menu', array($this, 'admin_menu'));
+	}
+
+	function admin_init() {
+
+		wp_register_style('tma-settings', plugins_url('ecommerce-experience/css/tma-settings.css'));
+		wp_enqueue_style('tma-settings');
+
+
+		if (tma_exm_dependencies_fulfilled(["module-metrics"])) {
+			wp_register_script('exm-d3-js', plugins_url('ecommerce-experience/assets/dashboard/d3.min.js'));
+			wp_enqueue_script('exm-d3-js');
+			wp_register_script('exm-c3-js', plugins_url('ecommerce-experience/assets/dashboard/c3.min.js'), ['exm-d3-js']);
+			wp_enqueue_script('exm-c3-js');
+			wp_register_style('ecm-c3-css', plugins_url('ecommerce-experience/assets/dashboard/c3.min.css'));
+			wp_enqueue_style('ecm-c3-css');
+
+
+
+			wp_register_script('exm-dashboard-js', plugins_url('ecommerce-experience/assets/dashboard/exm-dashboard.js'), ['exm-c3-js', 'experience-manager-exm']);
+			wp_enqueue_script('exm-dashboard-js');
+			wp_register_style('exm-dashboard-css', plugins_url('ecommerce-experience/assets/dashboard/exm-dashboard.css'));
+			wp_enqueue_style('exm-dashboard-css');
+		}
+
+		//set the settings
+		$this->settings_api->set_sections($this->get_settings_sections());
+		$this->settings_api->set_fields($this->get_settings_fields());
+		//initialize settings
+		$this->settings_api->admin_init();
+	}
+
+	function admin_menu() {
+		add_menu_page(
+				__("Ecommerce Experience", "tma-webtools"), __("Ecommerce Experience", "tma-webtools"), 'manage_options', 'ecommerce-experience/pages/tma-webtools-admin.php', null, plugins_url('ecommerce-experience/images/settings_16.png'), 50);
+		add_submenu_page('ecommerce-experience/pages/tma-webtools-admin.php', __("Dashboard", "tma-webtools"), __("Dashboard", "tma-webtools"), 'manage_options', 'ecommerce-experience/pages/tma-webtools-admin.php', null);
+		add_submenu_page('ecommerce-experience/pages/tma-webtools-admin.php', __("Settings", "tma-webtools"), __("Settings", "tma-webtools"), 'manage_options', 'tma-webtools-setting-admin', array($this, 'plugin_page'));
+		
+		if (tma_exm_dependencies_fulfilled(["module-hosting"])) {
+			add_submenu_page('ecommerce-experience/pages/tma-webtools-admin.php', __("Hosting", "tma-webtools"), __("Hosting", "tma-webtools"), 'manage_options', 'ecommerce-experience/pages/hosting.php', null);
+		}
+		
+		add_submenu_page('ecommerce-experience/pages/tma-webtools-admin.php', __("Documentation", "tma-webtools"), __("Documentation", "tma-webtools"), 'manage_options', 'https://wp-digitalexperience.com/documentation/experience-manager/', null);
+	}
+
+	function get_settings_sections() {
+		$sections = array(
+			array(
+				'id' => 'tma_webtools_option',
+				'title' => __('Basic Settings', 'tma-webtools')
+			),
+//			array(
+//				'id' => 'tma_webtools_option_targeting',
+//				'title' => __('Targeting', 'wedevs')
+//			)
+		);
+
+		$sections = apply_filters("experience-manager/settings/sections", $sections);
+		return $sections;
+	}
+
+	/**
+	 * Returns all the settings fields
+	 *
+	 * @return array settings fields
+	 */
+	function get_settings_fields() {
+		$settings_fields = array(
+			'tma_webtools_option' => array(
+				array(
+					'name' => 'webtools_siteid',
+					'label' => __("Site id", "tma-webtools"),
+					'desc' => __("The id should be unique and is used to filter in the Experience Platform.", "tma-webtools"),
+					'placeholder' => __('Your site id', 'wedevs'),
+					'type' => 'text',
+					'default' => '',
+					'sanitize_callback' => 'sanitize_text_field'
+				),
+				array(
+					'name' => 'webtools_url',
+					'label' => __("Url", "tma-webtools"),
+					'desc' => __("The url where the Experience Platform is installed.", "tma-webtools"),
+					'placeholder' => __('The webTools url', 'wedevs'),
+					'type' => 'text',
+					'default' => '',
+					'sanitize_callback' => 'sanitize_text_field'
+				),
+				array(
+					'name' => 'webtools_apikey',
+					'label' => __("ApiKey", "tma-webtools"),
+					'desc' => __("The apikey to use the Experience Platform.", "tma-webtools"),
+					'placeholder' => __('The apikey', 'wedevs'),
+					'type' => 'text',
+					'default' => '',
+					'sanitize_callback' => 'sanitize_text_field'
+				),
+				array(
+					'name' => 'webtools_cookiedomain',
+					'label' => __("Cookie domain", "tma-webtools"),
+					'desc' => __("Share the Experience Platform cookie with subdomains. e.q. .your_domain.com", "tma-webtools"),
+					'placeholder' => __('The cookiedomain', 'wedevs'),
+					'type' => 'text',
+					'default' => '',
+					'sanitize_callback' => 'sanitize_text_field'
+				),
+				array(
+					'name' => 'webtools_track',
+					'label' => __("Enable Tracking?", "tma-webtools"),
+					'desc' => __("Tracked events are: pageview", "tma-webtools"),
+					'type' => 'toggle'
+				),
+				array(
+					'name' => 'webtools_track_logged_in_users',
+					'label' => __("Track logged in users?", "tma-webtools"),
+					'desc' => __("Activate tracking of logged in users.", "tma-webtools"),
+					'type' => 'toggle'
+				),
+				/*
+				array(
+					'name' => 'webtools_score',
+					'label' => __("Enable Scoring?", "tma-webtools"),
+					'desc' => __("If enabled, you can user the scoring metabox to set scorings for all your post types.", "tma-webtools"),
+					'type' => 'toggle'
+				)
+				 */
+			)
+		);
+
+		$settings_fields = apply_filters("experience-manager/settings/fields", $settings_fields);
+
+		return $settings_fields;
+	}
+
+	function plugin_page() {
+		echo '<div class="wrap">';
+		$this->settings_api->show_navigation();
+		$this->settings_api->show_forms();
+		echo '</div>';
+	}
+
+	/**
+	 * Get all the pages
+	 *
+	 * @return array page names with key value pairs
+	 */
+	function get_pages() {
+		$pages = get_pages();
+		$pages_options = array();
+		if ($pages) {
+			foreach ($pages as $page) {
+				$pages_options[$page->ID] = $page->post_title;
+			}
+		}
+		return $pages_options;
+	}
+
+}
+
+if (is_admin()) {
+	new TMA_Settings();
+}
