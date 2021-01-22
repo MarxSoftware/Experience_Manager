@@ -55,26 +55,28 @@ class TMA_Request {
 		}
 
 		tma_exm_log("get request: " . $url);
+		tma_exm_log("parameters: " . json_encode($parameters));
 
 		$webtools_url = $this->get_webtools_url() . $this->clean_url($url);
-//		$headers["apikey"] = $this->options["webtools_apikey"];
+		if (array_key_exists("query", $parameters)) {
+			$webtools_url = add_query_arg( $parameters["query"], $webtools_url );
+		}
 
 		$parameters['method'] = "GET";
 		$parameters['timeout'] = "45";
 		$parameters['headers'] = $headers;
-//		$parameters['headers']['Content-Type'] = "application/json";
-//		$parameters['headers']['Content-Type'] = "text/plain";
 		$parameters['headers']['apikey'] = $this->options["webtools_apikey"];
 		$parameters['headers']['site'] = tma_exm_get_site();
 
-		tma_exm_log("calling");
-		tma_exm_log($webtools_url);
-		tma_exm_log(json_encode($parameters));
+		
 
 		$cache_key = $webtools_url . "_" . json_encode($parameters);
 		$result = wp_cache_get($cache_key);
 		if (false === $result) {
 			$result = $this->garded(function () use ($webtools_url, $parameters) {
+				tma_exm_log("calling");
+				tma_exm_log($webtools_url);
+				
 				$response = wp_remote_get($webtools_url, $parameters);
 				if (is_array($response) && !is_wp_error($response)) {
 					return $response; // use the content
@@ -184,63 +186,6 @@ class TMA_Request {
 		return $url;
 	}
 
-	public function module($module, $path, $parameters) {
-		$module_url = "/rest/module/$module$path";
-		$module_url .= "?" . http_build_query($parameters);
-
-		$response = $this->get($module_url);
-		tma_exm_log(json_encode($response));
-		if ((is_object($response) || is_array($response)) && !is_wp_error($response)) {
-			$result = $response['body']; // use the content
-			return json_decode($result);
-		}
-
-		return FALSE;
-	}
-
-	/**
-	 * checks if the platform modules are installed
-	 * 
-	 * <platform_url>/rest/module/installed
-	 * 
-	 * {
-	  "error": false,
-	  "modules": [
-	  {
-	  "name": "Core Module Entities",
-	  "active": true,
-	  "id": "core-module-entities",
-	  "version": "1.3.0"
-	  },...
-	  ]}
-	 */
-	public function check_installed_modules($dependencies = []) {
-		if (!is_array($dependencies) || sizeof($dependencies) === 0) {
-			return TRUE;
-		}
-		$module_url = "/rest/module/installed";
-
-		$response = $this->get($module_url, NULL, ['Content-Type' => 'text/plain', 'Accept' => 'application/json']);
-		tma_exm_log(json_encode($response));
-		if ((is_object($response) || is_array($response)) && !is_wp_error($response)) {
-			$result = $response['body']; // use the content
-			$installed_modules = json_decode($result);
-			if (property_exists($installed_modules, "modules") && is_array($installed_modules->modules)) {
-				foreach ($dependencies AS $module) {
-					$found = array_filter($installed_modules->modules, function($installedModule) use ($module) {
-						return $installedModule->id == $module;
-					});
-					if (!$found) {
-						return FALSE;
-					}
-				}
-				return TRUE;
-			}
-		}
-
-		return FALSE;
-	}
-
 	private function get_webtools_url() {
 		$url = $this->options['webtools_url'];
 		if (!tma_endsWith($url, "/")) {
@@ -285,34 +230,6 @@ class TMA_Request {
 		tma_exm_log($url);
 
 		$this->loadContent($url, "{}");
-	}
-
-	/**
-	 * REST call for the user segments.
-	 * 
-	 * @param type $userid
-	 * @return type
-	 */
-	public function getSegments($userid) {
-		if (!isset($this->options["webtools_apikey"]) || !isset($this->options['webtools_url'])) {
-			$result = '{"user" : {"segments" : []}}';
-			return json_decode($result);
-		}
-		$result = wp_cache_get($userid);
-		$apikey = $this->options["webtools_apikey"];
-		$site = tma_exm_get_site();
-		if (false === $result) {
-			$url = 'rest/userinformation/user?apikey=' . $apikey . '&user=' . $userid
-					. '&site=' . $site;
-			tma_exm_log("url: " . $url);
-			$result = $this->loadContent($url, '{"user" : {"segments" : []}, "status" : "ok", "default": true}');
-
-			wp_cache_set($userid, $result, "", 60);
-		}
-
-		$result = apply_filters("experience-manager/request/userinformation", $result);
-
-		return $result;
 	}
 
 

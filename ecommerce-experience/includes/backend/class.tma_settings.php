@@ -23,22 +23,6 @@ class TMA_Settings {
 		wp_enqueue_style('tma-settings');
 
 
-		if (tma_exm_dependencies_fulfilled(["module-metrics"])) {
-			wp_register_script('exm-d3-js', plugins_url('ecommerce-experience/assets/dashboard/d3.min.js'));
-			wp_enqueue_script('exm-d3-js');
-			wp_register_script('exm-c3-js', plugins_url('ecommerce-experience/assets/dashboard/c3.min.js'), ['exm-d3-js']);
-			wp_enqueue_script('exm-c3-js');
-			wp_register_style('ecm-c3-css', plugins_url('ecommerce-experience/assets/dashboard/c3.min.css'));
-			wp_enqueue_style('ecm-c3-css');
-
-
-
-			wp_register_script('exm-dashboard-js', plugins_url('ecommerce-experience/assets/dashboard/exm-dashboard.js'), ['exm-c3-js', 'experience-manager-exm']);
-			wp_enqueue_script('exm-dashboard-js');
-			wp_register_style('exm-dashboard-css', plugins_url('ecommerce-experience/assets/dashboard/exm-dashboard.css'));
-			wp_enqueue_style('exm-dashboard-css');
-		}
-
 		//set the settings
 		$this->settings_api->set_sections($this->get_settings_sections());
 		$this->settings_api->set_fields($this->get_settings_fields());
@@ -49,12 +33,9 @@ class TMA_Settings {
 	function admin_menu() {
 		add_menu_page(
 				__("Ecommerce Experience", "tma-webtools"), __("Ecommerce Experience", "tma-webtools"), 'manage_options', 'ecommerce-experience/pages/tma-webtools-admin.php', null, plugins_url('ecommerce-experience/images/settings_16.png'), 50);
-		add_submenu_page('ecommerce-experience/pages/tma-webtools-admin.php', __("Dashboard", "tma-webtools"), __("Dashboard", "tma-webtools"), 'manage_options', 'ecommerce-experience/pages/tma-webtools-admin.php', null);
+		//add_submenu_page('ecommerce-experience/pages/tma-webtools-admin.php', __("Dashboard", "tma-webtools"), __("Dashboard", "tma-webtools"), 'manage_options', 'ecommerce-experience/pages/tma-webtools-admin.php', null);
 		add_submenu_page('ecommerce-experience/pages/tma-webtools-admin.php', __("Settings", "tma-webtools"), __("Settings", "tma-webtools"), 'manage_options', 'tma-webtools-setting-admin', array($this, 'plugin_page'));
 		
-		if (tma_exm_dependencies_fulfilled(["module-hosting"])) {
-			add_submenu_page('ecommerce-experience/pages/tma-webtools-admin.php', __("Hosting", "tma-webtools"), __("Hosting", "tma-webtools"), 'manage_options', 'ecommerce-experience/pages/hosting.php', null);
-		}
 		
 		add_submenu_page('ecommerce-experience/pages/tma-webtools-admin.php', __("Documentation", "tma-webtools"), __("Documentation", "tma-webtools"), 'manage_options', 'https://wp-digitalexperience.com/documentation/experience-manager/', null);
 	}

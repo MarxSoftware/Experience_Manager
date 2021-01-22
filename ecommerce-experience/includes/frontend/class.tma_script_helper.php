@@ -256,9 +256,6 @@ class TMAScriptHelper {
 
 		$args = wp_parse_args($args, $defaults);
 
-//		foreach (array('link', 'inclusive') as $bool) {
-//			$args[$bool] = wp_validate_boolean($args[$bool]);
-//		}
 
 		$parents = get_ancestors($term_id, $taxonomy, 'taxonomy');
 

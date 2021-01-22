@@ -19,7 +19,7 @@ abstract class Ecommerce {
 	protected abstract function _random_products($count);
 
 	protected abstract function _popular_products($count);
-	
+
 	protected abstract function _map_product($product);
 
 	public function random_products($count) {
@@ -160,18 +160,23 @@ abstract class Ecommerce {
 
 	private function shop_profile($count) {
 		$parameters = [
-			"userid" => exm_get_userid(),
-			"site" => tma_exm_get_site()
+			"query" => [
+				"userid" => exm_get_userid(),
+				"site" => tma_exm_get_site()
+			]
 		];
 
 		$request = new \TMA\ExperienceManager\TMA_Request();
-		return $request->module("module-ecommerce", "/shopprofile", $parameters);
+//		return $request->module("module-ecommerce", "/shopprofile", $parameters);
+		return $request->get("json/profiles/shop", $parameters);
 	}
 
 	private function user_profile($count) {
 		$parameters = [
-			"userid" => exm_get_userid(),
-			"site" => tma_exm_get_site()
+			"quey" => [
+				"userid" => exm_get_userid(),
+				"site" => tma_exm_get_site()
+			]
 		];
 
 		$request = new \TMA\ExperienceManager\TMA_Request();

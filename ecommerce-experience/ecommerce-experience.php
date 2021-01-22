@@ -57,7 +57,7 @@ function tma_webtools_init() {
 
 	if (is_user_logged_in() && (is_admin() || tma_exm_is_preview() )) {
 
-		require_once 'includes/backend/class.tma_ajax.php';
+		//require_once 'includes/backend/class.tma_ajax.php';
 
 		require_once 'includes/backend/class.tma_settings.php';
 
@@ -79,6 +79,10 @@ function tma_webtools_init() {
 	add_action('admin_head', 'tma_js_variables', -100);
 
 	tma_init_cookie();
+	
+	if (\TMA\ExperienceManager\Plugins::getInstance()->woocommerce()) {
+		new TMA\ExperienceManager\Modules\ECommerce\Ecommerce_Woo();
+	}
 
 	do_action("experience-manager/init/after");
 }
