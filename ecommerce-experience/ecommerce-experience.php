@@ -45,13 +45,13 @@ function tma_webtools_rest_init() {
 	$tma_rest = new \TMA\ExperienceManager\TMA_Rest();
 }
 
-new \TMA\ExperienceManager\TMA_Backend_Ajax();
 
 function tma_webtools_init() {
 
 	do_action("experience-manager/init/before");
 
 	require_once 'includes/modules/woocommerce/woocommerce_integration.php';
+	new TMA\ExperienceManager\Modules\ECommerce\EcommerceAjax();
 	
 	
 	tma_exm_log("tma_webtools_init");

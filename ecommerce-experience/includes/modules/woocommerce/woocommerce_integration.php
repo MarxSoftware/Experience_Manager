@@ -49,7 +49,9 @@ function exm_woocommerce_output_related_products() {
 
 	tma_exm_log("related_products: " . json_encode($args));
 
-	wc_get_template('single-product/related.php', $args);
+	//wc_get_template('single-product/related.php', $args);
+
+	exm_get_template("single-product-related.php", $args);
 }
 
 add_filter("woocommerce_product_related_products_heading", function () {

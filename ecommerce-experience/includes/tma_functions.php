@@ -1,5 +1,22 @@
 <?php
 
+function exm_get_template ($template_name, $arguments) {
+		// Set our template to be the override template in the theme.
+	$tmpl = get_stylesheet_directory() . '/ecommerce-experience/' . $template_name;
+
+	if (!file_exists($tmpl)) {
+		$tmpl = TMA_EXPERIENCE_MANAGER_DIR . 'templates/' . $template_name;
+	}
+	extract($arguments);
+	include $tmpl;
+}
+function exm_get_template_html ($template_name, $arguments) {
+	ob_start();
+	exm_get_template ($template_name, $arguments);
+	return ob_get_clean();
+}
+
+
 function exm_get_userid () {
 	return \TMA\ExperienceManager\TMA_Request::getUserID();
 }
