@@ -27,6 +27,8 @@ require 'dependencies/Mustache/Autoloader.php';
 require_once 'includes/tma_functions.php';
 require_once 'tma-scripts.php';
 
+require_once 'includes/modules/events/ecommerce_events.php';
+
 add_action('plugins_loaded', 'tma_load_textdomain');
 
 function tma_load_textdomain() {

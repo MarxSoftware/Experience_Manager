@@ -17,6 +17,7 @@ function tma_webtools_modules_woocommerce_settings($fields) {
 				'name' => 'wc_tracking',
 				'label' => __("Track WooCommerce events?", "tma-webtools"),
 				'desc' => __("Tracked events are: order, add item to basket, remove item from basket.", "tma-webtools"),
+				'disable' => !\TMA\ExperienceManager\Plugins::getInstance()->woocommerce(),
 				'type' => 'toggle',
 				'default' => ''
 			),
@@ -24,16 +25,10 @@ function tma_webtools_modules_woocommerce_settings($fields) {
 				'name' => 'edd_tracking',
 				'label' => __("Track EasyDigitalDownloads events?", "tma-webtools"),
 				'desc' => __("Tracked events are: order, add item to basket, remove item from basket.", "tma-webtools"),
+				'disable' => !\TMA\ExperienceManager\Plugins::getInstance()->easydigitaldownloads(),
 				'type' => 'toggle',
 				'default' => ''
-			),
-			
-			array(
-				'name' => 'newsletter',
-				'label' => __("Newsletter events", "tma-webtools"),
-				'desc' => __("Coming soon!", "tma-webtools"),
-				'type' => 'subsection',
-			),
+			)
 		)
 	);
 	$fields = array_merge_recursive($fields, $settings_fields);
