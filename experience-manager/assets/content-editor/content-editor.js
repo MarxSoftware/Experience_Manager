@@ -1,5 +1,4 @@
-function exm_content_update_preview() {
-
+const exm_content_editor_update_preview = () => {
 	var view = {
 		user: {
 			logged_in: true
@@ -16,7 +15,7 @@ function exm_content_update_preview() {
 	}
 }
 
-function exm_content_update_preview_with_view(view) {
+const exm_content_update_preview_with_view = (view) => {
 	var output_css = Mustache.render(EXM.cssEditor.getValue(), view);
 	var output_html = Mustache.render(EXM.htmlEditor.getValue(), view);
 	var output_js = Mustache.render(EXM.jsEditor.getValue(), view);
@@ -36,16 +35,13 @@ function exm_content_update_preview_with_view(view) {
 	target.close();
 }
 
-function exm_content_update_fields() {
+const exm_content_editor_update_fields = () => {
 	document.querySelector("#exm_content_editor_css").value = EXM.cssEditor.getValue();
 	document.querySelector("#exm_content_editor_js").value = EXM.jsEditor.getValue();
 	document.querySelector("#exm_content_editor_html").value = EXM.htmlEditor.getValue();
 }
 
 jQuery(function () {
-
-	//document.getElementById("defaultOpen").click();
-
 	EXM.htmlEditor = ace.edit("html-editor");
 	EXM.htmlEditor.session.setMode("ace/mode/html");
 	EXM.htmlEditor.session.setTabSize(4);
@@ -61,13 +57,12 @@ jQuery(function () {
 	EXM.jsEditor.session.setTabSize(4);
 	EXM.jsEditor.setValue(window.exmContentEditorValue.js);
 
-	exm_content_update_preview();
-	exm_content_update_fields();
+	exm_content_editor_update_preview();
+	exm_content_editor_update_fields();
 
 	jQuery('.exm-content-editor .editor').on('keyup', function () {
-		exm_content_update_fields();
-
-		exm_content_update_preview();
+		exm_content_editor_update_fields();
+		exm_content_editor_update_preview();
 	});
 
 	document.querySelectorAll(".preview-container .devices button").forEach(($button) => {
@@ -87,6 +82,17 @@ jQuery(function () {
 			document.querySelector(".exm-content-editor #exm-preview-wrapper").classList.remove("laptop");
 			document.querySelector(".exm-content-editor #exm-preview-wrapper").classList.remove("smartphone");
 			document.querySelector(".exm-content-editor #exm-preview-wrapper").classList.add(device);
+		});
+	});
+	document.querySelectorAll(".exm-content-editor .size-select").forEach(($button) => {
+		$button.addEventListener("change", (event) => {
+			event.preventDefault();
+
+			let device = event.target.value;
+			document.getElementById("exm-preview-target").classList.remove("tablet");
+			document.getElementById("exm-preview-target").classList.remove("desktop");
+			document.getElementById("exm-preview-target").classList.remove("smartphone");
+			document.getElementById("exm-preview-target").classList.add(device);
 		});
 	});
 });

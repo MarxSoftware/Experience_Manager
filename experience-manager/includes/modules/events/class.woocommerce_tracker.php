@@ -59,6 +59,9 @@ class WC_TRACKER extends Base {
 	}
 	
 	public function woocommerce_add_to_cart($cart_item_key) {
+
+		tma_exm_log("woocommerce_add_to_cart");
+
 		
 		$cart = WC()->cart;
 		$item = $cart->get_cart_item($cart_item_key);
@@ -75,6 +78,7 @@ class WC_TRACKER extends Base {
 		$customAttributes['cart_id'] = $this->get_cart_id();
 		$request = new \TMA\ExperienceManager\TMA_Request();
 		$request->track("ecommerce_cart_item_add", "#cart", $customAttributes);
+		
 	}
 
 	public function woocommerce_remove_cart_item($cart_item_key) {

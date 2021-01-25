@@ -2,9 +2,9 @@
 Contributors: thmarx
 Tags: user experience, personalization, targeting, product targeting, behaviour targets, popup, experience manager
 Requires at least: 4.4.1
-Tested up to: 5.4
+Tested up to: 5.5
 Stable tag: 4.4.0
-Version: 4.4.0
+Version: 4.5.0
 License: GPLv2 or later
 
 Do not treat all your customers the same, create a digital experience!
