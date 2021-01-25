@@ -1,9 +1,6 @@
 <?php
 
-function tma_webtools_modules_woocommerce_settings($fields) {
-
-	$recommendation_options = ["segment" => __("Segment based", "tma-webtools")];
-	$recommendation_options = apply_filters("tma-webtools/modules/woocommerce/recommendation/options", $recommendation_options);
+function exm_modules_ecommerce_settings($fields) {
 
 	$settings_fields = array(
 		'tma-webtools-events' => array(
@@ -35,7 +32,7 @@ function tma_webtools_modules_woocommerce_settings($fields) {
 	return $fields;
 }
 
-function tma_webtools_modules_woocommerce_sections($sections) {
+function exm_modules_ecommerce_section($sections) {
 	$custom_sections = array(
 		array(
 			'id' => 'tma-webtools-events',
@@ -65,5 +62,5 @@ if (\TMA\ExperienceManager\Plugins::getInstance()->easydigitaldownloads()) {
 	}
 }
 
-add_filter('experience-manager/settings/fields', 'tma_webtools_modules_woocommerce_settings');
-add_filter('experience-manager/settings/sections', 'tma_webtools_modules_woocommerce_sections');
+add_filter('experience-manager/settings/fields', 'exm_modules_ecommerce_settings');
+add_filter('experience-manager/settings/sections', 'exm_modules_ecommerce_section');

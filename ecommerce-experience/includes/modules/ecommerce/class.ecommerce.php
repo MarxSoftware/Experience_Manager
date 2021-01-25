@@ -100,7 +100,7 @@ abstract class Ecommerce {
 				$products = $this->load_products($values->popularProducts);
 			}
 		}
-
+		
 		if (sizeof($products) < $count) {
 			$this->update_products($products, $count);
 		} else if (sizeof($products) > $count) {
@@ -118,10 +118,8 @@ abstract class Ecommerce {
 			
 		} else {
 			
-			$response = json_decode($values);
-			
-			if (property_exists($response, "recentlyViewedProducts")) {
-				$products = $this->load_products($response->recentlyViewedProducts);
+			if (property_exists($values, "recentlyViewedProducts")) {
+				$products = $this->load_products($values->recentlyViewedProducts);
 			}
 		}
 
@@ -156,6 +154,8 @@ abstract class Ecommerce {
 	public function bought_together($product, $count = 3) {
 		$values = $this->recommendations_bought_together($product);
 
+		
+		
 		$products = [];
 		if (!$values) {
 			
@@ -164,7 +164,7 @@ abstract class Ecommerce {
 				$products = $this->load_products($values->bought_together);
 			}
 		}
-
+		
 		if (sizeof($products) < $count) {
 			$this->update_products($products, $count);
 		} else if (sizeof($products) > $count) {
@@ -203,11 +203,7 @@ abstract class Ecommerce {
 		];
 
 		$request = new \TMA\ExperienceManager\TMA_Request();
-		$response = $request->get("json/profiles/shop", $parameters);
-		if ($response !== FALSE && (is_object($response) || is_array($response)) && !is_wp_error($response)) {
-			return $response['body']; // use the content
-		}
-		return FALSE;
+		return $request->get_body_object("json/profiles/shop", $parameters);
 	}
 
 	private function user_profile($count) {
@@ -220,22 +216,19 @@ abstract class Ecommerce {
 		];
 
 		$request = new \TMA\ExperienceManager\TMA_Request();
-		$response = $request->get("json/profiles/user", $parameters);
-		
-		if ($response !== FALSE && (is_object($response) || is_array($response)) && !is_wp_error($response)) {
-			return $response['body']; // use the content
-		}
-		return FALSE;
+		return $request->get_body_object("json/profiles/user", $parameters);
 	}
 
 	private function recommendations_bought_together($product) {
 		$parameters = [
-			"product" => $product,
-			"site" => tma_exm_get_site()
+			"query" => [
+				"product" => $product->get_id(),
+				"site" => tma_exm_get_site()
+			]
 		];
 
 		$request = new \TMA\ExperienceManager\TMA_Request();
-		return $request->module("module-ecommerce", "/recommendations/bought_together", $parameters);
+		return $request->get_body_object("json/recommendations/bought_together", $parameters);
 	}
 
 	private function recommendations_similar_users() {
@@ -245,7 +238,7 @@ abstract class Ecommerce {
 		];
 
 		$request = new \TMA\ExperienceManager\TMA_Request();
-		return $request->module("module-ecommerce", "/recommendations/similar_users", $parameters);
+		return $request->get_body_object("json/recommendations/similar_users", $parameters);
 	}
 
 }

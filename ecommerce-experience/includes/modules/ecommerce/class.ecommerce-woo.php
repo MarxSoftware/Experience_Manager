@@ -55,7 +55,7 @@ class Ecommerce_Woo extends Ecommerce {
 			return FALSE;
 		}
 
-		return $this->_map_product($woo_product);
+		return new Product($woo_product->get_id());
 	}
 	
 	protected function _map_product ($woo_product) {

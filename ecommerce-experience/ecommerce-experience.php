@@ -29,6 +29,7 @@ require_once 'tma-scripts.php';
 
 require_once 'includes/modules/events/ecommerce_events.php';
 
+
 add_action('plugins_loaded', 'tma_load_textdomain');
 
 function tma_load_textdomain() {
@@ -50,11 +51,14 @@ function tma_webtools_init() {
 
 	do_action("experience-manager/init/before");
 
+	require_once 'includes/modules/woocommerce/woocommerce_integration.php';
+	
+	
 	tma_exm_log("tma_webtools_init");
-	if (!is_admin()) {
-		wp_register_style('experience-manager', plugins_url('css/experience-manager.css', __FILE__));
-		wp_enqueue_style('experience-manager');
-	}
+//	if (!is_admin()) {
+//		wp_register_style('experience-manager', plugins_url('css/experience-manager.css', __FILE__));
+//		wp_enqueue_style('experience-manager');
+//	}
 
 
 	if (is_user_logged_in() && (is_admin() || tma_exm_is_preview() )) {

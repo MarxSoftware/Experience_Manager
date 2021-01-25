@@ -45,6 +45,14 @@ class TMA_Request {
 		}
 	}
 
+	public function get_body_object($url, $parameters = [], $headers = ['Content-Type' => 'text/plain', 'Accept' => 'application/json']) {
+		$response = $this->get($url, $parameters, $headers);
+		if ($response !== FALSE && (is_object($response) || is_array($response)) && !is_wp_error($response)) {
+			return json_decode($response['body']);
+		}
+		return FALSE;
+	}
+	
 	/**
 	 * setup the request object and return
 	 */

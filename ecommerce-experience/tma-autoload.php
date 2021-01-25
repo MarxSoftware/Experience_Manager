@@ -23,6 +23,7 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	"TMA\ExperienceManager\Events\Base" => "includes/modules/events/class.ecommerce_base.php",	
 	// Ecommerce Helper classes
 	"TMA\ExperienceManager\Modules\ECommerce\Ecommerce" => "includes/modules/ecommerce/class.ecommerce.php",
+	"TMA\ExperienceManager\Modules\ECommerce\Product" => "includes/modules/ecommerce/class.product.php",
 	"TMA\ExperienceManager\Modules\ECommerce\Ecommerce_EDD" => "includes/modules/ecommerce/class.ecommerce-edd.php",
 	"TMA\ExperienceManager\Modules\ECommerce\Ecommerce_Woo" => "includes/modules/ecommerce/class.ecommerce-woo.php",
 ));
