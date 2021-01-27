@@ -42,21 +42,23 @@ add_filter('experience-manager/settings/sections', 'exm_modules_woocommerce_sect
 
 function exm_woocommerce_output_related_products() {
 	global $product;
-	$ecom = new \TMA\ExperienceManager\Modules\ECommerce\Ecommerce_Woo();
-	$products = $ecom->bought_together($product);
+	
+	/*$ecom = new \TMA\ExperienceManager\Modules\ECommerce\Ecommerce_Woo();
+	$products = $ecom->bought_together($product->get_id());
 	$args = [];
 	$args['related_products'] = $products;
 
-	tma_exm_log("related_products: " . json_encode($args));
-
-	//wc_get_template('single-product/related.php', $args);
-
-	exm_get_template("single-product-related.php", $args);
+	exm_get_template("single-product-related", $args);
+	 */
+	$arguments = [];
+	$arguments["product"] = $product->get_id();
+	$arguments["size"] = 3;
+	$arguments["type"] = "bought-together";
+	$arguments["template"] = "single-product-related";
+	$arguments["title"] = "Werden häufig zusammen gekauft";
+	exm_get_template("recommendation.product.html", $arguments);
 }
 
-add_filter("woocommerce_product_related_products_heading", function () {
-	return __("Bought Together", "tma-webtools");
-});
 
 remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
 add_action('woocommerce_after_single_product_summary', 'exm_woocommerce_output_related_products', 20);

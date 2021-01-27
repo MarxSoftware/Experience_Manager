@@ -10,8 +10,8 @@ namespace TMA\ExperienceManager\Modules\ECommerce;
 abstract class Ecommerce {
 
 	public function __construct() {
-		add_action("wp_ajax_nopriv_exm_ecom_load_products", [$this, "ajax_load_products"]);
-		add_action("wp_ajax_exm_ecom_load_products", [$this, "ajax_load_products"]);
+		//add_action("wp_ajax_nopriv_exm_ecom_load_products", [$this, "ajax_load_products"]);
+		//add_action("wp_ajax_exm_ecom_load_products", [$this, "ajax_load_products"]);
 	}
 
 	public function ajax_load_products() {
@@ -151,8 +151,8 @@ abstract class Ecommerce {
 		return $products;
 	}
 
-	public function bought_together($product, $count = 3) {
-		$values = $this->recommendations_bought_together($product);
+	public function bought_together($product_id, $count = 3) {
+		$values = $this->recommendations_bought_together($product_id);
 
 		
 		
@@ -219,10 +219,10 @@ abstract class Ecommerce {
 		return $request->get_body_object("json/profiles/user", $parameters);
 	}
 
-	private function recommendations_bought_together($product) {
+	private function recommendations_bought_together($product_id) {
 		$parameters = [
 			"query" => [
-				"product" => $product->get_id(),
+				"product" => $product_id,
 				"site" => tma_exm_get_site()
 			]
 		];

@@ -2,10 +2,10 @@
 
 function exm_get_template ($template_name, $arguments) {
 		// Set our template to be the override template in the theme.
-	$tmpl = get_stylesheet_directory() . '/ecommerce-experience/' . $template_name;
+	$tmpl = get_stylesheet_directory() . '/ecommerce-experience/' . $template_name . ".php";
 
 	if (!file_exists($tmpl)) {
-		$tmpl = TMA_EXPERIENCE_MANAGER_DIR . 'templates/' . $template_name;
+		$tmpl = TMA_EXPERIENCE_MANAGER_DIR . 'templates/' . $template_name . ".php";
 	}
 	extract($arguments);
 	include $tmpl;
