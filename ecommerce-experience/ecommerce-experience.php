@@ -50,8 +50,7 @@ function tma_webtools_init() {
 
 	do_action("experience-manager/init/before");
 
-	require_once 'includes/modules/woocommerce/woocommerce_integration.php';
-	new TMA\ExperienceManager\Modules\ECommerce\EcommerceAjax();
+	
 	
 	
 	tma_exm_log("tma_webtools_init");
@@ -87,7 +86,15 @@ function tma_webtools_init() {
 	tma_init_cookie();
 	
 	if (\TMA\ExperienceManager\Plugins::getInstance()->woocommerce()) {
-		new TMA\ExperienceManager\Modules\ECommerce\Ecommerce_Woo();
+		//new TMA\ExperienceManager\Modules\ECommerce\Ecommerce_Woo();
+//		require_once 'includes/modules/woocommerce/woocommerce_integration.php';
+		new TMA\ExperienceManager\Modules\ECommerce\EcommerceAjax();
+		//new \TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Settings();
+		
+		$woo_product_integration = new \TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Product_Integration();
+		$woo_product_integration->init();
+		$woo_category_integration = new \TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Category_Integration();
+		$woo_category_integration->init();
 	}
 
 	do_action("experience-manager/init/after");

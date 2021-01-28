@@ -37,8 +37,8 @@ function exm_modules_woocommerce_section($sections) {
 	return $sections;
 }
 
-add_filter('experience-manager/settings/fields', 'exm_modules_woocommerce_settings');
-add_filter('experience-manager/settings/sections', 'exm_modules_woocommerce_section');
+//add_filter('experience-manager/settings/fields', 'exm_modules_woocommerce_settings');
+//add_filter('experience-manager/settings/sections', 'exm_modules_woocommerce_section');
 
 function exm_woocommerce_output_related_products() {
 	global $product;
