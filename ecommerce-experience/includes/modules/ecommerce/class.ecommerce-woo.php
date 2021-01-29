@@ -11,6 +11,10 @@ class Ecommerce_Woo extends Ecommerce {
 
 	private static $_instance = null;
 
+	/**
+	 * 
+	 * @return Ecommerce_Woo
+	 */
 	public static function instance() {
 
 		if (is_null(self::$_instance)) {
@@ -19,7 +23,7 @@ class Ecommerce_Woo extends Ecommerce {
 		return self::$_instance;
 	}
 
-	public function __construct() {
+	private function __construct() {
 		parent::__construct();
 	}
 

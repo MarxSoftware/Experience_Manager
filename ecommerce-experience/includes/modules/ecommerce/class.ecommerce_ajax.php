@@ -24,30 +24,33 @@ class EcommerceAjax {
 		$template = filter_input(INPUT_POST, 'template', FILTER_DEFAULT);
 		$title = filter_input(INPUT_POST, 'title', FILTER_DEFAULT);
 		$product = filter_input(INPUT_POST, 'product', FILTER_DEFAULT);
+		$category = filter_input(INPUT_POST, 'category', FILTER_DEFAULT);
 
 
 		tma_exm_log("load products: " . $type);
 
-		if ($count === FALSE || $count === NULL) {
-			$count = 3;
-		} else {
-			$count = intval($count);
-		}
+//		if ($count === FALSE || $count === NULL) {
+//			$count = 3;
+//		} else {
+//			$count = intval($count);
+//		}
 
 		try {
-			$ecom = new \TMA\ExperienceManager\Modules\ECommerce\Ecommerce_Woo();
-			$products = $ecom->bought_together($product);
+//			$products = Ecommerce_Woo::instance()->bought_together($product);
 			$args = [];
-			$args['related_products'] = $products;
+//			$args['related_products'] = $products;
 			$args['heading'] = $title;
 
+			$engine = Recommendation_Engine::create_instance($type, $count, $resolution, $category, $product);
+			$content = $engine->render_template($template, $args);
+			
 			$response = [];
 			$response["error"] = false;
-			$response['content'] = exm_get_template_html($template, $args);
+			$response['content'] = $content;
 
 			wp_send_json($response);
 		} catch (Exception $ex) {
-			$reponse = [
+			$response = [
 				"error" => true,
 				"message" => $ex->getMessage()
 			];
@@ -75,8 +78,7 @@ class EcommerceAjax {
 			$recentlyViewedProducts = [];
 			$frequentlyPurchasedProducts = [];
 			if ($type === "recently-viewed-products") {
-				$ecom = new Ecommerce_Woo();
-				$recentlyViewedProducts = $ecom->recently_viewed($count);
+				$recentlyViewedProducts = Ecommerce_Woo::instance()->recently_viewed($count);
 			}
 
 			$response["recentlyViewedProducts"] = $recentlyViewedProducts;

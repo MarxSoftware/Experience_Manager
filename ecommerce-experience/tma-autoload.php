@@ -27,6 +27,7 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	"TMA\ExperienceManager\Modules\ECommerce\Product" => "includes/modules/ecommerce/class.product.php",
 	"TMA\ExperienceManager\Modules\ECommerce\Ecommerce_EDD" => "includes/modules/ecommerce/class.ecommerce-edd.php",
 	"TMA\ExperienceManager\Modules\ECommerce\Ecommerce_Woo" => "includes/modules/ecommerce/class.ecommerce-woo.php",
+	"TMA\ExperienceManager\Modules\ECommerce\Recommendation_Engine" => "includes/modules/ecommerce/class.recommendation-engine.php",
 	"TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Settings" => "includes/modules/woocommerce/class.woocommerce.settings.php",
 	"TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Product_Integration" => "includes/modules/woocommerce/class.woocommerce.product.integration.php",
 	"TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Category_Integration" => "includes/modules/woocommerce/class.woocommerce.category.integration.php",

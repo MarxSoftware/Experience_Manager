@@ -89,8 +89,8 @@ abstract class Ecommerce {
 		}
 	}
 
-	public function popular_products($count = 3) {
-		$values = $this->shop_profile($count);
+	public function popular_products($count = 3, $category="none", $resolution="ALL") {
+		$values = $this->shop_profile($count, $category, $resolution);
 
 		$products = [];
 		if (!$values) {
@@ -131,8 +131,8 @@ abstract class Ecommerce {
 		return $products;
 	}
 
-	public function frequently_purchased($count = 3) {
-		$values = $this->user_profile($count);
+	public function frequently_purchased($count = 3, $category="none", $resolution="ALL") {
+		$values = $this->user_profile($count, $category, $resolution);
 
 		$products = [];
 		if (!$values) {
@@ -152,6 +152,9 @@ abstract class Ecommerce {
 	}
 
 	public function bought_together($product_id, $count = 3) {
+		
+		tma_exm_log("bought_together for product: " . $product_id);
+		
 		$values = $this->recommendations_bought_together($product_id);
 
 		
@@ -193,12 +196,14 @@ abstract class Ecommerce {
 		return $products;
 	}
 
-	private function shop_profile($count) {
+	private function shop_profile($count, $category, $resolution) {
 		$parameters = [
 			"query" => [
 				"userid" => exm_get_userid(),
 				"site" => tma_exm_get_site(),
-				"count" => $count
+				"count" => $count,
+				"category" => $category,
+				"resolution" => $resolution
 			]
 		];
 
@@ -206,12 +211,14 @@ abstract class Ecommerce {
 		return $request->get_body_object("json/profiles/shop", $parameters);
 	}
 
-	private function user_profile($count) {
+	private function user_profile($count, $category, $resolution) {
 		$parameters = [
 			"query" => [
 				"userid" => exm_get_userid(),
 				"site" => tma_exm_get_site(),
-				"count" => $count
+				"count" => $count,
+				"category" => $category,
+				"resolution" => $resolution
 			]
 		];
 

@@ -229,8 +229,10 @@ class TMAScriptHelper {
 		}
 		if (sizeof($categories_parents) > 0) {
 			$categories_parents = array_unique($categories_parents);
-			$meta['$categories_parents'] = array_map("strval", $categories_parents);
+			$meta['categories_parents'] = array_map("strval", $categories_parents);
 		}
+		
+		$meta['ecom_categories_all'] = array_map("strval", array_merge($ecom_categories, $ecom_categories_parents));
 	}
 
 	private function custom_get_term_parents_list($term_id_param, $taxonomy, $args = array()) {
