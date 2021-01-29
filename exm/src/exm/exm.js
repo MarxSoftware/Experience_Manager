@@ -1,22 +1,22 @@
-import Popup from './popup/popup'
+//import Popup from './popup/popup'
 import Dom from './dom'
 import Ajax from './ajax'
 import Woo from './woo'
 import Cookie from './cookie'
 import Tracking from './tracking'
-import Highlight from './highlight'
-import Frontend from './frontend'
+//import Highlight from './highlight'
+//import Frontend from './frontend'
 import Hook from './hook'
-import './exm.scss';
+//import './exm.scss';
 
 export {
-  Popup,
+  //Popup,
   Dom,
   Ajax,
   Woo,
   Cookie,
   Tracking,
-  Highlight,
-  Frontend,
+  //Highlight,
+  //Frontend,
   Hook
 }

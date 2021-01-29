@@ -102,10 +102,10 @@ var Tracking = function () {
                         var value = customParameters[p]
                         if (Array.isArray(value)) {
                             for (var item in value) {
-                                customParameterString += "&c_" + p + '=' + value[item];
+                                customParameterString += "&" + p + '=' + value[item];
                             }
                         } else {
-                            customParameterString += "&c_" + p + '=' + customParameters[p];
+                            customParameterString += "&" + p + '=' + customParameters[p];
                         }
                     }
                 }
