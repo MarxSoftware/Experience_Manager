@@ -156,7 +156,7 @@ class TMAScriptHelper {
 		if (is_category()) {
 			$term_list = get_categories();
 			foreach ($term_list as $cat) {
-				$result = $this->custom_get_term_parents_list($cat->term_id, "category", []);
+				$result = TMAScriptHelper::custom_get_term_parents_list($cat->term_id, "category", []);
 				$category_path[] = "/" . $result["list"];
 				$categories[] = $cat->term_id;
 				
@@ -164,14 +164,14 @@ class TMAScriptHelper {
 			}
 		} else if (function_exists("is_product_category") && is_product_category()) { // woocommerce category
 			$term = get_queried_object();
-			$result = $this->custom_get_term_parents_list($term->term_id, "product_cat", []);
+			$result = TMAScriptHelper::custom_get_term_parents_list($term->term_id, "product_cat", []);
 			$ecom_category_path[] = "/" . $result["list"];
 			$ecom_categories_parents = array_merge($ecom_categories_parents, $result["parents"]);
 		} else if (function_exists("is_product") && is_product()) { // woocommerce product
 			$product = wc_get_product();
 			$term_list = get_the_terms($product->get_id(), 'product_cat');
 			foreach ($term_list as $cat) {
-				$result = $this->custom_get_term_parents_list($cat->term_id, "product_cat", []);
+				$result = TMAScriptHelper::custom_get_term_parents_list($cat->term_id, "product_cat", []);
 
 				$ecom_category_path[] = "/" . $result["list"];
 				$ecom_categories[] = $cat->term_id;
@@ -183,7 +183,7 @@ class TMAScriptHelper {
 
 			$term_list = get_the_terms($download->ID, 'download_category');
 			foreach ($term_list as $cat) {
-				$result = $this->custom_get_term_parents_list($cat->term_id, "download_category", []);
+				$result = TMAScriptHelper::custom_get_term_parents_list($cat->term_id, "download_category", []);
 
 				$ecom_category_path[] = "/" . $result["list"];
 				$ecom_categories[] = $cat->term_id;
@@ -192,7 +192,7 @@ class TMAScriptHelper {
 			}
 		} else if ($term && $term->taxonomy === "download_category") {
 			$term = get_queried_object();
-			$result = $this->custom_get_term_parents_list($term->term_id, $term->taxonomy, []);
+			$result = TMAScriptHelper::custom_get_term_parents_list($term->term_id, $term->taxonomy, []);
 
 			$ecom_category_path[] = "/" . $result["list"];
 			$ecom_categories[] = $term->term_id;
@@ -202,7 +202,7 @@ class TMAScriptHelper {
 			$post_categories = wp_get_post_categories(get_post()->ID, ['fields' => "ids"]);
 			foreach ($post_categories as $cat) {
 				$category = get_category($cat);
-				$result = $this->custom_get_term_parents_list($category->term_id, "category", []);
+				$result = TMAScriptHelper::custom_get_term_parents_list($category->term_id, "category", []);
 
 				$category_path[] = "/" . $result["list"];
 				$categories[] = $categories->term_id;
@@ -235,7 +235,7 @@ class TMAScriptHelper {
 		$meta['ecom_categories_all'] = array_map("strval", array_merge($ecom_categories, $ecom_categories_parents));
 	}
 
-	private function custom_get_term_parents_list($term_id_param, $taxonomy, $args = array()) {
+	public static function custom_get_term_parents_list($term_id_param, $taxonomy, $args = array()) {
 		$list = '';
 		$parent_categories = [];
 		$term = get_term($term_id_param, $taxonomy);

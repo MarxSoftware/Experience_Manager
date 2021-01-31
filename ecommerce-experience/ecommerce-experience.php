@@ -42,10 +42,10 @@ add_action("rest_api_init", "tma_webtools_rest_init");
 
 function tma_webtools_rest_init() {
 	tma_exm_log("tma_webtools_rest_init");
-	$tma_rest = new \TMA\ExperienceManager\TMA_Rest();
+	//$tma_rest = new \TMA\ExperienceManager\TMA_Rest();
 }
 
-
+//require_once 'includes/backend/class.tma_settings.php';
 function tma_webtools_init() {
 
 	do_action("experience-manager/init/before");
@@ -54,15 +54,10 @@ function tma_webtools_init() {
 	
 	
 	tma_exm_log("tma_webtools_init");
-//	if (!is_admin()) {
-//		wp_register_style('experience-manager', plugins_url('css/experience-manager.css', __FILE__));
-//		wp_enqueue_style('experience-manager');
-//	}
 
+	if (is_user_logged_in() && is_admin() ) {
 
-	if (is_user_logged_in() && (is_admin() || tma_exm_is_preview() )) {
-
-		//require_once 'includes/backend/class.tma_ajax.php';
+		new TMA\ExperienceManager\TMA_Backend_Ajax();
 
 		require_once 'includes/backend/class.tma_settings.php';
 
