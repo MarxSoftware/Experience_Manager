@@ -6,7 +6,7 @@
 
 add_action('admin_enqueue_scripts', "exm_frontend_scripts", -99);
 add_action('admin_enqueue_scripts', "exm_backend_scripts", -99);
-add_action('wp_enqueue_scripts', "exm_frontends_scripts", -99);
+add_action('wp_enqueue_scripts', "exm_frontend_scripts", -99);
 
 function exm_backend_scripts() {
 	wp_enqueue_script('experience-manager-backend', TMA_EXPERIENCE_MANAGER_URL . 'assets/experience-manager-backend.js', array("experience-manager-exm"), "1");
