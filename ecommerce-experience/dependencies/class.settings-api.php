@@ -143,6 +143,8 @@ class TMA_Settings_API {
                     'max'               => isset( $option['max'] ) ? $option['max'] : '',
                     'step'              => isset( $option['step'] ) ? $option['step'] : '',
                     'disable'            => isset( $option['disable'] ) ? $option['disable'] : FALSE,
+                    'button_label'            => isset( $option['button_label'] ) ? $option['button_label'] : NULL,
+                    'onclick'            => isset( $option['onclick'] ) ? $option['onclick'] : NULL,
                 );
 
                 add_settings_field( "{$section}[{$name}]", $label, $callback, $section, $section, $args );
@@ -168,6 +170,17 @@ class TMA_Settings_API {
         }
 
         return $desc;
+    }
+	
+	function callback_button( $args ) {
+
+        $label        = isset( $args['button_label'] ) && !is_null( $args['button_label'] ) ? $args['button_label'] : 'No label';
+        $onclick        = isset( $args['onclick'] ) ? $args['onclick'] : 'javascript:void(0);';
+
+        $html        = sprintf( '<a class="button" onclick="%1$s" id="%2$s[%3$s]">%4$s</a>', $onclick, $args['section'], $args['id'], $label);
+        $html       .= $this->get_field_description( $args );
+
+        echo $html;
     }
     
     /**

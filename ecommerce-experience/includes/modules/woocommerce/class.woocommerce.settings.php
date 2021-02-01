@@ -17,29 +17,14 @@ class WooCommerce_Settings {
 	function settings_fields($fields) {
 
 		$settings_fields = [
-			'exm-woocommerce-product' => [
+			'exm-woocommerce-settings' => [
 				[
-					'name' => 'product_detail_page',
-					'label' => __("Product detail page", "tma-webtools"),
-					'desc' => __("Configure product recommendation on product defail page", "tma-webtools"),
-					'type' => 'subsection',
-				],
-				[
-					'name' => 'product_defailt_page_related',
-					'label' => __("Related products", "tma-webtools"),
-					'desc' => __("Replace the related products.", "tma-webtools"),
-					'type' => 'select',
-					'options' => [
-						"default" => "Default",
-						"bought_together" => "Bought together",
-						"frequently_bought" => "Frequently bought"
-					]
-				],
-				[
-					'name' => 'product_default_page_related_title',
-					'label' => __("Title", "tma-webtools"),
-					'desc' => __("The title.", "tma-webtools"),
-					'type' => 'text'
+					'name' => 'exm_wc_sync_products',
+					'label' => __("Sync Products", "tma-webtools"),
+					'desc' => __("Sync your products with the recommendation engine.", "tma-webtools"),
+					'type' => 'button',
+					'button_label' => 'Start Sync',
+					'onclick' => 'exm_wc_sync_products(this)'
 				]
 			]
 		];
@@ -50,12 +35,8 @@ class WooCommerce_Settings {
 	function sections($sections) {
 		$custom_sections = [
 			[
-				'id' => 'exm-woocommerce-product',
-				'title' => __('Product detail page', 'tma-webtools')
-			],
-			[
-				'id' => 'exm-woocommerce-category',
-				'title' => __('Category page', 'tma-webtools')
+				'id' => 'exm-woocommerce-settings',
+				'title' => __('WooCommerce Settings', 'tma-webtools')
 			]
 		];
 		$sections = array_merge_recursive($sections, $custom_sections);

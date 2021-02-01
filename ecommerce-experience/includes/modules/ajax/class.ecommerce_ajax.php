@@ -1,6 +1,6 @@
 <?php
 
-namespace TMA\ExperienceManager\Modules\ECommerce;
+namespace TMA\ExperienceManager\Modules\Ajax;
 
 /**
  * Description of class
@@ -78,7 +78,7 @@ class EcommerceAjax {
 			$recentlyViewedProducts = [];
 			$frequentlyPurchasedProducts = [];
 			if ($type === "recently-viewed-products") {
-				$recentlyViewedProducts = Ecommerce_Woo::instance()->recently_viewed($count);
+				$recentlyViewedProducts = Ajax_Woo::instance()->recently_viewed($count);
 			}
 
 			$response["recentlyViewedProducts"] = $recentlyViewedProducts;

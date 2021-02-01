@@ -47,25 +47,28 @@ class TMA_Backend_Ajax {
 			$wp_query->the_post();
 			$post = [];
 			$post['id'] = get_the_ID();
-			$post['title'] = get_the_title();
 
 			$product = wc_get_product(get_the_ID());
 			$terms = get_the_terms($product->get_id(), 'product_cat');
-			$post['ecom_categories'] = [];
+			$post['categories'] = [];
 			$ecom_categories_parents = [];
 			if ($terms) {
 				foreach ($terms as $term) {
-					$post['ecom_categories'][] = $term->term_id;
+					$post['categories'][] = $term->term_id;
 					
 					$cat_result = TMAScriptHelper::custom_get_term_parents_list($term->term_id, "product_cat", []);
 					$ecom_categories_parents = array_merge($ecom_categories_parents, $cat_result["parents"]);
 				}
 			}
-			$post['ecom_categories_parents'] = array_unique($ecom_categories_parents);
-			$post['ecom_categories_all'] = array_unique(array_map("strval", array_merge($post['ecom_categories'], $ecom_categories_parents)));
+			$post['parentCategories'] = array_unique($ecom_categories_parents);
+			$post['allCategories'] = array_unique(array_merge($post['categories'], $ecom_categories_parents));
 
 			$result["products"][] = $post;
 		}
+
+		$request = new \TMA\ExperienceManager\TMA_Request();
+		$response = $request->post("json/product/batch", $result);
+		
 		wp_reset_query();
 
 		wp_send_json($result);

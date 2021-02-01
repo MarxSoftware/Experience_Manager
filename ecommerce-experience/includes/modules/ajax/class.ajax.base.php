@@ -1,13 +1,13 @@
 <?php
 
-namespace TMA\ExperienceManager\Modules\ECommerce;
+namespace TMA\ExperienceManager\Modules\Ajax;
 
 /**
  * Description of class
  *
  * @author marx
  */
-abstract class Ecommerce {
+abstract class Ajax_Base {
 
 	public function __construct() {
 		//add_action("wp_ajax_nopriv_exm_ecom_load_products", [$this, "ajax_load_products"]);

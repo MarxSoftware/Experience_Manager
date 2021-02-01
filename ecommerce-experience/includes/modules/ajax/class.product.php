@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace TMA\ExperienceManager\Modules\ECommerce;
+namespace TMA\ExperienceManager\Modules\Ajax;
 
 /**
  * Description of class

@@ -1,19 +1,19 @@
 <?php
 
-namespace TMA\ExperienceManager\Modules\ECommerce;
+namespace TMA\ExperienceManager\Modules\Ajax;
 
 /**
  * Description of class
  *
  * @author marx
  */
-class Ecommerce_Woo extends Ecommerce {
+class Ajax_Woo extends Ajax_Base {
 
 	private static $_instance = null;
 
 	/**
 	 * 
-	 * @return Ecommerce_Woo
+	 * @return Ajax_Woo
 	 */
 	public static function instance() {
 

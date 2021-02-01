@@ -1,11 +1,11 @@
-<?php namespace TMA\ExperienceManager\Modules\ECommerce;
+<?php namespace TMA\ExperienceManager\Modules\Ajax;
 
 /**
  * Description of class
  *
  * @author marx
  */
-//class Ecommerce_EDD extends Ecommerce {
+//class Ajax_EDD extends Ecommerce {
 //
 //	private static $_instance = null;
 //
