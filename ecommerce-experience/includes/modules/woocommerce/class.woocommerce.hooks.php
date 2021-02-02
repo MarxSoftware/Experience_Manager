@@ -10,8 +10,8 @@ namespace TMA\ExperienceManager\Modules\WooCommerce;
 class WooCommerce_Hooks {
 
 	public function __construct() {
-		add_action( 'save_post_product', [$this, save_product], 10, 3 );
-		add_action( 'before_delete_post', [$this, delete_product]);
+		add_action( 'save_post_product', [$this, "save_product"], 10, 3 );
+		add_action( 'before_delete_post', [$this, "delete_product"]);
 	}
 	
 	function delete_product( $post_id) {

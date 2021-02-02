@@ -43,7 +43,7 @@ class WooCommerce_Category_Integration {
 			$arguments = [];
 			$arguments["category"] = get_queried_object()->term_id;
 			$arguments["size"] = 3;
-			$arguments["type"] = "bought-together";
+			$arguments["type"] = $this->get_feature("header_products") ? $this->get_feature("header_products") : "recently-viewed";
 			$arguments["template"] = "category-overview";
 			$title = $this->get_feature("header_title");
 			if ($title) {
@@ -60,7 +60,7 @@ class WooCommerce_Category_Integration {
 			$arguments = [];
 			$arguments["category"] = get_queried_object()->term_id;
 			$arguments["size"] = 3;
-			$arguments["type"] = "bought-together";
+			$arguments["type"] = $this->get_feature("footer_products") ? $this->get_feature("footer_products") : "recently-viewed";
 			$arguments["template"] = "category-overview";
 			$title = $this->get_feature("footer_title");
 			if ($title) {
@@ -76,8 +76,9 @@ class WooCommerce_Category_Integration {
 	private function get_recommendation_types() {
 		return [
 			"none" => __("None", "experience-manager"),
-			"popular_products" => __("Popular products in category", "experience-manager"),
-			"frequently_bought" => __("Frequently bought in category", "experience-manager")
+			"popular-products" => __("Popular products in category", "experience-manager"),
+			"frequently-bought" => __("Frequently bought in category", "experience-manager"),
+			"recently-viewed" => __("Recently viewed", "experience-manager")
 		];
 	}
 

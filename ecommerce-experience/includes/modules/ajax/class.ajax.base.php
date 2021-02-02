@@ -109,8 +109,8 @@ abstract class Ajax_Base {
 		return $products;
 	}
 
-	public function recently_viewed($count = 3) {
-		$values = $this->user_profile($count);
+	public function recently_viewed($count = 3, $category="none", $resolution="ALL") {
+		$values = $this->user_profile($count, $category, $resolution);
 
 		
 		$products = [];

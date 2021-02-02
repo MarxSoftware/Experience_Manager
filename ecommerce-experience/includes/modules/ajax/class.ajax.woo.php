@@ -29,7 +29,7 @@ class Ajax_Woo extends Ajax_Base {
 
 	protected function _popular_products($count) {
 		$args = array(
-			'post_type' => array( 'product' ),
+			'post_type' => array('product'),
 			'meta_key' => 'total_sales',
 			'orderby' => 'meta_value_num',
 			'order' => 'desc',
@@ -41,11 +41,23 @@ class Ajax_Woo extends Ajax_Base {
 		return $products;
 	}
 
-	protected function _random_products($count) {
+	protected function _random_products($count, $category = FALSE) {
 		$args = array(
 			'posts_per_page' => $count,
 			'orderby' => 'rand',
 			'post_type' => 'product');
+
+		if ($category) {
+			$args['tax_query'] = [
+				'relation' => 'AND',
+				[
+					'taxonomy' => 'product_cat',
+					'field' => 'id',
+					'terms' => $category,
+					'operator' => 'IN'
+				]
+			];
+		}
 
 		$random_products = get_posts($args);
 
@@ -61,8 +73,8 @@ class Ajax_Woo extends Ajax_Base {
 
 		return new Product($woo_product->get_id());
 	}
-	
-	protected function _map_product ($woo_product) {
+
+	protected function _map_product($woo_product) {
 		$product = [
 			"id" => $woo_product->get_id(),
 			"title" => $woo_product->get_title(),
@@ -72,7 +84,7 @@ class Ajax_Woo extends Ajax_Base {
 			"image" => $woo_product->get_image("woocommerce_thumbnail", ['class' => 'image']),
 			"url" => $woo_product->get_permalink()
 		];
-		
+
 		return $product;
 	}
 

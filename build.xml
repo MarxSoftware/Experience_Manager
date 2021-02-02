@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="build addons" basedir="." default="distribution">
+	<target name="distribution">
+		<echo>build ecommerce experience</echo>
+		<zip destfile="target/ecommerce-experience.zip">
+			<zipfileset dir="ecommerce-experience"  excludes="nbproject/**"/>
+		</zip>
+	</target>
+</project>

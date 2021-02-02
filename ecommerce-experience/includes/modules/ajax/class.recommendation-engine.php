@@ -32,7 +32,7 @@ class Recommendation_Engine {
 	}
 	
 	public function get_products () {
-		$ecom = \TMA\ExperienceManager\Modules\ECommerce\Ecommerce_Woo::instance();
+		$ecom = Ajax_Woo::instance();
 		$count = $this->get_with_default($this->count, 3);
 		$category = $this->get_with_default($this->category, "NONE");
 		$resolution = $this->get_with_default($this->resolution, "ALL");
