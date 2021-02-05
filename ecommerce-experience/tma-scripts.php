@@ -16,7 +16,7 @@ function exm_frontend_scripts() {
 	wp_localize_script('experience-manager-exm', 'EXMCONFIG', array(
 		'ajax_url' => admin_url('admin-ajax.php'),
 		'post_id' => get_the_ID(),
-		'taxonomy_id' => get_queried_object() ? get_queried_object()->term_id : ""
+		'taxonomy_id' => get_queried_object_id() //get_queried_object() ? get_queried_object()->term_id : ""
 	));
 
 	$scriptHelper = new \TMA\ExperienceManager\TMAScriptHelper();

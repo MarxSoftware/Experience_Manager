@@ -9,11 +9,26 @@ namespace TMA\ExperienceManager\Modules\WooCommerce;
  */
 class WooCommerce_Product_Integration {
 
+	protected static $_instance = null;
+
+	/**
+	 * 
+	 * @return WooCommerce_Category_Integration
+	 */
+	public static function getInstance() {
+		if (null === self::$_instance) {
+			self::$_instance = new self;
+		}
+		return self::$_instance;
+	}
+
 	private $options;
 
 	public function __construct() {
 		$this->options = get_option('exm-woocommerce-product');
-		
+	}
+	
+	public function add_settings () {
 		add_filter('experience-manager/settings/fields', [$this, 'settings_fields']);
 		add_filter('experience-manager/settings/sections', [$this, 'sections']);
 	}
@@ -52,7 +67,7 @@ class WooCommerce_Product_Integration {
 			exm_get_template("recommendation.product.html", $arguments);
 		}, 20);
 	}
-	
+
 	function settings_fields($fields) {
 
 		$settings_fields = [

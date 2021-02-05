@@ -10,6 +10,7 @@ EXM.Dom.ready(function (event) {
 		let type = $item.dataset.exmRecommendation;
 		let size = $item.dataset.exmRecommendationSize;
 		let product = $item.dataset.exmProduct;
+		let category = $item.dataset.exmCategory;
 		let template = $item.dataset.exmTemplate;
 		let title = $item.dataset.exmTitle;
 
@@ -17,6 +18,6 @@ EXM.Dom.ready(function (event) {
 			if (data.error === false) {
 				$item.innerHTML = data.content;
 			}
-		}, "&type=" + type + "&size=" + size + "&product=" + product + "&template=" + template + "&title=" + title);
+		}, "&type=" + type + "&size=" + size + "&category=" + category + "&product=" + product + "&template=" + template + "&title=" + title);
 	});
 });

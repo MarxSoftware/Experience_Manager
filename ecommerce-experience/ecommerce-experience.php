@@ -18,8 +18,8 @@ define("TMA_EXPERIENCE_MANAGER_VERSION", "4.5.0");
 define("TMA_EXPERIENCE_MANAGER_DIR", plugin_dir_path(__FILE__));
 define("TMA_EXPERIENCE_MANAGER_URL", plugins_url('/', __FILE__));
 
-define( 'TMA_EXPERIENCE__FILE__', __FILE__ );
-define( 'TMA_EXPERIENCE_PLUGIN_BASE', plugin_basename( TMA_EXPERIENCE__FILE__ ) );
+define('TMA_EXPERIENCE__FILE__', __FILE__);
+define('TMA_EXPERIENCE_PLUGIN_BASE', plugin_basename(TMA_EXPERIENCE__FILE__));
 
 require_once 'tma-autoload.php';
 require 'dependencies/Mustache/Autoloader.php';
@@ -36,7 +36,6 @@ function tma_load_textdomain() {
 	load_plugin_textdomain('tma-webtools', false, dirname(plugin_basename(__FILE__)) . '/languages/');
 }
 
-
 add_action("init", "tma_webtools_init");
 add_action("rest_api_init", "tma_webtools_rest_init");
 
@@ -50,12 +49,12 @@ function tma_webtools_init() {
 
 	do_action("experience-manager/init/before");
 
-	
-	
-	
+
+
+
 	tma_exm_log("tma_webtools_init");
 
-	if (is_user_logged_in() && is_admin() ) {
+	if (is_user_logged_in() && is_admin()) {
 
 		new TMA\ExperienceManager\TMA_Backend_Ajax();
 
@@ -79,20 +78,22 @@ function tma_webtools_init() {
 	add_action('admin_head', 'tma_js_variables', -100);
 
 	tma_init_cookie();
-	
+
 	if (\TMA\ExperienceManager\Plugins::getInstance()->woocommerce()) {
 		//new TMA\ExperienceManager\Modules\ECommerce\Ecommerce_Woo();
 //		require_once 'includes/modules/woocommerce/woocommerce_integration.php';
 		new TMA\ExperienceManager\Modules\Ajax\EcommerceAjax();
 		//new \TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Settings();
+
+
+		\TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Product_Integration::getInstance()->add_settings();
+		\TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Category_Integration::getInstance()->add_settings();
+
+		\TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Product_Integration::getInstance()->init();
+		\TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Category_Integration::getInstance()->init();
 		
-		$woo_product_integration = new \TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Product_Integration();
-		$woo_product_integration->init();
-		$woo_category_integration = new \TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Category_Integration();
-		$woo_category_integration->init();
-		
-		new TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Settings();
-		new TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Hooks();
+		new \TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Settings();
+		new \TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Hooks();
 	}
 
 	do_action("experience-manager/init/after");

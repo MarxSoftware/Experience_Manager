@@ -79,7 +79,7 @@ class TMAScriptHelper {
 			$meta = [];
 
 			$this->add_meta($meta);
-			$this->add_categories($meta);
+			
 
 
 			$meta = apply_filters('tma-webtools/customparameters', $meta);
@@ -99,9 +99,14 @@ class TMAScriptHelper {
 			$output .= "_exm.push(['init']);\r\n";
 			$output .= "_exm.push(['setTrackerUrl', '{$this->getWebTools_Url()}']);\r\n";
 			$output .= "_exm.push(['setSite', '$siteid']);\r\n";
-			if (!is_404()) {
+			if (function_exists("is_product_taxonomy") && is_product_taxonomy()) {
+				$output .= "_exm.push(['setPage', '" . get_queried_object_id() . "']);\r\n";
+				$output .= "_exm.push(['setType', '" . get_queried_object()->taxonomy . "']);\r\n";
+			} else if (!is_404()) {
 				$output .= "_exm.push(['setPage', '" . get_post()->ID . "']);\r\n";
 				$output .= "_exm.push(['setType', '" . get_post()->post_type . "']);\r\n";
+				
+				$this->add_categories($meta);
 			} else {
 				$output .= "_exm.push(['setPage', '404']);\r\n";
 				$output .= "_exm.push(['setType', 'error']);\r\n";
@@ -205,7 +210,7 @@ class TMAScriptHelper {
 				$result = TMAScriptHelper::custom_get_term_parents_list($category->term_id, "category", []);
 
 				$category_path[] = "/" . $result["list"];
-				$categories[] = $categories->term_id;
+				$categories[] = $category->term_id;
 				
 				$categories_parents = array_merge($categories_parents, $result["parents"]);
 			}

@@ -41,13 +41,13 @@ class Ajax_Woo extends Ajax_Base {
 		return $products;
 	}
 
-	protected function _random_products($count, $category = FALSE) {
+	protected function _random_products($count, $category = "none") {
 		$args = array(
 			'posts_per_page' => $count,
 			'orderby' => 'rand',
 			'post_type' => 'product');
 
-		if ($category) {
+		if ($category !== "none") {
 			$args['tax_query'] = [
 				'relation' => 'AND',
 				[

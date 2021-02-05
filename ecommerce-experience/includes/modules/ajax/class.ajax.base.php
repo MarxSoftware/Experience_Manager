@@ -47,14 +47,14 @@ abstract class Ajax_Base {
 
 	protected abstract function _load_product($product_id);
 
-	protected abstract function _random_products($count);
+	protected abstract function _random_products($count, $category="none");
 
 	protected abstract function _popular_products($count);
 
 	protected abstract function _map_product($product);
 
-	public function random_products($count) {
-		$products = $this->_random_products($count);
+	public function random_products($count, $category="none") {
+		$products = $this->_random_products($count, $category);
 		$result = [];
 		foreach ($products as $product) {
 			$prod = $this->_load_product($product->ID);
@@ -76,13 +76,13 @@ abstract class Ajax_Base {
 		return $products;
 	}
 
-	protected function update_products(&$products, $count) {
+	protected function update_products(&$products, $count, $category="none") {
 		$popular = $this->_popular_products($count - sizeof($products));
 		foreach ($popular as $product) {
 			$products[] = $this->_load_product($product->ID);
 		}
 		if (sizeof($products) < $count) {
-			$random = $this->random_products($count - sizeof($products));
+			$random = $this->random_products($count - sizeof($products), $category);
 			foreach ($random as $product) {
 				$products[] = $this->_load_product($product->ID);
 			}
