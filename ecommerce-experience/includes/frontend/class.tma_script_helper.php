@@ -99,7 +99,7 @@ class TMAScriptHelper {
 			$output .= "_exm.push(['init']);\r\n";
 			$output .= "_exm.push(['setTrackerUrl', '{$this->getWebTools_Url()}']);\r\n";
 			$output .= "_exm.push(['setSite', '$siteid']);\r\n";
-			if (function_exists("is_product_taxonomy") && is_product_taxonomy()) {
+			if (is_tax() || is_category()) {
 				$output .= "_exm.push(['setPage', '" . get_queried_object_id() . "']);\r\n";
 				$output .= "_exm.push(['setType', '" . get_queried_object()->taxonomy . "']);\r\n";
 			} else if (!is_404()) {
