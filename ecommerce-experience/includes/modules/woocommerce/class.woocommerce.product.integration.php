@@ -7,7 +7,7 @@ namespace TMA\ExperienceManager\Modules\WooCommerce;
  *
  * @author marx
  */
-class WooCommerce_Product_Integration {
+class WooCommerce_Product_Integration extends Integration {
 
 	protected static $_instance = null;
 
@@ -27,17 +27,14 @@ class WooCommerce_Product_Integration {
 	public function __construct() {
 		$this->options = get_option('exm-woocommerce-product');
 	}
-	
-	public function add_settings () {
+
+	public function add_settings() {
 		add_filter('experience-manager/settings/fields', [$this, 'settings_fields']);
 		add_filter('experience-manager/settings/sections', [$this, 'sections']);
 	}
 
-	private function get_feature($feature) {
-		if (isset($this->options[$feature])) {
-			return $this->options[$feature];
-		}
-		return FALSE;
+	public function get_options() {
+		return $this->options;
 	}
 
 	function init() {
@@ -48,6 +45,20 @@ class WooCommerce_Product_Integration {
 		}
 	}
 
+	private function get_recommendation_types() {
+		return [
+			"default" => __("None", "experience-manager"),
+			"popular-products" => __("Popular products in category", "experience-manager"),
+			"frequently-bought" => __("Frequently bought in category", "experience-manager"),
+			"recently-viewed" => __("Recently viewed", "experience-manager")
+		];
+	}
+	private function get_recommendation_templates() {
+		return apply_filters("experience-manager/woocommerce/product/templates", [
+			"woocommerce-default" => __("WooCommerce Default", "experience-manager")
+		]);
+	}
+
 	private function update_product_detail_page() {
 		remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
 		add_action('woocommerce_after_single_product_summary', function () {
@@ -55,8 +66,8 @@ class WooCommerce_Product_Integration {
 			$arguments = [];
 			$arguments["product"] = $product->get_id();
 			$arguments["size"] = 3;
-			$arguments["type"] = "bought-together";
-			$arguments["template"] = "product-detail-page";
+			$arguments["type"] = $this->get_feature("product_defailt_page_related") ? $this->get_feature("product_defailt_page_related") : "recently-viewed";
+			$arguments["template"] = "product/" . $this->get_feature("product_defailt_page_template") ? $this->get_feature("product_defailt_page_template") : "woocommerce-default";
 			$title = $this->get_feature("product_default_page_related_title");
 			if ($title) {
 				$arguments["title"] = $title;
@@ -83,11 +94,14 @@ class WooCommerce_Product_Integration {
 					'label' => __("Related products", "tma-webtools"),
 					'desc' => __("Replace the related products.", "tma-webtools"),
 					'type' => 'select',
-					'options' => [
-						"default" => "Default",
-						"bought_together" => "Bought together",
-						"frequently_bought" => "Frequently bought"
-					]
+					'options' => $this->get_recommendation_types()
+				],
+				[
+					'name' => 'product_defailt_page_template',
+					'label' => __("Template", "tma-webtools"),
+					'desc' => __("Template used to render recommendation.", "tma-webtools"),
+					'type' => 'select',
+					'options' => $this->get_recommendation_templates()
 				],
 				[
 					'name' => 'product_default_page_related_title',

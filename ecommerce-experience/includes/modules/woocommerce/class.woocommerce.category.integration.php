@@ -7,8 +7,8 @@ namespace TMA\ExperienceManager\Modules\WooCommerce;
  *
  * @author marx
  */
-class WooCommerce_Category_Integration {
-	
+class WooCommerce_Category_Integration extends Integration {
+
 	protected static $_instance = null;
 
 	/**
@@ -26,36 +26,27 @@ class WooCommerce_Category_Integration {
 
 	public function __construct() {
 		$this->options = get_option('exm-woocommerce-category');
-
-		
 	}
-	
-	public function add_settings () {
+
+	public function add_settings() {
 		add_filter('experience-manager/settings/fields', [$this, 'settings_fields']);
 		add_filter('experience-manager/settings/sections', [$this, 'sections']);
-	}
-
-	private function get_feature($feature) {
-		if (isset($this->options[$feature])) {
-			return $this->options[$feature];
-		}
-		return FALSE;
 	}
 
 	function init() {
 
 //		if (is_product_category()) {
-			tma_exm_log("is product cat");
-			tma_exm_log($this->get_feature("header_products"));
-			$category_header = $this->get_feature("header_products");
-			if ($category_header && $category_header !== "default") {
-				$this->update_category_header();
-			}
+		tma_exm_log("is product cat");
+		tma_exm_log($this->get_feature("header_products"));
+		$category_header = $this->get_feature("header_products");
+		if ($category_header && $category_header !== "default") {
+			$this->update_category_header();
+		}
 
-			$category_footer = $this->get_feature("footer_products");
-			if ($category_footer && $category_footer !== "default") {
-				$this->update_category_footer();
-			}
+		$category_footer = $this->get_feature("footer_products");
+		if ($category_footer && $category_footer !== "default") {
+			$this->update_category_footer();
+		}
 //		} else {
 //			tma_exm_log("is not product cat");
 //		}
@@ -69,7 +60,7 @@ class WooCommerce_Category_Integration {
 			$arguments["category"] = get_queried_object_id(); // get_queried_object()->term_id;
 			$arguments["size"] = 3;
 			$arguments["type"] = $this->get_feature("header_products") ? $this->get_feature("header_products") : "recently-viewed";
-			$arguments["template"] = "category-overview";
+			$arguments["template"] = "category/" . ($this->get_feature("header_template") ? $this->get_feature("header_template") : "woocommerce-default");
 			$title = $this->get_feature("header_title");
 			if ($title) {
 				$arguments["title"] = $title;
@@ -86,7 +77,7 @@ class WooCommerce_Category_Integration {
 			$arguments["category"] = get_queried_object_id(); // get_queried_object()->term_id;
 			$arguments["size"] = 3;
 			$arguments["type"] = $this->get_feature("footer_products") ? $this->get_feature("footer_products") : "recently-viewed";
-			$arguments["template"] = "category-overview";
+			$arguments["template"] = "category/" . $this->get_feature("footer_template") ? $this->get_feature("footer_template") : "woocommerce-default";
 			$title = $this->get_feature("footer_title");
 			if ($title) {
 				$arguments["title"] = $title;
@@ -106,6 +97,11 @@ class WooCommerce_Category_Integration {
 			"recently-viewed" => __("Recently viewed", "experience-manager")
 		];
 	}
+	private function get_recommendation_templates() {
+		return apply_filters("experience-manager/woocommerce/category/templates", [
+			"woocommerce-default" => __("WooCommerce Default", "experience-manager")
+		]);
+	}
 
 	function settings_fields($fields) {
 
@@ -123,6 +119,13 @@ class WooCommerce_Category_Integration {
 					'desc' => __("What kind of recommendation to display.", "tma-webtools"),
 					'type' => 'select',
 					'options' => $this->get_recommendation_types()
+				],
+				[
+					'name' => 'header_template',
+					'label' => __("Template", "tma-webtools"),
+					'desc' => __("The template used to display the products.", "tma-webtools"),
+					'type' => 'select',
+					'options' => $this->get_recommendation_templates()
 				],
 				[
 					'name' => 'header_title',
@@ -145,6 +148,13 @@ class WooCommerce_Category_Integration {
 					'options' => $this->get_recommendation_types()
 				],
 				[
+					'name' => 'footer_template',
+					'label' => __("Template", "tma-webtools"),
+					'desc' => __("The template used to display the products.", "tma-webtools"),
+					'type' => 'select',
+					'options' => $this->get_recommendation_templates()
+				],
+				[
 					'name' => 'footer_title',
 					'label' => __("Title", "tma-webtools"),
 					'desc' => __("The title.", "tma-webtools"),
@@ -165,6 +175,10 @@ class WooCommerce_Category_Integration {
 		];
 		$sections = array_merge_recursive($sections, $custom_sections);
 		return $sections;
+	}
+
+	public function get_options() {
+		return $this->options;
 	}
 
 }

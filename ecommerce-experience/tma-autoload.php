@@ -32,6 +32,7 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	"TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Hooks" => "includes/modules/woocommerce/class.woocommerce.hooks.php",
 	"TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Product_Integration" => "includes/modules/woocommerce/class.woocommerce.product.integration.php",
 	"TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Category_Integration" => "includes/modules/woocommerce/class.woocommerce.category.integration.php",
+	"TMA\ExperienceManager\Modules\WooCommerce\Integration" => "includes/modules/woocommerce/class.integration.php",
 ));
 
 function tma_webtools_autoload($class_name) {
