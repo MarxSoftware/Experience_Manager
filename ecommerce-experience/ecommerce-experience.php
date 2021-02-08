@@ -38,6 +38,8 @@ function tma_load_textdomain() {
 
 add_action("init", "tma_webtools_init");
 add_action("rest_api_init", "tma_webtools_rest_init");
+		require_once 'includes/modules/widgets/register_widgets.php';
+
 
 function tma_webtools_rest_init() {
 	tma_exm_log("tma_webtools_rest_init");
@@ -81,7 +83,6 @@ function tma_webtools_init() {
 
 	if (\TMA\ExperienceManager\Plugins::getInstance()->woocommerce()) {
 		//new TMA\ExperienceManager\Modules\ECommerce\Ecommerce_Woo();
-//		require_once 'includes/modules/woocommerce/woocommerce_integration.php';
 		new TMA\ExperienceManager\Modules\Ajax\EcommerceAjax();
 		//new \TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Settings();
 

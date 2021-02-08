@@ -19,7 +19,7 @@ class EcommerceAjax {
 
 	public function ajax_load_products_html() {
 		$type = filter_input(INPUT_POST, 'type', FILTER_DEFAULT);
-		$count = filter_input(INPUT_POST, 'count', FILTER_DEFAULT);
+		$count = filter_input(INPUT_POST, 'size', FILTER_DEFAULT);
 		$resolution = filter_input(INPUT_POST, 'resolution', FILTER_DEFAULT);
 		$template = filter_input(INPUT_POST, 'template', FILTER_DEFAULT);
 		$title = filter_input(INPUT_POST, 'title', FILTER_DEFAULT);

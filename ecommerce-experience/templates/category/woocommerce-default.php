@@ -48,7 +48,12 @@ if ($related_products) :
 					<?php echo woocommerce_show_product_loop_sale_flash(); ?>
 					<?php echo woocommerce_template_loop_price(); ?>
 				</a>
+				<?php
+				woocommerce_template_loop_add_to_cart()
+				?>
+				<!--
 				<a href="<?php echo $product->add_to_cart_url();?>" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="<?php echo $pid;?>" data-product_sku="<?php echo $product->get_sku("edit"); ?>" aria-label="<?php $product->add_to_cart_description ?>" rel="nofollow"><?php echo $product->add_to_cart_text(); ?></a>
+				-->
 			</li>
 			<?php
 			?>

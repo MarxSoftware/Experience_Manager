@@ -33,6 +33,7 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	"TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Product_Integration" => "includes/modules/woocommerce/class.woocommerce.product.integration.php",
 	"TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Category_Integration" => "includes/modules/woocommerce/class.woocommerce.category.integration.php",
 	"TMA\ExperienceManager\Modules\WooCommerce\Integration" => "includes/modules/woocommerce/class.integration.php",
+	"TMA\ExperienceManager\Modules\Widgets\Foo_Widget" => "includes/modules/widgets/class.widget.php",
 ));
 
 function tma_webtools_autoload($class_name) {
