@@ -52,7 +52,8 @@ class Foo_Widget extends \WP_Widget {
 	}
 	private function get_recommendation_templates() {
 		return apply_filters("experience-manager/woocommerce/widget/templates", [
-			"woocommerce-default" => __("WooCommerce Default", "experience-manager")
+			"woocommerce-default" => __("WooCommerce Default", "experience-manager"),
+			"simple" => __("Simple", "experience-manager")
 		]);
 	}
  
@@ -116,7 +117,7 @@ class Foo_Widget extends \WP_Widget {
 			echo '<select id="' . $this->get_field_id( 'template' ) . '" name="' . $this->get_field_name( 'template' ) . '">';
 			?>
 			<?php foreach ( $templates as $template => $label ): ?>
-                <option <?php selected( $template, $instance['type'] ); ?>
+                <option <?php selected( $template, $instance['template'] ); ?>
                         value="<?php echo $template; ?>"><?php echo $label; ?></option>
 			<?php endforeach; ?>
             <?php echo '</select>'; ?>
