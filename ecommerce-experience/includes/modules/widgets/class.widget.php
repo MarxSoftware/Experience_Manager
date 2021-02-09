@@ -13,8 +13,8 @@ class Foo_Widget extends \WP_Widget {
     public function __construct() {
         parent::__construct(
             'foo_widget', // Base ID
-            'Foo_Widget', // Name
-            array( 'description' => __( 'A Foo Widget', 'text_domain' ), ) // Args
+            'EXM Recommendation', // Name
+            array( 'description' => __( 'Prodcut recommendation widget', 'experience-manager' ), ) // Args
         );
     }
  
@@ -33,15 +33,28 @@ class Foo_Widget extends \WP_Widget {
         echo $before_widget;
         
 		$arguments = [
-			"title" => "Das ist der Titel",
-			"type" => "recently-viewed",
-			"size" => 1,
-			"template" => "product/woocommerce-default"
+			"title" => $title,
+			"type" => $instance['type'],
+			"size" => $instance['size'],
+			"template" => "widget/" . $instance['template']
 		];
 		exm_get_template("recommendation.widget.html", $arguments);
 		
         echo $after_widget;
     }
+	
+	private function get_recommendation_types() {
+		return [
+			"popular-products" => __("Popular products in category", "experience-manager"),
+			"frequently-bought" => __("Frequently bought in category", "experience-manager"),
+			"recently-viewed" => __("Recently viewed", "experience-manager")
+		];
+	}
+	private function get_recommendation_templates() {
+		return apply_filters("experience-manager/woocommerce/widget/templates", [
+			"woocommerce-default" => __("WooCommerce Default", "experience-manager")
+		]);
+	}
  
     /**
      * Back-end widget form.
@@ -52,40 +65,59 @@ class Foo_Widget extends \WP_Widget {
      */
     public function form( $instance ) {
         $title = isset( $instance['title'] ) ? esc_attr( $instance['title'] ) : '';
-		if ( ! isset( $instance['number'] ) || ! $number = (int) $instance['number'] ) {
-			$number = 5;
+		if ( ! isset( $instance['size'] ) || ! $size = (int) $instance['size'] ) {
+			$size = 1;
 		}
 
-		if (!isset($instance['activity'])) {
-		    $instance['activity'] = 'completed';
+		if (!isset($instance['type'])) {
+		    $instance['type'] = 'recently-viewed';
         }
 
-		if ( is_array( $instance['activity'] ) ) {
-			$instance['activity'] = array_shift( $instance['activity'] );
+		if ( is_array( $instance['type'] ) ) {
+			$instance['type'] = array_shift( $instance['type'] );
+		}
+		if (!isset($instance['template'])) {
+		    $instance['template'] = 'woocommerce-default';
+        }
+
+		if ( is_array( $instance['template'] ) ) {
+			$instance['template'] = array_shift( $instance['template'] );
 		}
 
 		?>
-        <p><label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'woocommerce' ); ?></label>
+        <p><label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'experience-manager' ); ?></label>
             <input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"
                    name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text"
                    value="<?php echo esc_attr( $title ); ?>"/></p>
 
         <p>
-            <label for="<?php echo $this->get_field_id( 'number' ); ?>"><?php _e( 'Number of products to show:', 'woocommerce' ); ?></label>
-            <input id="<?php echo esc_attr( $this->get_field_id( 'number' ) ); ?>"
-                   name="<?php echo esc_attr( $this->get_field_name( 'number' ) ); ?>" type="text"
-                   value="<?php echo esc_attr( $number ); ?>" size="3"/></p>
+            <label for="<?php echo $this->get_field_id( 'size' ); ?>"><?php _e( 'Number of products to show:', 'experience-manager' ); ?></label>
+            <input id="<?php echo esc_attr( $this->get_field_id( 'size' ) ); ?>"
+                   name="<?php echo esc_attr( $this->get_field_name( 'size' ) ); ?>" type="text"
+                   value="<?php echo esc_attr( $size ); ?>" size="3"/></p>
 
         <p>
         <p>
-            <label for="<?php echo $this->get_field_id( 'activity' ); ?>"><?php _e( 'Show recommendations based on:', 'woocommerce' ); ?></label>
+            <label for="<?php echo $this->get_field_id( 'type' ); ?>"><?php _e( 'Show recommendations based on:', 'experience-manager' ); ?></label>
 			<?php
-			$activities = array( 'viewed' => 'View History', 'completed' => 'Purchase History' );
-			echo '<select id="' . $this->get_field_id( 'activity' ) . '" name="' . $this->get_field_name( 'activity' ) . '">';
+			$activities = $this->get_recommendation_types();
+			echo '<select id="' . $this->get_field_id( 'type' ) . '" name="' . $this->get_field_name( 'type' ) . '">';
 			?>
 			<?php foreach ( $activities as $activity => $label ): ?>
-                <option <?php selected( $activity, $instance['activity'] ); ?>
+                <option <?php selected( $activity, $instance['type'] ); ?>
                         value="<?php echo $activity; ?>"><?php echo $label; ?></option>
+			<?php endforeach; ?>
+            <?php echo '</select>'; ?>
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id( 'template' ); ?>"><?php _e( 'Recommendation template:', 'experience-manager' ); ?></label>
+			<?php
+			$templates = $this->get_recommendation_templates();
+			echo '<select id="' . $this->get_field_id( 'template' ) . '" name="' . $this->get_field_name( 'template' ) . '">';
+			?>
+			<?php foreach ( $templates as $template => $label ): ?>
+                <option <?php selected( $template, $instance['type'] ); ?>
+                        value="<?php echo $template; ?>"><?php echo $label; ?></option>
 			<?php endforeach; ?>
             <?php echo '</select>'; ?>
         </p>
@@ -105,6 +137,9 @@ class Foo_Widget extends \WP_Widget {
     public function update( $new_instance, $old_instance ) {
         $instance = array();
         $instance['title'] = ( !empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+        $instance['size'] = ( !empty( $new_instance['size'] ) ) ? strip_tags( $new_instance['size'] ) : '';
+        $instance['type'] = ( !empty( $new_instance['type'] ) ) ? strip_tags( $new_instance['type'] ) : '';
+        $instance['template'] = ( !empty( $new_instance['template'] ) ) ? strip_tags( $new_instance['template'] ) : '';
  
         return $instance;
     }
