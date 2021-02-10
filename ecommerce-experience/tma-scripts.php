@@ -23,4 +23,5 @@ function exm_frontend_scripts() {
 	wp_add_inline_script("experience-manager-exm", $scriptHelper->getCode());
 	
 	wp_enqueue_script('experience-manager-frontend', TMA_EXPERIENCE_MANAGER_URL . 'assets/experience-manager-frontend.js', array("experience-manager-exm"), "1");
+	wp_enqueue_style('experience-manager-frontend', TMA_EXPERIENCE_MANAGER_URL . 'assets/experience-manager-frontend.css');
 }
