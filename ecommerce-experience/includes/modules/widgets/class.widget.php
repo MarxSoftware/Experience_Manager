@@ -53,7 +53,8 @@ class Foo_Widget extends \WP_Widget {
 	private function get_recommendation_templates() {
 		return apply_filters("experience-manager/woocommerce/widget/templates", [
 			"woocommerce-default" => __("WooCommerce Default", "experience-manager"),
-			"simple" => __("Simple", "experience-manager")
+			"simple" => __("Simple", "experience-manager"),
+			"slider" => __("Slider", "experience-manager")
 		]);
 	}
  

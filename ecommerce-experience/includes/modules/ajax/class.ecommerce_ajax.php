@@ -29,17 +29,12 @@ class EcommerceAjax {
 
 		tma_exm_log("load products: " . $type);
 
-//		if ($count === FALSE || $count === NULL) {
-//			$count = 3;
-//		} else {
-//			$count = intval($count);
-//		}
 
 		try {
-//			$products = Ecommerce_Woo::instance()->bought_together($product);
+			$id = uniqid();
 			$args = [];
-//			$args['related_products'] = $products;
 			$args['heading'] = $title;
+			$args['id'] = $id;
 
 			$engine = Recommendation_Engine::create_instance($type, $count, $resolution, $category, $product);
 			$content = $engine->render_template($template, $args);
@@ -47,6 +42,8 @@ class EcommerceAjax {
 			$response = [];
 			$response["error"] = false;
 			$response['content'] = $content;
+			$response['id'] = $id;
+			$response['template'] = $template;
 
 			wp_send_json($response);
 		} catch (Exception $ex) {

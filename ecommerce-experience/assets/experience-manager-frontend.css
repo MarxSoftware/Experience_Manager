@@ -1,0 +1,35 @@
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+.exm-widget-slide {
+    display: none;
+	text-align: center;
+}
+
+.exm-widget-slide-fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes exm-widget-slide-fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes exm-widget-slide-fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
+}
