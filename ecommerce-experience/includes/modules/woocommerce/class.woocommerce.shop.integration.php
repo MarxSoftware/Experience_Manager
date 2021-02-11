@@ -7,13 +7,13 @@ namespace TMA\ExperienceManager\Modules\WooCommerce;
  *
  * @author marx
  */
-class WooCommerce_Category_Integration extends Integration {
+class WooCommerce_Shop_Integration extends Integration {
 
 	protected static $_instance = null;
 
 	/**
 	 * 
-	 * @return WooCommerce_Category_Integration
+	 * @return WooCommerce_Shop_Integration
 	 */
 	public static function getInstance() {
 		if (null === self::$_instance) {
@@ -25,7 +25,7 @@ class WooCommerce_Category_Integration extends Integration {
 	private $options;
 
 	public function __construct() {
-		$this->options = get_option('exm-woocommerce-category');
+		$this->options = get_option('exm-woocommerce-shop');
 	}
 
 	public function add_settings() {
@@ -36,28 +36,27 @@ class WooCommerce_Category_Integration extends Integration {
 	function init() {
 
 		add_action("parse_query", function () {
-			if (is_product_category()) {
-				tma_exm_log("is product cat");
+			if (is_shop()) {
+				tma_exm_log("is shop");
 				tma_exm_log($this->get_feature("header_products"));
-				$category_header = $this->get_feature("header_products");
-				if ($category_header && $category_header !== "default") {
-					$this->update_category_header();
+				$shop_header = $this->get_feature("header_products");
+				if ($shop_header && $shop_header !== "default") {
+					$this->update_shop_header();
 				}
 
-				$category_footer = $this->get_feature("footer_products");
-				if ($category_footer && $category_footer !== "default") {
-					$this->update_category_footer();
+				$shop_footer = $this->get_feature("footer_products");
+				if ($shop_footer && $shop_footer !== "default") {
+					$this->update_shop_footer();
 				}
 			} else {
-				tma_exm_log("is not product cat");
+				tma_exm_log("is not shop");
 			}
 		});
 	}
 
-	private function update_category_header() {
+	private function update_shop_header() {
 		add_action('woocommerce_archive_description', function () {
 			$arguments = [];
-			$arguments["category"] = get_queried_object_id();
 			$arguments["size"] = 3;
 			$arguments["type"] = $this->get_feature("header_products") ? $this->get_feature("header_products") : "recently-viewed";
 			$arguments["template"] = "category/" . ($this->get_feature("header_template") ? $this->get_feature("header_template") : "woocommerce-default");
@@ -67,14 +66,13 @@ class WooCommerce_Category_Integration extends Integration {
 			} else {
 				$arguments["title"] = "";
 			}
-			exm_get_template("recommendation.category.html", $arguments);
+			exm_get_template("recommendation.shop.html", $arguments);
 		}, 20);
 	}
 
-	private function update_category_footer() {
+	private function update_shop_footer() {
 		add_action('woocommerce_after_shop_loop', function () {
 			$arguments = [];
-			$arguments["category"] = get_queried_object_id();
 			$arguments["size"] = 3;
 			$arguments["type"] = $this->get_feature("footer_products") ? $this->get_feature("footer_products") : "recently-viewed";
 			$arguments["template"] = "category/" . ($this->get_feature("footer_template") ? $this->get_feature("footer_template") : "woocommerce-default");
@@ -85,21 +83,21 @@ class WooCommerce_Category_Integration extends Integration {
 				$arguments["title"] = "";
 			}
 			tma_exm_log("update_category_footer");
-			exm_get_template("recommendation.category.html", $arguments);
+			exm_get_template("recommendation.shop.html", $arguments);
 		}, 20);
 	}
 
 	private function get_recommendation_types() {
 		return [
 			"default" => __("None", "experience-manager"),
-			"popular-products" => __("Popular products in category", "experience-manager"),
-			"frequently-bought" => __("Frequently bought in category", "experience-manager"),
+			"popular-products" => __("Popular products", "experience-manager"),
+			"frequently-bought" => __("Frequently bought", "experience-manager"),
 			"recently-viewed" => __("Recently viewed", "experience-manager")
 		];
 	}
 
 	private function get_recommendation_templates() {
-		return apply_filters("experience-manager/woocommerce/category/templates", [
+		return apply_filters("experience-manager/woocommerce/shop/templates", [
 			"woocommerce-default" => __("WooCommerce Default", "experience-manager")
 		]);
 	}
@@ -107,11 +105,11 @@ class WooCommerce_Category_Integration extends Integration {
 	function settings_fields($fields) {
 
 		$settings_fields = [
-			'exm-woocommerce-category' => [
+			'exm-woocommerce-shop' => [
 				[
 					'name' => 'header',
-					'label' => __("Category header", "experience-manager"),
-					'desc' => __("Configure product recommendation on category overview header!", "experience-manager"),
+					'label' => __("Shop header", "experience-manager"),
+					'desc' => __("Configure product recommendation on shop page header!", "experience-manager"),
 					'type' => 'subsection',
 				],
 				[
@@ -138,7 +136,7 @@ class WooCommerce_Category_Integration extends Integration {
 				[
 					'name' => 'footer',
 					'label' => __("Category footer", "experience-manager"),
-					'desc' => __("Configure product recommendation on category overview footer!", "experience-manager"),
+					'desc' => __("Configure product recommendation on shop page footer!", "experience-manager"),
 					'type' => 'subsection',
 				],
 				[
@@ -170,8 +168,8 @@ class WooCommerce_Category_Integration extends Integration {
 	function sections($sections) {
 		$custom_sections = [
 			[
-				'id' => 'exm-woocommerce-category',
-				'title' => __('Category overview', 'tma-webtools')
+				'id' => 'exm-woocommerce-shop',
+				'title' => __('Shop page', 'tma-webtools')
 			]
 		];
 		$sections = array_merge_recursive($sections, $custom_sections);

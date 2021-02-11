@@ -6,14 +6,14 @@ function exm_modules_woocommerce_settings($fields) {
 		'tma-webtools-woocommerce' => array(
 			[
 				'name' => 'single-product',
-				'label' => __("Single product", "tma-webtools"),
-				'desc' => __("Configure product recommendation on single product page", "tma-webtools"),
+				'label' => __("Single product", "experience-manager"),
+				'desc' => __("Configure product recommendation on single product page", "experience-manager"),
 				'type' => 'subsection',
 			],
 			array(
 				'name' => 'single-product-related',
-				'label' => __("Single product related products", "tma-webtools"),
-				'desc' => __("Configure the tracking of e-Commerce events", "tma-webtools"),
+				'label' => __("Single product related products", "experience-manager"),
+				'desc' => __("Configure the tracking of e-Commerce events", "experience-manager"),
 				'type' => 'select',
 				'options' => [
 					"default" => "Default",

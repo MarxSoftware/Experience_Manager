@@ -30,29 +30,21 @@ require_once 'tma-scripts.php';
 require_once 'includes/modules/events/ecommerce_events.php';
 
 
-add_action('plugins_loaded', 'tma_load_textdomain');
-
-function tma_load_textdomain() {
-	load_plugin_textdomain('tma-webtools', false, dirname(plugin_basename(__FILE__)) . '/languages/');
-}
-
+//add_action('plugins_loaded', 'exm_plugins_loaded');
+//add_action('parse_query', 'exm_plugins_loaded');
 add_action("init", "tma_webtools_init");
-add_action("rest_api_init", "tma_webtools_rest_init");
-		require_once 'includes/modules/widgets/register_widgets.php';
+require_once 'includes/modules/widgets/register_widgets.php';
 
-
-function tma_webtools_rest_init() {
-	tma_exm_log("tma_webtools_rest_init");
-	//$tma_rest = new \TMA\ExperienceManager\TMA_Rest();
+function exm_plugins_loaded() {
+//	load_plugin_textdomain('tma-webtools', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+	
+	
 }
 
 //require_once 'includes/backend/class.tma_settings.php';
 function tma_webtools_init() {
 
 	do_action("experience-manager/init/before");
-
-
-
 
 	tma_exm_log("tma_webtools_init");
 
@@ -89,9 +81,11 @@ function tma_webtools_init() {
 
 		\TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Product_Integration::getInstance()->add_settings();
 		\TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Category_Integration::getInstance()->add_settings();
-
+		\TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Shop_Integration::getInstance()->add_settings();
+		
 		\TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Product_Integration::getInstance()->init();
 		\TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Category_Integration::getInstance()->init();
+		\TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Shop_Integration::getInstance()->init();
 		
 		new \TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Settings();
 		new \TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Hooks();

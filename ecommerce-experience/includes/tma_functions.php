@@ -7,6 +7,7 @@ function exm_get_template ($template_name, $arguments) {
 	if (!file_exists($tmpl)) {
 		$tmpl = TMA_EXPERIENCE_MANAGER_DIR . 'templates/' . $template_name . ".php";
 	}
+	tma_exm_log("load template: " . $tmpl);
 	extract($arguments);
 	include $tmpl;
 }

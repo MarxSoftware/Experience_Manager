@@ -48,8 +48,8 @@ class WooCommerce_Product_Integration extends Integration {
 	private function get_recommendation_types() {
 		return [
 			"default" => __("None", "experience-manager"),
-			"popular-products" => __("Popular products in category", "experience-manager"),
-			"frequently-bought" => __("Frequently bought in category", "experience-manager"),
+			"popular-products" => __("Popular products", "experience-manager"),
+			"frequently-bought" => __("Frequently bought", "experience-manager"),
 			"recently-viewed" => __("Recently viewed", "experience-manager")
 		];
 	}
@@ -85,28 +85,28 @@ class WooCommerce_Product_Integration extends Integration {
 			'exm-woocommerce-product' => [
 				[
 					'name' => 'product_detail_page',
-					'label' => __("Product detail page", "tma-webtools"),
-					'desc' => __("Configure product recommendation on product defail page", "tma-webtools"),
+					'label' => __("Product detail page", "experience-manager"),
+					'desc' => __("Configure product recommendation on product defail page", "experience-manager"),
 					'type' => 'subsection',
 				],
 				[
 					'name' => 'product_defailt_page_related',
-					'label' => __("Related products", "tma-webtools"),
-					'desc' => __("Replace the related products.", "tma-webtools"),
+					'label' => __("Related products", "experience-manager"),
+					'desc' => __("Replace the related products.", "experience-manager"),
 					'type' => 'select',
 					'options' => $this->get_recommendation_types()
 				],
 				[
 					'name' => 'product_defailt_page_template',
-					'label' => __("Template", "tma-webtools"),
-					'desc' => __("Template used to render recommendation.", "tma-webtools"),
+					'label' => __("Template", "experience-manager"),
+					'desc' => __("Template used to render recommendation.", "experience-manager"),
 					'type' => 'select',
 					'options' => $this->get_recommendation_templates()
 				],
 				[
 					'name' => 'product_default_page_related_title',
-					'label' => __("Title", "tma-webtools"),
-					'desc' => __("The title.", "tma-webtools"),
+					'label' => __("Title", "experience-manager"),
+					'desc' => __("The title.", "experience-manager"),
 					'type' => 'text'
 				]
 			]

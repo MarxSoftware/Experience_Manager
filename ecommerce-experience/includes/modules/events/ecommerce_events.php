@@ -6,22 +6,22 @@ function exm_modules_ecommerce_settings($fields) {
 		'tma-webtools-events' => array(
 			array(
 				'name' => 'ecommerce',
-				'label' => __("e-Commerce events", "tma-webtools"),
-				'desc' => __("Configure the tracking of e-Commerce events", "tma-webtools"),
+				'label' => __("e-Commerce events", "experience-manager"),
+				'desc' => __("Configure the tracking of e-Commerce events", "experience-manager"),
 				'type' => 'subsection',
 			),
 			array(
 				'name' => 'wc_tracking',
-				'label' => __("Track WooCommerce events?", "tma-webtools"),
-				'desc' => __("Tracked events are: order, add item to basket, remove item from basket.", "tma-webtools"),
+				'label' => __("Track WooCommerce events?", "experience-manager"),
+				'desc' => __("Tracked events are: order, add item to basket, remove item from basket.", "experience-manager"),
 				'disable' => !\TMA\ExperienceManager\Plugins::getInstance()->woocommerce(),
 				'type' => 'toggle',
 				'default' => ''
 			),
 			array(
 				'name' => 'edd_tracking',
-				'label' => __("Track EasyDigitalDownloads events?", "tma-webtools"),
-				'desc' => __("Tracked events are: order, add item to basket, remove item from basket.", "tma-webtools"),
+				'label' => __("Track EasyDigitalDownloads events?", "experience-manager"),
+				'desc' => __("Tracked events are: order, add item to basket, remove item from basket.", "experience-manager"),
 				'disable' => !\TMA\ExperienceManager\Plugins::getInstance()->easydigitaldownloads(),
 				'type' => 'toggle',
 				'default' => ''
