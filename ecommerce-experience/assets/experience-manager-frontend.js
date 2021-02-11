@@ -7,12 +7,6 @@ EXM.Hook.register("experience-manager/recommendation/added", (arguments) => {
 	}
 }, 1);
 EXM.Dom.ready(function (event) {
-	console.log("und los");
-	/*
-	 EXM.Ajax.request("exm_ecom_load_products_html", function (data) {
-	 console.log(data);
-	 }, "&type=recently-viewed-products&product=68&template=single-product-related&title=Hallo Leute");
-	 */
 	document.querySelectorAll("[data-exm-recommendation]").forEach(function ($item) {
 		console.log("found recommendation");
 		let type = $item.dataset.exmRecommendation;
@@ -32,10 +26,8 @@ EXM.Dom.ready(function (event) {
 });
 
 function registerSlideShow($element) {
-	console.log("registerSlideShow");
-	let slideIndex = 0;
+	let slideIndex = 1;
 	var slides = $element.querySelectorAll('.exm-widget-slide');
-	console.log(slides.length);
 	if (slides.length === 0) {
 		return;
 	}
@@ -48,6 +40,6 @@ function registerSlideShow($element) {
 			slideIndex = 1;
 		}
 		slides[slideIndex - 1].style.display = "block";
-	}
+	};
 	setInterval(slideFunction, 4000);
 }
