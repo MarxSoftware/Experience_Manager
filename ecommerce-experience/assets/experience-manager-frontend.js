@@ -16,12 +16,35 @@ EXM.Dom.ready(function (event) {
 		let template = $item.dataset.exmTemplate;
 		let title = $item.dataset.exmTitle;
 
-		EXM.Ajax.request("exm_ecom_load_products_html", function (data) {
-			if (data.error === false) {
-				$item.innerHTML = data.content;
-				EXM.Hook.call("experience-manager/recommendation/added", {data: data});
-			}
-		}, "&type=" + type + "&size=" + size + "&category=" + category + "&product=" + product + "&template=" + template + "&title=" + title);
+		let params = {
+			"type": type,
+			"size": size,
+			"product": product,
+			"category": category,
+			"template": template,
+			"title": title
+		};
+		let RECURL = EXMCONFIG.rest_url + "experience-manager/v1/recommendations";
+		let query = Object.keys(params)
+				.map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+				.join('&');
+		let url = RECURL + '?' + query;
+		fetch(url).then(function (response) {
+			response.json().then((data) => {
+				if (data.error === false) {
+					$item.innerHTML = data.content;
+					EXM.Hook.call("experience-manager/recommendation/added", {data: data});
+				}
+			});
+		});
+		/*
+		 EXM.Ajax.request("exm_ecom_load_products_html", function (data) {
+		 if (data.error === false) {
+		 $item.innerHTML = data.content;
+		 EXM.Hook.call("experience-manager/recommendation/added", {data: data});
+		 }
+		 }, "&type=" + type + "&size=" + size + "&category=" + category + "&product=" + product + "&template=" + template + "&title=" + title);
+		 */
 	});
 });
 

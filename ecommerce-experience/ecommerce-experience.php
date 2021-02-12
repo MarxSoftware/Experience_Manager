@@ -30,19 +30,18 @@ require_once 'tma-scripts.php';
 require_once 'includes/modules/events/ecommerce_events.php';
 
 
-//add_action('plugins_loaded', 'exm_plugins_loaded');
-//add_action('parse_query', 'exm_plugins_loaded');
-add_action("init", "tma_webtools_init");
+add_action("init", "exm_init");
+add_action("rest_api_init", "exm_rest_init");
 require_once 'includes/modules/widgets/register_widgets.php';
 
-function exm_plugins_loaded() {
-//	load_plugin_textdomain('tma-webtools', false, dirname(plugin_basename(__FILE__)) . '/languages/');
-	
-	
+
+function exm_rest_init() {
+	tma_exm_log("tma_webtools_rest_init");
+	$tma_rest = new \TMA\ExperienceManager\TMA_Rest();
 }
 
 //require_once 'includes/backend/class.tma_settings.php';
-function tma_webtools_init() {
+function exm_init() {
 
 	do_action("experience-manager/init/before");
 

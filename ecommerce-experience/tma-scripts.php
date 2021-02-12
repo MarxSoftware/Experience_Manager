@@ -15,6 +15,7 @@ function exm_frontend_scripts() {
 	wp_enqueue_script('experience-manager-exm', TMA_EXPERIENCE_MANAGER_URL . 'assets/exm/exm.js', array(), "1");
 	wp_localize_script('experience-manager-exm', 'EXMCONFIG', array(
 		'ajax_url' => admin_url('admin-ajax.php'),
+		'rest_url' => get_rest_url(),
 		'post_id' => get_the_ID(),
 		'taxonomy_id' => get_queried_object_id() //get_queried_object() ? get_queried_object()->term_id : ""
 	));
