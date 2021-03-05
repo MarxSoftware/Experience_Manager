@@ -1,3 +1,4 @@
+<h2>Hier geht es rund</h2>
 <?php
 /*
  * Copyright (C) 2016 marx
@@ -16,10 +17,3 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if (tma_exm_dependencies_fulfilled(["module-metrics"]))  {
-	include "dashboard.php";
-} else {
-	echo "<h1>";
-	echo __("The metrics module is either not installed or not activated", "tma-webtools");
-	echo "</h1>";
-}

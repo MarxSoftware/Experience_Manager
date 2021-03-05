@@ -4,35 +4,25 @@
  * enables frontend targeting if cache mode is configured
  */
 
-add_action('admin_enqueue_scripts', "exm_enqueue_script", -99);
+add_action('admin_enqueue_scripts', "exm_frontend_scripts", -99);
+add_action('admin_enqueue_scripts', "exm_backend_scripts", -99);
+add_action('wp_enqueue_scripts', "exm_frontend_scripts", -99);
 
-add_action('wp_enqueue_scripts', "exm_enqueue_script", -99);
-
-function exm_enqueue_script() {
-//	if (tma_exm_is_debug()) {
-//		wp_register_script('webtools-frontend', TMA_EXPERIENCE_MANAGER_URL . 'js/webtools/webtools-frontend.js', array(), "1");
-//		wp_register_script('tma-webtools-backend', TMA_EXPERIENCE_MANAGER_URL . 'js/webtools/webtools-wp-backend.js', array(), "1");
-//	} else {
-//		wp_register_script('webtools-frontend', TMA_EXPERIENCE_MANAGER_URL . 'js/webtools/webtools-frontend-min.js', array(), "1");
-//		wp_register_script('tma-webtools-backend', TMA_EXPERIENCE_MANAGER_URL . 'js/webtools/webtools-wp-backend-min.js', array(), "1");
-//	}
-
+function exm_backend_scripts() {
+	wp_enqueue_script('experience-manager-backend', TMA_EXPERIENCE_MANAGER_URL . 'assets/experience-manager-backend.js', array("experience-manager-exm"), "1");
+}
+function exm_frontend_scripts() {
 	wp_enqueue_script('experience-manager-exm', TMA_EXPERIENCE_MANAGER_URL . 'assets/exm/exm.js', array(), "1");
 	wp_localize_script('experience-manager-exm', 'EXMCONFIG', array(
 		'ajax_url' => admin_url('admin-ajax.php'),
+		'rest_url' => get_rest_url(),
 		'post_id' => get_the_ID(),
-		'front_page' => is_front_page() ? "true" : "false"
+		'taxonomy_id' => get_queried_object_id() //get_queried_object() ? get_queried_object()->term_id : ""
 	));
 
 	$scriptHelper = new \TMA\ExperienceManager\TMAScriptHelper();
-//	wp_enqueue_script('experience-manager-exm-tracker', TMA_EXPERIENCE_MANAGER_URL . 'assets/exm/tracker.js', array('experience-manager-exm'), "1");
 	wp_add_inline_script("experience-manager-exm", $scriptHelper->getCode());
-
-	//$scriptHelper = new \TMA\ExperienceManager\TMAScriptHelper();
-	//wp_add_inline_script("experience-manager-exm", $scriptHelper->getCode());
-
-	if (!tma_exm_is_editor_active()) {
-		wp_enqueue_script('experience-manager-frontend', TMA_EXPERIENCE_MANAGER_URL . 'js/experience-manager-frontend.js', array("jquery", "experience-manager-exm"), "1");
-		wp_enqueue_script('experience-manager-flex-content', TMA_EXPERIENCE_MANAGER_URL . 'js/experience-manager-flex-content.js', array("experience-manager-frontend", "experience-manager-exm"), "1");
-	}
+	
+	wp_enqueue_script('experience-manager-frontend', TMA_EXPERIENCE_MANAGER_URL . 'assets/experience-manager-frontend.js', array("experience-manager-exm"), "1");
+	wp_enqueue_style('experience-manager-frontend', TMA_EXPERIENCE_MANAGER_URL . 'assets/experience-manager-frontend.css');
 }

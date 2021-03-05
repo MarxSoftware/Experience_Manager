@@ -79,7 +79,7 @@ class TMAScriptHelper {
 			$meta = [];
 
 			$this->add_meta($meta);
-			$this->add_categories($meta);
+			
 
 
 			$meta = apply_filters('tma-webtools/customparameters', $meta);
@@ -95,19 +95,18 @@ class TMAScriptHelper {
 			 * Wenn die Einstellungen auf default bleiben, sind beide TRUE
 			 */
 
-//			if ($this->shouldScore()) {
-//				$score = $this->getScoring();
-//
-//				$output .= $score;
-//			}
-
 			$output = "var _exm = window._exm || [];\r\n";
 			$output .= "_exm.push(['init']);\r\n";
 			$output .= "_exm.push(['setTrackerUrl', '{$this->getWebTools_Url()}']);\r\n";
 			$output .= "_exm.push(['setSite', '$siteid']);\r\n";
-			if (!is_404()) {
+			if (is_tax() || is_category()) {
+				$output .= "_exm.push(['setPage', '" . get_queried_object_id() . "']);\r\n";
+				$output .= "_exm.push(['setType', '" . get_queried_object()->taxonomy . "']);\r\n";
+			} else if (!is_404()) {
 				$output .= "_exm.push(['setPage', '" . get_post()->ID . "']);\r\n";
 				$output .= "_exm.push(['setType', '" . get_post()->post_type . "']);\r\n";
+				
+				$this->add_categories($meta);
 			} else {
 				$output .= "_exm.push(['setPage', '404']);\r\n";
 				$output .= "_exm.push(['setType', 'error']);\r\n";
@@ -151,88 +150,141 @@ class TMAScriptHelper {
 	}
 
 	private function add_categories(& $meta) {
-		$cats = [];
+		$category_path = [];
+		$categories = [];
+		$ecom_category_path = [];
+		$ecom_categories = [];
+		$ecom_categories_parents = [];
+		$categories_parents = [];
+
 		$term = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'));
 		if (is_category()) {
 			$term_list = get_categories();
 			foreach ($term_list as $cat) {
-				//$cats[] = $cat->slug;
-				$cats[] = "/" . get_term_parents_list($cat->term_id, "category", ["format" => "slug", "link" => false]);
+				$result = TMAScriptHelper::custom_get_term_parents_list($cat->term_id, "category", []);
+				$category_path[] = "/" . $result["list"];
+				$categories[] = $cat->term_id;
+				
+				$categories_parents = array_merge($categories_parents, $result["parents"]);
 			}
 		} else if (function_exists("is_product_category") && is_product_category()) { // woocommerce category
 			$term = get_queried_object();
-			//$cats[] = $term->slug;
-			$cats[] = "/" . get_term_parents_list($term->term_id, "product_cat", ["format" => "slug", "link" => false]);
+			$result = TMAScriptHelper::custom_get_term_parents_list($term->term_id, "product_cat", []);
+			$ecom_category_path[] = "/" . $result["list"];
+			$ecom_categories_parents = array_merge($ecom_categories_parents, $result["parents"]);
 		} else if (function_exists("is_product") && is_product()) { // woocommerce product
 			$product = wc_get_product();
 			$term_list = get_the_terms($product->get_id(), 'product_cat');
 			foreach ($term_list as $cat) {
-				//$cats[] = $cat->slug;
-				$cats[] = "/" . get_term_parents_list($cat->term_id, "product_cat", ["format" => "slug", "link" => false]);
+				$result = TMAScriptHelper::custom_get_term_parents_list($cat->term_id, "product_cat", []);
+
+				$ecom_category_path[] = "/" . $result["list"];
+				$ecom_categories[] = $cat->term_id;
+				
+				$ecom_categories_parents = array_merge($ecom_categories_parents, $result["parents"]);
 			}
 		} else if (get_post() && get_post()->post_type === "download") { // easy digital download
 			$download = edd_get_download(get_post()->ID);
 
 			$term_list = get_the_terms($download->ID, 'download_category');
 			foreach ($term_list as $cat) {
-				$cats[] = "/" . get_term_parents_list($cat->term_id, "download_category", ["format" => "slug", "link" => false]);
+				$result = TMAScriptHelper::custom_get_term_parents_list($cat->term_id, "download_category", []);
+
+				$ecom_category_path[] = "/" . $result["list"];
+				$ecom_categories[] = $cat->term_id;
+				
+				$ecom_categories_parents = array_merge($ecom_categories_parents, $result["parents"]);
 			}
 		} else if ($term && $term->taxonomy === "download_category") {
 			$term = get_queried_object();
-			//$cats[] = $term->slug;
-			$cats[] = "/" . get_term_parents_list($term->term_id, $term->taxonomy, ["format" => "slug", "link" => false]);
+			$result = TMAScriptHelper::custom_get_term_parents_list($term->term_id, $term->taxonomy, []);
+
+			$ecom_category_path[] = "/" . $result["list"];
+			$ecom_categories[] = $term->term_id;
+			
+			$ecom_categories_parents = array_merge($ecom_categories_parents, $result["parents"]);
 		} else if (!is_404()) {
 			$post_categories = wp_get_post_categories(get_post()->ID, ['fields' => "ids"]);
 			foreach ($post_categories as $cat) {
 				$category = get_category($cat);
-				//$cats[] = $category->slug;
-				$cats[] = "/" . get_term_parents_list($category->term_id, "category", ["format" => "slug", "link" => false]);
+				$result = TMAScriptHelper::custom_get_term_parents_list($category->term_id, "category", []);
+
+				$category_path[] = "/" . $result["list"];
+				$categories[] = $category->term_id;
+				
+				$categories_parents = array_merge($categories_parents, $result["parents"]);
 			}
 		}
 
-		if (sizeof($cats) > 0) {
-			$meta['categories'] = array_map("strval", $cats);
+		if (sizeof($category_path) > 0) {
+			$meta['categories_path'] = array_map("strval", $category_path);
 		}
+		if (sizeof($categories) > 0) {
+			$meta['categories'] = array_map("strval", $categories);
+		}
+		if (sizeof($ecom_categories) > 0) {
+			$meta['ecom_categories'] = array_map("strval", $ecom_categories);
+		}
+		if (sizeof($ecom_category_path) > 0) {
+			$meta['ecom_categories_path'] = array_map("strval", $ecom_category_path);
+		}
+		if (sizeof($ecom_categories_parents) > 0) {
+			$ecom_categories_parents = array_unique($ecom_categories_parents);
+			$meta['ecom_categories_parents'] = array_map("strval", $ecom_categories_parents);
+		}
+		if (sizeof($categories_parents) > 0) {
+			$categories_parents = array_unique($categories_parents);
+			$meta['categories_parents'] = array_map("strval", $categories_parents);
+		}
+		
+		$meta['ecom_categories_all'] = array_map("strval", array_merge($ecom_categories, $ecom_categories_parents));
 	}
 
-	function getScoring() {
-		$score = '{';
-		$hasScore = false;
-		//$custom_field_keys = get_post_custom_keys();
+	public static function custom_get_term_parents_list($term_id_param, $taxonomy, $args = array()) {
+		$list = '';
+		$parent_categories = [];
+		$term = get_term($term_id_param, $taxonomy);
 
-		$metaData = get_post_meta(get_the_ID(), Constants::$META_KEY_SEGMENT_SCORE);
-		$segments = array();
-		if (isset($metaData[0])) {
-			$segments = $metaData[0];
+		if (is_wp_error($term)) {
+			return $term;
 		}
-		if ($segments != null) {
-			foreach ($segments as $key => $value) {
-				if ($hasScore) {
-					$score .= ', ';
-				}
-				$scoreValue = $value; //array_values(get_post_custom_values($value))[0];
-				$value = str_replace('tma_score_', '', $value);
-				$score .= $key . ' : ' . $scoreValue;
-				$hasScore = true;
+
+		if (!$term) {
+			return $list;
+		}
+
+		$term_id = $term->term_id;
+
+		$defaults = array(
+			'format' => 'id',
+			'separator' => '/',
+			'inclusive' => true,
+		);
+
+		$args = wp_parse_args($args, $defaults);
+
+
+		$parents = get_ancestors($term_id, $taxonomy, 'taxonomy');
+
+		if ($args['inclusive']) {
+			array_unshift($parents, $term_id);
+		}
+
+		foreach (array_reverse($parents) as $term_id) {
+			$parent = get_term($term_id, $taxonomy);
+			$key = ( 'slug' === $args['format'] ) ? $parent->slug : $parent->term_id;
+
+			$list .= $key . $args['separator'];
+
+			if ($term_id_param !== $term_id) {
+				$parent_categories[] = $term_id;
 			}
 		}
 
-		$score .= '}';
-		if ($hasScore) {
-			return 'EXM.Tracking.score(' . $score . ');';
-		} else {
-			return '';
-		}
-	}
-
-	public static function startsWith($haystack, $needle) {
-		// search backwards starting from haystack length characters from the end
-		return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
-	}
-
-	function endsWith($haystack, $needle) {
-		// search forward starting from end minus needle length characters
-		return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
+		$result = [];
+		$result["list"] = $list;
+		$result["parents"] = $parent_categories;
+		return $result;
 	}
 
 }

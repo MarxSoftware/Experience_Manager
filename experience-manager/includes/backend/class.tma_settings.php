@@ -23,22 +23,6 @@ class TMA_Settings {
 		wp_enqueue_style('tma-settings');
 
 
-		if (tma_exm_dependencies_fulfilled(["module-metrics"])) {
-			wp_register_script('exm-d3-js', plugins_url('experience-manager/assets/dashboard/d3.min.js'));
-			wp_enqueue_script('exm-d3-js');
-			wp_register_script('exm-c3-js', plugins_url('experience-manager/assets/dashboard/c3.min.js'), ['exm-d3-js']);
-			wp_enqueue_script('exm-c3-js');
-			wp_register_style('ecm-c3-css', plugins_url('experience-manager/assets/dashboard/c3.min.css'));
-			wp_enqueue_style('ecm-c3-css');
-
-
-
-			wp_register_script('exm-dashboard-js', plugins_url('experience-manager/assets/dashboard/exm-dashboard.js'), ['exm-c3-js', 'experience-manager-exm']);
-			wp_enqueue_script('exm-dashboard-js');
-			wp_register_style('exm-dashboard-css', plugins_url('experience-manager/assets/dashboard/exm-dashboard.css'));
-			wp_enqueue_style('exm-dashboard-css');
-		}
-
 		//set the settings
 		$this->settings_api->set_sections($this->get_settings_sections());
 		$this->settings_api->set_fields($this->get_settings_fields());
@@ -48,15 +32,12 @@ class TMA_Settings {
 
 	function admin_menu() {
 		add_menu_page(
-				__("Experience Manager", "tma-webtools"), __("Experience Manager", "tma-webtools"), 'manage_options', 'experience-manager/pages/tma-webtools-admin.php', null, plugins_url('experience-manager/images/settings_16.png'), 50);
-		add_submenu_page('experience-manager/pages/tma-webtools-admin.php', __("Dashboard", "tma-webtools"), __("Dashboard", "tma-webtools"), 'manage_options', 'experience-manager/pages/tma-webtools-admin.php', null);
-		add_submenu_page('experience-manager/pages/tma-webtools-admin.php', __("Settings", "tma-webtools"), __("Settings", "tma-webtools"), 'manage_options', 'tma-webtools-setting-admin', array($this, 'plugin_page'));
+				__("Experience Manager", "experience-manager"), __("Experience Manager", "experience-manager"), 'manage_options', 'exm-settings', array($this, 'plugin_page'), plugins_url('experience-manager/images/settings_16.png'), 50);
+		//add_submenu_page('experience-manager/pages/tma-webtools-admin.php', __("Dashboard", "experience-manager"), __("Dashboard", "experience-manager"), 'manage_options', 'experience-manager/pages/tma-webtools-admin.php', null);
+		//add_submenu_page('experience-manager/pages/tma-webtools-admin.php', __("Settings", "experience-manager"), __("Settings", "experience-manager"), 'manage_options', 'tma-webtools-setting-admin', array($this, 'plugin_page'));
 		
-		if (tma_exm_dependencies_fulfilled(["module-hosting"])) {
-			add_submenu_page('experience-manager/pages/tma-webtools-admin.php', __("Hosting", "tma-webtools"), __("Hosting", "tma-webtools"), 'manage_options', 'experience-manager/pages/hosting.php', null);
-		}
 		
-		add_submenu_page('experience-manager/pages/tma-webtools-admin.php', __("Documentation", "tma-webtools"), __("Documentation", "tma-webtools"), 'manage_options', 'https://wp-digitalexperience.com/documentation/experience-manager/', null);
+		add_submenu_page('exm-settings', __("Documentation", "experience-manager"), __("Documentation", "experience-manager"), 'manage_options', 'https://marx-software.de/documentation/experience-manager/', null);
 	}
 
 	function get_settings_sections() {
@@ -85,8 +66,8 @@ class TMA_Settings {
 			'tma_webtools_option' => array(
 				array(
 					'name' => 'webtools_siteid',
-					'label' => __("Site id", "tma-webtools"),
-					'desc' => __("The id should be unique and is used to filter in the Experience Platform.", "tma-webtools"),
+					'label' => __("Site id", "experience-manager"),
+					'desc' => __("The id should be unique and is used to filter in the Experience Platform.", "experience-manager"),
 					'placeholder' => __('Your site id', 'wedevs'),
 					'type' => 'text',
 					'default' => '',
@@ -94,8 +75,8 @@ class TMA_Settings {
 				),
 				array(
 					'name' => 'webtools_url',
-					'label' => __("Url", "tma-webtools"),
-					'desc' => __("The url where the Experience Platform is installed.", "tma-webtools"),
+					'label' => __("Url", "experience-manager"),
+					'desc' => __("The url where the Experience Platform is installed.", "experience-manager"),
 					'placeholder' => __('The webTools url', 'wedevs'),
 					'type' => 'text',
 					'default' => '',
@@ -103,8 +84,8 @@ class TMA_Settings {
 				),
 				array(
 					'name' => 'webtools_apikey',
-					'label' => __("ApiKey", "tma-webtools"),
-					'desc' => __("The apikey to use the Experience Platform.", "tma-webtools"),
+					'label' => __("ApiKey", "experience-manager"),
+					'desc' => __("The apikey to use the Experience Platform.", "experience-manager"),
 					'placeholder' => __('The apikey', 'wedevs'),
 					'type' => 'text',
 					'default' => '',
@@ -112,8 +93,8 @@ class TMA_Settings {
 				),
 				array(
 					'name' => 'webtools_cookiedomain',
-					'label' => __("Cookie domain", "tma-webtools"),
-					'desc' => __("Share the Experience Platform cookie with subdomains. e.q. .your_domain.com", "tma-webtools"),
+					'label' => __("Cookie domain", "experience-manager"),
+					'desc' => __("Share the Experience Platform cookie with subdomains. e.q. .your_domain.com", "experience-manager"),
 					'placeholder' => __('The cookiedomain', 'wedevs'),
 					'type' => 'text',
 					'default' => '',
@@ -121,41 +102,25 @@ class TMA_Settings {
 				),
 				array(
 					'name' => 'webtools_track',
-					'label' => __("Enable Tracking?", "tma-webtools"),
-					'desc' => __("Tracked events are: pageview", "tma-webtools"),
+					'label' => __("Enable Tracking?", "experience-manager"),
+					'desc' => __("Tracked events are: pageview", "experience-manager"),
 					'type' => 'toggle'
 				),
 				array(
 					'name' => 'webtools_track_logged_in_users',
-					'label' => __("Track logged in users?", "tma-webtools"),
-					'desc' => __("Activate tracking of logged in users.", "tma-webtools"),
+					'label' => __("Track logged in users?", "experience-manager"),
+					'desc' => __("Activate tracking of logged in users.", "experience-manager"),
 					'type' => 'toggle'
 				),
 				/*
 				array(
 					'name' => 'webtools_score',
-					'label' => __("Enable Scoring?", "tma-webtools"),
-					'desc' => __("If enabled, you can user the scoring metabox to set scorings for all your post types.", "tma-webtools"),
+					'label' => __("Enable Scoring?", "experience-manager"),
+					'desc' => __("If enabled, you can user the scoring metabox to set scorings for all your post types.", "experience-manager"),
 					'type' => 'toggle'
 				)
 				 */
-			),
-//			'tma_webtools_option_targeting' => array(
-//				/*
-//				array(
-//					'name' => 'webtools_backend_mode',
-//					'label' => __("Backend mode?", "tma-webtools"),
-//					'desc' => __("Experimental: If enabled, the targeting is done in the backend.", "tma-webtools"),
-//					'type' => 'toggle'
-//				),
-//				 */
-//				array(
-//					'name' => 'webtools_shortcode_single_item_per_group',
-//					'label' => __("Single item per group?", "tma-webtools"),
-//					'desc' => __("If enabled, only the first matching group is delivered.", "tma-webtools"),
-//					'type' => 'toggle'
-//				)
-//			)
+			)
 		);
 
 		$settings_fields = apply_filters("experience-manager/settings/fields", $settings_fields);
