@@ -30,12 +30,12 @@ EXM.Dom.ready(function (event) {
 				.join('&');
 		let url = RECURL + '?' + query;
 		fetch(url).then(function (response) {
-			response.json().then((data) => {
-				if (data.error === false) {
-					$item.innerHTML = data.content;
-					EXM.Hook.call("experience-manager/recommendation/added", {data: data});
-				}
-			});
+			return response.json();
+		}).then((data) => {
+			if (data.error === false) {
+				$item.innerHTML = data.content;
+				EXM.Hook.call("experience-manager/recommendation/added", {data: data});
+			}
 		});
 		/*
 		 EXM.Ajax.request("exm_ecom_load_products_html", function (data) {

@@ -130,6 +130,28 @@ abstract class Ajax_Base {
 		}
 		return $products;
 	}
+	
+	public function most_viewed($count = 3, $category="none", $resolution="ALL") {
+		$values = $this->user_profile($count, $category, $resolution);
+
+		
+		$products = [];
+		if (!$values) {
+			
+		} else {
+			
+			if (property_exists($values, "mostViewedProducts")) {
+				$products = $this->load_products($values->mostViewedProducts);
+			}
+		}
+
+		if (sizeof($products) < $count) {
+			$this->update_products($products, $count);
+		} else if (sizeof($products) > $count) {
+			$products = array_slice($products, 0, $count);
+		}
+		return $products;
+	}
 
 	public function frequently_purchased($count = 3, $category="none", $resolution="ALL") {
 		$values = $this->user_profile($count, $category, $resolution);

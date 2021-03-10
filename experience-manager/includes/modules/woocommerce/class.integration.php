@@ -24,4 +24,15 @@ abstract class Integration {
 		}
 		return FALSE;
 	}
+	
+	protected function get_recommendation_types() {
+		return [
+			"default" => __("None", "experience-manager"),
+			"popular-products" => __("Popular products", "experience-manager"),
+			"frequently-bought" => __("Frequently bought", "experience-manager"),
+			"recently-viewed" => __("Recently viewed", "experience-manager"),
+			"most-viewed" => __("Most viewed", "experience-manager")
+		];
+	}
+
 }

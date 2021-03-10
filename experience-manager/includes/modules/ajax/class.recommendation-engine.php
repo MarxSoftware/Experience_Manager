@@ -51,6 +51,9 @@ class Recommendation_Engine {
 			case "recently-viewed":
 				tma_exm_log("recently-viewed");
 				return $ecom->recently_viewed($count);
+			case "most-viewed":
+				tma_exm_log("most-viewed");
+				return $ecom->most_viewed($count);
 			case "bought-together":
 				tma_exm_log("bought-togther");
 				return $ecom->bought_together($product, $count);

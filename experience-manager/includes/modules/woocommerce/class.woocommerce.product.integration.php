@@ -45,14 +45,6 @@ class WooCommerce_Product_Integration extends Integration {
 		}
 	}
 
-	private function get_recommendation_types() {
-		return [
-			"default" => __("None", "experience-manager"),
-			"popular-products" => __("Popular products", "experience-manager"),
-			"frequently-bought" => __("Frequently bought", "experience-manager"),
-			"recently-viewed" => __("Recently viewed", "experience-manager")
-		];
-	}
 	private function get_recommendation_templates() {
 		return apply_filters("experience-manager/woocommerce/product/templates", [
 			"woocommerce-default" => __("WooCommerce Default", "experience-manager")

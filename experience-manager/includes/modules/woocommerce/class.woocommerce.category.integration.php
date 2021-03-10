@@ -33,6 +33,12 @@ class WooCommerce_Category_Integration extends Integration {
 		add_filter('experience-manager/settings/sections', [$this, 'sections']);
 	}
 
+	private function get_recommendation_templates() {
+		return apply_filters("experience-manager/woocommerce/category/templates", [
+			"woocommerce-default" => __("WooCommerce Default", "experience-manager")
+		]);
+	}
+
 	function init() {
 
 		add_action("parse_query", function () {
@@ -87,21 +93,6 @@ class WooCommerce_Category_Integration extends Integration {
 			tma_exm_log("update_category_footer");
 			exm_get_template("recommendation.category.html", $arguments);
 		}, 20);
-	}
-
-	private function get_recommendation_types() {
-		return [
-			"default" => __("None", "experience-manager"),
-			"popular-products" => __("Popular products in category", "experience-manager"),
-			"frequently-bought" => __("Frequently bought in category", "experience-manager"),
-			"recently-viewed" => __("Recently viewed", "experience-manager")
-		];
-	}
-
-	private function get_recommendation_templates() {
-		return apply_filters("experience-manager/woocommerce/category/templates", [
-			"woocommerce-default" => __("WooCommerce Default", "experience-manager")
-		]);
 	}
 
 	function settings_fields($fields) {

@@ -23,6 +23,7 @@ class TMA_Rest {
 		register_rest_route('experience-manager/v1', '/recommendations', array(
 			'methods' => \WP_REST_Server::READABLE,
 			'callback' => array($this, 'recommendations'),
+			'permission_callback' => '__return_true'
 		));
 	}
 

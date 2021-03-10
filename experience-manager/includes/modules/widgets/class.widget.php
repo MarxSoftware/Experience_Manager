@@ -47,7 +47,9 @@ class Foo_Widget extends \WP_Widget {
 		return [
 			"popular-products" => __("Popular products in category", "experience-manager"),
 			"frequently-bought" => __("Frequently bought in category", "experience-manager"),
-			"recently-viewed" => __("Recently viewed", "experience-manager")
+			"recently-viewed" => __("Recently viewed", "experience-manager"),
+			"most-viewed" => __("Most viewed", "experience-manager")
+			
 		];
 	}
 	private function get_recommendation_templates() {
