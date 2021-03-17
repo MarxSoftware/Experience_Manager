@@ -1,7 +1,7 @@
 <?php
 
-function exm_get_template ($template_name, $arguments) {
-		// Set our template to be the override template in the theme.
+function exm_get_template($template_name, $arguments) {
+	// Set our template to be the override template in the theme.
 	$tmpl = get_stylesheet_directory() . '/experience-manager/' . $template_name . ".php";
 
 	if (!file_exists($tmpl)) {
@@ -11,14 +11,14 @@ function exm_get_template ($template_name, $arguments) {
 	extract($arguments);
 	include $tmpl;
 }
-function exm_get_template_html ($template_name, $arguments) {
+
+function exm_get_template_html($template_name, $arguments) {
 	ob_start();
-	exm_get_template ($template_name, $arguments);
+	exm_get_template($template_name, $arguments);
 	return ob_get_clean();
 }
 
-
-function exm_get_userid () {
+function exm_get_userid() {
 	return \TMA\ExperienceManager\TMA_Request::getUserID();
 }
 
@@ -60,7 +60,6 @@ function tma_exm_is_debug() {
 
 	return $debug;
 }
-
 
 function tma_exm_is_editor_active() {
 	if (isset($_GET['action']) && ($_GET['action'] === 'edit')) { // || $_GET['action'] === 'elementor')

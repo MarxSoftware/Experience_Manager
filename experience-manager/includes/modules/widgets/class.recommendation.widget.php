@@ -5,16 +5,16 @@ namespace TMA\ExperienceManager\Modules\Widgets;
 /**
  * Adds Foo_Widget widget.
  */
-class Foo_Widget extends \WP_Widget {
+class Recommendation_Widget extends \WP_Widget {
  
     /**
      * Register widget with WordPress.
      */
     public function __construct() {
         parent::__construct(
-            'foo_widget', // Base ID
+            'exm_recommendation_widget', // Base ID
             'EXM Recommendation', // Name
-            array( 'description' => __( 'Prodcut recommendation widget', 'experience-manager' ), ) // Args
+            array( 'description' => __( 'Product recommendation widget', 'experience-manager' ), ) // Args
         );
     }
  
@@ -36,6 +36,7 @@ class Foo_Widget extends \WP_Widget {
 			"title" => $title,
 			"type" => $instance['type'],
 			"size" => $instance['size'],
+			"resolution" => $instance['resolution'],
 			"template" => "widget/" . $instance['template']
 		];
 		exm_get_template("recommendation.widget.html", $arguments);
@@ -54,7 +55,7 @@ class Foo_Widget extends \WP_Widget {
 	}
 	private function get_recommendation_templates() {
 		return apply_filters("experience-manager/woocommerce/widget/templates", [
-			"woocommerce-default" => __("WooCommerce Default", "experience-manager"),
+			"default" => __("Default", "experience-manager"),
 			"simple" => __("Simple", "experience-manager"),
 			"slider" => __("Slider", "experience-manager")
 		]);
@@ -81,18 +82,21 @@ class Foo_Widget extends \WP_Widget {
 			$instance['type'] = array_shift( $instance['type'] );
 		}
 		if (!isset($instance['template'])) {
-		    $instance['template'] = 'woocommerce-default';
+		    $instance['template'] = 'default';
         }
-
 		if ( is_array( $instance['template'] ) ) {
 			$instance['template'] = array_shift( $instance['template'] );
 		}
+		if (!isset($instance['resolution'])) {
+		    $instance['resolution'] = 'resolution';
+        }
 
 		?>
         <p><label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'experience-manager' ); ?></label>
             <input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"
                    name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text"
-                   value="<?php echo esc_attr( $title ); ?>"/></p>
+                   value="<?php echo esc_attr( $title ); ?>"/>
+		</p>
 
         <p>
             <label for="<?php echo $this->get_field_id( 'size' ); ?>"><?php _e( 'Number of products to show:', 'experience-manager' ); ?></label>
@@ -125,6 +129,25 @@ class Foo_Widget extends \WP_Widget {
 			<?php endforeach; ?>
             <?php echo '</select>'; ?>
         </p>
+		<p>
+            <label for="<?php echo $this->get_field_id( 'resolution' ); ?>"><?php _e( 'Resolution:', 'experience-manager' ); ?></label>
+			<?php
+			echo '<select id="' . $this->get_field_id( 'resolution' ) . '" name="' . $this->get_field_name( 'resolution' ) . '">';
+			?>
+			<?php 
+			$resolutions = [
+				"ALL" => "All",
+				"DAY" => "Day",
+				"WEEK" => "Week",
+				"MONTH" => "Month",
+				"YEAR" => "Year",
+			];
+			foreach ( $resolutions as $resolution => $label ): ?>
+                <option <?php selected( $resolution, $instance['resolution'] ); ?>
+                        value="<?php echo $resolution; ?>"><?php echo $label; ?></option>
+			<?php endforeach; ?>
+            <?php echo '</select>'; ?>
+        </p>
 
 		<?php
 	}
@@ -144,6 +167,7 @@ class Foo_Widget extends \WP_Widget {
         $instance['size'] = ( !empty( $new_instance['size'] ) ) ? strip_tags( $new_instance['size'] ) : '';
         $instance['type'] = ( !empty( $new_instance['type'] ) ) ? strip_tags( $new_instance['type'] ) : '';
         $instance['template'] = ( !empty( $new_instance['template'] ) ) ? strip_tags( $new_instance['template'] ) : '';
+        $instance['resolution'] = ( !empty( $new_instance['resolution'] ) ) ? strip_tags( $new_instance['resolution'] ) : '';
  
         return $instance;
     }

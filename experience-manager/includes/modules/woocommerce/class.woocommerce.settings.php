@@ -21,7 +21,7 @@ class WooCommerce_Settings {
 				[
 					'name' => 'exm_wc_sync_products',
 					'label' => __("Sync Products", "experience-manager"),
-					'desc' => __("Sync your products with the recommendation engine.", "experience-manager"),
+					'desc' => __("Sync your products with the ecommerce engine.", "experience-manager"),
 					'type' => 'button',
 					'button_label' => 'Start Sync',
 					'onclick' => 'exm_wc_sync_products(this)'

@@ -17,7 +17,7 @@ function exm_modules_ecommerce_settings($fields) {
 				'disable' => !\TMA\ExperienceManager\Plugins::getInstance()->woocommerce(),
 				'type' => 'toggle',
 				'default' => ''
-			),
+			)/*,
 			array(
 				'name' => 'edd_tracking',
 				'label' => __("Track EasyDigitalDownloads events?", "experience-manager"),
@@ -25,7 +25,7 @@ function exm_modules_ecommerce_settings($fields) {
 				'disable' => !\TMA\ExperienceManager\Plugins::getInstance()->easydigitaldownloads(),
 				'type' => 'toggle',
 				'default' => ''
-			)
+			)*/
 		)
 	);
 	$fields = array_merge_recursive($fields, $settings_fields);

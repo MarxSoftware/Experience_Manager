@@ -115,9 +115,9 @@ abstract class Ajax_Base {
 		
 		$products = [];
 		if (!$values) {
-			
+			tma_exm_log("no values");
 		} else {
-			
+			tma_exm_log("values");
 			if (property_exists($values, "recentlyViewedProducts")) {
 				$products = $this->load_products($values->recentlyViewedProducts);
 			}

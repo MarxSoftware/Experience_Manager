@@ -34,7 +34,19 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	"TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Category_Integration" => "includes/modules/woocommerce/class.woocommerce.category.integration.php",
 	"TMA\ExperienceManager\Modules\WooCommerce\WooCommerce_Shop_Integration" => "includes/modules/woocommerce/class.woocommerce.shop.integration.php",
 	"TMA\ExperienceManager\Modules\WooCommerce\Integration" => "includes/modules/woocommerce/class.integration.php",
-	"TMA\ExperienceManager\Modules\Widgets\Foo_Widget" => "includes/modules/widgets/class.widget.php",
+	"TMA\ExperienceManager\Modules\Widgets\Recommendation_Widget" => "includes/modules/widgets/class.recommendation.widget.php",
+	"TMA\ExperienceManager\Modules\Widgets\FlexContent_Widget" => "includes/modules/widgets/class.flex_content.widget.php",
+	
+	// Content Editor
+	"TMA\ExperienceManager\Content\Flex_Content" => "includes/backend/content/class.content.php",
+	"TMA\ExperienceManager\Content\Flex_Content_Engine" => "includes/backend/content/class.content-engine.php",
+	"TMA\ExperienceManager\Content\Flex_Content_Validator" => "includes/backend/content/class.content-validator.php",
+	"TMA\ExperienceManager\Content\ContentType" => "includes/backend/content/class.content-type.php",
+	"TMA\ExperienceManager\Content\ContentEditor" => "includes/backend/content/class.content-editor.php",
+	"TMA\ExperienceManager\Content\ContentEditorMetaBox" => "includes/backend/content/class.content-editor-metabox.php",
+	"TMA\ExperienceManager\Content\ContentSettingsMetaBox" => "includes/backend/content/class.content-settings-metabox.php",
+	"TMA\ExperienceManager\Content\ContentShortCode" => "includes/backend/content/class.content-shortcode.php",
+	"TMA\ExperienceManager\Content\ContentAjax" => "includes/backend/content/class.content-ajax.php", 
 ));
 
 function tma_webtools_autoload($class_name) {

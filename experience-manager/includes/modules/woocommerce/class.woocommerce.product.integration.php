@@ -47,7 +47,8 @@ class WooCommerce_Product_Integration extends Integration {
 
 	private function get_recommendation_templates() {
 		return apply_filters("experience-manager/woocommerce/product/templates", [
-			"woocommerce-default" => __("WooCommerce Default", "experience-manager")
+			"default" => __("Default", "experience-manager"),
+			"simple" => __("Simple", "experience-manager")
 		]);
 	}
 
@@ -59,7 +60,7 @@ class WooCommerce_Product_Integration extends Integration {
 			$arguments["product"] = $product->get_id();
 			$arguments["size"] = 3;
 			$arguments["type"] = $this->get_feature("product_defailt_page_related") ? $this->get_feature("product_defailt_page_related") : "recently-viewed";
-			$arguments["template"] = "product/" . $this->get_feature("product_defailt_page_template") ? $this->get_feature("product_defailt_page_template") : "woocommerce-default";
+			$arguments["template"] = "product/" . $this->get_feature("product_defailt_page_template") ? $this->get_feature("product_defailt_page_template") : "default";
 			$title = $this->get_feature("product_default_page_related_title");
 			if ($title) {
 				$arguments["title"] = $title;

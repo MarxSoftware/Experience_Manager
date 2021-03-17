@@ -1,0 +1,147 @@
+.products {
+    display: flex;
+    flex-wrap: wrap;
+}
+ 
+.product {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 2%;
+    flex: 1 16%;
+    padding-top: 20px;
+    text-align: center;
+    position: relative;
+}
+ 
+.button {
+    position: relative;
+}
+ 
+.image {
+    width: 100%;
+    font-size: 5em;
+    margin: 2px;
+    min-height: 120px;
+    margin: 0 auto;
+}
+ 
+.sale {
+    padding: 2px;
+    font-weight: bold;
+    position: absolute;
+    background-color: red;
+    color: white;
+}
+ 
+.price {
+    flex: 1;
+}
+ 
+.title {
+    flex: 1;
+}
+ 
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .product {
+        flex: 1 21%;
+    }
+    .products .product:first-child, .products .product:nth-child(2) {
+        flex: 2 46%;
+    }
+}
+ 
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .products {
+        flex-direction: column;
+    }
+    .product {
+        flex: 1 46%;
+    }
+}
+ 
+@media (min-width: 481px) and (max-width: 767px) {
+    .products {
+        flex-direction: column;
+    }
+    .product {
+        flex: 1 46%;
+    }
+}
+ 
+@media (min-width: 320px) and (max-width: 480px) {
+    .products {
+        flex-direction: column;
+    }
+    .product {
+        flex: 1 100%;
+    }
+}
+ 
+@keyframes loader {
+    to {
+        transform: rotate(360deg);
+    }
+}
+ 
+.loader:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: #07d;
+    border-bottom-color: #07d;
+    animation: loader .8s ease infinite;
+}
+ 
+/* notify start */
+ 
+.success {
+    background: #03a679;
+    color: #f0f0f0;
+}
+ 
+.failure {
+    background: #ff3939;
+    color: #f0f0f0;
+}
+ 
+.notify {
+    position: relative;
+    top: 0px;
+    width: 100%;
+    height: 0;
+    box-sizing: border-box;
+    color: white;
+    text-align: center;
+    background: rgba(0, 0, 0, .6);
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: height .2s;
+}
+ 
+#exm_ecom_notifyType:before {
+    display: block;
+    margin-top: 15px;
+}
+ 
+.active {
+    height: 50px;
+}
+ 
+.success:before {
+    Content: "Success!";
+}
+ 
+.failure:before {
+    Content: "Something went wrong!";
+}
+ 
+/* notify end*/

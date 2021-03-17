@@ -14,6 +14,7 @@ EXM.Dom.ready(function (event) {
 		let product = $item.dataset.exmProduct;
 		let category = $item.dataset.exmCategory;
 		let template = $item.dataset.exmTemplate;
+		let resolution = $item.dataset.exmResolution;
 		let title = $item.dataset.exmTitle;
 
 		let params = {
@@ -22,7 +23,8 @@ EXM.Dom.ready(function (event) {
 			"product": product,
 			"category": category,
 			"template": template,
-			"title": title
+			"title": title,
+			"resolution": resolution
 		};
 		let RECURL = EXMCONFIG.rest_url + "experience-manager/v1/recommendations";
 		let query = Object.keys(params)

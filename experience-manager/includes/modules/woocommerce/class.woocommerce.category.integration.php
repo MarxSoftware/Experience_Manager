@@ -35,7 +35,8 @@ class WooCommerce_Category_Integration extends Integration {
 
 	private function get_recommendation_templates() {
 		return apply_filters("experience-manager/woocommerce/category/templates", [
-			"woocommerce-default" => __("WooCommerce Default", "experience-manager")
+			"default" => __("Default", "experience-manager"),
+			"simple" => __("Simple", "experience-manager")
 		]);
 	}
 
@@ -66,7 +67,7 @@ class WooCommerce_Category_Integration extends Integration {
 			$arguments["category"] = get_queried_object_id();
 			$arguments["size"] = 3;
 			$arguments["type"] = $this->get_feature("header_products") ? $this->get_feature("header_products") : "recently-viewed";
-			$arguments["template"] = "category/" . ($this->get_feature("header_template") ? $this->get_feature("header_template") : "woocommerce-default");
+			$arguments["template"] = "category/" . ($this->get_feature("header_template") ? $this->get_feature("header_template") : "default");
 			$title = $this->get_feature("header_title");
 			if ($title) {
 				$arguments["title"] = $title;
@@ -83,7 +84,7 @@ class WooCommerce_Category_Integration extends Integration {
 			$arguments["category"] = get_queried_object_id();
 			$arguments["size"] = 3;
 			$arguments["type"] = $this->get_feature("footer_products") ? $this->get_feature("footer_products") : "recently-viewed";
-			$arguments["template"] = "category/" . ($this->get_feature("footer_template") ? $this->get_feature("footer_template") : "woocommerce-default");
+			$arguments["template"] = "category/" . ($this->get_feature("footer_template") ? $this->get_feature("footer_template") : "default");
 			$title = $this->get_feature("footer_title");
 			if ($title) {
 				$arguments["title"] = $title;

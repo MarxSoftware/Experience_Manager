@@ -1,0 +1,15 @@
+<div class="slider">
+    <b class="title">Recently viewed products</b>
+    {{#recommendation}}
+        <div class="slides fade">
+             <div class="product" data-exm-product-id="{{{id}}}">
+            <a href="{{{url}}}">
+                {{{image}}}
+                <h4 class="title" style="width:100%;">{{title}}</h4>
+            </a>
+            </div>
+        </div>
+    {{/recommendation}}
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>

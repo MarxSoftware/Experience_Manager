@@ -29,8 +29,16 @@ class Recommendation_Engine {
 	}
 
 	public function render_template($template, $arguments = []) {
-		$arguments["related_products"] = $this->get_products();
+		$products = $this->get_products();
+		$arguments["related_products"] = $products;
 
+		if (!$products || sizeof($products) === 0) {
+			tma_exm_log("no products loaded");
+			return "";
+		} else {
+			tma_exm_log("products loaded: " . sizeof($products));
+		}
+		
 		return exm_get_template_html($template, $arguments);
 	}
 

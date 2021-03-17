@@ -2,7 +2,7 @@
 /*
   Plugin Name: Experience Manager
   Plugin URI: https://marx-software.de/experience-manager/
-  Description: The integration for the experience platform.
+  Description: The integration for the ecommerce-engine.
   Author: Marx-Software - Thorsten Marx
   Version: 4.5.0
   Author URI: https://marx-software.de/
@@ -29,7 +29,7 @@ require_once 'tma-scripts.php';
 
 require_once 'includes/modules/events/ecommerce_events.php';
 
-
+\TMA\ExperienceManager\Content\ContentType::getInstance()->register();
 add_action("init", "exm_init");
 add_action("rest_api_init", "exm_rest_init");
 require_once 'includes/modules/widgets/register_widgets.php';
