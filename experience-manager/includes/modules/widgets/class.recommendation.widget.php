@@ -36,7 +36,7 @@ class Recommendation_Widget extends \WP_Widget {
 			"title" => $title,
 			"type" => $instance['type'],
 			"size" => $instance['size'],
-			"resolution" => $instance['resolution'],
+			"resolution" => array_key_exists("resolution", $instance) ? $instance['resolution'] : "ALL",
 			"template" => "widget/" . $instance['template']
 		];
 		exm_get_template("recommendation.widget.html", $arguments);

@@ -47,6 +47,9 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	"TMA\ExperienceManager\Content\ContentSettingsMetaBox" => "includes/backend/content/class.content-settings-metabox.php",
 	"TMA\ExperienceManager\Content\ContentShortCode" => "includes/backend/content/class.content-shortcode.php",
 	"TMA\ExperienceManager\Content\ContentAjax" => "includes/backend/content/class.content-ajax.php", 
+	
+	// Customizer
+	"TMA\ExperienceManager\Customizer\Customizer" => "includes/backend/customizer/class.customizer.php",
 ));
 
 function tma_webtools_autoload($class_name) {

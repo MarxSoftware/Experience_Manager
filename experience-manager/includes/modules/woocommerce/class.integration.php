@@ -14,8 +14,28 @@ namespace TMA\ExperienceManager\Modules\WooCommerce;
  * @author marx
  */
 abstract class Integration {
+	
+	private $options;
+	private $option_name;
+	
+	public function __construct($option_name) {
+		$this->option_name = $option_name;
+		$this->options = get_option($option_name);
+	}
     
-	abstract function get_options ();
+	function get_options () {
+		return $this->options;
+	}
+	
+	function get_option_name () {
+		return $this->option_name;
+	}
+	
+	function update_options() {
+		if (is_customize_preview()) {
+			$this->options = get_option($this->option_name);
+		}
+	}
 
 	
 	protected function get_feature($feature) {
