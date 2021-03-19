@@ -30,6 +30,9 @@ class WooCommerce_Shop_Integration extends Integration {
 
 	public function add_settings() {
 		add_filter("customize_register", [$this, "register_customizer"]);
+	
+		add_filter('experience-manager/settings/fields', [$this, 'settings_fields']);
+		add_filter('experience-manager/settings/sections', [$this, 'sections']);
 	}
 
 	public function register_customizer(\WP_Customize_Manager $wp_customize) {
@@ -41,13 +44,13 @@ class WooCommerce_Shop_Integration extends Integration {
 		$wp_customize->add_section("exm_recom_shoppage_header", array(
 			'title' => __("Shoppage header", "experience-manager"),
 			'panel' => 'exm_recommendations',
-			'capability' => 'manage_options',
+			'capability' => 'manage_woocommerce',
 			'description' => 'Configure the recommendation for the shop page header area.'
 		));
 		// HEADER START
 		$wp_customize->add_setting('exm-woocommerce-shop[header_title]', array(
 			'type' => 'option',
-			'capability' => 'manage_options',
+			'capability' => 'manage_woocommerce',
 			'default' => '',
 		));
 
@@ -64,7 +67,7 @@ class WooCommerce_Shop_Integration extends Integration {
 
 		$wp_customize->add_setting('exm-woocommerce-shop[header_products]', array(
 			'type' => 'option',
-			'capability' => 'manage_options',
+			'capability' => 'manage_woocommerce',
 			'default' => '',
 		));
 
@@ -81,7 +84,7 @@ class WooCommerce_Shop_Integration extends Integration {
 		);
 		$wp_customize->add_setting('exm-woocommerce-shop[header_template]', array(
 			'type' => 'option',
-			'capability' => 'manage_options',
+			'capability' => 'manage_woocommerce',
 			'default' => 'default',
 		));
 
@@ -104,13 +107,13 @@ class WooCommerce_Shop_Integration extends Integration {
 		$wp_customize->add_section("exm_recom_shoppage_footer", array(
 			'title' => __("Shoppage footer", "experience-manager"),
 			'panel' => 'exm_recommendations',
-			'capability' => 'manage_options',
+			'capability' => 'manage_woocommerce',
 			'description' => 'Configure the recommendation for the footer of the shop page'
 		));
 		// FOOTER START
 		$wp_customize->add_setting('exm-woocommerce-shop[footer_title]', array(
 			'type' => 'option',
-			'capability' => 'manage_options',
+			'capability' => 'manage_woocommerce',
 			'default' => 'default',
 		));
 
@@ -127,7 +130,7 @@ class WooCommerce_Shop_Integration extends Integration {
 
 		$wp_customize->add_setting('exm-woocommerce-shop[footer_products]', array(
 			'type' => 'option',
-			'capability' => 'manage_options',
+			'capability' => 'manage_woocommerce',
 			'default' => 'default',
 		));
 
@@ -144,7 +147,7 @@ class WooCommerce_Shop_Integration extends Integration {
 		);
 		$wp_customize->add_setting('exm-woocommerce-shop[footer_template]', array(
 			'type' => 'option',
-			'capability' => 'manage_options',
+			'capability' => 'manage_woocommerce',
 			'default' => '',
 		));
 
@@ -223,5 +226,79 @@ class WooCommerce_Shop_Integration extends Integration {
 			"default" => __("Default", "experience-manager"),
 			"simple" => __("Simple", "experience-manager")
 		]);
+	}
+	
+	function settings_fields($fields) {
+
+		$settings_fields = [
+			'exm-woocommerce-shop' => [
+				[
+					'name' => 'header',
+					'label' => __("Shop header", "experience-manager"),
+					'desc' => __("Configure product recommendation on shop page header!", "experience-manager"),
+					'type' => 'subsection',
+				],
+				[
+					'name' => 'header_products',
+					'label' => __("Recommendation type", "experience-manager"),
+					'desc' => __("What kind of recommendation to display.", "experience-manager"),
+					'type' => 'select',
+					'options' => $this->get_recommendation_types()
+				],
+				[
+					'name' => 'header_template',
+					'label' => __("Template", "experience-manager"),
+					'desc' => __("The template used to display the products.", "experience-manager"),
+					'type' => 'select',
+					'options' => $this->get_recommendation_templates()
+				],
+				[
+					'name' => 'header_title',
+					'label' => __("Title", "experience-manager"),
+					'desc' => __("The title.", "experience-manager"),
+					'type' => 'text'
+				],
+				/* Footer */
+				[
+					'name' => 'footer',
+					'label' => __("Category footer", "experience-manager"),
+					'desc' => __("Configure product recommendation on shop page footer!", "experience-manager"),
+					'type' => 'subsection',
+				],
+				[
+					'name' => 'footer_products',
+					'label' => __("Recommendation type", "experience-manager"),
+					'desc' => __("What kind of recommendation to display.", "experience-manager"),
+					'type' => 'select',
+					'options' => $this->get_recommendation_types()
+				],
+				[
+					'name' => 'footer_template',
+					'label' => __("Template", "experience-manager"),
+					'desc' => __("The template used to display the products.", "experience-manager"),
+					'type' => 'select',
+					'options' => $this->get_recommendation_templates()
+				],
+				[
+					'name' => 'footer_title',
+					'label' => __("Title", "experience-manager"),
+					'desc' => __("The title.", "experience-manager"),
+					'type' => 'text'
+				]
+			]
+		];
+		$fields = array_merge_recursive($fields, $settings_fields);
+		return $fields;
+	}
+
+	function sections($sections) {
+		$custom_sections = [
+			[
+				'id' => 'exm-woocommerce-shop',
+				'title' => __('Shop page', 'tma-webtools')
+			]
+		];
+		$sections = array_merge_recursive($sections, $custom_sections);
+		return $sections;
 	}
 }

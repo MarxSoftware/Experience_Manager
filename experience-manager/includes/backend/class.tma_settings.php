@@ -32,12 +32,12 @@ class TMA_Settings {
 
 	function admin_menu() {
 		add_menu_page(
-				__("Experience Manager", "experience-manager"), __("Experience Manager", "experience-manager"), 'manage_options', 'exm-settings', array($this, 'plugin_page'), plugins_url('experience-manager/images/settings_16.png'), 50);
+				__("Experience Manager", "experience-manager"), __("Experience Manager", "experience-manager"), 'manage_woocommerce', 'exm-settings', array($this, 'plugin_page'), plugins_url('experience-manager/images/settings_16.png'), 50);
 		//add_submenu_page('experience-manager/pages/tma-webtools-admin.php', __("Dashboard", "experience-manager"), __("Dashboard", "experience-manager"), 'manage_options', 'experience-manager/pages/tma-webtools-admin.php', null);
 		//add_submenu_page('experience-manager/pages/tma-webtools-admin.php', __("Settings", "experience-manager"), __("Settings", "experience-manager"), 'manage_options', 'tma-webtools-setting-admin', array($this, 'plugin_page'));
 		
 		
-		add_submenu_page('exm-settings', __("Documentation", "experience-manager"), __("Documentation", "experience-manager"), 'manage_options', 'https://marx-software.de/documentation/experience-manager/', null);
+		add_submenu_page('exm-settings', __("Documentation", "experience-manager"), __("Documentation", "experience-manager"), 'manage_woocommerce', 'https://marx-software.de/documentation/experience-manager/', null);
 	}
 
 	function get_settings_sections() {

@@ -48,13 +48,13 @@ class WooCommerce_Product_Integration extends Integration {
 		$wp_customize->add_section("exm_recom_product", array(
 			'title' => __("Product related products", "experience-manager"),
 			'panel' => 'exm_recommendations',
-			'capability' => 'manage_options',
+			'capability' => 'manage_woocommerce',
 			'description' => 'Configure the related products for the product page.'
 		));
 
 		$wp_customize->add_setting('exm-woocommerce-product[related_disable]', array(
 			'type' => 'option',
-			'capability' => 'manage_options',
+			'capability' => 'manage_woocommerce',
 			'default' => 'off',
 			'sanitize_callback' => [$this, "themeslug_sanitize_checkbox"],
 		));
@@ -73,7 +73,7 @@ class WooCommerce_Product_Integration extends Integration {
 		// HEADER START
 		$wp_customize->add_setting('exm-woocommerce-product[title]', array(
 			'type' => 'option',
-			'capability' => 'manage_options',
+			'capability' => 'manage_woocommerce',
 			'default' => '',
 		));
 
@@ -90,7 +90,7 @@ class WooCommerce_Product_Integration extends Integration {
 
 		$wp_customize->add_setting('exm-woocommerce-product[type]', array(
 			'type' => 'option',
-			'capability' => 'manage_options',
+			'capability' => 'manage_woocommerce',
 			'default' => 'default',
 		));
 
@@ -108,7 +108,7 @@ class WooCommerce_Product_Integration extends Integration {
 		);
 		$wp_customize->add_setting('exm-woocommerce-product[template]', array(
 			'type' => 'option',
-			'capability' => 'manage_options',
+			'capability' => 'manage_woocommerce',
 			'default' => 'default',
 		));
 

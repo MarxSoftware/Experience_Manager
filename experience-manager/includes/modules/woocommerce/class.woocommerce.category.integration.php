@@ -44,13 +44,13 @@ class WooCommerce_Category_Integration extends Integration {
 		$wp_customize->add_section("exm_recom_category_header", array(
 			'title' => __("Category page header", "experience-manager"),
 			'panel' => 'exm_recommendations',
-			'capability' => 'manage_options',
+			'capability' => 'manage_woocommerce',
 			'description' => 'Configure the recommendation for the category page header area.'
 		));
 		// HEADER START
 		$wp_customize->add_setting('exm-woocommerce-category[header_title]', array(
 			'type' => 'option',
-			'capability' => 'manage_options',
+			'capability' => 'manage_woocommerce',
 			'default' => '',
 		));
 
@@ -67,7 +67,7 @@ class WooCommerce_Category_Integration extends Integration {
 
 		$wp_customize->add_setting('exm-woocommerce-category[header_products]', array(
 			'type' => 'option',
-			'capability' => 'manage_options',
+			'capability' => 'manage_woocommerce',
 			'default' => 'default',
 		));
 
@@ -85,7 +85,7 @@ class WooCommerce_Category_Integration extends Integration {
 		);
 		$wp_customize->add_setting('exm-woocommerce-category[header_template]', array(
 			'type' => 'option',
-			'capability' => 'manage_options',
+			'capability' => 'manage_woocommerce',
 			'default' => 'default',
 		));
 
@@ -108,7 +108,7 @@ class WooCommerce_Category_Integration extends Integration {
 		$wp_customize->add_section("exm_recom_category_footer", array(
 			'title' => __("Category page footer", "experience-manager"),
 			'panel' => 'exm_recommendations',
-			'capability' => 'manage_options',
+			'capability' => 'manage_woocommerce',
 			'description' => 'Configure the recommendation for the footer of the category page'
 		));
 		// FOOTER START
@@ -131,7 +131,7 @@ class WooCommerce_Category_Integration extends Integration {
 
 		$wp_customize->add_setting('exm-woocommerce-category[footer_products]', array(
 			'type' => 'option',
-			'capability' => 'manage_options',
+			'capability' => 'manage_woocommerce',
 			'default' => 'default',
 		));
 
@@ -149,7 +149,7 @@ class WooCommerce_Category_Integration extends Integration {
 		);
 		$wp_customize->add_setting('exm-woocommerce-category[footer_template]', array(
 			'type' => 'option',
-			'capability' => 'manage_options',
+			'capability' => 'manage_woocommerce',
 			'default' => 'default',
 		));
 
