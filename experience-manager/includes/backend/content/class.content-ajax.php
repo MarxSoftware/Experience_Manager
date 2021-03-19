@@ -68,9 +68,11 @@ class ContentAjax {
 			$content = new Flex_Content($post->ID);
 
 			$validator = new Flex_Content_Validator($content, $post_id, $frontpage);
+			/*
 			if (!$validator->validate_conditions(['weekday', 'post_type', 'homepage', 'audience', 'logged_in', 'roles'])) {
 				continue;
 			}
+			 */
 
 			$content_engine = new Flex_Content_Engine($content);
 

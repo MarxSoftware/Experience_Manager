@@ -30,6 +30,9 @@ class WooCommerce_Category_Integration extends Integration {
 
 	public function add_settings() {
 		add_filter("customize_register", [$this, "register_customizer"]);
+
+		add_filter('experience-manager/settings/fields', [$this, 'settings_fields']);
+		add_filter('experience-manager/settings/sections', [$this, 'sections']);
 	}
 
 	public function register_customizer(\WP_Customize_Manager $wp_customize) {
@@ -228,4 +231,79 @@ class WooCommerce_Category_Integration extends Integration {
 			exm_get_template("recommendation.category.html", $arguments);
 		}, 20);
 	}
+
+	function settings_fields($fields) {
+
+		$settings_fields = [
+			'exm-woocommerce-category' => [
+				[
+					'name' => 'header',
+					'label' => __("Category header", "experience-manager"),
+					'desc' => __("Configure product recommendation on category overview header!", "experience-manager"),
+					'type' => 'subsection',
+				],
+				[
+					'name' => 'header_products',
+					'label' => __("Recommendation type", "experience-manager"),
+					'desc' => __("What kind of recommendation to display.", "experience-manager"),
+					'type' => 'select',
+					'options' => $this->get_recommendation_types()
+				],
+				[
+					'name' => 'header_template',
+					'label' => __("Template", "experience-manager"),
+					'desc' => __("The template used to display the products.", "experience-manager"),
+					'type' => 'select',
+					'options' => $this->get_recommendation_templates()
+				],
+				[
+					'name' => 'header_title',
+					'label' => __("Title", "experience-manager"),
+					'desc' => __("The title.", "experience-manager"),
+					'type' => 'text'
+				],
+				/* Footer */
+				[
+					'name' => 'footer',
+					'label' => __("Category footer", "experience-manager"),
+					'desc' => __("Configure product recommendation on category overview footer!", "experience-manager"),
+					'type' => 'subsection',
+				],
+				[
+					'name' => 'footer_products',
+					'label' => __("Recommendation type", "experience-manager"),
+					'desc' => __("What kind of recommendation to display.", "experience-manager"),
+					'type' => 'select',
+					'options' => $this->get_recommendation_types()
+				],
+				[
+					'name' => 'footer_template',
+					'label' => __("Template", "experience-manager"),
+					'desc' => __("The template used to display the products.", "experience-manager"),
+					'type' => 'select',
+					'options' => $this->get_recommendation_templates()
+				],
+				[
+					'name' => 'footer_title',
+					'label' => __("Title", "experience-manager"),
+					'desc' => __("The title.", "experience-manager"),
+					'type' => 'text'
+				]
+			]
+		];
+		$fields = array_merge_recursive($fields, $settings_fields);
+		return $fields;
+	}
+
+	function sections($sections) {
+		$custom_sections = [
+			[
+				'id' => 'exm-woocommerce-category',
+				'title' => __('Category overview', 'tma-webtools')
+			]
+		];
+		$sections = array_merge_recursive($sections, $custom_sections);
+		return $sections;
+	}
+
 }

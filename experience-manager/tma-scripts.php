@@ -25,4 +25,6 @@ function exm_frontend_scripts() {
 	
 	wp_enqueue_script('experience-manager-frontend', TMA_EXPERIENCE_MANAGER_URL . 'assets/experience-manager-frontend.js', array("experience-manager-exm"), "1");
 	wp_enqueue_style('experience-manager-frontend', TMA_EXPERIENCE_MANAGER_URL . 'assets/experience-manager-frontend.css');
+	
+	//wp_enqueue_script('experience-manager-flex-content', TMA_EXPERIENCE_MANAGER_URL . 'js/experience-manager-flex-content.js', array("experience-manager-exm"), "1");
 }
