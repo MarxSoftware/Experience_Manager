@@ -67,7 +67,7 @@ class TMA_Backend_Ajax {
 		}
 
 		$request = new \TMA\ExperienceManager\TMA_Request();
-		$response = $request->post("json/product/batch", $result);
+		$response = $request->post("json/sync/product/batch", $result);
 		
 		wp_reset_query();
 

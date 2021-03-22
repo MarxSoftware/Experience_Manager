@@ -227,10 +227,10 @@ class TMA_Request {
 			foreach ($customAttributes as $key => $value) {
 				if (is_array($value)) {
 					foreach ($value as $vk) {
-						$url .= '&c_' . urldecode($key) . '=' . urlencode($vk);
+						$url .= '&' . urldecode($key) . '=' . urlencode($vk);
 					}
 				} else {
-					$url .= '&c_' . urldecode($key) . '=' . urlencode($value);
+					$url .= '&' . urldecode($key) . '=' . urlencode($value);
 				}
 			}
 		}

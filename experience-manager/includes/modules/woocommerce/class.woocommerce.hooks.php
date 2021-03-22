@@ -23,7 +23,7 @@ class WooCommerce_Hooks {
 		tma_exm_log("delete_product: " . $product->get_id());
 		
 		$request = new \TMA\ExperienceManager\TMA_Request();
-		$response = $request->delete("json/product?product_id=" . $post_id);
+		$response = $request->delete("json/sync/product?product_id=" . $post_id);
 		if ($response) {
 			tma_exm_log("product deleted");
 		} else {
@@ -56,7 +56,7 @@ class WooCommerce_Hooks {
 			$product_dto['allCategories'] = array_unique(array_merge($product_dto['categories'], $ecom_categories_parents));
 			
 			$request = new \TMA\ExperienceManager\TMA_Request();
-			$response = $request->post("json/product", $product_dto);
+			$response = $request->post("json/sync/product", $product_dto);
 			
 			if ($response) {
 				tma_exm_log("product synced");
