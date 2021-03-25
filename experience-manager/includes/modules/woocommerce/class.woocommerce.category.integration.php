@@ -176,29 +176,34 @@ class WooCommerce_Category_Integration extends Integration {
 	}
 
 	function init() {
+		if (!is_customize_preview()) {
+			$this->update_category_page();
+		}
 
-		add_action("parse_query", function () {
-			if (is_product_category()) {
-				$this->update_options();
-				tma_exm_log("is product cat");
-				tma_exm_log($this->get_feature("header_products"));
-				$category_header = $this->get_feature("header_products");
-				if ($category_header && $category_header !== "default") {
-					$this->update_category_header();
-				}
-
-				$category_footer = $this->get_feature("footer_products");
-				if ($category_footer && $category_footer !== "default") {
-					$this->update_category_footer();
-				}
-			} else {
-				tma_exm_log("is not product cat");
-			}
+		// Prepare for customizer preview
+		add_action('customize_preview_init', function () {
+			$this->update_options();
+			$this->update_category_page();
 		});
+	}
+
+	public function update_category_page() {
+		$category_header = $this->get_feature("header_products");
+		if ($category_header && $category_header !== "default") {
+			$this->update_category_header();
+		}
+
+		$category_footer = $this->get_feature("footer_products");
+		if ($category_footer && $category_footer !== "default") {
+			$this->update_category_footer();
+		}
 	}
 
 	private function update_category_header() {
 		add_action('woocommerce_archive_description', function () {
+			if (!is_product_category()) {
+				return;
+			}
 			$arguments = [];
 			$arguments["category"] = get_queried_object_id();
 			$arguments["size"] = 3;
@@ -216,6 +221,9 @@ class WooCommerce_Category_Integration extends Integration {
 
 	private function update_category_footer() {
 		add_action('woocommerce_after_shop_loop', function () {
+			if (!is_product_category()) {
+				return;
+			}
 			$arguments = [];
 			$arguments["category"] = get_queried_object_id();
 			$arguments["size"] = 3;

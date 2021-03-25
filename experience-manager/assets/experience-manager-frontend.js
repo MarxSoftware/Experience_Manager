@@ -8,7 +8,7 @@ EXM.Hook.register("experience-manager/recommendation/added", (arguments) => {
 }, 1);
 EXM.Dom.ready(function (event) {
 	document.querySelectorAll("[data-exm-recommendation]").forEach(function ($item) {
-		console.log("found recommendation");
+		console.log("found recommendation", $item);
 		let type = $item.dataset.exmRecommendation;
 		let size = $item.dataset.exmRecommendationSize;
 		let product = $item.dataset.exmProduct;
@@ -39,14 +39,6 @@ EXM.Dom.ready(function (event) {
 				EXM.Hook.call("experience-manager/recommendation/added", {data: data});
 			}
 		});
-		/*
-		 EXM.Ajax.request("exm_ecom_load_products_html", function (data) {
-		 if (data.error === false) {
-		 $item.innerHTML = data.content;
-		 EXM.Hook.call("experience-manager/recommendation/added", {data: data});
-		 }
-		 }, "&type=" + type + "&size=" + size + "&category=" + category + "&product=" + product + "&template=" + template + "&title=" + title);
-		 */
 	});
 });
 

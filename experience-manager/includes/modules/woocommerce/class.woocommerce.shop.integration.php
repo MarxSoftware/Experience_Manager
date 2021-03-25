@@ -30,7 +30,7 @@ class WooCommerce_Shop_Integration extends Integration {
 
 	public function add_settings() {
 		add_filter("customize_register", [$this, "register_customizer"]);
-	
+
 		add_filter('experience-manager/settings/fields', [$this, 'settings_fields']);
 		add_filter('experience-manager/settings/sections', [$this, 'sections']);
 	}
@@ -166,30 +166,36 @@ class WooCommerce_Shop_Integration extends Integration {
 	}
 
 	function init() {
+		tma_exm_log("shop-- init");
 
-		add_action("parse_query", function () {
+		if (!is_customize_preview()) {
+			$this->update_shop_page();
+		}
+
+		// Prepare for customizer preview
+		add_action('customize_preview_init', function () {
 			$this->update_options();
-			if (is_shop()) {
-				tma_exm_log("options: " . json_encode($this->options));
-				tma_exm_log("is shop");
-				tma_exm_log($this->get_feature("header_products"));
-				$shop_header = $this->get_feature("header_products");
-				if ($shop_header && $shop_header !== "default") {
-					$this->update_shop_header();
-				}
-
-				$shop_footer = $this->get_feature("footer_products");
-				if ($shop_footer && $shop_footer !== "default") {
-					$this->update_shop_footer();
-				}
-			} else {
-				tma_exm_log("is not shop");
-			}
+			$this->update_shop_page();
 		});
+	}
+
+	private function update_shop_page() {
+		$shop_header = $this->get_feature("header_products");
+		if ($shop_header && $shop_header !== "default") {
+			$this->update_shop_header();
+		}
+
+		$shop_footer = $this->get_feature("footer_products");
+		if ($shop_footer && $shop_footer !== "default") {
+			$this->update_shop_footer();
+		}
 	}
 
 	private function update_shop_header() {
 		add_action('woocommerce_archive_description', function () {
+			if (!is_shop()) {
+				return;
+			}
 			$arguments = [];
 			$arguments["size"] = 3;
 			$arguments["type"] = $this->get_feature("header_products") ? $this->get_feature("header_products") : "recently-viewed";
@@ -206,6 +212,9 @@ class WooCommerce_Shop_Integration extends Integration {
 
 	private function update_shop_footer() {
 		add_action('woocommerce_after_shop_loop', function () {
+			if (!is_shop()) {
+				return;
+			}
 			$arguments = [];
 			$arguments["size"] = 3;
 			$arguments["type"] = $this->get_feature("footer_products") ? $this->get_feature("footer_products") : "recently-viewed";
@@ -227,7 +236,7 @@ class WooCommerce_Shop_Integration extends Integration {
 			"simple" => __("Simple", "experience-manager")
 		]);
 	}
-	
+
 	function settings_fields($fields) {
 
 		$settings_fields = [
@@ -301,4 +310,5 @@ class WooCommerce_Shop_Integration extends Integration {
 		$sections = array_merge_recursive($sections, $custom_sections);
 		return $sections;
 	}
+
 }

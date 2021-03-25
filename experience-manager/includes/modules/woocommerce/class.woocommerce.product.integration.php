@@ -13,7 +13,7 @@ class WooCommerce_Product_Integration extends Integration {
 
 	/**
 	 * 
-	 * @return WooCommerce_Category_Integration
+	 * @return WooCommerce_Product_Integration
 	 */
 	public static function getInstance() {
 		if (null === self::$_instance) {
