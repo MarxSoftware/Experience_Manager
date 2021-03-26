@@ -33,10 +33,7 @@ class Recommendation_Engine {
 		$arguments["related_products"] = $products;
 
 		if (!$products || sizeof($products) === 0) {
-			tma_exm_log("no products loaded");
 			return "";
-		} else {
-			tma_exm_log("products loaded: " . sizeof($products));
 		}
 		
 		return exm_get_template_html($template, $arguments);

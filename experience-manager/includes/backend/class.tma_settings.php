@@ -44,8 +44,12 @@ class TMA_Settings {
 		$sections = array(
 			array(
 				'id' => 'tma_webtools_option',
-				'title' => __('Basic Settings', 'tma-webtools')
+				'title' => __('Basic Settings', 'experience-manager')
 			),
+			[
+				'id' => 'exm_options_recommendations',
+				'title' => __("Recommendation Options", "experience-manager")
+			]
 //			array(
 //				'id' => 'tma_webtools_option_targeting',
 //				'title' => __('Targeting', 'wedevs')
@@ -120,7 +124,15 @@ class TMA_Settings {
 					'type' => 'toggle'
 				)
 				 */
-			)
+			),
+			"exm_options_recommendations" => [
+				[
+					'name' => 'add_random_products',
+					'label' => __("Add popular/random products?", "experience-manager"),
+					'desc' => __("Should missing recommendations be filled with popular/random products?", "experience-manager"),
+					'type' => 'toggle'
+				]
+			]
 		);
 
 		$settings_fields = apply_filters("experience-manager/settings/fields", $settings_fields);

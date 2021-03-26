@@ -29,7 +29,7 @@ require_once 'tma-scripts.php';
 
 require_once 'includes/modules/events/ecommerce_events.php';
 
-\TMA\ExperienceManager\Content\ContentType::getInstance()->register();
+//\TMA\ExperienceManager\Content\ContentType::getInstance()->register();
 \TMA\ExperienceManager\Customizer\Customizer::getInstance()->init();
 add_action("init", "exm_init");
 add_action("rest_api_init", "exm_rest_init");
@@ -37,7 +37,6 @@ require_once 'includes/modules/widgets/register_widgets.php';
 
 
 function exm_rest_init() {
-	tma_exm_log("tma_webtools_rest_init");
 	$tma_rest = new \TMA\ExperienceManager\TMA_Rest();
 }
 

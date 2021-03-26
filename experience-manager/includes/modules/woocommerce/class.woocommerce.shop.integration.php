@@ -166,8 +166,6 @@ class WooCommerce_Shop_Integration extends Integration {
 	}
 
 	function init() {
-		tma_exm_log("shop-- init");
-
 		if (!is_customize_preview()) {
 			$this->update_shop_page();
 		}
@@ -225,7 +223,6 @@ class WooCommerce_Shop_Integration extends Integration {
 			} else {
 				$arguments["title"] = "";
 			}
-			tma_exm_log("update_category_footer");
 			exm_get_template("recommendation.shop.html", $arguments);
 		}, 20);
 	}

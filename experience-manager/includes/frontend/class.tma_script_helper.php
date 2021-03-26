@@ -29,7 +29,7 @@ class TMAScriptHelper {
 	public function isTrackingEnabled() {
 
 		$trackUser = false;
-		if (isset(get_option('tma_webtools_option')['webtools_track_logged_in_users']) && get_option('tma_webtools_option')['webtools_track_logged_in_users'] == true) {
+		if (isset(get_option('tma_webtools_option')['webtools_track_logged_in_users']) && get_option('tma_webtools_option')['webtools_track_logged_in_users'] === "on") {
 			$trackUser = true;
 		} else {
 			$trackUser = !is_user_logged_in();
