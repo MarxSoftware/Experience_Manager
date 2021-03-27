@@ -16,6 +16,7 @@ define("TMA_WEBTOOLS_CLASSES", array(
 	"TMA\ExperienceManager\ShortCode_TMA_CONTENT" => "includes/frontend/class.shortcode_tma_content.php",
 	"TMA\ExperienceManager\TMA_Rest" => "includes/class.tma_rest.php",
 	"TMA\ExperienceManager\Singleton" => "includes/class.singleton.php",
+	"TMA\ExperienceManager\Options" => "includes/class.options.php",
 	
 	// Event Tracking
 	"TMA\ExperienceManager\Events\WC_TRACKER" => "includes/modules/events/class.woocommerce_tracker.php",

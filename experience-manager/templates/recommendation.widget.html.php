@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	 data-exm-template="<?php echo $template;?>"
 	 data-exm-resolution="<?php echo $resolution;?>"
 	 data-exm-title="<?php echo $title;?>"
+	 data-exm-category="<?php echo $category;?>"
 	 >
 </div>
 	<?php

@@ -39,6 +39,9 @@ class Recommendation_Widget extends \WP_Widget {
 			"resolution" => array_key_exists("resolution", $instance) ? $instance['resolution'] : "ALL",
 			"template" => "widget/" . $instance['template']
 		];
+		
+		$arguments["category"] = is_product_category() ? get_queried_object_id() : "NONE";
+		
 		exm_get_template("recommendation.widget.html", $arguments);
 		
         echo $after_widget;
@@ -46,8 +49,8 @@ class Recommendation_Widget extends \WP_Widget {
 	
 	private function get_recommendation_types() {
 		return [
-			"popular-products" => __("Popular products in category", "experience-manager"),
-			"frequently-bought" => __("Frequently bought in category", "experience-manager"),
+			"popular-products" => __("Popular products", "experience-manager"),
+			"frequently-bought" => __("Frequently bought", "experience-manager"),
 			"recently-viewed" => __("Recently viewed", "experience-manager"),
 			"most-viewed" => __("Most viewed", "experience-manager")
 			

@@ -15,7 +15,7 @@ abstract class Ajax_Base {
 		//add_action("wp_ajax_nopriv_exm_ecom_load_products", [$this, "ajax_load_products"]);
 		//add_action("wp_ajax_exm_ecom_load_products", [$this, "ajax_load_products"]);
 	
-		$this->options = get_option('exm_options_recommendations');
+		$this->options = new \TMA\ExperienceManager\Options('exm_options_recommendations');
 	}
 
 	public function ajax_load_products() {
@@ -81,7 +81,7 @@ abstract class Ajax_Base {
 	}
 
 	protected function update_products(&$products, $count, $category="none") {
-		if (!isset($this->options['add_random_products']) || $this->options['add_random_products'] !== "on") {
+		if (!$this->options->is_toggle_on('add_random_products')) {
 			tma_exm_log("do not fill up with random products");
 			return;
 		}

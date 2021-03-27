@@ -131,6 +131,12 @@ class TMA_Settings {
 					'label' => __("Add popular/random products?", "experience-manager"),
 					'desc' => __("Should missing recommendations be filled with popular/random products?", "experience-manager"),
 					'type' => 'toggle'
+				],
+				[
+					'name' => 'mode_intelligent',
+					'label' => __("Enable intelligent mode?", "experience-manager"),
+					'desc' => __("If the recommendation is dispayed on a category page, only products if that category are recommended!", "experience-manager"),
+					'type' => 'toggle'
 				]
 			]
 		);

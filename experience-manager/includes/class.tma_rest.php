@@ -42,7 +42,10 @@ class TMA_Rest {
 		$title = $request->get_param('title');
 		$product = $request->get_param('product');
 		$category = $request->get_param('category');
+		
+				tma_exm_log("category: " . $category);
 
+		
 		try {
 			$id = uniqid();
 			$args = [];

@@ -15,17 +15,25 @@ class Recommendation_Engine {
 	private $resolution;
 	private $product;
 	private $category;
+	
+	public $options;
 
-	private function __construct($type, $count, $resolution, $product, $category) {
-		$this->type = $type;
-		$this->count = $count;
-		$this->resolution = $resolution;
-		$this->product = $product;
-		$this->category = $category;
+	private function __construct($parameters) {
+		$this->type = $parameters["type"];
+		$this->count = $parameters["count"];
+		$this->resolution = $parameters["resolution"];
+		$this->product = $parameters["product"];
+		$this->category = $parameters["category"];
+		
+		tma_exm_log(json_encode($parameters));
+		tma_exm_log("category: " . $this->category);
+
+		
+		$this->options = new \TMA\ExperienceManager\Options('exm_options_recommendations');
 	}
 
 	private function get_with_default($value, $defaultValue) {
-		return $value !== FALSE && $value != NULL ? $value : $defaultValue;
+		return $value !== FALSE && $value !== NULL ? $value : $defaultValue;
 	}
 
 	public function render_template($template, $arguments = []) {
@@ -45,6 +53,10 @@ class Recommendation_Engine {
 		$category = $this->get_with_default($this->category, "NONE");
 		$resolution = $this->get_with_default($this->resolution, "ALL");
 		$product = $this->get_with_default($this->product, "ALL");
+		
+		if (!$this->options->is_toggle_on("mode_intelligent")) {
+			$category = "NONE";
+		}
 
 		switch ($this->type) {
 			case "frequently-bought":
@@ -68,7 +80,14 @@ class Recommendation_Engine {
 	}
 
 	public static function create_instance($type, $count, $resolution, $category, $product) {
-		return new Recommendation_Engine($type, $count, $resolution, $category, $product);
+		$parameters = [
+			"type" => $type,
+			"count" => $count,
+			"resolution" => $resolution,
+			"category" => $category,
+			"product" => $product
+		];
+		return new Recommendation_Engine($parameters);
 	}
 
 }
