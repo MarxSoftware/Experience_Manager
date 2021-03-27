@@ -30,7 +30,7 @@ function exm_modules_woocommerce_section($sections) {
 	$custom_sections = array(
 		array(
 			'id' => 'tma-webtools-woocommerce',
-			'title' => __('WooCommerce', 'tma-webtools')
+			'title' => __('WooCommerce', 'experience-manager')
 		)
 	);
 	$sections = array_merge_recursive($sections, $custom_sections);

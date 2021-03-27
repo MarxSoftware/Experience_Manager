@@ -301,7 +301,7 @@ class WooCommerce_Shop_Integration extends Integration {
 		$custom_sections = [
 			[
 				'id' => 'exm-woocommerce-shop',
-				'title' => __('Shop page', 'tma-webtools')
+				'title' => __('Shop page', 'experience-manager')
 			]
 		];
 		$sections = array_merge_recursive($sections, $custom_sections);

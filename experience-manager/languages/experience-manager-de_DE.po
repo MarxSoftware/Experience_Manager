@@ -1,0 +1,464 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2021-03-27 12:31+0100\n"
+"PO-Revision-Date: 2021-03-27 12:32+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"X-Poedit-Basepath: ../../../../entwicklung/workspaces/tma/marx-software/"
+"wordpress/experience_manager/experience-manager/includes\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;esc_html__\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: backend/class.tma_settings.php:35
+msgid "Experience Manager"
+msgstr "Experience Manager"
+
+#: backend/class.tma_settings.php:40
+msgid "Documentation"
+msgstr "Dokumentation"
+
+#: backend/class.tma_settings.php:47
+msgid "Basic Settings"
+msgstr "Standard Einstellungen"
+
+#: backend/class.tma_settings.php:51
+msgid "Recommendation Options"
+msgstr "Einstellungen"
+
+#: backend/class.tma_settings.php:73
+msgid "Site id"
+msgstr "Seiten ID"
+
+#: backend/class.tma_settings.php:74
+msgid ""
+"The id should be unique and is used to filter in the Experience Platform."
+msgstr ""
+
+#: backend/class.tma_settings.php:75
+msgid "Your site id"
+msgstr "Ihre Seiten ID"
+
+#: backend/class.tma_settings.php:82
+msgid "Url"
+msgstr ""
+
+#: backend/class.tma_settings.php:83
+msgid "The url where the Experience Platform is installed."
+msgstr ""
+
+#: backend/class.tma_settings.php:84
+msgid "The webTools url"
+msgstr ""
+
+#: backend/class.tma_settings.php:91
+msgid "ApiKey"
+msgstr ""
+
+#: backend/class.tma_settings.php:92
+msgid "The apikey to use the Experience Platform."
+msgstr ""
+
+#: backend/class.tma_settings.php:93
+msgid "The apikey"
+msgstr ""
+
+#: backend/class.tma_settings.php:100
+msgid "Cookie domain"
+msgstr ""
+
+#: backend/class.tma_settings.php:101
+msgid ""
+"Share the Experience Platform cookie with subdomains. e.q. .your_domain.com"
+msgstr ""
+
+#: backend/class.tma_settings.php:102
+msgid "The cookiedomain"
+msgstr ""
+
+#: backend/class.tma_settings.php:109
+msgid "Enable Tracking?"
+msgstr ""
+
+#: backend/class.tma_settings.php:110
+msgid "Tracked events are: pageview"
+msgstr ""
+
+#: backend/class.tma_settings.php:115
+msgid "Track logged in users?"
+msgstr ""
+
+#: backend/class.tma_settings.php:116
+msgid "Activate tracking of logged in users."
+msgstr ""
+
+#: backend/class.tma_settings.php:131
+msgid "Add popular/random products?"
+msgstr ""
+
+#: backend/class.tma_settings.php:132
+msgid "Should missing recommendations be filled with popular/random products?"
+msgstr ""
+
+#: backend/class.tma_settings.php:137
+msgid "Enable intelligent mode?"
+msgstr ""
+
+#: backend/class.tma_settings.php:138
+msgid ""
+"If the recommendation is dispayed on a category page, only products of that "
+"category are recommended!"
+msgstr ""
+
+#: backend/content/class.content-ajax.php:147
+msgid "No flex content id"
+msgstr ""
+
+#: backend/content/class.content-editor.php:40
+msgid "Open library"
+msgstr ""
+
+#: backend/content/class.content-type.php:109
+msgid "Add New Flex Content"
+msgstr ""
+
+#: backend/content/class.content-type.php:110
+msgid "New Flex Content"
+msgstr ""
+
+#: backend/content/class.content-type.php:111
+msgid "Edit Flex Content"
+msgstr ""
+
+#: backend/content/class.content-type.php:112
+msgid "View Flec Content"
+msgstr ""
+
+#: backend/content/class.content-type.php:113
+msgid "All Flex Contents"
+msgstr ""
+
+#: backend/content/class.content-type.php:114
+msgid "Search Flex Contentx"
+msgstr ""
+
+#: backend/content/class.content-type.php:115
+msgid "Parent Flex Contents:"
+msgstr ""
+
+#: backend/content/class.content-type.php:116
+msgid "No Flex Contents found."
+msgstr ""
+
+#: backend/content/class.content-type.php:117
+msgid "No Flex Contents found in Trash."
+msgstr ""
+
+#: backend/content/class.content-type.php:123
+msgid "Flex Content"
+msgstr ""
+
+#: backend/content/info.php:5
+#, php-format
+msgid "Content Id: %s"
+msgstr ""
+
+#: backend/customizer/class.customizer.php:80
+msgid "Recommendations"
+msgstr ""
+
+#: modules/events/ecommerce_events.php:9
+msgid "e-Commerce events"
+msgstr ""
+
+#: modules/events/ecommerce_events.php:10
+#: modules/woocommerce/woocommerce_integration.php:16
+msgid "Configure the tracking of e-Commerce events"
+msgstr ""
+
+#: modules/events/ecommerce_events.php:15
+msgid "Track WooCommerce events?"
+msgstr ""
+
+#: modules/events/ecommerce_events.php:16
+msgid "Tracked events are: order, add item to basket, remove item from basket."
+msgstr ""
+
+#: modules/events/ecommerce_events.php:39
+msgid "Events"
+msgstr ""
+
+#: modules/widgets/class.flex_content.widget.php:17
+msgid "Flex Content widget"
+msgstr ""
+
+#: modules/widgets/class.flex_content.widget.php:48
+msgid "Popular products in category"
+msgstr ""
+
+#: modules/widgets/class.flex_content.widget.php:49
+msgid "Frequently bought in category"
+msgstr ""
+
+#: modules/widgets/class.flex_content.widget.php:50
+#: modules/widgets/class.recommendation.widget.php:54
+#: modules/woocommerce/class.integration.php:53
+msgid "Recently viewed"
+msgstr ""
+
+#: modules/widgets/class.flex_content.widget.php:51
+#: modules/widgets/class.recommendation.widget.php:55
+#: modules/woocommerce/class.integration.php:54
+msgid "Most viewed"
+msgstr ""
+
+#: modules/widgets/class.flex_content.widget.php:57
+#: modules/widgets/class.recommendation.widget.php:61
+#: modules/woocommerce/class.woocommerce.category.integration.php:173
+#: modules/woocommerce/class.woocommerce.product.integration.php:144
+#: modules/woocommerce/class.woocommerce.shop.integration.php:232
+msgid "Default"
+msgstr ""
+
+#: modules/widgets/class.flex_content.widget.php:58
+#: modules/widgets/class.recommendation.widget.php:62
+#: modules/woocommerce/class.woocommerce.category.integration.php:174
+#: modules/woocommerce/class.woocommerce.product.integration.php:145
+#: modules/woocommerce/class.woocommerce.shop.integration.php:233
+msgid "Simple"
+msgstr ""
+
+#: modules/widgets/class.flex_content.widget.php:59
+#: modules/widgets/class.recommendation.widget.php:63
+msgid "Slider"
+msgstr ""
+
+#: modules/widgets/class.flex_content.widget.php:83
+#: modules/widgets/class.recommendation.widget.php:98
+msgid "Title:"
+msgstr ""
+
+#: modules/widgets/class.flex_content.widget.php:90
+#: modules/widgets/class.recommendation.widget.php:124
+msgid "Recommendation template:"
+msgstr ""
+
+#: modules/widgets/class.recommendation.widget.php:17
+msgid "Product recommendation widget"
+msgstr ""
+
+#: modules/widgets/class.recommendation.widget.php:52
+#: modules/woocommerce/class.integration.php:51
+msgid "Popular products"
+msgstr ""
+
+#: modules/widgets/class.recommendation.widget.php:53
+#: modules/woocommerce/class.integration.php:52
+msgid "Frequently bought"
+msgstr ""
+
+#: modules/widgets/class.recommendation.widget.php:105
+msgid "Number of products to show:"
+msgstr ""
+
+#: modules/widgets/class.recommendation.widget.php:112
+msgid "Show recommendations based on:"
+msgstr ""
+
+#: modules/widgets/class.recommendation.widget.php:136
+msgid "Resolution:"
+msgstr ""
+
+#: modules/woocommerce/class.integration.php:50
+msgid "None"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.category.integration.php:45
+msgid "Category page header"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.category.integration.php:62
+#: modules/woocommerce/class.woocommerce.category.integration.php:126
+#: modules/woocommerce/class.woocommerce.product.integration.php:85
+#: modules/woocommerce/class.woocommerce.shop.integration.php:62
+#: modules/woocommerce/class.woocommerce.shop.integration.php:125
+msgid "Headline"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.category.integration.php:79
+#: modules/woocommerce/class.woocommerce.category.integration.php:143
+#: modules/woocommerce/class.woocommerce.product.integration.php:102
+#: modules/woocommerce/class.woocommerce.shop.integration.php:79
+#: modules/woocommerce/class.woocommerce.shop.integration.php:142
+msgid "Type"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.category.integration.php:97
+#: modules/woocommerce/class.woocommerce.category.integration.php:161
+#: modules/woocommerce/class.woocommerce.category.integration.php:262
+#: modules/woocommerce/class.woocommerce.category.integration.php:289
+#: modules/woocommerce/class.woocommerce.product.integration.php:120
+#: modules/woocommerce/class.woocommerce.product.integration.php:201
+#: modules/woocommerce/class.woocommerce.shop.integration.php:96
+#: modules/woocommerce/class.woocommerce.shop.integration.php:159
+#: modules/woocommerce/class.woocommerce.shop.integration.php:256
+#: modules/woocommerce/class.woocommerce.shop.integration.php:283
+msgid "Template"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.category.integration.php:109
+msgid "Category page footer"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.category.integration.php:249
+msgid "Category header"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.category.integration.php:250
+msgid "Configure product recommendation on category overview header!"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.category.integration.php:255
+#: modules/woocommerce/class.woocommerce.category.integration.php:282
+#: modules/woocommerce/class.woocommerce.shop.integration.php:249
+#: modules/woocommerce/class.woocommerce.shop.integration.php:276
+msgid "Recommendation type"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.category.integration.php:256
+#: modules/woocommerce/class.woocommerce.category.integration.php:283
+#: modules/woocommerce/class.woocommerce.shop.integration.php:250
+#: modules/woocommerce/class.woocommerce.shop.integration.php:277
+msgid "What kind of recommendation to display."
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.category.integration.php:263
+#: modules/woocommerce/class.woocommerce.category.integration.php:290
+#: modules/woocommerce/class.woocommerce.shop.integration.php:257
+#: modules/woocommerce/class.woocommerce.shop.integration.php:284
+msgid "The template used to display the products."
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.category.integration.php:269
+#: modules/woocommerce/class.woocommerce.category.integration.php:296
+#: modules/woocommerce/class.woocommerce.product.integration.php:208
+#: modules/woocommerce/class.woocommerce.shop.integration.php:263
+#: modules/woocommerce/class.woocommerce.shop.integration.php:290
+msgid "Title"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.category.integration.php:270
+#: modules/woocommerce/class.woocommerce.category.integration.php:297
+#: modules/woocommerce/class.woocommerce.product.integration.php:209
+#: modules/woocommerce/class.woocommerce.shop.integration.php:264
+#: modules/woocommerce/class.woocommerce.shop.integration.php:291
+msgid "The title."
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.category.integration.php:276
+#: modules/woocommerce/class.woocommerce.shop.integration.php:270
+msgid "Category footer"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.category.integration.php:277
+msgid "Configure product recommendation on category overview footer!"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.category.integration.php:310
+msgid "Category overview"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.product.integration.php:49
+msgid "Product related products"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.product.integration.php:67
+msgid "Disable related prodcuts"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.product.integration.php:182
+msgid "Disable related products"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.product.integration.php:183
+msgid "Disable the default related products."
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.product.integration.php:188
+#: modules/woocommerce/class.woocommerce.product.integration.php:222
+msgid "Product detail page"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.product.integration.php:189
+msgid "Configure product recommendation on product defail page"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.product.integration.php:194
+msgid "Related products"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.product.integration.php:195
+msgid "Replace the related products."
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.product.integration.php:202
+msgid "Template used to render recommendation."
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.settings.php:23
+msgid "Sync Products"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.settings.php:24
+msgid "Sync your products with the ecommerce engine."
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.settings.php:39
+msgid "WooCommerce Settings"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.shop.integration.php:45
+msgid "Shoppage header"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.shop.integration.php:108
+msgid "Shoppage footer"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.shop.integration.php:243
+msgid "Shop header"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.shop.integration.php:244
+msgid "Configure product recommendation on shop page header!"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.shop.integration.php:271
+msgid "Configure product recommendation on shop page footer!"
+msgstr ""
+
+#: modules/woocommerce/class.woocommerce.shop.integration.php:304
+msgid "Shop page"
+msgstr ""
+
+#: modules/woocommerce/woocommerce_integration.php:9
+msgid "Single product"
+msgstr ""
+
+#: modules/woocommerce/woocommerce_integration.php:10
+msgid "Configure product recommendation on single product page"
+msgstr ""
+
+#: modules/woocommerce/woocommerce_integration.php:15
+msgid "Single product related products"
+msgstr ""
+
+#: modules/woocommerce/woocommerce_integration.php:33
+msgid "WooCommerce"
+msgstr ""

@@ -37,7 +37,7 @@ class ContentEditor {
 		if ($post->post_type !== ContentType::$TYPE) {
 			return;
 		}
-		echo "<a class='ui button primary' id='tma_content_library' href='#'>" . __("Open library", "tma-webtools") . "</a>";
+		echo "<a class='ui button primary' id='tma_content_library' href='#'>" . __("Open library", "experience-manager") . "</a>";
 
 		include 'content-library.php';
 	}

@@ -6,7 +6,7 @@
 				'<strong>' . absint($post->ID) . '</strong>'
 		);
 		?></span>
-	<label>&nbsp;<span><?php esc_html_e('shortcode', 'tma-webtools'); ?></span>
+	<label>&nbsp;<span><?php esc_html_e('shortcode', 'experience-manager'); ?></span>
 		<input type="text" onclick="this.select();" value='[exm_content id="<?php echo absint($post->ID); ?>"]' size="20" readonly="readonly"/>
 	</label>
 </div>

@@ -36,7 +36,7 @@ function exm_modules_ecommerce_section($sections) {
 	$custom_sections = array(
 		array(
 			'id' => 'tma-webtools-events',
-			'title' => __('Events', 'tma-webtools')
+			'title' => __('Events', 'experience-manager')
 		)
 	);
 	$sections = array_merge_recursive($sections, $custom_sections);

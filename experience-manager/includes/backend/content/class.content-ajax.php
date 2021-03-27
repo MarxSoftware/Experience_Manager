@@ -144,7 +144,7 @@ class ContentAjax {
 		}
 		if (!$content_id) {
 			$response["error"] = true;
-			$response["message"] = __("No flex content id", "tma-webtools");
+			$response["message"] = __("No flex content id", "experience-manager");
 
 			wp_send_json($response);
 		}
