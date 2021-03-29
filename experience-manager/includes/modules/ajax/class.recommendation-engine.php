@@ -54,8 +54,8 @@ class Recommendation_Engine {
 		$resolution = $this->get_with_default($this->resolution, "ALL");
 		$product = $this->get_with_default($this->product, "ALL");
 		
-		if (!$this->options->is_toggle_on("mode_intelligent")) {
-			$category = "NONE";
+		if (!$this->options->is_toggle_on("consider_category")) {
+			$category = "none";
 		}
 
 		switch ($this->type) {

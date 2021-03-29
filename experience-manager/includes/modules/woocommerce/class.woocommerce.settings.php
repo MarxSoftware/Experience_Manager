@@ -36,7 +36,7 @@ class WooCommerce_Settings {
 		$custom_sections = [
 			[
 				'id' => 'exm-woocommerce-settings',
-				'title' => __('WooCommerce Settings', 'tma-webtools')
+				'title' => __('WooCommerce Settings', 'experience-manager')
 			]
 		];
 		$sections = array_merge_recursive($sections, $custom_sections);

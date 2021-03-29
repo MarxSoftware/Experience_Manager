@@ -27,7 +27,7 @@ class Ajax_Woo extends Ajax_Base {
 		parent::__construct();
 	}
 
-	protected function _popular_products($count) {
+	protected function _popular_products($count, $category = "none") {
 		$args = array(
 			'post_type' => array('product'),
 			'meta_key' => 'total_sales',
@@ -35,6 +35,18 @@ class Ajax_Woo extends Ajax_Base {
 			'order' => 'desc',
 			'posts_per_page' => $count
 		);
+		
+		if (strcasecmp($category, "none") === 0) {
+			$args['tax_query'] = [
+				'relation' => 'AND',
+				[
+					'taxonomy' => 'product_cat',
+					'field' => 'id',
+					'terms' => $category,
+					'operator' => 'IN'
+				]
+			];
+		}
 
 		$products = get_posts($args);
 
@@ -47,7 +59,7 @@ class Ajax_Woo extends Ajax_Base {
 			'orderby' => 'rand',
 			'post_type' => 'product');
 
-		if ($category !== "none") {
+		if (strcasecmp($category, "none") === 0) {
 			$args['tax_query'] = [
 				'relation' => 'AND',
 				[

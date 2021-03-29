@@ -133,8 +133,8 @@ class TMA_Settings {
 					'type' => 'toggle'
 				],
 				[
-					'name' => 'mode_intelligent',
-					'label' => __("Enable intelligent mode?", "experience-manager"),
+					'name' => 'consider_category',
+					'label' => __("Consider category?", "experience-manager"),
 					'desc' => __("If the recommendation is dispayed on a category page, only products of that category are recommended!", "experience-manager"),
 					'type' => 'toggle'
 				]

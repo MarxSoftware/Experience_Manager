@@ -101,26 +101,26 @@ class ContentType {
 	public function register_post_type() {
 		// Set various pieces of text, $labels is used inside the $args array
 		$labels = array(
-			'name' => _x('Flex content', 'post type general name', 'tma-webtools'),
-			'singular_name' => _x('Flex Content', 'post type singular name', 'tma-webtools'),
-			'menu_name' => _x('Flex Contents', 'admin menu', 'tma-webtools'),
-			'name_admin_bar' => _x('Flex Content', 'add new on admin bar', 'tma-webtools'),
-			'add_new' => _x('Add New', 'book', 'tma-webtools'),
-			'add_new_item' => __('Add New Flex Content', 'tma-webtools'),
-			'new_item' => __('New Flex Content', 'tma-webtools'),
-			'edit_item' => __('Edit Flex Content', 'tma-webtools'),
-			'view_item' => __('View Flec Content', 'tma-webtools'),
-			'all_items' => __('All Flex Contents', 'tma-webtools'),
-			'search_items' => __('Search Flex Contentx', 'tma-webtools'),
-			'parent_item_colon' => __('Parent Flex Contents:', 'tma-webtools'),
-			'not_found' => __('No Flex Contents found.', 'tma-webtools'),
-			'not_found_in_trash' => __('No Flex Contents found in Trash.', 'tma-webtools')
+			'name' => _x('Flex content', 'post type general name', 'experience-manager'),
+			'singular_name' => _x('Flex Content', 'post type singular name', 'experience-manager'),
+			'menu_name' => _x('Flex Contents', 'admin menu', 'experience-manager'),
+			'name_admin_bar' => _x('Flex Content', 'add new on admin bar', 'experience-manager'),
+			'add_new' => _x('Add New', 'book', 'experience-manager'),
+			'add_new_item' => __('Add New Flex Content', 'experience-manager'),
+			'new_item' => __('New Flex Content', 'experience-manager'),
+			'edit_item' => __('Edit Flex Content', 'experience-manager'),
+			'view_item' => __('View Flec Content', 'experience-manager'),
+			'all_items' => __('All Flex Contents', 'experience-manager'),
+			'search_items' => __('Search Flex Contentx', 'experience-manager'),
+			'parent_item_colon' => __('Parent Flex Contents:', 'experience-manager'),
+			'not_found' => __('No Flex Contents found.', 'experience-manager'),
+			'not_found_in_trash' => __('No Flex Contents found in Trash.', 'experience-manager')
 		);
 
 		// Set various pieces of information about the post type
 		$args = array(
 			'labels' => $labels,
-			'description' => __("Flex Content", "tma-webtools"),
+			'description' => __("Flex Content", "experience-manager"),
 			'public' => true,
 			'show_in_menu' => true,
 			'menu_icon' => plugins_url('experience-manager/images/flex-content_16.png'),

@@ -307,7 +307,7 @@ class WooCommerce_Category_Integration extends Integration {
 		$custom_sections = [
 			[
 				'id' => 'exm-woocommerce-category',
-				'title' => __('Category overview', 'tma-webtools')
+				'title' => __('Category overview', 'experience-manager')
 			]
 		];
 		$sections = array_merge_recursive($sections, $custom_sections);

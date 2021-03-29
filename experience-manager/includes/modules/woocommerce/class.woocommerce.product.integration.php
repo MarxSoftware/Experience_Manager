@@ -219,7 +219,7 @@ class WooCommerce_Product_Integration extends Integration {
 		$custom_sections = [
 			[
 				'id' => 'exm-woocommerce-product',
-				'title' => __('Product detail page', 'tma-webtools')
+				'title' => __('Product detail page', 'experience-manager')
 			]
 		];
 		$sections = array_merge_recursive($sections, $custom_sections);
