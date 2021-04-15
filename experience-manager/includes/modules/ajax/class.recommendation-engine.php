@@ -67,13 +67,16 @@ class Recommendation_Engine {
 				return $ecom->popular_products($count, $category, $resolution);
 			case "recently-viewed":
 				tma_exm_log("recently-viewed");
-				return $ecom->recently_viewed($count);
+				return $ecom->recently_viewed($count, $category, $resolution);
 			case "most-viewed":
 				tma_exm_log("most-viewed");
-				return $ecom->most_viewed($count);
+				return $ecom->most_viewed($count, $category, $resolution);
 			case "bought-together":
 				tma_exm_log("bought-togther");
 				return $ecom->bought_together($product, $count);
+			case "viewed-together":
+				tma_exm_log("viewed-together");
+				return $ecom->viewed_together($product, $count);
 			default:
 				break;
 		}

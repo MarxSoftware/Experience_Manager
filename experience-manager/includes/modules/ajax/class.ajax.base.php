@@ -86,7 +86,7 @@ abstract class Ajax_Base {
 			return;
 		}
 		
-		$popular = $this->_popular_products($count - sizeof($products));
+		$popular = $this->_popular_products($count - sizeof($products), $category);
 		foreach ($popular as $product) {
 			$products[] = $this->_load_product($product->ID);
 		}
@@ -111,7 +111,7 @@ abstract class Ajax_Base {
 		}
 		
 		if (sizeof($products) < $count) {
-			$this->update_products($products, $count);
+			$this->update_products($products, $count, $category);
 		} else if (sizeof($products) > $count) {
 			$products = array_slice($products, 0, $count);
 		}
@@ -133,7 +133,7 @@ abstract class Ajax_Base {
 		}
 
 		if (sizeof($products) < $count) {
-			$this->update_products($products, $count);
+			$this->update_products($products, $count, $category);
 		} else if (sizeof($products) > $count) {
 			$products = array_slice($products, 0, $count);
 		}
@@ -155,7 +155,7 @@ abstract class Ajax_Base {
 		}
 
 		if (sizeof($products) < $count) {
-			$this->update_products($products, $count);
+			$this->update_products($products, $count, $category);
 		} else if (sizeof($products) > $count) {
 			$products = array_slice($products, 0, $count);
 		}
@@ -175,7 +175,7 @@ abstract class Ajax_Base {
 		}
 
 		if (sizeof($products) < $count) {
-			$this->update_products($products, $count);
+			$this->update_products($products, $count, $category);
 		} else if (sizeof($products) > $count) {
 			$products = array_slice($products, 0, $count);
 		}
@@ -195,6 +195,31 @@ abstract class Ajax_Base {
 			
 		} else {
 			if (property_exists($values, "bought_together")) {
+				$products = $this->load_products($values->bought_together);
+			}
+		}
+		
+		if (sizeof($products) < $count) {
+			$this->update_products($products, $count);
+		} else if (sizeof($products) > $count) {
+			$products = array_slice($products, 0, $count);
+		}
+		return $products;
+	}
+	
+	public function viewed_together($product_id, $count = 3) {
+		
+		tma_exm_log("viewed_together for product: " . $product_id);
+		
+		$values = $this->recommendations_viewed_together($product_id);
+
+		
+		
+		$products = [];
+		if (!$values) {
+			
+		} else {
+			if (property_exists($values, "viewed_together")) {
 				$products = $this->load_products($values->bought_together);
 			}
 		}
@@ -255,6 +280,18 @@ abstract class Ajax_Base {
 
 		$request = new \TMA\ExperienceManager\TMA_Request();
 		return $request->get_body_object("json/profiles/user", $parameters);
+	}
+	
+	private function recommendations_viewed_together($product_id) {
+		$parameters = [
+			"query" => [
+				"product" => $product_id,
+				"site" => tma_exm_get_site()
+			]
+		];
+
+		$request = new \TMA\ExperienceManager\TMA_Request();
+		return $request->get_body_object("json/profiles/product", $parameters);
 	}
 
 	private function recommendations_bought_together($product_id) {

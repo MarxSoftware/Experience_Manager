@@ -127,6 +127,15 @@ class WooCommerce_Product_Integration extends Integration {
 		// HEADER ENDE
 	}
 
+	protected function get_recommendation_types() {
+		$recommendations = parent::get_recommendation_types();
+		
+		$recommendations["bought-together"] = __("Bought Together");
+		$recommendations["viewed-together"] = __("Viewed Together");
+		
+		return $recommendations;
+	}
+	
 	function init() {
 		if (!is_customize_preview()) {
 			$this->update_product_detail_page();
